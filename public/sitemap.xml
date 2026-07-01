@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://bxchange.pages.dev/fr</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/en</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/fr/produit</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/produit"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/produit"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/en/produit</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/produit"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/produit"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/fr/cas-usage</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/cas-usage"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/cas-usage"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/en/cas-usage</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/cas-usage"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/cas-usage"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/fr/catalogue</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/catalogue"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/catalogue"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/en/catalogue</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/catalogue"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/catalogue"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/fr/securite</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/securite"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/securite"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/en/securite</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/securite"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/securite"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/fr/tarifs</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/tarifs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/tarifs"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/en/tarifs</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/tarifs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/tarifs"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/fr/demo</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/demo"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/demo"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/en/demo</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/demo"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/demo"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/fr/contact</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/contact"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/contact"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>
