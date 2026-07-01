@@ -40,6 +40,14 @@ export const fr = {
       description:
         'Réservez en quelques clics un créneau pour une démonstration de bxChange adaptée à vos processus. En ligne, sans engagement.',
     },
+    legalNotice: {
+      title: 'Mentions légales — bxChange',
+      description: 'Informations légales relatives au site bxChange : éditeur, hébergement, propriété intellectuelle.',
+    },
+    privacy: {
+      title: 'Politique de confidentialité — bxChange',
+      description: 'Comment le site bxChange collecte, utilise et protège vos données personnelles.',
+    },
   },
 
   nav: {
@@ -345,7 +353,12 @@ export const fr = {
       text: 'Une mise en route rapide sur un périmètre ciblé, pour mesurer les bénéfices concrets avant d’étendre. Accompagnement inclus.',
       cta: 'Demander un devis personnalisé',
     },
-    tiersLabel: 'Trois paliers, selon votre périmètre',
+    tiersLabel: 'Le bon niveau pour chaque étape de votre projet',
+    popularBadge: 'Le plus choisi',
+    onQuote: 'Sur devis',
+    onQuoteSub: 'tarif adapté à votre périmètre',
+    ctaNote: 'Réponse sous 24–48h · Sans engagement',
+    allTiersNote: 'Tous les paliers incluent l’accès au catalogue de 20+ processus prêts à l’emploi.',
     tiers: [
       {
         name: 'Starter',
@@ -433,6 +446,7 @@ export const fr = {
       subtitle:
         'Choisissez le créneau qui vous arrange. La démonstration est en ligne, courte et centrée sur vos processus — sans engagement.',
       ctaScroll: 'Choisir mon créneau',
+      ctaInline: 'Voir le calendrier',
     },
     benefits: [
       'Une démonstration adaptée à votre secteur et à vos besoins',
@@ -447,6 +461,11 @@ export const fr = {
     freeLabel: 'Conditions',
     widgetTitle: 'Choisissez votre créneau',
     loading: 'Chargement du calendrier…',
+    error: {
+      title: 'Le calendrier n’a pas pu s’afficher',
+      text: 'Vous pouvez ouvrir la prise de rendez-vous dans un nouvel onglet, ou nous écrire directement.',
+      open: 'Ouvrir le calendrier',
+    },
     fallback: {
       title: 'La prise de rendez-vous en ligne arrive bientôt',
       text: 'En attendant, écrivez-nous via le formulaire de contact : nous vous proposons un créneau adapté sous 24–48h.',

@@ -42,6 +42,14 @@ export const en: Translation = {
       description:
         'Book a slot in a few clicks for a bxChange demo tailored to your processes. Online, no commitment.',
     },
+    legalNotice: {
+      title: 'Legal notice — bxChange',
+      description: 'Legal information about the bxChange website: publisher, hosting, intellectual property.',
+    },
+    privacy: {
+      title: 'Privacy policy — bxChange',
+      description: 'How the bxChange website collects, uses and protects your personal data.',
+    },
   },
 
   nav: {
@@ -346,7 +354,12 @@ export const en: Translation = {
       text: 'A quick start on a focused scope, to measure concrete benefits before scaling up. Support included.',
       cta: 'Request a custom quote',
     },
-    tiersLabel: 'Three tiers, based on your scope',
+    tiersLabel: 'The right level for every stage of your project',
+    popularBadge: 'Most chosen',
+    onQuote: 'On request',
+    onQuoteSub: 'priced to your scope',
+    ctaNote: 'Reply within 24–48h · No commitment',
+    allTiersNote: 'All tiers include access to the catalogue of 20+ ready-to-use processes.',
     tiers: [
       {
         name: 'Starter',
@@ -432,6 +445,7 @@ export const en: Translation = {
       subtitle:
         'Pick the slot that suits you. The demo is online, short and focused on your processes — no commitment.',
       ctaScroll: 'Pick my slot',
+      ctaInline: 'See the calendar',
     },
     benefits: [
       'A demo tailored to your sector and needs',
@@ -446,6 +460,11 @@ export const en: Translation = {
     freeLabel: 'Terms',
     widgetTitle: 'Choose your slot',
     loading: 'Loading calendar…',
+    error: {
+      title: 'The calendar could not be displayed',
+      text: 'You can open the booking page in a new tab, or email us directly.',
+      open: 'Open the calendar',
+    },
     fallback: {
       title: 'Online booking is coming soon',
       text: 'In the meantime, reach out via the contact form: we’ll propose a suitable slot within 24–48h.',

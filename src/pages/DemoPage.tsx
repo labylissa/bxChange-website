@@ -7,7 +7,50 @@ import { useLang } from '@/hooks/useLang';
 import { CALENDLY_URL } from '@/lib/site';
 
 const CALENDLY_SCRIPT = 'https://assets.calendly.com/assets/external/widget.js';
+const CALENDLY_CSS = 'https://assets.calendly.com/assets/external/widget.css';
 const WIDGET_ID = 'demo-widget';
+
+/** Normalise l'URL Calendly saisie (ajoute https:// et les paramètres d'affichage). */
+function buildCalendlySrc(rawUrl: string, lang: string): string {
+  let base = rawUrl.trim();
+  if (!/^https?:\/\//i.test(base)) base = `https://${base.replace(/^\/+/, '')}`;
+  const sep = base.includes('?') ? '&' : '?';
+  return `${base}${sep}locale=${lang}&hide_gdpr_banner=1`;
+}
+
+/** Charge le script + la feuille de style Calendly une seule fois (partagé inline/popup). */
+let calendlyLoader: Promise<void> | null = null;
+function loadCalendly(): Promise<void> {
+  if (typeof window === 'undefined') return Promise.resolve();
+  if (window.Calendly) return Promise.resolve();
+  if (calendlyLoader) return calendlyLoader;
+
+  calendlyLoader = new Promise<void>((resolve, reject) => {
+    if (!document.querySelector(`link[href="${CALENDLY_CSS}"]`)) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = CALENDLY_CSS;
+      document.head.appendChild(link);
+    }
+    let script = document.querySelector<HTMLScriptElement>(`script[src="${CALENDLY_SCRIPT}"]`);
+    if (script && window.Calendly) {
+      resolve();
+      return;
+    }
+    if (!script) {
+      script = document.createElement('script');
+      script.src = CALENDLY_SCRIPT;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    script.addEventListener('load', () => resolve());
+    script.addEventListener('error', () => {
+      calendlyLoader = null;
+      reject(new Error('Calendly script failed to load'));
+    });
+  });
+  return calendlyLoader;
+}
 
 /** Skeleton affiché à l'emplacement exact du widget tant que Calendly n'est pas prêt. */
 function WidgetSkeleton({ label }: { label: string }) {
@@ -29,64 +72,92 @@ function WidgetSkeleton({ label }: { label: string }) {
   );
 }
 
-/** Charge le script Calendly, initialise le widget inline et masque le skeleton une fois prêt. */
-function CalendlyWidget({ url, lang, loadingLabel }: { url: string; lang: string; loadingLabel: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [loaded, setLoaded] = useState(false);
-  const src = `${url}${url.includes('?') ? '&' : '?'}locale=${lang}&hide_gdpr_banner=1`;
+type WidgetState = 'loading' | 'ready' | 'error';
 
-  // Initialise le widget (via le script Calendly).
+/** Initialise le widget Calendly inline et gère les états chargement/erreur. */
+function CalendlyWidget({
+  src,
+  loadingLabel,
+  error,
+  contactPath,
+  contactLabel,
+}: {
+  src: string;
+  loadingLabel: string;
+  error: { title: string; text: string; open: string };
+  contactPath: string;
+  contactLabel: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [state, setState] = useState<WidgetState>('loading');
+
   useEffect(() => {
     let cancelled = false;
-    const init = () => {
-      if (cancelled || !ref.current || !window.Calendly) return;
-      ref.current.innerHTML = '';
-      window.Calendly.initInlineWidget({ url: src, parentElement: ref.current });
+    setState('loading');
+
+    const markReady = () => {
+      if (!cancelled && ref.current?.querySelector('iframe')) setState('ready');
     };
 
-    if (window.Calendly) {
-      init();
-      return () => {
-        cancelled = true;
-      };
-    }
+    loadCalendly()
+      .then(() => {
+        if (cancelled || !ref.current || !window.Calendly) {
+          if (!cancelled) setState('error');
+          return;
+        }
+        ref.current.innerHTML = '';
+        window.Calendly.initInlineWidget({ url: src, parentElement: ref.current });
+        requestAnimationFrame(markReady);
+      })
+      .catch(() => {
+        if (!cancelled) setState('error');
+      });
 
-    let script = document.querySelector<HTMLScriptElement>(`script[src="${CALENDLY_SCRIPT}"]`);
-    if (!script) {
-      script = document.createElement('script');
-      script.src = CALENDLY_SCRIPT;
-      script.async = true;
-      document.body.appendChild(script);
-    }
-    script.addEventListener('load', init);
-    return () => {
-      cancelled = true;
-      script?.removeEventListener('load', init);
-    };
-  }, [src]);
-
-  // Masque le skeleton dès que Calendly émet un événement (iframe chargée), avec repli temporisé.
-  useEffect(() => {
+    // Événements Calendly (iframe interactive) → prêt.
     const onMessage = (e: MessageEvent) => {
       const data = e.data as { event?: string } | null;
       if (data && typeof data.event === 'string' && data.event.indexOf('calendly') === 0) {
-        setLoaded(true);
+        markReady();
       }
     };
     window.addEventListener('message', onMessage);
-    const fallback = window.setTimeout(() => setLoaded(true), 6000);
+
+    // Repli : si aucune iframe n'apparaît, on bascule en erreur (URL invalide, script bloqué…).
+    const errorTimer = window.setTimeout(() => {
+      if (!cancelled && !ref.current?.querySelector('iframe')) setState('error');
+    }, 8000);
+
     return () => {
+      cancelled = true;
+      window.clearTimeout(errorTimer);
       window.removeEventListener('message', onMessage);
-      window.clearTimeout(fallback);
     };
-  }, []);
+  }, [src]);
 
   return (
     <div className="relative min-h-[640px]">
-      {!loaded && <WidgetSkeleton label={loadingLabel} />}
+      {state === 'loading' && <WidgetSkeleton label={loadingLabel} />}
+      {state === 'error' && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-2xl border border-ink-100 bg-ink-50 px-6 text-center">
+          <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gold/15 text-gold">
+            <Icons.mail className="h-6 w-6" />
+          </span>
+          <h3 className="text-lg font-bold text-navy-900">{error.title}</h3>
+          <p className="max-w-sm text-sm text-ink-500">{error.text}</p>
+          <div className="mt-1 flex flex-wrap justify-center gap-3">
+            <a href={src} target="_blank" rel="noopener noreferrer" className="btn-primary">
+              {error.open}
+              <Icons.arrowRight className="h-4 w-4" />
+            </a>
+            <Link to={contactPath} className="btn-secondary">
+              {contactLabel}
+            </Link>
+          </div>
+        </div>
+      )}
       <div
         ref={ref}
-        className="calendly-inline-widget overflow-hidden rounded-2xl"
+        className={`overflow-hidden rounded-2xl ${state === 'error' ? 'invisible' : ''}`}
         style={{ minWidth: '320px', height: '700px' }}
       />
     </div>
@@ -97,9 +168,19 @@ export function DemoPage() {
   const c = useContent();
   const { lang, path } = useLang();
   const configured = CALENDLY_URL.length > 0;
+  const calendlySrc = configured ? buildCalendlySrc(CALENDLY_URL, lang) : '';
 
-  const scrollToWidget = () => {
-    document.getElementById(WIDGET_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Ouvre le calendrier en popup (retour visuel immédiat) ; repli : nouvel onglet.
+  const openCalendly = () => {
+    loadCalendly()
+      .then(() => {
+        if (window.Calendly?.initPopupWidget) {
+          window.Calendly.initPopupWidget({ url: calendlySrc });
+        } else {
+          window.open(calendlySrc, '_blank', 'noopener');
+        }
+      })
+      .catch(() => window.open(calendlySrc, '_blank', 'noopener'));
   };
 
   const meta = [
@@ -131,10 +212,22 @@ export function DemoPage() {
             ))}
           </div>
           {configured && (
-            <button type="button" onClick={scrollToWidget} className="btn-primary mt-7">
-              {c.demo.hero.ctaScroll}
-              <Icons.chevronDown className="h-4 w-4 animate-bounce motion-reduce:animate-none" />
-            </button>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <button type="button" onClick={openCalendly} className="btn-primary">
+                {c.demo.hero.ctaScroll}
+                <Icons.arrowRight className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  document.getElementById(WIDGET_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+                className="btn-ghost-light"
+              >
+                {c.demo.hero.ctaInline}
+                <Icons.chevronDown className="h-4 w-4" />
+              </button>
+            </div>
           )}
         </div>
       </section>
@@ -145,7 +238,13 @@ export function DemoPage() {
           <div id={WIDGET_ID} className="order-1 scroll-mt-24 lg:order-2">
             <h2 className="mb-5 text-xl font-bold text-navy-900">{c.demo.widgetTitle}</h2>
             {configured ? (
-              <CalendlyWidget url={CALENDLY_URL} lang={lang} loadingLabel={c.demo.loading} />
+              <CalendlyWidget
+                src={calendlySrc}
+                loadingLabel={c.demo.loading}
+                error={c.demo.error}
+                contactPath={path('contact')}
+                contactLabel={c.demo.fallback.cta}
+              />
             ) : (
               <div className="rounded-2xl border border-dashed border-teal/40 bg-teal/5 p-10 text-center">
                 <span className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full bg-teal/15 text-teal-500">
