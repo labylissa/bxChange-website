@@ -431,6 +431,7 @@ export const en: Translation = {
       title: 'Book your demo in a few clicks',
       subtitle:
         'Pick the slot that suits you. The demo is online, short and focused on your processes — no commitment.',
+      ctaScroll: 'Pick my slot',
     },
     benefits: [
       'A demo tailored to your sector and needs',

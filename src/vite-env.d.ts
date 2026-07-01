@@ -8,3 +8,9 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+interface Window {
+  Calendly?: {
+    initInlineWidget: (options: { url: string; parentElement: HTMLElement }) => void;
+  };
+}

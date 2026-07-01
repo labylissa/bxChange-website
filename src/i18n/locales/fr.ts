@@ -432,6 +432,7 @@ export const fr = {
       title: 'Réservez votre démonstration en quelques clics',
       subtitle:
         'Choisissez le créneau qui vous arrange. La démonstration est en ligne, courte et centrée sur vos processus — sans engagement.',
+      ctaScroll: 'Choisir mon créneau',
     },
     benefits: [
       'Une démonstration adaptée à votre secteur et à vos besoins',
