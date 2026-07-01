@@ -78,7 +78,7 @@ export const fr = {
   home: {
     hero: {
       eyebrow: 'Plateforme d’automatisation des processus',
-      title: 'Vos logiciels ne se parlent pas ? bxChange les connecte.',
+      title: 'bxChange connecte vos logiciels et automatise vos démarches.',
       subtitle:
         'Vos anciens logiciels et vos nouveaux outils travaillent enfin ensemble. bxChange fait circuler l’information automatiquement et prend en charge vos démarches internes — sans ressaisie, sans erreurs, sans dépendre du service informatique.',
       ctaPrimary: 'Demander une démo',
