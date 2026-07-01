@@ -12,6 +12,8 @@ export const PAGE_SLUGS = {
   pricing: 'tarifs',
   contact: 'contact',
   demo: 'demo',
+  legalNotice: 'mentions-legales',
+  privacy: 'confidentialite',
 } as const;
 
 export type PageKey = keyof typeof PAGE_SLUGS;
@@ -32,6 +34,8 @@ export const ALL_PAGES: PageKey[] = [
   'pricing',
   'demo',
   'contact',
+  'legalNotice',
+  'privacy',
 ];
 
 /** Pages affichées dans la navigation principale (hors accueil / CTA contact). */

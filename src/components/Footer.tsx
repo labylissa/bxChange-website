@@ -15,6 +15,8 @@ const NAV_KEY: Record<PageKey, string> = {
   pricing: 'nav.pricing',
   contact: 'nav.contact',
   demo: 'nav.demo',
+  legalNotice: 'footer.legalNotice',
+  privacy: 'footer.privacy',
 };
 
 export function Footer() {
@@ -60,12 +62,12 @@ export function Footer() {
           </h3>
           <ul className="mt-4 space-y-3 text-sm">
             <li>
-              <Link to={path('contact')} className="text-white/70 transition-colors hover:text-teal">
+              <Link to={path('legalNotice')} className="text-white/70 transition-colors hover:text-teal">
                 {t('footer.legalNotice')}
               </Link>
             </li>
             <li>
-              <Link to={path('contact')} className="text-white/70 transition-colors hover:text-teal">
+              <Link to={path('privacy')} className="text-white/70 transition-colors hover:text-teal">
                 {t('footer.privacy')}
               </Link>
             </li>

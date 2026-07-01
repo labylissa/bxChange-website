@@ -9,6 +9,7 @@ import { SecurityPage } from './pages/SecurityPage';
 import { PricingPage } from './pages/PricingPage';
 import { ContactPage } from './pages/ContactPage';
 import { DemoPage } from './pages/DemoPage';
+import { LegalNoticePage, PrivacyPage } from './pages/LegalPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 export const router = createBrowserRouter([
@@ -28,6 +29,8 @@ export const router = createBrowserRouter([
       { path: 'tarifs', element: <PricingPage /> },
       { path: 'contact', element: <ContactPage /> },
       { path: 'demo', element: <DemoPage /> },
+      { path: 'mentions-legales', element: <LegalNoticePage /> },
+      { path: 'confidentialite', element: <PrivacyPage /> },
       { path: '*', element: <NotFoundPage /> },
     ],
   },

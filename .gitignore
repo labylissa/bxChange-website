@@ -12,6 +12,9 @@ dist-ssr
 # Build info
 *.tsbuildinfo
 
+# Sources de contenu juridique (brouillons, non publiés tels quels)
+mentions-legales/
+
 # Editor
 .vscode/*
 !.vscode/extensions.json
