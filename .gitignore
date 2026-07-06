@@ -15,6 +15,9 @@ dist-ssr
 # Sources de contenu juridique (brouillons, non publiés tels quels)
 mentions-legales/
 
+# Sources de documentation technique (interne, non publiées)
+doc/
+
 # Editor
 .vscode/*
 !.vscode/extensions.json

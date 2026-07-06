@@ -40,6 +40,11 @@ export const fr = {
       description:
         'Réservez en quelques clics un créneau pour une démonstration de bxChange adaptée à vos processus. En ligne, sans engagement.',
     },
+    documentation: {
+      title: 'Documentation — bxChange | Référence de scripting workflow',
+      description:
+        'Référence technique pour automatiser vos processus bxChange : bibliothèque lib, comportements de formulaire, conditions, post-fonctions et appel de connecteurs.',
+    },
     legalNotice: {
       title: 'Mentions légales — bxChange',
       description: 'Informations légales relatives au site bxChange : éditeur, hébergement, propriété intellectuelle.',
@@ -59,6 +64,7 @@ export const fr = {
     pricing: 'Tarifs',
     contact: 'Contact',
     demo: 'Planifier une démo',
+    documentation: 'Documentation',
     cta: 'Planifier une démo',
     openMenu: 'Ouvrir le menu',
     closeMenu: 'Fermer le menu',

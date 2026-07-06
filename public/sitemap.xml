@@ -86,6 +86,20 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://bxchange.pages.dev/fr/documentation</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/documentation"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/documentation"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxchange.pages.dev/en/documentation</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/documentation"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/documentation"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://bxchange.pages.dev/fr/demo</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://bxchange.pages.dev/fr/demo"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://bxchange.pages.dev/en/demo"/>

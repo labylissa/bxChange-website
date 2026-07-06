@@ -42,6 +42,11 @@ export const en: Translation = {
       description:
         'Book a slot in a few clicks for a bxChange demo tailored to your processes. Online, no commitment.',
     },
+    documentation: {
+      title: 'Documentation — bxChange | Workflow scripting reference',
+      description:
+        'Technical reference to automate your bxChange processes: the lib library, form behaviours, conditions, post-functions and calling connectors.',
+    },
     legalNotice: {
       title: 'Legal notice — bxChange',
       description: 'Legal information about the bxChange website: publisher, hosting, intellectual property.',
@@ -61,6 +66,7 @@ export const en: Translation = {
     pricing: 'Pricing',
     contact: 'Contact',
     demo: 'Book a demo',
+    documentation: 'Documentation',
     cta: 'Book a demo',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',

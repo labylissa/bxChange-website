@@ -12,6 +12,7 @@ export const PAGE_SLUGS = {
   pricing: 'tarifs',
   contact: 'contact',
   demo: 'demo',
+  documentation: 'documentation',
   legalNotice: 'mentions-legales',
   privacy: 'confidentialite',
 } as const;
@@ -32,6 +33,7 @@ export const ALL_PAGES: PageKey[] = [
   'catalog',
   'security',
   'pricing',
+  'documentation',
   'demo',
   'contact',
   'legalNotice',
@@ -45,4 +47,5 @@ export const NAV_PAGES: PageKey[] = [
   'catalog',
   'security',
   'pricing',
+  'documentation',
 ];

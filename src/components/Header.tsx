@@ -16,6 +16,7 @@ const NAV_KEY: Record<PageKey, string> = {
   pricing: 'nav.pricing',
   contact: 'nav.contact',
   demo: 'nav.demo',
+  documentation: 'nav.documentation',
   legalNotice: 'footer.legalNotice',
   privacy: 'footer.privacy',
 };

@@ -6,7 +6,7 @@ import { dirname, resolve } from 'node:path';
 
 const SITE_URL = process.env.SITE_URL ?? 'https://bxchange.pages.dev';
 
-const SLUGS = ['', 'produit', 'cas-usage', 'catalogue', 'securite', 'tarifs', 'demo', 'contact', 'mentions-legales', 'confidentialite'];
+const SLUGS = ['', 'produit', 'cas-usage', 'catalogue', 'securite', 'tarifs', 'documentation', 'demo', 'contact', 'mentions-legales', 'confidentialite'];
 const LANGS = ['fr', 'en'];
 
 const urls = [];
