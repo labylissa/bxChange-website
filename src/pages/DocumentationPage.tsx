@@ -559,7 +559,12 @@ if (!me || !me.wf_role_names.includes('Manager')) hideTransition('Valider')`}</P
             <p>Liste des rôles workflow : <C>{'{ id, slug, name, level }'}</C>.</p>
           </Method>
           <Method name="getMembers()" returns="BehaviourMember[]">
-            <p>Membres du tenant : <C>{'{ id, email, full_name, wf_role_id, wf_role_name, wf_role_slug, wf_role_names[], wf_role_slugs[], attributes }'}</C>. Utile pour router selon un attribut de profil.</p>
+            <p>Membres du tenant : <C>{'{ id, email, full_name, wf_role_id, wf_role_name, wf_role_slug, wf_role_names[], wf_role_slugs[], attributes }'}</C>. Un membre peut porter plusieurs rôles (<C>wf_role_slugs</C>) et des <C>attributes</C> de profil personnalisés — la base pour router intelligemment.</p>
+            <Pre>{`// Tous les membres du rôle "Manager" de la région "Sud"
+const managers = getMembers().filter(m =>
+  m.wf_role_slugs.includes('manager') &&
+  m.attributes && m.attributes.region === 'sud'
+)`}</Pre>
           </Method>
           <Method name="getCurrentUser()" returns="CurrentUser | null">
             <p>L’utilisateur connecté : mêmes champs qu’un membre, plus son <C>role</C> plateforme et ses <C>attributes</C> de profil workflow. <C>null</C> si indisponible.</p>
@@ -597,7 +602,10 @@ if (!me || !me.wf_role_names.includes('Manager')) hideTransition('Valider')`}</P
             <p>Affecte un champ Objet métier par UUID d’instance (<C>null</C> pour vider).</p>
           </Method>
           <Method name="searchBoInstances(typeName, query?, limit?)" returns="Promise<object[]>">
-            <p><em>async</em> — Recherche des instances d’un type d’objet métier. <C>limit</C> par défaut <C>20</C>.</p>
+            <p><em>async</em> — Recherche des instances d’un type d’objet métier par nom de type. <C>query</C> filtre sur le texte, <C>limit</C> par défaut <C>20</C>. Renvoie un tableau (vide si rien).</p>
+            <Pre>{`// Proposer les 10 clients dont le nom contient la saisie
+const clients = await searchBoInstances('Client', getValue('recherche_client'), 10)
+setMessage('client', clients.length + ' client(s) trouvé(s)')`}</Pre>
           </Method>
           <Method name="getBoInstance(typeId, instanceId)" returns="Promise<object | null>">
             <p><em>async</em> — Récupère une instance précise.</p>
@@ -620,7 +628,9 @@ if (!me || !me.wf_role_names.includes('Manager')) hideTransition('Valider')`}</P
             <p><em>async</em> — <strong>Remplace</strong> l’ensemble des attributs personnalisés d’un membre (profil workflow).</p>
           </Method>
           <Method name="updateUserAttribute(userId, key, value)" returns="Promise<void>">
-            <p><em>async</em> — Met à jour <strong>un seul</strong> attribut sans écraser les autres. À préférer à <C>setMemberAttributes</C> quand on ne touche qu’une clé.</p>
+            <p><em>async</em> — Met à jour <strong>un seul</strong> attribut de profil sans écraser les autres. À préférer à <C>setMemberAttributes</C> quand on ne touche qu’une clé.</p>
+            <Pre>{`const me = getCurrentUser()
+if (me) await updateUserAttribute(me.id, 'derniere_action', lib.today())`}</Pre>
           </Method>
           <Method name="log(...args)" returns="void">
             <p>Trace dans la console de debug du moteur. N’a aucun effet en production visible par l’utilisateur — utile pendant la mise au point.</p>
@@ -847,6 +857,106 @@ if (projet) {
   const budget = Number(lib.get(projet, 'fields_data.budget_restant', 0))
   await updateIssue(ref, { budget_restant: Math.max(0, budget - Number(getValue('montant') || 0)) })
 }`}</Pre>
+          </Recipe>
+        </div>
+
+        <H3>Objets métier (BO)</H3>
+        <p className="text-sm text-ink-500">
+          Rappel : un champ BO lu avec <C>getValue</C> renvoie l’<strong>objet complet</strong>{' '}
+          (pré-résolu), pas l’UUID. À l’écriture, on affecte par UUID d’instance avec <C>setBoField</C>.
+        </p>
+        <div className="mt-4 flex flex-col gap-5">
+          <Recipe tag="Comportement · on_field_change" title="Pré-remplir depuis l’instance sélectionnée" goal="Lire les propriétés d’un champ « Véhicule » (BO pré-résolu) pour remplir d’autres champs.">
+            <Pre>{`const v = getValue('vehicule') // objet BO complet (pas l'UUID)
+if (v) {
+  setValue('immatriculation', v.immatriculation)
+  setValue('cout_journalier', v.tarif_jour)
+  setMessage('vehicule', v.marque + ' ' + v.modele)
+}`}</Pre>
+          </Recipe>
+
+          <Recipe tag="Comportement · async" title="Sélection en cascade (client → contrat)" goal="Quand on choisit un client, proposer automatiquement son contrat.">
+            <Pre>{`const client = getValue('client') // BO pré-résolu
+if (client) {
+  const contrats = await searchBoInstances('Contrat', client.reference, 50)
+  setMessage('contrat', contrats.length + ' contrat(s) pour ce client')
+  if (contrats.length === 1) setBoField('contrat', contrats[0].id) // affectation par UUID
+}`}</Pre>
+          </Recipe>
+
+          <Recipe tag="Comportement · async" title="Créer une instance à la volée puis la lier" goal="Réutiliser un fournisseur existant, sinon le créer, puis l’affecter au dossier.">
+            <Pre>{`const email = getValue('email_fournisseur')
+const existants = await searchBoInstances('Fournisseur', email, 1)
+let instance = existants[0]
+if (!instance) {
+  instance = await createBoInstance('type-fournisseur-uuid', {
+    nom: getValue('nom_fournisseur'),
+    email,
+  })
+}
+if (instance) setBoField('fournisseur', instance.id)`}</Pre>
+          </Recipe>
+
+          <Recipe tag="Post-fonction · after_transition" title="Mettre à jour une instance (décrément de stock)" goal="À la validation, retirer la quantité commandée du stock de l’article.">
+            <Pre>{`const article = getValue('article') // BO pré-résolu
+if (article) {
+  const stock = Number(article.stock || 0) - Number(getValue('quantite') || 0)
+  await updateBoInstance('type-article-uuid', article.id, { stock: Math.max(0, stock) })
+}`}</Pre>
+          </Recipe>
+
+          <Recipe tag="Condition de transition · async" title="Bloquer selon un attribut de l’instance" goal="Empêcher l’avancement si le client lié est en liste noire.">
+            <Pre>{`const res = await searchBoInstances('Client', getValue('siren'), 1)
+const client = res[0]
+return !(client && client.blacklist === true) // false → bouton masqué`}</Pre>
+          </Recipe>
+        </div>
+
+        <H3>Champs utilisateur &amp; membres</H3>
+        <p className="text-sm text-ink-500">
+          Un champ de type « utilisateur » contient un <strong>UUID</strong> de membre. Pour l’afficher,
+          on le résout via <C>getMembers()</C>. Pour l’assignation, on utilise <C>setAssignee</C>{' '}
+          (utilisateur) ou <C>setAssigneeByRole</C> (rôle).
+        </p>
+        <div className="mt-4 flex flex-col gap-5">
+          <Recipe tag="Comportement · on_form_load" title="Pré-sélectionner un utilisateur (champ « valideur »)" goal="Remplir un champ utilisateur avec le manager du demandeur, depuis un attribut de profil.">
+            <Pre>{`const me = getCurrentUser()
+const managerId = me && me.attributes ? me.attributes.manager_id : null
+if (managerId) setValue('valideur', managerId) // champ utilisateur = UUID`}</Pre>
+          </Recipe>
+
+          <Recipe tag="Comportement · on_field_change" title="Afficher le nom d’un champ utilisateur" goal="Un champ utilisateur contient un UUID ; retrouver le nom via l’annuaire pour informer.">
+            <Pre>{`const uid = getValue('valideur')
+const membre = getMembers().find(m => m.id === uid)
+setMessage('valideur', membre ? 'Validation par ' + (membre.full_name || membre.email) : '')`}</Pre>
+          </Recipe>
+
+          <Recipe tag="Post-fonction · async" title="Assigner au bon référent selon un attribut" goal="Router vers le référent RH de la région du dossier, avec repli sur le rôle.">
+            <Pre>{`const region = getValue('region')
+const referent = getMembers().find(m =>
+  m.wf_role_slugs.includes('rh') && m.attributes && m.attributes.region === region
+)
+if (referent) setAssignee(referent.id)
+else setAssigneeByRole('rh') // repli si aucun référent`}</Pre>
+          </Recipe>
+
+          <Recipe tag="Post-fonction · async" title="Assigner au membre le moins chargé d’un rôle" goal="Répartition simple : compter les dossiers ouverts par membre et choisir le minimum.">
+            <Pre>{`const support = getMembers().filter(m => m.wf_role_slugs.includes('support'))
+const ouverts = await getIssuesByTemplate('Ticket', { status: 'Ouvert', limit: 500 })
+const charge = lib.countBy(ouverts, o => lib.get(o, 'assigned_to', ''))
+const cible = lib.minBy(support.map(m => ({ id: m.id, n: charge[m.id] || 0 })), 'n')
+if (cible) setAssignee(cible.id)`}</Pre>
+          </Recipe>
+
+          <Recipe tag="Comportement · on_case_load" title="Masquer une action selon le profil courant" goal="N’exposer « Valider budget » qu’aux membres dont le plafond couvre le montant.">
+            <Pre>{`const me = getCurrentUser()
+const plafond = me && me.attributes ? Number(me.attributes.plafond_validation || 0) : 0
+if (Number(getValue('montant') || 0) > plafond) hideTransition('Valider budget')`}</Pre>
+          </Recipe>
+
+          <Recipe tag="Post-fonction · after_transition" title="Horodater une action sur le profil" goal="Enregistrer la date de dernière prise en charge sur le profil du membre.">
+            <Pre>{`const me = getCurrentUser()
+if (me) await updateUserAttribute(me.id, 'derniere_prise_en_charge', lib.today())`}</Pre>
           </Recipe>
         </div>
       </>
