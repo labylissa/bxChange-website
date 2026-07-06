@@ -47,20 +47,20 @@ export function Header() {
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     `text-sm font-medium transition-colors ${
-      isActive ? 'text-teal' : 'text-white/70 hover:text-white'
+      isActive ? 'text-teal-500' : 'text-ink-600 hover:text-navy-900'
     }`;
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b bg-navy-900 transition-all ${
-        scrolled
-          ? 'border-white/10 shadow-lg shadow-navy-900/40'
-          : 'border-transparent'
+      className={`sticky top-0 z-50 border-b bg-white transition-all ${
+        scrolled ? 'border-ink-100 shadow-sm' : 'border-transparent'
       }`}
     >
       <div className="container-page flex h-20 items-center justify-between gap-4">
         <Link to={path('home')} aria-label="bxChange" className="shrink-0">
-          <Logo className="h-14 w-auto" />
+          <span className="inline-flex items-center rounded-xl bg-gradient-to-br from-gold to-gold-600 px-3 py-2 shadow-card">
+            <Logo variant="light" className="h-9 w-auto" />
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Principale">
@@ -72,7 +72,7 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <LanguageSwitcher variant="light" />
+          <LanguageSwitcher />
           <Link to={path('demo')} className="btn-primary">
             {t('nav.cta')}
           </Link>
@@ -80,7 +80,7 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-lg p-2 text-white lg:hidden"
+          className="inline-flex items-center justify-center rounded-lg p-2 text-navy-900 lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? t('nav.closeMenu') : t('nav.openMenu')}
           aria-expanded={open}
@@ -90,7 +90,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-white/10 bg-navy-900 lg:hidden">
+        <div className="border-t border-ink-100 bg-white lg:hidden">
           <nav className="container-page flex flex-col gap-1 py-4" aria-label="Mobile">
             {NAV_PAGES.map((page) => (
               <NavLink
@@ -98,15 +98,15 @@ export function Header() {
                 to={path(page)}
                 className={({ isActive }) =>
                   `rounded-lg px-3 py-3 text-base font-medium ${
-                    isActive ? 'bg-teal/15 text-teal' : 'text-white/80 hover:bg-white/5'
+                    isActive ? 'bg-teal/10 text-teal-500' : 'text-navy-900 hover:bg-ink-50'
                   }`
                 }
               >
                 {t(NAV_KEY[page])}
               </NavLink>
             ))}
-            <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-4">
-              <LanguageSwitcher variant="light" />
+            <div className="mt-3 flex items-center justify-between border-t border-ink-100 pt-4">
+              <LanguageSwitcher />
               <Link to={path('demo')} className="btn-primary">
                 {t('nav.cta')}
               </Link>

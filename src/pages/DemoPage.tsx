@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
+import { PageHero } from '@/components/ui';
 import { Icons } from '@/components/Icon';
 import { useContent } from '@/hooks/useContent';
 import { useLang } from '@/hooks/useLang';
@@ -194,43 +195,35 @@ export function DemoPage() {
       <Seo page="demo" title={c.meta.demo.title} description={c.meta.demo.description} />
 
       {/* HERO compact — laisse voir le widget juste en dessous */}
-      <section className="relative overflow-hidden bg-navy-900 py-12 text-white sm:py-14">
-        <div className="pointer-events-none absolute -left-20 top-0 h-64 w-64 animate-pulse-soft rounded-full bg-teal/20 blur-3xl motion-reduce:animate-none" />
-        <div className="container-page relative">
-          <span className="eyebrow">{c.demo.hero.eyebrow}</span>
-          <h1 className="mt-4 max-w-3xl text-3xl font-bold leading-tight sm:text-4xl">
-            {c.demo.hero.title}
-          </h1>
-          <p className="mt-4 max-w-2xl text-white/70">{c.demo.hero.subtitle}</p>
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-            {meta.map((m, i) => (
-              <span key={i} className="inline-flex items-center gap-2 text-white/80">
-                <Icons.check className="h-4 w-4 text-teal" strokeWidth={2.5} />
-                <span className="font-semibold">{m.value}</span>
-                <span className="text-white/40">· {m.label}</span>
-              </span>
-            ))}
-          </div>
-          {configured && (
-            <div className="mt-7 flex flex-wrap gap-3">
-              <button type="button" onClick={openCalendly} className="btn-primary">
-                {c.demo.hero.ctaScroll}
-                <Icons.arrowRight className="h-4 w-4" />
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  document.getElementById(WIDGET_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                }
-                className="btn-ghost-light"
-              >
-                {c.demo.hero.ctaInline}
-                <Icons.chevronDown className="h-4 w-4" />
-              </button>
-            </div>
-          )}
+      <PageHero eyebrow={c.demo.hero.eyebrow} title={c.demo.hero.title} subtitle={c.demo.hero.subtitle}>
+        <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+          {meta.map((m, i) => (
+            <span key={i} className="inline-flex items-center gap-2 text-ink-600">
+              <Icons.check className="h-4 w-4 text-teal-500" strokeWidth={2.5} />
+              <span className="font-semibold text-navy-900">{m.value}</span>
+              <span className="text-ink-400">· {m.label}</span>
+            </span>
+          ))}
         </div>
-      </section>
+        {configured && (
+          <div className="mt-7 flex flex-wrap gap-3">
+            <button type="button" onClick={openCalendly} className="btn-primary">
+              {c.demo.hero.ctaScroll}
+              <Icons.arrowRight className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                document.getElementById(WIDGET_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }
+              className="btn-secondary"
+            >
+              {c.demo.hero.ctaInline}
+              <Icons.chevronDown className="h-4 w-4" />
+            </button>
+          </div>
+        )}
+      </PageHero>
 
       <section className="py-12 sm:py-14">
         <div className="container-page grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">

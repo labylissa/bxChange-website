@@ -1,5 +1,5 @@
 import { Seo } from '@/components/Seo';
-import { Section, CtaBand } from '@/components/ui';
+import { Section, CtaBand, PageHero } from '@/components/ui';
 import { Reveal } from '@/components/Reveal';
 import { Icons } from '@/components/Icon';
 import { useContent } from '@/hooks/useContent';
@@ -13,15 +13,11 @@ export function UseCasesPage() {
     <>
       <Seo page="useCases" title={c.meta.useCases.title} description={c.meta.useCases.description} />
 
-      <section className="bg-navy-900 py-20 text-white lg:py-24">
-        <div className="container-page max-w-3xl">
-          <span className="eyebrow">{c.useCases.hero.eyebrow}</span>
-          <h1 className="mt-5 text-4xl font-bold leading-tight sm:text-5xl">
-            {c.useCases.hero.title}
-          </h1>
-          <p className="mt-6 text-lg text-white/70">{c.useCases.hero.subtitle}</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={c.useCases.hero.eyebrow}
+        title={c.useCases.hero.title}
+        subtitle={c.useCases.hero.subtitle}
+      />
 
       <Section>
         <div className="grid gap-8">
@@ -38,23 +34,13 @@ export function UseCasesPage() {
                 <div className="grid md:grid-cols-[minmax(0,260px)_1fr]">
                   <div
                     className={`flex items-center gap-4 p-6 md:flex-col md:items-start md:justify-center ${
-                      aspirational ? 'bg-gold/10' : 'bg-navy-900'
+                      aspirational ? 'bg-gold/10' : 'bg-gradient-to-br from-[#F8F2E6] to-ink-50'
                     }`}
                   >
-                    <span
-                      className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${
-                        aspirational ? 'bg-gold/20 text-gold' : 'bg-teal/15 text-teal'
-                      }`}
-                    >
+                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gold/15 text-gold-600">
                       <Icons.sparkArrow className="h-6 w-6" />
                     </span>
-                    <h2
-                      className={`font-display text-xl font-bold ${
-                        aspirational ? 'text-navy-900' : 'text-white'
-                      }`}
-                    >
-                      {s.name}
-                    </h2>
+                    <h2 className="font-display text-xl font-bold text-navy-900">{s.name}</h2>
                   </div>
                   <div className="grid gap-6 p-6 sm:grid-cols-3">
                     <div>

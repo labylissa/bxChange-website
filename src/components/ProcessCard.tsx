@@ -8,9 +8,9 @@ export function ProcessCard({ process }: { process: Process }) {
   const { t } = useTranslation();
 
   return (
-    <div className="card group h-full hover:-translate-y-0.5 hover:border-teal/40 hover:shadow-card-hover">
+    <div className="card group h-full hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-card-hover">
       <div className="flex items-start justify-between gap-3">
-        <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-teal/10 text-teal-500 transition-colors group-hover:bg-teal group-hover:text-navy-900">
+        <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-gold/15 to-gold/5 text-gold-600 ring-1 ring-gold/20 transition-colors group-hover:bg-gold group-hover:from-gold group-hover:to-gold group-hover:text-white">
           <ProcessIcon name={process.icon} />
         </span>
         <span className="rounded-full bg-ink-50 px-2.5 py-1 text-xs font-medium text-ink-500">

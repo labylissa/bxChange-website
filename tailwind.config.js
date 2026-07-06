@@ -4,35 +4,41 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Brand palette — see bxchange-site-brief.md §3
+        // Palette « warm minimal » — blanc chaud, neutres pierre, accent or.
+        // (les noms de tokens sont conservés pour éviter un renommage global)
         navy: {
-          DEFAULT: '#0A1628',
-          900: '#0A1628',
-          800: '#0F1E36',
-          700: '#16294A',
-          600: '#1E3560',
+          // Encre chaude (titres, footer) — jamais de noir pur
+          DEFAULT: '#292524',
+          900: '#292524',
+          800: '#37322D',
+          700: '#44403B',
+          600: '#57534E',
         },
         teal: {
-          DEFAULT: '#2DD4E8', // accent primaire
-          400: '#2DD4E8',
-          500: '#1BB9CE',
+          // Accent principal → or
+          DEFAULT: '#C9A45C',
+          400: '#D9BC80',
+          500: '#A8874A',
         },
         mint: {
-          DEFAULT: '#1EC9A3', // teal secondaire
-          500: '#1EC9A3',
+          // Accent secondaire → sauge douce (états « prêt », succès)
+          DEFAULT: '#8A9A76',
+          500: '#74845F',
         },
         gold: {
-          DEFAULT: '#C9A45C', // accent premium — parcimonie
+          DEFAULT: '#C9A45C',
+          600: '#A8874A',
         },
         ink: {
-          50: '#F6F8FB',
-          100: '#EEF2F7',
-          200: '#DCE3EC',
-          300: '#B9C4D2',
-          400: '#8593A6',
-          500: '#5C6B80',
-          600: '#3E4B5E',
-          700: '#2A3547',
+          // Neutres pierre, chauds
+          50: '#FAF9F7',
+          100: '#F3F1ED',
+          200: '#E7E3DC',
+          300: '#D3CDC2',
+          400: '#A39D92',
+          500: '#756F64',
+          600: '#57524A',
+          700: '#3D3933',
         },
       },
       fontFamily: {
@@ -40,12 +46,12 @@ export default {
         display: ['"Space Grotesk"', 'Inter', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        card: '0 4px 24px -6px rgba(10, 22, 40, 0.10)',
-        'card-hover': '0 12px 40px -8px rgba(10, 22, 40, 0.18)',
+        card: '0 4px 24px -6px rgba(41, 37, 36, 0.07)',
+        'card-hover': '0 16px 48px -12px rgba(41, 37, 36, 0.14)',
       },
       backgroundImage: {
         'grid-navy':
-          'linear-gradient(rgba(45,212,232,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(45,212,232,0.06) 1px, transparent 1px)',
+          'linear-gradient(rgba(87,83,78,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(87,83,78,0.05) 1px, transparent 1px)',
       },
       keyframes: {
         'fade-up': {

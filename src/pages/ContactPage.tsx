@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { Seo } from '@/components/Seo';
-import { Section } from '@/components/ui';
+import { Section, PageHero } from '@/components/ui';
 import { Icons } from '@/components/Icon';
 import { useContent } from '@/hooks/useContent';
 import { useLang } from '@/hooks/useLang';
@@ -44,15 +44,11 @@ export function ContactPage() {
     <>
       <Seo page="contact" title={c.meta.contact.title} description={c.meta.contact.description} />
 
-      <section className="bg-navy-900 py-20 text-white lg:py-24">
-        <div className="container-page max-w-3xl">
-          <span className="eyebrow">{c.contact.hero.eyebrow}</span>
-          <h1 className="mt-5 text-4xl font-bold leading-tight sm:text-5xl">
-            {c.contact.hero.title}
-          </h1>
-          <p className="mt-6 text-lg text-white/70">{c.contact.hero.subtitle}</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={c.contact.hero.eyebrow}
+        title={c.contact.hero.title}
+        subtitle={c.contact.hero.subtitle}
+      />
 
       <Section>
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">

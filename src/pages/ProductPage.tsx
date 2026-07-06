@@ -1,5 +1,5 @@
 import { Seo } from '@/components/Seo';
-import { Section, SectionHeading, CtaBand } from '@/components/ui';
+import { Section, SectionHeading, CtaBand, PageHero } from '@/components/ui';
 import { ProcessIcon } from '@/components/Icon';
 import { SyncMark } from '@/components/Logo';
 import { Reveal } from '@/components/Reveal';
@@ -40,13 +40,13 @@ function FlowDiagram() {
             <div
               className={`w-full rounded-2xl border p-6 text-center md:flex-1 ${
                 n.tone === 'accent'
-                  ? 'border-teal bg-navy-900 text-white shadow-card-hover'
+                  ? 'border-gold/60 bg-gradient-to-br from-[#F8F2E6] to-white text-navy-900 shadow-card-hover ring-1 ring-gold/25'
                   : 'border-ink-200 bg-white text-navy-900'
               }`}
             >
               <span
                 className={`mx-auto inline-flex h-12 w-12 items-center justify-center rounded-xl ${
-                  n.tone === 'accent' ? 'bg-teal/15 text-teal' : 'bg-ink-50 text-teal-500'
+                  n.tone === 'accent' ? 'bg-gold/15' : 'bg-ink-50 text-gold-600'
                 }`}
               >
                 {n.tone === 'accent' ? (
@@ -56,7 +56,7 @@ function FlowDiagram() {
                 )}
               </span>
               <p className="mt-3 font-display text-lg font-bold">{n.label}</p>
-              <p className={`mt-1 text-sm ${n.tone === 'accent' ? 'text-teal' : 'text-ink-400'}`}>
+              <p className={`mt-1 text-sm ${n.tone === 'accent' ? 'text-gold-600' : 'text-ink-400'}`}>
                 {n.note}
               </p>
             </div>
@@ -81,15 +81,11 @@ export function ProductPage() {
     <>
       <Seo page="product" title={c.meta.product.title} description={c.meta.product.description} />
 
-      <section className="bg-navy-900 py-20 text-white lg:py-24">
-        <div className="container-page max-w-3xl">
-          <span className="eyebrow">{c.product.hero.eyebrow}</span>
-          <h1 className="mt-5 text-4xl font-bold leading-tight sm:text-5xl">
-            {c.product.hero.title}
-          </h1>
-          <p className="mt-6 text-lg text-white/70">{c.product.hero.subtitle}</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={c.product.hero.eyebrow}
+        title={c.product.hero.title}
+        subtitle={c.product.hero.subtitle}
+      />
 
       <Section>
         <Reveal>
@@ -98,8 +94,8 @@ export function ProductPage() {
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {c.product.capabilities.items.map((item, i) => (
             <Reveal key={i} delay={(i % 3) * 100} from="up">
-              <div className="card group h-full transition-all duration-300 hover:-translate-y-1 hover:border-teal/40 hover:shadow-card-hover">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-teal/10 text-teal-500 transition-colors group-hover:bg-teal group-hover:text-navy-900">
+              <div className="card group h-full transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-card-hover">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-gold/15 to-gold/5 text-gold-600 ring-1 ring-gold/20 transition-colors group-hover:bg-gold group-hover:from-gold group-hover:to-gold group-hover:text-white">
                   <ProcessIcon name={CAP_ICONS[i] ?? 'refresh'} />
                 </span>
                 <h3 className="mt-4 text-lg font-semibold text-navy-900">{item.title}</h3>

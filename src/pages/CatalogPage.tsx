@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
-import { Section } from '@/components/ui';
+import { Section, PageHero } from '@/components/ui';
 import { Reveal } from '@/components/Reveal';
 import { Icons } from '@/components/Icon';
 import { ProcessCard } from '@/components/ProcessCard';
@@ -31,15 +31,11 @@ export function CatalogPage() {
     <>
       <Seo page="catalog" title={c.meta.catalog.title} description={c.meta.catalog.description} />
 
-      <section className="bg-navy-900 py-20 text-white lg:py-24">
-        <div className="container-page max-w-3xl">
-          <span className="eyebrow">{c.catalog.hero.eyebrow}</span>
-          <h1 className="mt-5 text-4xl font-bold leading-tight sm:text-5xl">
-            {c.catalog.hero.title}
-          </h1>
-          <p className="mt-6 text-lg text-white/70">{c.catalog.hero.subtitle}</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={c.catalog.hero.eyebrow}
+        title={c.catalog.hero.title}
+        subtitle={c.catalog.hero.subtitle}
+      />
 
       <Section>
         {/* Filtres */}
@@ -55,8 +51,8 @@ export function CatalogPage() {
                 aria-pressed={active}
                 className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                   active
-                    ? 'bg-navy-900 text-white'
-                    : 'border border-ink-200 bg-white text-ink-600 hover:border-teal hover:text-teal-500'
+                    ? 'bg-gold text-navy-900 shadow-card'
+                    : 'border border-ink-200 bg-white text-ink-600 hover:border-gold hover:text-gold-600'
                 }`}
               >
                 {label}

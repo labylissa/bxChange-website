@@ -18,32 +18,38 @@ export function SyncArrows({ className = '' }: { className?: string }) {
   );
 }
 
-/** Icône sync/refresh de la marque (flèches teal dans un disque navy) — favicon / grands marqueurs. */
+/** Icône sync/refresh de la marque (flèches blanches dans un disque doré). */
 export function SyncMark({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" className={className} role="img" aria-hidden="true" fill="none">
-      <circle cx="16" cy="16" r="16" fill="#0A1628" />
-      <path d="M10 14.2a6.2 6.2 0 0 1 10.6-2.6" stroke="#2DD4E8" strokeWidth="2.1" strokeLinecap="round" />
-      <path d="M22 17.8A6.2 6.2 0 0 1 11.4 20.4" stroke="#2DD4E8" strokeWidth="2.1" strokeLinecap="round" />
-      <path d="M20.8 8.4v3.6h-3.6" stroke="#2DD4E8" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M11.2 23.6V20h3.6" stroke="#2DD4E8" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round" />
+      <defs>
+        <linearGradient id="syncmark-gold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#C9A45C" />
+          <stop offset="1" stopColor="#A8874A" />
+        </linearGradient>
+      </defs>
+      <circle cx="16" cy="16" r="16" fill="url(#syncmark-gold)" />
+      <path d="M10 14.2a6.2 6.2 0 0 1 10.6-2.6" stroke="#FFFFFF" strokeWidth="2.1" strokeLinecap="round" />
+      <path d="M22 17.8A6.2 6.2 0 0 1 11.4 20.4" stroke="#FFFFFF" strokeWidth="2.1" strokeLinecap="round" />
+      <path d="M20.8 8.4v3.6h-3.6" stroke="#FFFFFF" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M11.2 23.6V20h3.6" stroke="#FFFFFF" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
 /**
- * Logo de marque bxChange (artwork original, blanc sur navy — voir img/).
- * Conçu pour fonds sombres (header navy, footer, hero).
- * `variant` est conservé pour compatibilité d'API ; l'artwork est mono-version.
+ * Logo de marque bxChange (artwork original détouré, recoloré depuis img/).
+ * - `dark`  : glyphes encre chaude — pour fonds clairs / pastille dorée (header).
+ * - `light` : glyphes blancs — pour fonds sombres (footer).
  */
-export function Logo({ className = '', markOnly = false }: LogoProps) {
+export function Logo({ variant = 'dark', className = '', markOnly = false }: LogoProps) {
   if (markOnly) {
     return <SyncMark className={className || 'h-9 w-9'} />;
   }
 
   return (
     <img
-      src="/logo-bxchange.png"
+      src={variant === 'light' ? '/logo-mark-light.png' : '/logo-mark-dark.png'}
       alt="bxChange"
       className={className || 'h-14 w-auto'}
       width={951}

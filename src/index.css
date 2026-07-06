@@ -34,19 +34,19 @@
   }
 
   .btn-primary {
-    @apply btn bg-teal text-navy-900 hover:bg-teal-500 hover:shadow-card-hover;
+    @apply btn bg-gold text-navy-900 hover:bg-gold-600 hover:text-white hover:shadow-card-hover;
   }
 
   .btn-secondary {
-    @apply btn border border-ink-200 bg-white text-navy-900 hover:border-teal hover:text-teal-500;
+    @apply btn border border-ink-300 bg-white text-navy-900 hover:border-gold hover:text-gold-600;
   }
 
   .btn-ghost-light {
-    @apply btn border border-white/20 bg-white/5 text-white hover:bg-white/10;
+    @apply btn border border-white/25 bg-white/10 text-white hover:bg-white/20;
   }
 
   .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-teal/30 bg-teal/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-teal-500;
+    @apply inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/[0.06] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-gold-600;
   }
 
   .card {
@@ -54,6 +54,6 @@
   }
 
   .link-underline {
-    @apply relative font-medium text-teal-500 after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-teal-500 after:transition-all hover:after:w-full;
+    @apply relative font-medium text-navy-900 after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all hover:after:w-full;
   }
 }

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
-import { Section } from '@/components/ui';
+import { Section, PageHero } from '@/components/ui';
 import { Reveal } from '@/components/Reveal';
 import { Icons, ProcessIcon } from '@/components/Icon';
 import { useContent } from '@/hooks/useContent';
@@ -24,23 +24,18 @@ export function SecurityPage() {
     <>
       <Seo page="security" title={c.meta.security.title} description={c.meta.security.description} />
 
-      <section className="relative overflow-hidden bg-navy-900 py-20 text-white lg:py-24">
-        <div className="pointer-events-none absolute -right-20 top-0 h-72 w-72 rounded-full bg-teal/15 blur-3xl" />
-        <div className="container-page relative max-w-3xl">
-          <span className="eyebrow">{c.security.hero.eyebrow}</span>
-          <h1 className="mt-5 text-4xl font-bold leading-tight sm:text-5xl">
-            {c.security.hero.title}
-          </h1>
-          <p className="mt-6 text-lg text-white/70">{c.security.hero.subtitle}</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={c.security.hero.eyebrow}
+        title={c.security.hero.title}
+        subtitle={c.security.hero.subtitle}
+      />
 
       <Section>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {c.security.pillars.map((pillar, i) => (
             <Reveal key={i} delay={(i % 3) * 100} from="up">
               <div className="card group h-full transition-all duration-300 hover:-translate-y-1 hover:border-teal/40 hover:shadow-card-hover">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-navy-900 text-teal transition-transform duration-300 group-hover:scale-110">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-gold/15 to-gold/5 text-gold-600 ring-1 ring-gold/25 transition-transform duration-300 group-hover:scale-110">
                   <ProcessIcon name={PILLAR_ICONS[i] ?? 'shield'} />
                 </span>
                 <h3 className="mt-4 text-lg font-semibold text-navy-900">{pillar.title}</h3>

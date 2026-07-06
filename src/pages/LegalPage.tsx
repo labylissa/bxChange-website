@@ -59,11 +59,13 @@ function LegalDocument({ doc, page, title, description }: {
     <>
       <Seo page={page} title={title} description={description} />
 
-      <section className="bg-navy-900 py-16 text-white lg:py-20">
-        <div className="container-page max-w-3xl">
-          <h1 className="text-3xl font-bold sm:text-4xl">{doc.title}</h1>
-          <p className="mt-4 text-white/70">{withPlaceholders(doc.intro)}</p>
-          <p className="mt-4 text-sm text-white/40">
+      <section className="relative overflow-hidden border-b border-ink-100 bg-gradient-to-b from-ink-50 to-white">
+        <div className="pointer-events-none absolute inset-0 bg-grid-navy [background-size:30px_30px] opacity-50" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-teal/40 to-transparent" />
+        <div className="container-page relative max-w-3xl py-14 lg:py-16">
+          <h1 className="text-3xl font-bold text-navy-900 sm:text-4xl">{doc.title}</h1>
+          <p className="mt-4 text-ink-500">{withPlaceholders(doc.intro)}</p>
+          <p className="mt-4 text-sm text-ink-400">
             {doc.updatedLabel} : {withPlaceholders(doc.updated)}
           </p>
         </div>
