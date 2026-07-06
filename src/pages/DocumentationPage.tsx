@@ -4,9 +4,9 @@ import { PageHero } from '@/components/ui';
 import { Icons } from '@/components/Icon';
 import { useContent } from '@/hooks/useContent';
 
-/* ------------------------------------------------------------------ */
-/* Petits composants de mise en forme (charte warm minimal)            */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/* Composants de mise en forme (charte warm minimal)                  */
+/* ================================================================== */
 
 function C({ children }: { children: ReactNode }) {
   return (
@@ -35,9 +35,9 @@ function Table({ head, rows }: { head: ReactNode[]; rows: ReactNode[][] }) {
         <tbody>
           {rows.map((r, i) => (
             <tr key={i} className="transition-colors hover:bg-ink-50/70">
-              {r.map((c, j) => (
+              {r.map((cell, j) => (
                 <td key={j} className="border-t border-ink-100 px-4 py-2.5 align-top text-ink-600">
-                  {c}
+                  {cell}
                 </td>
               ))}
             </tr>
@@ -105,14 +105,48 @@ function Pre({ children }: { children: ReactNode }) {
 }
 
 function Note({ children, tone = 'note' }: { children: ReactNode; tone?: 'note' | 'warn' }) {
-  const styles =
-    tone === 'warn'
-      ? 'border-gold/50 bg-gold/[0.07]'
-      : 'border-gold/30 bg-gold/[0.05]';
+  const styles = tone === 'warn' ? 'border-gold/50 bg-gold/[0.07]' : 'border-gold/30 bg-gold/[0.05]';
   return (
     <div className={`my-4 flex gap-3 rounded-xl border px-4 py-3 text-sm leading-relaxed text-ink-600 ${styles}`}>
       <span className="mt-0.5 shrink-0 font-bold text-gold-600">{tone === 'warn' ? '⚠' : '▸'}</span>
       <div>{children}</div>
+    </div>
+  );
+}
+
+/** Entrée de méthode façon « method reference » (Laravel). */
+function Method({ name, returns, children }: { name: ReactNode; returns?: string; children: ReactNode }) {
+  return (
+    <div className="border-t border-ink-100 pt-6 first:border-t-0 first:pt-0">
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <code className="rounded-md bg-ink-100 px-2.5 py-1 font-mono text-sm font-semibold text-navy-900">{name}</code>
+        {returns && (
+          <span className="text-xs text-ink-400">
+            → <span className="font-mono text-gold-600">{returns}</span>
+          </span>
+        )}
+      </div>
+      <div className="mt-2.5 space-y-2 text-sm leading-relaxed text-ink-600">{children}</div>
+    </div>
+  );
+}
+
+/** Tableau compact de paramètres (nom · type · rôle). */
+function Params({ rows }: { rows: [ReactNode, ReactNode, ReactNode][] }) {
+  return (
+    <div className="my-2.5 overflow-hidden rounded-lg border border-ink-100 text-xs">
+      <div className="grid grid-cols-[1fr] gap-0.5 border-b border-ink-100 bg-ink-50 px-3 py-1.5 font-bold uppercase tracking-wide text-ink-400 sm:grid-cols-[10rem_7rem_1fr] sm:gap-3">
+        <span>Paramètre</span>
+        <span className="hidden sm:block">Type</span>
+        <span className="hidden sm:block">Rôle</span>
+      </div>
+      {rows.map((r, i) => (
+        <div key={i} className="grid grid-cols-[1fr] gap-0.5 border-b border-ink-100 px-3 py-2 last:border-b-0 sm:grid-cols-[10rem_7rem_1fr] sm:gap-3">
+          <code className="font-mono font-semibold text-gold-600">{r[0]}</code>
+          <span className="font-mono text-ink-400">{r[1]}</span>
+          <span className="text-ink-600">{r[2]}</span>
+        </div>
+      ))}
     </div>
   );
 }
@@ -130,9 +164,13 @@ function Recipe({ tag, title, goal, children }: { tag: string; title: string; go
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Contenu — référence de scripting (dev / admins de processus)        */
-/* ------------------------------------------------------------------ */
+function H3({ children }: { children: ReactNode }) {
+  return <h3 className="mt-9 mb-1 text-lg font-bold text-navy-900">{children}</h3>;
+}
+
+/* ================================================================== */
+/* Contenu — référence exhaustive du scripting workflow               */
+/* ================================================================== */
 
 interface DocSection {
   id: string;
@@ -142,331 +180,620 @@ interface DocSection {
 }
 
 const SECTIONS: DocSection[] = [
+  /* ---------------------------------------------------------------- */
   {
     id: 'contexts',
-    label: 'Points d’extension',
-    terms: 'comportements behaviours conditions post-fonctions transition on_form_load on_field_change on_case_load before after javascript',
+    label: 'Introduction',
+    terms:
+      'introduction contextes comportements behaviours conditions post-fonctions transition on_form_load on_field_change on_case_load before after javascript async await cycle de vie déclencheurs',
     body: (
       <>
         <p className="text-ink-500">
-          Le moteur workflow expose <strong>trois points d’extension en JavaScript</strong>, exécutés
-          côté navigateur dans un bac à sable. Chaque contexte reçoit un jeu de fonctions injectées, la
-          bibliothèque maison <C>lib</C> et <C>require()</C>.
+          Le moteur workflow de bxChange est <strong>configurable sans déployer de code</strong> : un
+          administrateur de processus définit les étapes, les écrans et les transitions depuis
+          l’interface. Pour tout ce qui ne se règle pas par configuration — calculs, validations,
+          règles conditionnelles, effets de bord — il branche de petits scripts <strong>JavaScript</strong>.
         </p>
+        <p>
+          Ces scripts s’exécutent <strong>dans le navigateur</strong>, dans un bac à sable. Ils
+          supportent <C>async/await</C>. Il existe <strong>trois contextes</strong>, chacun avec ses
+          déclencheurs, son jeu de fonctions injectées et sa sémantique propre. C’est le point le plus
+          important à comprendre avant d’écrire : <em>le même nom de fonction n’existe pas partout</em>,
+          et écrire un champ ne se fait pas de la même façon selon le contexte.
+        </p>
+
         <Table
-          head={['Contexte', 'Déclencheurs', 'Rôle']}
+          head={['Contexte', 'Où on l’écrit', 'Déclencheurs', 'Ce qu’il décide']}
           rows={[
             [
-              <strong>Comportements de formulaire</strong>,
+              <strong>Comportements</strong>,
+              'Éditeur de comportements d’un écran',
               <><C>on_form_load</C>, <C>on_field_change</C>, <C>on_case_load</C></>,
-              'Piloter dynamiquement le formulaire : visibilité, obligation, valeurs, validation, visibilité des boutons de transition.',
+              'L’état vivant du formulaire : valeurs, visibilité, obligation, validation, boutons de transition.',
             ],
             [
-              <strong>Conditions de transition</strong>,
+              <strong>Conditions</strong>,
+              'Champ « condition » d’une transition',
               'À l’affichage du dossier',
-              <>Décider si le <strong>bouton de transition est visible</strong> (<C>return false</C> = masqué).</>,
+              <>La <strong>visibilité d’un bouton</strong> de transition (<C>return false</C> = masqué).</>,
             ],
             [
               <strong>Post-fonctions</strong>,
+              'Onglet « Post-fonctions » d’une transition',
               <><C>before_transition</C>, <C>after_transition</C></>,
-              'Effet de bord après le franchissement : assignation, MAJ de champs / dossiers, connecteurs, e-mails, commentaires.',
+              'Les effets de bord une fois la transition franchie : assignation, MAJ, connecteurs, e-mails.',
             ],
           ]}
         />
+
+        <H3>Cycle de vie des déclencheurs</H3>
+        <ul className="list-disc space-y-1.5 pl-5 text-ink-600">
+          <li>
+            <C>on_form_load</C> — s’exécute <strong>une fois</strong>, à l’ouverture du formulaire.
+            Idéal pour préparer l’état initial (masquer des champs, poser des valeurs par défaut).
+          </li>
+          <li>
+            <C>on_field_change</C> — s’exécute à <strong>chaque modification</strong> d’un champ. On
+            peut le restreindre à un champ précis (paramètre « champ déclencheur ») pour ne pas
+            recalculer à chaque frappe ailleurs.
+          </li>
+          <li>
+            <C>on_case_load</C> — s’exécute à l’ouverture du <strong>dossier</strong>. C’est le{' '}
+            <strong>seul</strong> endroit où l’on peut afficher / masquer des boutons de transition
+            (<C>showTransition</C> / <C>hideTransition</C>).
+          </li>
+        </ul>
+
+        <H3>Adresser un champ</H3>
+        <p>
+          Partout, un champ est désigné par sa <strong>clé</strong> (son <em>field key</em>, ex.{' '}
+          <C>date_debut</C>), pas par son libellé. <C>getValue('date_debut')</C> lit sa valeur
+          courante ; les fonctions d’écriture prennent la même clé en premier argument.
+        </p>
+
+        <Note>
+          <strong>Champs « Objet métier » pré-résolus.</strong> Pour un champ lié à un objet métier,{' '}
+          <C>getValue('vehicule')</C> renvoie <strong>l’objet complet</strong> (pas l’UUID) — vous
+          pouvez lire <C>getValue('vehicule').marque</C> directement. À l’écriture, la valeur est
+          renormalisée en UUID pour le backend automatiquement.
+        </Note>
+
+        <H3>Gestion des erreurs (par contexte)</H3>
+        <ul className="list-disc space-y-1.5 pl-5 text-ink-600">
+          <li>
+            <strong>Comportements</strong> — une exception est tracée dans la console de debug du
+            moteur (<C>log</C>) sans casser le formulaire ; le reste de l’UI continue de fonctionner.
+          </li>
+          <li>
+            <strong>Conditions</strong> — en cas d’erreur, le bouton reste <strong>visible</strong>{' '}
+            (<em>fail open</em>). Ne jamais s’appuyer sur une condition pour un contrôle de sécurité :
+            le franchissement réel reste gardé côté serveur.
+          </li>
+          <li>
+            <strong>Post-fonctions</strong> — <strong>best-effort</strong> : une erreur sur une action
+            (ex. e-mail) n’annule pas la transition déjà franchie.
+          </li>
+        </ul>
       </>
     ),
   },
+
+  /* ---------------------------------------------------------------- */
   {
     id: 'sandbox',
-    label: 'Exécution & sécurité',
-    terms: 'sandbox sécurité async await fetch window document eval function csp réseau connect-src dépendance npm',
+    label: 'Environnement d’exécution',
+    terms:
+      'sandbox sécurité async await fetch window document eval function csp réseau require dépendance npm globals interdits',
     body: (
       <>
         <p className="text-ink-500">
-          Les scripts sont compilés en fonctions asynchrones (support de <C>await</C>) avec un préambule
-          de durcissement. Bon à savoir avant d’écrire un script :
+          Les scripts sont compilés en fonctions asynchrones (vous pouvez donc utiliser <C>await</C>)
+          et exécutés avec un préambule de durcissement. Voici précisément ce qui est disponible et ce
+          qui ne l’est pas.
         </p>
-        <ul className="mt-3 list-disc space-y-1.5 pl-5 text-ink-600">
+
+        <H3>Ce qui est disponible</H3>
+        <ul className="list-disc space-y-1.5 pl-5 text-ink-600">
+          <li>Les <strong>fonctions injectées</strong> du contexte (voir chaque section).</li>
+          <li>La <strong>bibliothèque <C>lib</C></strong> et <C>require('lib')</C>.</li>
           <li>
-            Pas d’accès réseau direct, DOM, ni timers : <C>window</C>, <C>document</C>, <C>fetch</C>,{' '}
-            <C>XMLHttpRequest</C>, <C>localStorage</C>, <C>setTimeout</C>… sont neutralisés.
-          </li>
-          <li>
-            <C>Function</C> et <C>eval</C> sont désactivés ; les motifs <C>.constructor</C>,{' '}
-            <C>__proto__</C>, <C>.prototype</C> sont rejetés.
-          </li>
-          <li>
-            Les seuls appels réseau possibles passent par les <strong>helpers injectés</strong> (qui
-            appellent l’API bxChange authentifiée) — par exemple <C>callConnector</C> ou{' '}
-            <C>getIssuesByTemplate</C>.
+            Les objets standard du langage : <C>JSON</C>, <C>Math</C>, <C>Number</C>, <C>String</C>,{' '}
+            <C>Array</C>, <C>Object</C>, <C>Date</C>, les littéraux de gabarit, <C>await</C>…
           </li>
         </ul>
-        <Note>
-          Toute la bibliothèque est <strong>code maison, sans dépendance externe</strong>. On n’importe
-          jamais depuis une URL — on utilise <C>lib</C> et <C>require()</C>.
+
+        <H3>Ce qui est neutralisé</H3>
+        <ul className="list-disc space-y-1.5 pl-5 text-ink-600">
+          <li>
+            Accès réseau direct, DOM et timers : <C>window</C>, <C>document</C>, <C>location</C>,{' '}
+            <C>fetch</C>, <C>XMLHttpRequest</C>, <C>WebSocket</C>, <C>localStorage</C>,{' '}
+            <C>sessionStorage</C>, <C>setTimeout</C>, <C>setInterval</C>… sont à <C>undefined</C>.
+          </li>
+          <li>
+            <C>Function</C> et <C>eval</C> sont désactivés ; les motifs d’évasion (<C>.constructor</C>,{' '}
+            <C>__proto__</C>, <C>.prototype</C>) sont rejetés avant exécution.
+          </li>
+        </ul>
+
+        <Note tone="warn">
+          Le <strong>seul moyen d’appeler l’extérieur</strong> est de passer par les helpers injectés
+          (<C>callConnector</C>, <C>getIssuesByTemplate</C>, <C>updateIssue</C>…), qui tapent l’API
+          bxChange <strong>authentifiée</strong> avec vos droits. Aucune dépendance externe : tout est
+          code maison, on n’importe jamais depuis une URL.
         </Note>
       </>
     ),
   },
+
+  /* ---------------------------------------------------------------- */
   {
     id: 'lib',
     label: 'Bibliothèque lib',
-    terms: 'lib businessDays parseDate formatDate today addDays diffDays diffMonths daysBetween isWeekend groupBy sumBy sortBy uniq get currency number round clamp percent slugify isEmail isPhone isEmpty isNumeric dates collections format validation',
+    terms:
+      'lib parseDate formatDate today addDays subDays addMonths diffDays diffMonths businessDays daysBetween isBefore isAfter isSameDay isWeekend dayOfWeek startOfMonth endOfMonth groupBy keyBy countBy sortBy uniq uniqBy sumBy meanBy maxBy minBy chunk range get currency number round clamp percent capitalize truncate slugify isEmail isPhone isEmpty isNumeric dates collections format nombres validation',
     body: (
       <>
         <p className="text-ink-500">
-          Disponible dans les 3 contextes (comme <C>lib</C>, ou via <C>require('lib')</C>). 100 % pure et
-          tolérante aux entrées invalides — retourne <C>''</C> / <C>null</C> / <C>0</C> plutôt que de
-          lever. À la manière de dayjs + lodash, mais maison.
+          <C>lib</C> est une bibliothèque utilitaire maison, disponible dans les <strong>trois
+          contextes</strong> (directement comme <C>lib</C>, ou via <C>require('lib')</C>). Elle est{' '}
+          <strong>100 % pure et tolérante</strong> : sur une entrée invalide, elle renvoie une valeur
+          neutre (<C>''</C>, <C>null</C>, <C>0</C>) plutôt que de lever une exception. Vous pouvez donc
+          l’appeler sans multiplier les <C>try/catch</C>.
         </p>
 
-        <h3 className="mt-8 text-lg font-bold text-navy-900">Dates</h3>
-        <p className="mt-1 text-sm text-ink-500">
-          Parsing multi-format (<C>parseDate</C>) : ISO <C>YYYY-MM-DD</C>, ISO avec heure,{' '}
-          <C>YYYYMMDD</C>, FR <C>DD/MM/YYYY</C> · <C>DD-MM-YYYY</C> · <C>DD.MM.YYYY</C>. Toute fonction
-          qui renvoie une date renvoie une string ISO.
+        <H3>Dates</H3>
+        <p className="text-sm text-ink-500">
+          <strong>Formats reconnus en entrée</strong> (par <C>parseDate</C>, utilisé partout) : ISO{' '}
+          <C>YYYY-MM-DD</C>, ISO avec heure, <C>YYYYMMDD</C> (8 chiffres), et les formats FR{' '}
+          <C>DD/MM/YYYY</C>, <C>DD-MM-YYYY</C>, <C>DD.MM.YYYY</C>. <strong>En sortie</strong>, toute
+          fonction qui renvoie une date renvoie une string ISO <C>YYYY-MM-DD</C>.
         </p>
-        <Table
-          head={['Signature', 'Description']}
-          rows={[
-            [<C>parseDate(date)</C>, <>Parse en <C>Date</C> locale ; <C>null</C> si invalide.</>],
-            [<C>formatDate(date, fmt?)</C>, <><C>'iso'</C> (défaut) ou <C>'fr'</C> ; <C>''</C> si invalide.</>],
-            [<C>today()</C>, 'Date du jour (ISO).'],
-            [<><C>addDays(date, n)</C> · <C>subDays</C></>, 'Ajoute / retire n jours (n<0 possible).'],
-            [<C>addMonths(date, n)</C>, 'Ajoute / retire n mois.'],
-            [<C>diffDays(a, b)</C>, <>Différence en jours calendaires <C>b − a</C> (minuit à minuit).</>],
-            [<C>diffMonths(a, b)</C>, 'Différence en mois entiers.'],
-            [<C>businessDays(start, end)</C>, <><strong>Jours ouvrés (lun–ven), bornes incluses.</strong> N’exclut pas les jours fériés.</>],
-            [<C>daysBetween(start, end)</C>, <>Jours calendaires bornes incluses (= <C>diffDays + 1</C>).</>],
-            [<><C>isBefore</C> · <C>isAfter</C> · <C>isSameDay</C></>, 'Comparaisons au jour.'],
-            [<><C>isWeekend(date)</C> · <C>dayOfWeek(date)</C></>, '0 = dimanche … 6 = samedi.'],
-            [<><C>startOfMonth</C> · <C>endOfMonth</C></>, 'Premier / dernier jour du mois (ISO).'],
-          ]}
-        />
-        <Pre>{`lib.businessDays('2026-07-06', '2026-07-10')  // → 5 (lun→ven)
-lib.businessDays('2026-07-04', '2026-07-06')  // → 1 (sam+dim exclus)
-lib.addDays(lib.today(), 30)                  // → échéance J+30 en ISO`}</Pre>
-        <Note>
-          <C>businessDays</C> ne connaît pas les jours fériés : pour un calcul « ouvrés hors fériés »,
-          soustraire manuellement les fériés connus.
-        </Note>
 
-        <h3 className="mt-8 text-lg font-bold text-navy-900">Collections (façon lodash)</h3>
-        <p className="mt-1 text-sm text-ink-500">
-          L’itératee <C>key</C> accepte une string (<C>'montant'</C>) ou une fonction (<C>x =&gt; x.montant</C>).
+        <div className="mt-4 flex flex-col gap-1">
+          <Method name="parseDate(date)" returns="Date | null">
+            <p>Convertit une valeur en objet <C>Date</C> locale en essayant tous les formats ci-dessus, puis en dernier recours <C>new Date()</C>. Renvoie <C>null</C> si rien n’est interprétable. Sert de base à toutes les autres fonctions de date.</p>
+          </Method>
+          <Method name="formatDate(date, fmt?)" returns="string">
+            <p>Formate une date. <C>fmt</C> vaut <C>'iso'</C> (défaut, <C>2026-07-06</C>) ou <C>'fr'</C> (<C>06/07/2026</C>). Renvoie <C>''</C> si la date est invalide.</p>
+            <Pre>{`lib.formatDate('2026-07-06', 'fr')   // → '06/07/2026'
+lib.formatDate('n’importe quoi')     // → ''`}</Pre>
+          </Method>
+          <Method name="today()" returns="string">
+            <p>La date du jour au format ISO. Pratique pour horodater ou calculer une échéance.</p>
+          </Method>
+          <Method name="addDays(date, n) · subDays(date, n)" returns="string">
+            <p>Ajoute (ou retire) <C>n</C> jours calendaires. <C>n</C> peut être négatif. Renvoie une date ISO, ou <C>''</C> si l’entrée est invalide.</p>
+            <Pre>{`lib.addDays(lib.today(), 30)   // échéance à J+30
+lib.subDays('2026-07-06', 7)   // → '2026-06-29'`}</Pre>
+          </Method>
+          <Method name="addMonths(date, n)" returns="string">
+            <p>Ajoute (ou retire, si <C>n</C> &lt; 0) <C>n</C> mois entiers.</p>
+          </Method>
+          <Method name="diffDays(a, b)" returns="number | null">
+            <p>Nombre de jours calendaires entre <C>a</C> et <C>b</C>, soit <C>b − a</C>, calculé de minuit à minuit (aucun effet d’heure ni de fuseau). Négatif si <C>b</C> est avant <C>a</C>. <C>null</C> si une date est invalide.</p>
+          </Method>
+          <Method name="diffMonths(a, b)" returns="number | null">
+            <p>Nombre de mois <strong>entiers</strong> entre les deux dates.</p>
+          </Method>
+          <Method name="businessDays(start, end)" returns="number | null">
+            <p>Nombre de <strong>jours ouvrés (lundi→vendredi)</strong> entre deux dates, <strong>bornes incluses</strong>. Exclut uniquement les week-ends — <strong>pas</strong> les jours fériés.</p>
+            <Pre>{`lib.businessDays('2026-07-06', '2026-07-10')  // → 5 (lun→ven)
+lib.businessDays('2026-07-04', '2026-07-06')  // → 1 (sam+dim exclus, lun inclus)`}</Pre>
+            <Note>Pour des « ouvrés hors fériés », soustrayez manuellement les fériés connus de votre pays : <C>lib.businessDays(a,b) - nbFeriesDansIntervalle</C>.</Note>
+          </Method>
+          <Method name="daysBetween(start, end)" returns="number | null">
+            <p>Jours calendaires <strong>bornes incluses</strong> — équivaut à <C>diffDays + 1</C>. <C>daysBetween('2026-07-01','2026-07-01')</C> vaut <C>1</C>.</p>
+          </Method>
+          <Method name="isBefore(a, b) · isAfter(a, b) · isSameDay(a, b)" returns="boolean">
+            <p>Comparaisons <strong>au jour</strong> (l’heure est ignorée).</p>
+          </Method>
+          <Method name="isWeekend(date) · dayOfWeek(date)" returns="boolean · number">
+            <p><C>isWeekend</C> : samedi ou dimanche. <C>dayOfWeek</C> : <C>0</C> = dimanche … <C>6</C> = samedi (<C>-1</C> si invalide).</p>
+          </Method>
+          <Method name="startOfMonth(date) · endOfMonth(date)" returns="string">
+            <p>Premier / dernier jour du mois de la date donnée, en ISO.</p>
+          </Method>
+        </div>
+
+        <H3>Collections</H3>
+        <p className="text-sm text-ink-500">
+          Fonctions façon lodash. Le paramètre <C>key</C> (l’« itératee ») accepte soit une{' '}
+          <strong>string</strong> (nom de propriété : <C>'montant'</C>), soit une{' '}
+          <strong>fonction</strong> (<C>x =&gt; x.montant</C>). Toutes sont non-mutantes (elles
+          renvoient une copie).
         </p>
-        <Table
-          head={['Signature', 'Description']}
-          rows={[
-            [<><C>groupBy</C> · <C>keyBy</C> · <C>countBy</C></>, 'Regroupe / indexe / compte par clé.'],
-            [<C>sortBy(arr, key)</C>, 'Tri ascendant (copie, non mutant).'],
-            [<><C>uniq</C> · <C>uniqBy(arr, key)</C></>, 'Déduplique (identité / par clé).'],
-            [<><C>sumBy</C> · <C>meanBy</C> · <C>maxBy</C> · <C>minBy</C></>, 'Agrégats (valeurs non numériques → 0).'],
-            [<><C>chunk(arr, size)</C> · <C>range(start, end?, step?)</C></>, 'Découpe en paquets ; suite numérique.'],
-            [<C>get(obj, path, def?)</C>, <>Accès sûr par chemin : <C>lib.get(o, 'a.b.0.c', 'defaut')</C>.</>],
-          ]}
-        />
-        <Pre>{`const lignes = JSON.parse(getValue('lignes_frais') || '[]')
-lib.sumBy(lignes, 'montant')            // total
-lib.groupBy(lignes, l => l.categorie)   // { transport: [...], repas: [...] }`}</Pre>
+        <div className="mt-4 flex flex-col gap-1">
+          <Method name="groupBy(arr, key)" returns="Record<string, T[]>">
+            <p>Regroupe les éléments dans un objet, indexé par la valeur de <C>key</C>. Chaque entrée est un tableau.</p>
+            <Pre>{`lib.groupBy(lignes, l => l.categorie)
+// → { transport: [...], repas: [...] }`}</Pre>
+          </Method>
+          <Method name="keyBy(arr, key)" returns="Record<string, T>">
+            <p>Indexe par clé, en gardant <strong>un seul</strong> élément par valeur (le dernier rencontré gagne).</p>
+          </Method>
+          <Method name="countBy(arr, key)" returns="Record<string, number>">
+            <p>Compte le nombre d’éléments par valeur de clé.</p>
+          </Method>
+          <Method name="sortBy(arr, key)" returns="T[]">
+            <p>Trie par ordre <strong>ascendant</strong> selon la clé (copie, non mutant).</p>
+          </Method>
+          <Method name="uniq(arr) · uniqBy(arr, key)" returns="T[]">
+            <p>Déduplique : <C>uniq</C> par identité (via <C>Set</C>), <C>uniqBy</C> par valeur de clé.</p>
+          </Method>
+          <Method name="sumBy(arr, key) · meanBy(arr, key)" returns="number">
+            <p>Somme / moyenne des valeurs. Les valeurs non numériques comptent pour <C>0</C> ; <C>meanBy</C> d’un tableau vide vaut <C>0</C>.</p>
+            <Pre>{`lib.sumBy(lignes, 'montant')   // total des montants`}</Pre>
+          </Method>
+          <Method name="maxBy(arr, key) · minBy(arr, key)" returns="T | null">
+            <p>Renvoie l’<strong>élément</strong> (pas la valeur) au maximum / minimum de la clé, ou <C>null</C> si le tableau est vide.</p>
+          </Method>
+          <Method name="chunk(arr, size)" returns="T[][]">
+            <p>Découpe le tableau en paquets de longueur <C>size</C> (≥ 1).</p>
+          </Method>
+          <Method name="range(start, end?, step?)" returns="number[]">
+            <p>Génère une suite numérique. <C>range(3)</C> → <C>[0,1,2]</C> ; <C>range(2, 6)</C> → <C>[2,3,4,5]</C> ; <C>step</C> négatif supporté.</p>
+          </Method>
+          <Method name="get(obj, path, def?)" returns="unknown">
+            <p>Accès <strong>sûr</strong> à une valeur imbriquée par chemin, sans planter si un maillon est absent. Supporte la notation pointée et les index (<C>a.b.0.c</C> ou <C>a.b[0].c</C>). Renvoie <C>def</C> si le chemin n’existe pas.</p>
+            <Pre>{`lib.get(resultatConnecteur, 'body.items.0.id', null)`}</Pre>
+          </Method>
+        </div>
 
-        <h3 className="mt-8 text-lg font-bold text-navy-900">
-          Format &amp; nombres <span className="text-sm font-normal text-ink-400">(locale fr-FR)</span>
-        </h3>
-        <Table
-          head={['Signature', 'Exemple →']}
-          rows={[
-            [<C>currency(n, code?)</C>, <><C>lib.currency(1234.5)</C> → <C>1 234,50 €</C></>],
-            [<C>number(n, decimals?)</C>, <><C>lib.number(1234.5, 2)</C> → <C>1 234,50</C></>],
-            [<><C>round(n, dec?)</C> · <C>clamp(n, min, max)</C></>, <><C>lib.clamp(150, 0, 100)</C> → <C>100</C></>],
-            [<C>percent(n, dec?)</C>, <><C>lib.percent(0.75)</C> → <C>75 %</C></>],
-            [<><C>capitalize</C> · <C>truncate</C> · <C>slugify</C></>, <><C>lib.slugify('Été à Paris!')</C> → <C>ete-a-paris</C></>],
-          ]}
-        />
+        <H3>Format &amp; nombres <span className="text-sm font-normal text-ink-400">(locale par défaut fr-FR)</span></H3>
+        <div className="mt-4 flex flex-col gap-1">
+          <Method name="currency(n, code?, locale?)" returns="string">
+            <p>Formate un montant en devise. <C>code</C> par défaut <C>'EUR'</C>. <C>lib.currency(1234.5)</C> → <C>1 234,50 €</C>.</p>
+          </Method>
+          <Method name="number(n, decimals?, locale?)" returns="string">
+            <p>Formate un nombre avec séparateurs de milliers. <C>lib.number(1234.5, 2)</C> → <C>1 234,50</C>.</p>
+          </Method>
+          <Method name="round(n, decimals?)" returns="number">
+            <p>Arrondit à <C>decimals</C> décimales (défaut 0). <C>lib.round(3.14159, 2)</C> → <C>3.14</C>.</p>
+          </Method>
+          <Method name="clamp(n, min, max)" returns="number">
+            <p>Borne <C>n</C> entre <C>min</C> et <C>max</C>. <C>lib.clamp(150, 0, 100)</C> → <C>100</C>.</p>
+          </Method>
+          <Method name="percent(n, decimals?, locale?)" returns="string">
+            <p>Formate une proportion en pourcentage. <C>lib.percent(0.75)</C> → <C>75 %</C>.</p>
+          </Method>
+          <Method name="capitalize(s) · truncate(s, len, suffix?) · slugify(s)" returns="string">
+            <p><C>capitalize('bonjour')</C> → <C>Bonjour</C> · <C>truncate('abcdef', 4)</C> → <C>abc…</C> · <C>slugify('Été à Paris!')</C> → <C>ete-a-paris</C>.</p>
+          </Method>
+        </div>
 
-        <h3 className="mt-8 text-lg font-bold text-navy-900">Validation</h3>
-        <Table
-          head={['Signature', 'Description']}
-          rows={[
-            [<><C>isEmail(s)</C> · <C>isPhone(s)</C></>, 'Format e-mail ; téléphone (6–30 car.).'],
-            [<C>isEmpty(v)</C>, <><C>null</C> / <C>''</C> / <C>'[]'</C> / <C>[]</C> / <C>{'{}'}</C> → vrai.</>],
-            [<C>isNumeric(v)</C>, 'Nombre ou string numérique.'],
-          ]}
-        />
+        <H3>Validation</H3>
+        <div className="mt-4 flex flex-col gap-1">
+          <Method name="isEmail(s)" returns="boolean">
+            <p>Vrai si la string ressemble à une adresse e-mail (contrôle de forme basique, pas de vérification d’existence).</p>
+          </Method>
+          <Method name="isPhone(s)" returns="boolean">
+            <p>Vrai pour un numéro de 6 à 30 caractères composé de <C>+</C>, chiffres et séparateurs usuels.</p>
+          </Method>
+          <Method name="isEmpty(v)" returns="boolean">
+            <p>Vrai pour <C>null</C>, <C>''</C>, <C>'[]'</C>, un tableau vide, ou un objet vide. Pratique pour tester un champ « rempli ».</p>
+          </Method>
+          <Method name="isNumeric(v)" returns="boolean">
+            <p>Vrai si <C>v</C> est un nombre ou une string entièrement numérique.</p>
+          </Method>
+        </div>
       </>
     ),
   },
+
+  /* ---------------------------------------------------------------- */
   {
     id: 'behaviours',
-    label: 'Comportements de formulaire',
-    terms: 'comportements getValue setValue show hide setRequired disable enable setError clearError setMessage showTransition hideTransition getAssignee setAssignee setAssigneeByRole getRoles getMembers getCurrentUser getCurrentIssue getIssueByKey getIssuesByTemplate updateIssue addComment sendEmail objet métier bo callConnector',
+    label: 'Comportements — API',
+    terms:
+      'comportements getValue setValue show hide setRequired disable enable setError clearError setMessage clearMessage showTransition hideTransition getAssignee setAssignee setAssigneeByRole getRoles getMembers getCurrentUser getCurrentIssue getIssueByKey getIssuesByTemplate updateIssue addComment sendEmail setBoField searchBoInstances getBoInstance updateBoInstance createBoInstance callConnector setMemberAttributes updateUserAttribute log require',
     body: (
       <>
         <p className="text-ink-500">
-          Le contexte le plus riche. Un comportement a un déclencheur (<C>on_form_load</C>,{' '}
-          <C>on_field_change</C> — filtrable sur un champ, <C>on_case_load</C>).
+          Le contexte le plus riche : il pilote l’<strong>état vivant</strong> du formulaire. Toutes les
+          fonctions ci-dessous y sont disponibles. Celles marquées <em>async</em> renvoient une{' '}
+          <C>Promise</C> — utilisez <C>await</C>.
         </p>
-        <Note>
-          Les champs de type <strong>Objet métier</strong> sont pré-résolus :{' '}
-          <C>getValue('vehicule')</C> retourne l’objet complet (pas l’UUID), permettant{' '}
-          <C>getValue('vehicule').marque</C>. <C>setValue</C> renormalise en UUID pour le backend.
-        </Note>
 
-        <h4 className="mt-6 text-sm font-bold text-ink-700">Champs — lecture / écriture &amp; affichage</h4>
-        <Table
-          head={['Fonction', 'Effet']}
-          rows={[
-            [<C>getValue(key)</C>, <>Valeur courante (objet complet pour un champ BO). <C>''</C> si absent.</>],
-            [<C>setValue(key, value)</C>, 'Fixe la valeur (objet BO → UUID ; tableau d’objets → tableau d’UUID).'],
-            [<><C>show(key)</C> · <C>hide(key)</C></>, 'Affiche / masque le champ.'],
-            [<C>setRequired(key, bool)</C>, 'Rend obligatoire / optionnel.'],
-            [<><C>disable(key)</C> · <C>enable(key)</C></>, 'Grise (visible, non éditable) / réactive.'],
-          ]}
-        />
+        <H3>Lire &amp; écrire un champ</H3>
+        <div className="mt-4 flex flex-col gap-1">
+          <Method name="getValue(key)" returns="unknown">
+            <p>Valeur courante du champ <C>key</C>. Renvoie <C>''</C> si le champ est absent. Pour un champ Objet métier, renvoie l’<strong>objet complet</strong> (pré-résolu).</p>
+          </Method>
+          <Method name="setValue(key, value)" returns="void">
+            <p>Fixe la valeur d’un champ. Un objet BO est normalisé en UUID ; un tableau d’objets BO en tableau d’UUID. Déclenche la logique de dépendance du formulaire.</p>
+            <Params rows={[
+              ['key', 'string', 'Clé du champ cible.'],
+              ['value', 'unknown', 'Nouvelle valeur (string, number, tableau, objet BO…).'],
+            ]} />
+          </Method>
+        </div>
 
-        <h4 className="mt-6 text-sm font-bold text-ink-700">Validation, messages &amp; transitions</h4>
-        <Table
-          head={['Fonction', 'Effet']}
-          rows={[
-            [<C>setError(key, message)</C>, <>Marque le champ invalide → <strong>bloque la soumission</strong>.</>],
-            [<><C>clearError(key)</C></>, 'Efface l’erreur.'],
-            [<><C>setMessage(key, msg)</C> · <C>clearMessage(key)</C></>, 'Message informatif (non bloquant) sous le champ.'],
-            [<><C>showTransition(nameOrId)</C> · <C>hideTransition(nameOrId)</C></>, <>Affiche / masque un bouton de transition (<C>on_case_load</C>).</>],
-          ]}
-        />
+        <H3>Afficher, masquer, rendre obligatoire</H3>
+        <div className="mt-4 flex flex-col gap-1">
+          <Method name="show(key) · hide(key)" returns="void">
+            <p>Affiche ou masque un champ. Un champ masqué n’est pas soumis.</p>
+          </Method>
+          <Method name="setRequired(key, required)" returns="void">
+            <p>Rend un champ obligatoire (<C>true</C>) ou optionnel (<C>false</C>). Un champ obligatoire vide bloque la soumission.</p>
+          </Method>
+          <Method name="disable(key) · enable(key)" returns="void">
+            <p><C>disable</C> grise le champ (visible mais non éditable) ; <C>enable</C> le réactive. À distinguer de <C>hide</C> (qui le retire).</p>
+          </Method>
+        </div>
 
-        <h4 className="mt-6 text-sm font-bold text-ink-700">Assignation, rôles &amp; contexte dossier</h4>
-        <Table
-          head={['Fonction', 'Effet']}
-          rows={[
-            [<C>getAssignee()</C>, <>Assigné courant <C>{'{ type, id, name }'}</C> ou <C>null</C>.</>],
-            [<C>setAssignee(userId | null)</C>, 'Assigne à un utilisateur (UUID) ; null = désassigne.'],
-            [<C>setAssigneeByRole(slugOrName)</C>, 'Assigne à un rôle workflow.'],
-            [<><C>getRoles()</C> · <C>getMembers()</C> · <C>getCurrentUser()</C></>, 'Rôles workflow ; membres du tenant ; utilisateur connecté.'],
-            [<C>getCurrentIssue()</C>, <>Métadonnées du dossier <C>{'{ id, reference, status, priority, title }'}</C>.</>],
-            [<><C>getIssueByKey(ref)</C> · <C>getIssuesByTemplate(name, filters?)</C></>, <><em>async</em> — recherche un dossier / liste par template.</>],
-            [<C>updateIssue(ref, fieldsData)</C>, <><em>async</em> — MAJ partielle d’un autre dossier.</>],
-            [<><C>addComment(text)</C> · <C>sendEmail(id)</C></>, <><em>async</em> — commente le dossier ; met en file une notification e-mail.</>],
-          ]}
-        />
+        <H3>Validation &amp; messages</H3>
+        <div className="mt-4 flex flex-col gap-1">
+          <Method name="setError(key, message)" returns="void">
+            <p>Marque le champ en erreur et affiche <C>message</C>. <strong>Bloque la soumission</strong> tant que l’erreur n’est pas levée. À rappeler à chaque évaluation (voir <C>clearError</C>).</p>
+          </Method>
+          <Method name="clearError(key)" returns="void">
+            <p>Lève l’erreur posée sur le champ. Bonne pratique : dans un <C>on_field_change</C>, appeler <C>clearError</C> dans la branche « valide » pour ne pas laisser une erreur obsolète.</p>
+          </Method>
+          <Method name="setMessage(key, message) · clearMessage(key)" returns="void">
+            <p>Message <strong>informatif</strong> (non bloquant) sous le champ — pour une aide contextuelle ou un total calculé. <C>clearMessage</C> l’efface.</p>
+          </Method>
+        </div>
 
-        <h4 className="mt-6 text-sm font-bold text-ink-700">
-          Objets métier, connecteurs &amp; utilitaires <span className="font-normal text-ink-400">(async sauf mention)</span>
-        </h4>
-        <Table
-          head={['Fonction', 'Effet']}
-          rows={[
-            [<C>setBoField(key, instanceId | null)</C>, 'Affecte un champ BO par UUID d’instance.'],
-            [<C>searchBoInstances(typeName, query?, limit?)</C>, <>Recherche d’instances (défaut <C>limit = 20</C>).</>],
-            [<><C>getBoInstance</C> · <C>updateBoInstance</C> · <C>createBoInstance</C></>, 'Récupère / met à jour / crée une instance.'],
-            [<C>callConnector(connectorId, params?)</C>, <>Exécute un connecteur bxChange (<C>null</C> sur erreur).</>],
-            [<><C>setMemberAttributes</C> · <C>updateUserAttribute(userId, key, value)</C></>, 'Attributs de profil workflow (remplace tout / MAJ d’un seul).'],
-            [<><C>log(...args)</C> · <C>lib</C> · <C>require(name)</C></>, 'Trace de debug ; bibliothèque maison ; import sécurisé.'],
-          ]}
-        />
-        <Pre>{`// on_field_change sur 'type_contrat' : champ conditionnel requis
+        <H3>Boutons de transition <span className="text-sm font-normal text-ink-400">(contexte on_case_load)</span></H3>
+        <div className="mt-4 flex flex-col gap-1">
+          <Method name="showTransition(nameOrId) · hideTransition(nameOrId)" returns="void">
+            <p>Affiche / masque un bouton de transition, par <strong>nom</strong> ou par <strong>ID</strong>. N’a de sens que dans <C>on_case_load</C>. Pour une règle purement déclarative, préférez une <strong>condition de transition</strong> (section suivante).</p>
+            <Pre>{`// Masquer "Valider" sauf pour le rôle Manager
+const me = getCurrentUser()
+if (!me || !me.wf_role_names.includes('Manager')) hideTransition('Valider')`}</Pre>
+          </Method>
+        </div>
+
+        <H3>Assignation &amp; annuaire</H3>
+        <div className="mt-4 flex flex-col gap-1">
+          <Method name="getAssignee()" returns="{ type, id, name } | null">
+            <p>L’assigné courant du dossier, en tenant compte d’une assignation posée plus tôt dans le même run. <C>type</C> vaut <C>'user'</C> ou <C>'role'</C>. <C>null</C> si non assigné.</p>
+          </Method>
+          <Method name="setAssignee(userId | null)" returns="void">
+            <p>Assigne le dossier à un utilisateur par son <strong>UUID</strong>. <C>null</C> désassigne.</p>
+          </Method>
+          <Method name="setAssigneeByRole(slugOrName)" returns="void">
+            <p>Assigne à un <strong>rôle workflow</strong> (par slug ou nom), plutôt qu’à une personne précise.</p>
+          </Method>
+          <Method name="getRoles()" returns="BehaviourRole[]">
+            <p>Liste des rôles workflow : <C>{'{ id, slug, name, level }'}</C>.</p>
+          </Method>
+          <Method name="getMembers()" returns="BehaviourMember[]">
+            <p>Membres du tenant : <C>{'{ id, email, full_name, wf_role_id, wf_role_name, wf_role_slug, wf_role_names[], wf_role_slugs[], attributes }'}</C>. Utile pour router selon un attribut de profil.</p>
+          </Method>
+          <Method name="getCurrentUser()" returns="CurrentUser | null">
+            <p>L’utilisateur connecté : mêmes champs qu’un membre, plus son <C>role</C> plateforme et ses <C>attributes</C> de profil workflow. <C>null</C> si indisponible.</p>
+          </Method>
+        </div>
+
+        <H3>Contexte dossier &amp; inter-dossiers</H3>
+        <div className="mt-4 flex flex-col gap-1">
+          <Method name="getCurrentIssue()" returns="{ id, reference, status, priority, title }">
+            <p>Métadonnées du dossier ouvert.</p>
+          </Method>
+          <Method name="getIssueByKey(reference)" returns="Promise<object | null>">
+            <p><em>async</em> — Recherche un dossier par sa <strong>référence</strong> ou son UUID. <C>null</C> si introuvable.</p>
+          </Method>
+          <Method name="getIssuesByTemplate(templateName, filters?)" returns="Promise<object[]>">
+            <p><em>async</em> — Liste des dossiers d’un template. <C>filters</C> optionnel : <C>{'{ status, priority, search, limit }'}</C>.</p>
+            <Pre>{`const enCours = await getIssuesByTemplate('Demande de congés', {
+  status: 'En attente', limit: 100,
+})`}</Pre>
+          </Method>
+          <Method name="updateIssue(referenceOrId, fieldsData)" returns="Promise<void>">
+            <p><em>async</em> — Met à jour <strong>partiellement</strong> les champs d’un autre dossier. <C>fieldsData</C> est un objet <C>{'{ cle: valeur }'}</C>.</p>
+          </Method>
+          <Method name="addComment(text)" returns="Promise<void>">
+            <p><em>async</em> — Ajoute un commentaire au dossier courant (visible dans son historique).</p>
+          </Method>
+          <Method name="sendEmail(notificationId)" returns="Promise<void>">
+            <p><em>async</em> — Met en file une notification e-mail <strong>préconfigurée</strong> (identifiée par son UUID), avec ses destinataires et son gabarit.</p>
+          </Method>
+        </div>
+
+        <H3>Objets métier</H3>
+        <div className="mt-4 flex flex-col gap-1">
+          <Method name="setBoField(key, instanceId | null)" returns="void">
+            <p>Affecte un champ Objet métier par UUID d’instance (<C>null</C> pour vider).</p>
+          </Method>
+          <Method name="searchBoInstances(typeName, query?, limit?)" returns="Promise<object[]>">
+            <p><em>async</em> — Recherche des instances d’un type d’objet métier. <C>limit</C> par défaut <C>20</C>.</p>
+          </Method>
+          <Method name="getBoInstance(typeId, instanceId)" returns="Promise<object | null>">
+            <p><em>async</em> — Récupère une instance précise.</p>
+          </Method>
+          <Method name="updateBoInstance(typeId, instanceId, data) · createBoInstance(typeId, data)" returns="Promise<object | null>">
+            <p><em>async</em> — Met à jour ou crée une instance d’objet métier.</p>
+          </Method>
+        </div>
+
+        <H3>Connecteurs &amp; utilitaires</H3>
+        <div className="mt-4 flex flex-col gap-1">
+          <Method name="callConnector(connectorId, params?)" returns="Promise<unknown>">
+            <p><em>async</em> — Exécute un connecteur bxChange (SOAP ou REST) et renvoie son résultat. Renvoie <C>null</C> en cas d’erreur (à tester). Le résultat REST a la forme <C>{'{ status_code, headers, body }'}</C> — lisez-le avec <C>lib.get(res, 'body.…')</C>.</p>
+            <Params rows={[
+              ['connectorId', 'string', 'UUID du connecteur à exécuter.'],
+              ['params', 'object?', 'Paramètres passés au connecteur (query, body…).'],
+            ]} />
+          </Method>
+          <Method name="setMemberAttributes(memberId, attributes)" returns="Promise<void>">
+            <p><em>async</em> — <strong>Remplace</strong> l’ensemble des attributs personnalisés d’un membre (profil workflow).</p>
+          </Method>
+          <Method name="updateUserAttribute(userId, key, value)" returns="Promise<void>">
+            <p><em>async</em> — Met à jour <strong>un seul</strong> attribut sans écraser les autres. À préférer à <C>setMemberAttributes</C> quand on ne touche qu’une clé.</p>
+          </Method>
+          <Method name="log(...args)" returns="void">
+            <p>Trace dans la console de debug du moteur. N’a aucun effet en production visible par l’utilisateur — utile pendant la mise au point.</p>
+          </Method>
+          <Method name="require(name)" returns="unknown">
+            <p>Import sécurisé. <C>require('lib')</C> est toujours disponible ; les autres modules doivent être activés sur le processus (voir <a href="#require" className="text-gold-600 underline">require() &amp; catalogue</a>).</p>
+          </Method>
+        </div>
+
+        <Pre>{`// Exemple complet — on_field_change sur 'type_contrat'
 if (getValue('type_contrat') === 'CDD') {
   show('date_fin'); setRequired('date_fin', true)
 } else {
   hide('date_fin'); setRequired('date_fin', false)
 }
 
-// Validation métier : plafond de jours ouvrés
 const nb = lib.businessDays(getValue('date_debut'), getValue('date_fin'))
 if (nb !== null && nb > 25) setError('date_fin', 'Maximum 25 jours ouvrés')
-else setValue('nombre_jours', nb)`}</Pre>
+else { clearError('date_fin'); setValue('nombre_jours', nb ?? 0) }`}</Pre>
       </>
     ),
   },
+
+  /* ---------------------------------------------------------------- */
   {
     id: 'conditions',
-    label: 'Conditions de transition',
-    terms: 'conditions condition_script return false visible masqué fail open lecture seule déclaratif backend field_condition connector_result',
+    label: 'Conditions — API',
+    terms:
+      'conditions condition_script return false visible masqué fail open lecture seule getValue getCurrentUser getAssignee déclaratif backend field_condition connector_result opérateurs is_set eq ne gt gte lt lte contains in eq_current_user système',
     body: (
       <>
         <p className="text-ink-500">
-          Un petit script évalué côté client à l’affichage du dossier, qui décide si le bouton de
-          transition apparaît.
+          Une condition est un court script attaché à une transition, évalué à l’affichage du dossier,
+          qui décide si le bouton apparaît. Elle est en <strong>lecture seule</strong> : aucun effet de
+          bord n’est possible ici.
         </p>
-        <Note>
-          <strong>Sémantique du retour :</strong> <C>return false</C> → bouton masqué. <C>true</C> /{' '}
-          <C>undefined</C> / toute autre valeur → visible. Une erreur du script → <strong>fail open</strong>{' '}
-          (visible). Un script vide = visible.
-        </Note>
+
+        <H3>Sémantique du retour</H3>
+        <Table
+          head={['Le script…', 'Résultat']}
+          rows={[
+            [<><C>return false</C></>, 'Bouton masqué.'],
+            [<><C>return true</C> / <C>undefined</C> / autre valeur</>, 'Bouton visible.'],
+            ['lève une erreur', <>Bouton <strong>visible</strong> (fail open).</>],
+            ['est vide', 'Bouton visible.'],
+          ]}
+        />
+
+        <H3>Fonctions disponibles</H3>
         <p className="text-ink-600">
-          API injectée en <strong>lecture seule</strong> (aucun effet de bord) : <C>getValue</C>,{' '}
+          Un sous-ensemble volontairement restreint (aucune écriture) : <C>getValue</C>,{' '}
           <C>getCurrentUser</C>, <C>getAssignee</C>, <C>getRoles</C>, <C>getMembers</C>,{' '}
           <C>getCurrentIssue</C>, <C>getIssueByKey</C>, <C>getIssuesByTemplate</C>, <C>callConnector</C>,{' '}
-          <C>searchBoInstances</C>, <C>getBoInstance</C>, <C>lib</C>, <C>log</C>.
+          <C>searchBoInstances</C>, <C>getBoInstance</C>, <C>lib</C>, <C>log</C>. Leur comportement est
+          identique à celui décrit pour les comportements.
         </p>
         <Pre>{`// "Clôturer" visible seulement si soldé ET gestionnaire
 const solde = Number(getValue('montant_restant') || 0)
 const me = getCurrentUser()
 return solde === 0 && !!me && me.wf_role_names.includes('Gestionnaire')`}</Pre>
+
+        <H3>Conditions déclaratives (côté serveur)</H3>
+        <p className="text-ink-600">
+          Indépendamment du script (qui gère la <strong>visibilité</strong>), une transition peut porter
+          une condition <strong>déclarative</strong> qui garde le <strong>franchissement réel</strong> :
+          si elle n’est pas satisfaite, le serveur refuse la transition. C’est le vrai garde-fou.
+        </p>
+        <Table
+          head={['Élément', 'Valeurs']}
+          rows={[
+            [<C>condition_type</C>, <><C>none</C> · <C>field_condition</C> · <C>connector_result</C></>],
+            [
+              <C>condition_op</C>,
+              <><C>is_set</C>, <C>is_not_set</C>, <C>eq</C>, <C>ne</C>, <C>gt</C>, <C>gte</C>, <C>lt</C>, <C>lte</C>, <C>contains</C>, <C>not_contains</C>, <C>in</C>, <C>not_in</C>, <C>eq_current_user</C>, <C>ne_current_user</C></>,
+            ],
+            [
+              'Contexte évaluable',
+              <>Les champs <C>fields_data</C> et <C>connector_data</C>, plus les champs système préfixés <C>$</C> : <C>$assigned_to</C>, <C>$priority</C>, <C>$status</C>, <C>$created_by</C>, <C>$current_user</C>.</>,
+            ],
+          ]}
+        />
         <Note tone="warn">
-          À ne pas confondre : le script gouverne la <strong>visibilité du bouton</strong>. Le moteur
-          garde le <strong>franchissement réel</strong> via des conditions déclaratives (opérateurs{' '}
-          <C>eq</C>, <C>gt</C>, <C>in</C>, <C>eq_current_user</C>…) et refuse la transition si elle
-          n’est pas satisfaite.
+          <strong>Règle d’or :</strong> le script gouverne l’<em>affichage</em> du bouton (confort UX) ;
+          la condition déclarative gouverne l’<em>autorisation</em> réelle (sécurité). Ne comptez jamais
+          sur le seul script pour empêcher une action.
         </Note>
       </>
     ),
   },
+
+  /* ---------------------------------------------------------------- */
   {
     id: 'postfn',
-    label: 'Post-fonctions',
-    terms: 'post-fonctions setField setAssignee before_transition after_transition persisté assignation commentaire sendEmail',
+    label: 'Post-fonctions — API',
+    terms:
+      'post-fonctions setField setAssignee setAssigneeByRole before_transition after_transition persistance mode test addComment sendEmail updateIssue objets métier',
     body: (
       <>
         <p className="text-ink-500">
-          Effets de bord attachés à une transition. Après exécution, les champs modifiés (<C>setField</C>)
-          sont persistés et l’assignation appliquée.
+          Les post-fonctions produisent des <strong>effets de bord</strong> une fois la transition
+          franchie. Après exécution, les champs modifiés (<C>setField</C>) sont persistés et
+          l’assignation appliquée.
         </p>
+
         <Note tone="warn">
-          <strong>Runtime actuel :</strong> après confirmation, <strong>toutes les post-fonctions
-          actives</strong> de la transition s’exécutent après le franchissement (filtrage sur l’état
-          « actif », pas sur before/after).
+          <strong>À connaître sur le runtime actuel :</strong> après confirmation, <strong>toutes les
+          post-fonctions actives</strong> de la transition s’exécutent <strong>après</strong> le
+          franchissement (le filtrage se fait sur l’état « actif », pas sur <C>before</C>/<C>after</C>).
+          Le champ before/after existe et est éditable, mais <C>before_transition</C> s’exécute aussi
+          après le franchissement dans l’implémentation courante — écrivez vos scripts en conséquence.
         </Note>
-        <p className="text-ink-600">
-          Différences avec les comportements : l’écriture de champ est <C>setField(key, value)</C> (et non{' '}
-          <C>setValue</C>) ; pas de <C>show/hide/setRequired/setError</C> (pas de formulaire vivant).
-        </p>
-        <p className="mt-2 text-ink-600">
-          Fonctions : <C>getValue</C>, <C>setField</C>, <C>setAssignee</C>, <C>setAssigneeByRole</C>,{' '}
-          <C>getRoles</C>, <C>getMembers</C>, <C>getCurrentUser</C>, <C>getCurrentIssue</C>,{' '}
-          <C>getIssueByKey</C>, <C>getIssuesByTemplate</C>, <C>updateIssue</C>, <C>callConnector</C>,{' '}
-          <C>sendEmail</C>, <C>addComment</C>, <C>setBoField</C>, <C>searchBoInstances</C>,{' '}
-          <C>getBoInstance</C>, <C>updateBoInstance</C>, <C>createBoInstance</C>,{' '}
-          <C>setMemberAttributes</C>, <C>updateUserAttribute</C>, <C>lib</C>, <C>log</C>.
-        </p>
-        <Pre>{`// after_transition "Prendre en charge" : s'auto-assigner + horodater + notifier
+
+        <H3>Différences avec les comportements</H3>
+        <ul className="list-disc space-y-1.5 pl-5 text-ink-600">
+          <li>L’écriture d’un champ se fait avec <C>setField(key, value)</C> — <strong>pas</strong> <C>setValue</C>.</li>
+          <li>Aucune fonction de formulaire vivant : pas de <C>show/hide/setRequired/disable/enable/setError/setMessage</C>.</li>
+          <li><C>setAssignee</C> accepte un UUID <strong>ou</strong> un objet <C>{'{ id }'}</C>, et valide le format (ignoré si invalide).</li>
+        </ul>
+
+        <H3>Fonctions disponibles</H3>
+        <div className="mt-4 flex flex-col gap-1">
+          <Method name="setField(key, value)" returns="void">
+            <p>Modifie un champ du dossier ; la valeur est persistée après l’exécution de la post-fonction.</p>
+          </Method>
+          <Method name="setAssignee(userId | {id}) · setAssigneeByRole(slugOrName)" returns="void">
+            <p>Assigne à un utilisateur (UUID validé) ou à un rôle workflow (toast d’erreur si le rôle est introuvable).</p>
+          </Method>
+          <Method name="getValue · getCurrentIssue · getIssueByKey · getIssuesByTemplate · updateIssue" returns="—">
+            <p>Lecture des champs (BO pré-résolus) et accès inter-dossiers, identiques aux comportements. <C>getCurrentIssue</C> reflète l’état <strong>après</strong> transition.</p>
+          </Method>
+          <Method name="addComment(text) · sendEmail(notificationId)" returns="Promise<void>">
+            <p><em>async</em> — Commente le dossier ; envoie une notification e-mail préconfigurée.</p>
+          </Method>
+          <Method name="callConnector · searchBoInstances · getBoInstance · updateBoInstance · createBoInstance · setBoField" returns="—">
+            <p>Connecteurs et objets métier, identiques aux comportements (<C>setBoField</C> est persisté avec les champs).</p>
+          </Method>
+          <Method name="setMemberAttributes · updateUserAttribute · getRoles · getMembers · getCurrentUser · lib · log" returns="—">
+            <p>Annuaire, attributs de profil, bibliothèque maison et trace de debug.</p>
+          </Method>
+        </div>
+
+        <Note>
+          Le <strong>mode Test</strong> de l’éditeur (bouton ▶) exécute le script avec des stubs — il
+          expose le même jeu de fonctions <strong>sans effet réel</strong>, pour valider la logique
+          avant de l’activer.
+        </Note>
+
+        <Pre>{`// after_transition "Prendre en charge"
 const me = getCurrentUser()
 if (me) {
   setAssignee(me.id)
   setField('date_prise_en_charge', lib.today())
-  await addComment(\`Pris en charge par \${me.full_name || me.email}.\`)
+  await addComment('Pris en charge par ' + (me.full_name || me.email) + '.')
   await sendEmail('notif-prise-en-charge-uuid')
 }`}</Pre>
       </>
     ),
   },
+
+  /* ---------------------------------------------------------------- */
   {
     id: 'recipes',
     label: 'Recettes concrètes',
-    terms: 'exemples recettes congés note de frais total connecteur siren enrichir assignation escalade objet métier véhicule budget parent updateIssue callConnector sendEmail bonnes pratiques',
+    terms:
+      'exemples recettes congés note de frais total connecteur siren enrichir assignation escalade objet métier véhicule budget parent updateIssue callConnector sendEmail',
     body: (
       <>
         <p className="text-ink-500">
           Des scripts complets, prêts à adapter. Chaque recette indique le <strong>contexte</strong> et
           le <strong>déclencheur</strong> à utiliser.
         </p>
-
         <div className="mt-6 flex flex-col gap-5">
-          <Recipe
-            tag="Comportement · on_field_change"
-            title="Demande de congés — calcul auto & contrôle du solde"
-            goal={<>Afficher un motif conditionnel, calculer les jours ouvrés et bloquer au-delà du solde.</>}
-          >
+          <Recipe tag="Comportement · on_field_change" title="Congés — calcul auto & contrôle du solde" goal="Motif conditionnel, jours ouvrés calculés, blocage au-delà du solde.">
             <Pre>{`const type = getValue('type_conge')
 if (type === 'exceptionnel') { show('motif'); setRequired('motif', true) }
 else { hide('motif'); setRequired('motif', false) }
@@ -476,36 +803,21 @@ setValue('nombre_jours', nb ?? 0)
 
 const solde = Number(getValue('solde_conges') || 0)
 if (nb !== null && nb > solde) {
-  setError('date_fin', 'Solde insuffisant : ' + nb + ' jours demandés, ' + solde + ' disponibles')
-} else {
-  clearError('date_fin')
-}`}</Pre>
+  setError('date_fin', 'Solde insuffisant : ' + nb + ' demandés, ' + solde + ' disponibles')
+} else clearError('date_fin')`}</Pre>
           </Recipe>
 
-          <Recipe
-            tag="Comportement · on_field_change"
-            title="Note de frais — total dynamique & plafond par catégorie"
-            goal={<>Sommer des lignes saisies, afficher le total et signaler un dépassement.</>}
-          >
+          <Recipe tag="Comportement · on_field_change" title="Note de frais — total dynamique & plafond" goal="Sommer des lignes, afficher le total, signaler un dépassement par catégorie.">
             <Pre>{`const lignes = JSON.parse(getValue('lignes_frais') || '[]')
-const total = lib.sumBy(lignes, 'montant')
-setValue('total', total)
-setMessage('total', lib.currency(total) + ' sur ' + lignes.length + ' ligne(s)')
+setValue('total', lib.sumBy(lignes, 'montant'))
+setMessage('total', lib.currency(lib.sumBy(lignes, 'montant')) + ' sur ' + lignes.length + ' ligne(s)')
 
-const parCat = lib.groupBy(lignes, l => l.categorie)
-const repas = parCat.repas || []
-if (repas.length && lib.sumBy(repas, 'montant') > 50) {
-  setError('lignes_frais', 'Plafond repas dépassé (50 € / jour)')
-} else {
-  clearError('lignes_frais')
-}`}</Pre>
+const repas = (lib.groupBy(lignes, l => l.categorie).repas) || []
+if (repas.length && lib.sumBy(repas, 'montant') > 50) setError('lignes_frais', 'Plafond repas dépassé')
+else clearError('lignes_frais')`}</Pre>
           </Recipe>
 
-          <Recipe
-            tag="Comportement · on_field_change (async)"
-            title="Enrichir un dossier via un connecteur"
-            goal={<>Appeler un connecteur pour récupérer la raison sociale à partir d’un SIREN.</>}
-          >
+          <Recipe tag="Comportement · async" title="Enrichir via un connecteur (SIREN → raison sociale)" goal="Appeler un connecteur et exploiter son résultat en sécurité.">
             <Pre>{`const siren = String(getValue('siren') || '').replace(/\\s/g, '')
 if (siren.length === 9) {
   const res = await callConnector('annuaire-entreprises-uuid', { siren })
@@ -513,125 +825,62 @@ if (siren.length === 9) {
   if (nom) { setValue('raison_sociale', nom); clearError('siren') }
   else setError('siren', 'SIREN introuvable')
 }`}</Pre>
-            <Note><C>callConnector</C> renvoie <C>null</C> en cas d’erreur ; <C>lib.get</C> lit le résultat sans planter si le chemin est absent.</Note>
           </Recipe>
 
-          <Recipe
-            tag="Comportement · on_field_change"
-            title="Objet métier — pré-remplir depuis l’instance sélectionnée"
-            goal={<>Un champ « Véhicule » (objet métier) est pré-résolu : on lit ses propriétés directement.</>}
-          >
-            <Pre>{`const v = getValue('vehicule') // objet complet (BO pré-résolu, pas l'UUID)
-if (v) {
-  setValue('immatriculation', v.immatriculation)
-  setValue('cout_journalier', v.tarif_jour)
-}`}</Pre>
-          </Recipe>
-
-          <Recipe
-            tag="Comportement · on_case_load"
-            title="Masquer un bouton selon le rôle"
-            goal={<>N’exposer « Valider » qu’aux membres du rôle workflow « Manager ».</>}
-          >
-            <Pre>{`const me = getCurrentUser()
-if (!me || !me.wf_role_names.includes('Manager')) hideTransition('Valider')`}</Pre>
-          </Recipe>
-
-          <Recipe
-            tag="Condition de transition"
-            title="N’afficher « Clôturer » que si tout est réglé"
-            goal={<>Le bouton reste masqué tant qu’il existe des dossiers liés en attente.</>}
-          >
+          <Recipe tag="Condition de transition" title="« Clôturer » visible seulement si tout est réglé" goal="Masquer le bouton tant qu’il reste des dossiers liés en attente.">
             <Pre>{`const factures = await getIssuesByTemplate('Facture fournisseur', {
-  status: 'À payer',
-  search: getCurrentIssue().reference,
-  limit: 50,
+  status: 'À payer', search: getCurrentIssue().reference, limit: 50,
 })
 return factures.length === 0   // false → bouton masqué`}</Pre>
           </Recipe>
 
-          <Recipe
-            tag="Post-fonction · after_transition"
-            title="Prendre en charge — s’auto-assigner, horodater, notifier"
-            goal={<>Enchaîner assignation, mise à jour de champ, commentaire et e-mail.</>}
-          >
-            <Pre>{`const me = getCurrentUser()
-if (me) {
-  setAssignee(me.id)
-  setField('date_prise_en_charge', lib.today())
-  await addComment('Pris en charge par ' + (me.full_name || me.email) + '.')
-  await sendEmail('notif-prise-en-charge-uuid')
-}`}</Pre>
-          </Recipe>
-
-          <Recipe
-            tag="Post-fonction · before_transition"
-            title="Escalade automatique selon le montant"
-            goal={<>Router l’assignation vers le bon rôle en fonction d’un seuil.</>}
-          >
+          <Recipe tag="Post-fonction · before_transition" title="Escalade d’assignation selon le montant" goal="Router vers le bon rôle en fonction d’un seuil.">
             <Pre>{`const montant = Number(getValue('montant') || 0)
 setAssigneeByRole(montant > 5000 ? 'direction' : 'manager')
 await addComment('Demande de ' + lib.currency(montant) + ' routée automatiquement.')`}</Pre>
           </Recipe>
 
-          <Recipe
-            tag="Post-fonction · after_transition"
-            title="Mettre à jour un dossier lié"
-            goal={<>Décrémenter le budget d’un dossier « Projet » parent à la validation.</>}
-          >
+          <Recipe tag="Post-fonction · after_transition" title="Mettre à jour un dossier lié (budget parent)" goal="Décrémenter le budget d’un dossier « Projet » à la validation.">
             <Pre>{`const ref = getValue('projet_ref')
 const projet = await getIssueByKey(ref)
 if (projet) {
   const budget = Number(lib.get(projet, 'fields_data.budget_restant', 0))
-  const reste = Math.max(0, budget - Number(getValue('montant') || 0))
-  await updateIssue(ref, { budget_restant: reste })
+  await updateIssue(ref, { budget_restant: Math.max(0, budget - Number(getValue('montant') || 0)) })
 }`}</Pre>
           </Recipe>
         </div>
-
-        <h3 className="mt-10 text-lg font-bold text-navy-900">Bonnes pratiques</h3>
-        <ul className="mt-2 list-disc space-y-1.5 pl-5 text-ink-600">
-          <li>Toujours prévoir les valeurs vides : <C>getValue</C> renvoie <C>''</C> si le champ est absent — encadrer avec <C>Number(x || 0)</C> ou <C>JSON.parse(x || '[]')</C>.</li>
-          <li><C>businessDays</C> et les <C>diff*</C> renvoient <C>null</C> sur date invalide — tester <C>!== null</C> avant d’écrire un résultat.</li>
-          <li>Les fonctions marquées <em>async</em> (<C>callConnector</C>, <C>getIssueByKey</C>, <C>updateIssue</C>, <C>sendEmail</C>, <C>addComment</C>…) s’utilisent avec <C>await</C>.</li>
-          <li>Dans une <strong>condition</strong>, un <C>return false</C> masque le bouton ; toute erreur laisse le bouton visible (fail open) — ne pas compter dessus pour un contrôle de sécurité (le franchissement reste gardé côté serveur).</li>
-          <li>Utiliser <C>setMessage</C> pour informer (non bloquant) et <C>setError</C> pour empêcher la soumission.</li>
-        </ul>
       </>
     ),
   },
+
+  /* ---------------------------------------------------------------- */
   {
     id: 'require',
     label: 'require() & catalogue',
-    terms: 'require lib catalogue module enabled_libs activation',
+    terms: 'require lib catalogue module enabled_libs activation import',
     body: (
       <>
         <p className="text-ink-500">
-          <C>require(name)</C> est le seul moyen d’importer un module — jamais depuis une URL externe.
+          <C>require(name)</C> est le <strong>seul</strong> moyen d’importer un module — jamais depuis
+          une URL. Deux niveaux :
         </p>
         <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-ink-600">
-          <li>
-            <C>require('lib')</C> — la bibliothèque maison, <strong>toujours disponible</strong>, sans
-            activation.
-          </li>
-          <li>
-            <strong>Catalogue optionnel</strong> — modules maison plus spécifiques, activables par
-            processus. Un <C>require('x')</C> non activé lève une erreur explicite.
-          </li>
+          <li><C>require('lib')</C> — la bibliothèque maison, <strong>toujours disponible</strong>, sans activation.</li>
+          <li><strong>Catalogue optionnel</strong> — modules maison spécifiques, <strong>activables par processus</strong>. Un <C>require('x')</C> non activé lève une erreur explicite.</li>
         </ol>
-        <Note>
-          État actuel : le catalogue est vide — seul <C>require('lib')</C> est exploitable aujourd’hui.
-        </Note>
+        <Note>État actuel : le catalogue est vide — seul <C>require('lib')</C> est exploitable aujourd’hui. L’ajout d’un module se fait par l’équipe plateforme (code pur, sans dépendance, bundlé au build).</Note>
       </>
     ),
   },
+
+  /* ---------------------------------------------------------------- */
   {
     id: 'matrix',
     label: 'Matrice des API',
-    terms: 'matrice quelle fonction contexte comportements conditions post-fonctions récapitulatif',
+    terms: 'matrice quelle fonction contexte comportements conditions post-fonctions récapitulatif disponibilité',
     body: (
       <>
-        <p className="text-ink-500">Quelle fonction est disponible dans quel contexte.</p>
+        <p className="text-ink-500">Récapitulatif de la disponibilité de chaque capacité par contexte.</p>
         <Table
           head={['Capacité', 'Comportements', 'Conditions', 'Post-fonctions']}
           rows={(() => {
@@ -641,7 +890,7 @@ if (projet) {
               [<C>getValue</C>, y, y, y],
               ['écrire un champ', <C>setValue</C>, n, <C>setField</C>],
               [<C>show/hide/setRequired/disable/enable</C>, y, n, n],
-              [<C>setError/setMessage</C> as ReactNode, y, n, n],
+              [<C>setError/setMessage</C>, y, n, n],
               [<C>show/hideTransition</C>, y, n, n],
               [<><C>return false</C> masque le bouton</>, n, y, n],
               [<C>getAssignee</C>, y, y, n],
@@ -652,7 +901,7 @@ if (projet) {
               [<C>callConnector</C>, y, y, y],
               [<>BO : <C>searchBoInstances/getBoInstance</C></>, y, y, y],
               [<>BO : <C>setBoField/updateBoInstance/createBoInstance</C></>, y, n, y],
-              [<><C>lib</C> (dont <C>businessDays</C>) · <C>log</C></>, y, y, y],
+              [<><C>lib</C> · <C>log</C></>, y, y, y],
             ];
           })()}
         />
@@ -661,9 +910,9 @@ if (projet) {
   },
 ];
 
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
 /* Page                                                                */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
 
 export function DocumentationPage() {
   const c = useContent();
@@ -671,10 +920,7 @@ export function DocumentationPage() {
 
   const q = query.trim().toLowerCase();
   const visible = useMemo(
-    () =>
-      SECTIONS.filter(
-        (s) => q === '' || s.label.toLowerCase().includes(q) || s.terms.toLowerCase().includes(q),
-      ),
+    () => SECTIONS.filter((s) => q === '' || s.label.toLowerCase().includes(q) || s.terms.toLowerCase().includes(q)),
     [q],
   );
 
@@ -685,11 +931,11 @@ export function DocumentationPage() {
       <PageHero
         eyebrow="Documentation technique"
         title="Automatiser vos processus avec bxChange"
-        subtitle="La référence des points d’extension du moteur workflow : bibliothèque lib, comportements de formulaire, conditions, post-fonctions et appel de connecteurs."
+        subtitle="La référence complète des points d’extension du moteur workflow : bibliothèque lib, comportements, conditions, post-fonctions et appel de connecteurs — chaque fonction documentée, avec exemples."
       />
 
       <section className="py-14 sm:py-16">
-        <div className="container-page grid gap-10 lg:grid-cols-[220px_1fr] lg:items-start">
+        <div className="container-page grid gap-10 lg:grid-cols-[230px_1fr] lg:items-start">
           {/* Sommaire */}
           <aside className="hidden lg:block">
             <div className="sticky top-24">
@@ -710,7 +956,6 @@ export function DocumentationPage() {
 
           {/* Contenu */}
           <div className="min-w-0">
-            {/* Recherche */}
             <div className="relative mb-8">
               <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-400">
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2}>
@@ -722,14 +967,13 @@ export function DocumentationPage() {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Rechercher une fonction… (ex. businessDays, callConnector, setAssignee)"
+                placeholder="Rechercher une fonction… (ex. businessDays, callConnector, setError)"
                 aria-label="Rechercher dans la documentation"
                 className="w-full rounded-xl border border-ink-200 bg-white py-3 pl-10 pr-4 text-sm text-navy-900 shadow-card placeholder:text-ink-400 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
               />
               {q !== '' && (
                 <p className="mt-2 text-xs text-ink-400">
-                  {visible.length}{' '}
-                  {visible.length > 1 ? 'sections correspondent' : 'section correspond'} à « {query.trim()} »
+                  {visible.length} {visible.length > 1 ? 'sections correspondent' : 'section correspond'} à « {query.trim()} »
                 </p>
               )}
             </div>
@@ -739,7 +983,7 @@ export function DocumentationPage() {
                 Aucun résultat. Essaie <C>businessDays</C>, <C>connecteur</C>, <C>assignation</C> ou <C>validation</C>.
               </div>
             ) : (
-              <div className="flex flex-col gap-14">
+              <div className="flex flex-col gap-16">
                 {visible.map((s) => (
                   <section key={s.id} id={s.id} className="scroll-mt-24">
                     <h2 className="mb-3 flex items-center gap-3 text-2xl font-bold text-navy-900">
@@ -754,14 +998,13 @@ export function DocumentationPage() {
               </div>
             )}
 
-            {/* Aide */}
             <div className="mt-16 flex items-start gap-3 rounded-2xl border border-gold/30 bg-gradient-to-br from-[#F8F2E6] to-white p-6 shadow-card">
               <Icons.mail className="mt-0.5 h-5 w-5 shrink-0 text-gold-600" />
               <div>
-                <h3 className="font-bold text-navy-900">Une question sur un cas d’usage ?</h3>
+                <h3 className="font-bold text-navy-900">Un cas non couvert ?</h3>
                 <p className="mt-1 text-sm text-ink-500">
-                  Notre équipe accompagne vos administrateurs de processus. Écrivez-nous et nous vous
-                  aidons à modéliser votre workflow.
+                  Cette référence vise l’exhaustivité. S’il manque un exemple ou une précision,
+                  dites-le nous — nous complétons la documentation.
                 </p>
               </div>
             </div>
