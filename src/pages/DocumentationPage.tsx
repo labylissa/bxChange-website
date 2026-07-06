@@ -1,4 +1,4 @@
-import { useMemo, useState, type ReactNode } from 'react';
+import { useMemo, useRef, useState, type ReactNode } from 'react';
 import { Seo } from '@/components/Seo';
 import { PageHero } from '@/components/ui';
 import { Icons } from '@/components/Icon';
@@ -49,10 +49,58 @@ function Table({ head, rows }: { head: ReactNode[]; rows: ReactNode[][] }) {
 }
 
 function Pre({ children }: { children: ReactNode }) {
+  const ref = useRef<HTMLPreElement>(null);
+  const [copied, setCopied] = useState(false);
+
+  const copy = async () => {
+    const text = ref.current?.innerText ?? '';
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+      } catch {
+        /* ignoré */
+      }
+      ta.remove();
+    }
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1600);
+  };
+
   return (
-    <pre className="my-4 overflow-x-auto rounded-xl border border-ink-100 border-l-[3px] border-l-gold bg-white p-4 font-mono text-[13px] leading-relaxed text-navy-900 shadow-card">
-      {children}
-    </pre>
+    <div className="group relative my-4">
+      <button
+        type="button"
+        onClick={copy}
+        aria-label={copied ? 'Code copié' : 'Copier le code'}
+        className="absolute right-2.5 top-2.5 z-10 inline-flex items-center gap-1.5 rounded-lg border border-ink-200 bg-white/90 px-2.5 py-1.5 text-xs font-semibold text-ink-500 shadow-sm backdrop-blur transition-colors hover:border-gold hover:text-gold-600"
+      >
+        {copied ? (
+          <>
+            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-mint" fill="none" stroke="currentColor" strokeWidth={2.5}><path d="M20 6 9 17l-5-5" /></svg>
+            Copié
+          </>
+        ) : (
+          <>
+            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2}><rect x="9" y="9" width="12" height="12" rx="2" /><path d="M5 15V5a2 2 0 0 1 2-2h10" /></svg>
+            Copier
+          </>
+        )}
+      </button>
+      <pre
+        ref={ref}
+        className="overflow-x-auto rounded-xl border border-ink-100 border-l-[3px] border-l-gold bg-white p-4 pr-16 font-mono text-[13px] leading-relaxed text-navy-900 shadow-card"
+      >
+        {children}
+      </pre>
+    </div>
   );
 }
 
@@ -65,6 +113,19 @@ function Note({ children, tone = 'note' }: { children: ReactNode; tone?: 'note' 
     <div className={`my-4 flex gap-3 rounded-xl border px-4 py-3 text-sm leading-relaxed text-ink-600 ${styles}`}>
       <span className="mt-0.5 shrink-0 font-bold text-gold-600">{tone === 'warn' ? '⚠' : '▸'}</span>
       <div>{children}</div>
+    </div>
+  );
+}
+
+function Recipe({ tag, title, goal, children }: { tag: string; title: string; goal: ReactNode; children: ReactNode }) {
+  return (
+    <div className="rounded-2xl border border-ink-100 bg-white p-5 shadow-card sm:p-6">
+      <span className="inline-flex items-center rounded-full bg-gold/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-gold-600 ring-1 ring-gold/25">
+        {tag}
+      </span>
+      <h3 className="mt-3 text-base font-bold text-navy-900">{title}</h3>
+      <p className="mt-1 text-sm text-ink-500">{goal}</p>
+      {children}
     </div>
   );
 }
@@ -386,6 +447,156 @@ if (me) {
   await addComment(\`Pris en charge par \${me.full_name || me.email}.\`)
   await sendEmail('notif-prise-en-charge-uuid')
 }`}</Pre>
+      </>
+    ),
+  },
+  {
+    id: 'recipes',
+    label: 'Recettes concrètes',
+    terms: 'exemples recettes congés note de frais total connecteur siren enrichir assignation escalade objet métier véhicule budget parent updateIssue callConnector sendEmail bonnes pratiques',
+    body: (
+      <>
+        <p className="text-ink-500">
+          Des scripts complets, prêts à adapter. Chaque recette indique le <strong>contexte</strong> et
+          le <strong>déclencheur</strong> à utiliser.
+        </p>
+
+        <div className="mt-6 flex flex-col gap-5">
+          <Recipe
+            tag="Comportement · on_field_change"
+            title="Demande de congés — calcul auto & contrôle du solde"
+            goal={<>Afficher un motif conditionnel, calculer les jours ouvrés et bloquer au-delà du solde.</>}
+          >
+            <Pre>{`const type = getValue('type_conge')
+if (type === 'exceptionnel') { show('motif'); setRequired('motif', true) }
+else { hide('motif'); setRequired('motif', false) }
+
+const nb = lib.businessDays(getValue('date_debut'), getValue('date_fin'))
+setValue('nombre_jours', nb ?? 0)
+
+const solde = Number(getValue('solde_conges') || 0)
+if (nb !== null && nb > solde) {
+  setError('date_fin', 'Solde insuffisant : ' + nb + ' jours demandés, ' + solde + ' disponibles')
+} else {
+  clearError('date_fin')
+}`}</Pre>
+          </Recipe>
+
+          <Recipe
+            tag="Comportement · on_field_change"
+            title="Note de frais — total dynamique & plafond par catégorie"
+            goal={<>Sommer des lignes saisies, afficher le total et signaler un dépassement.</>}
+          >
+            <Pre>{`const lignes = JSON.parse(getValue('lignes_frais') || '[]')
+const total = lib.sumBy(lignes, 'montant')
+setValue('total', total)
+setMessage('total', lib.currency(total) + ' sur ' + lignes.length + ' ligne(s)')
+
+const parCat = lib.groupBy(lignes, l => l.categorie)
+const repas = parCat.repas || []
+if (repas.length && lib.sumBy(repas, 'montant') > 50) {
+  setError('lignes_frais', 'Plafond repas dépassé (50 € / jour)')
+} else {
+  clearError('lignes_frais')
+}`}</Pre>
+          </Recipe>
+
+          <Recipe
+            tag="Comportement · on_field_change (async)"
+            title="Enrichir un dossier via un connecteur"
+            goal={<>Appeler un connecteur pour récupérer la raison sociale à partir d’un SIREN.</>}
+          >
+            <Pre>{`const siren = String(getValue('siren') || '').replace(/\\s/g, '')
+if (siren.length === 9) {
+  const res = await callConnector('annuaire-entreprises-uuid', { siren })
+  const nom = lib.get(res, 'body.results.0.nom_complet', null)
+  if (nom) { setValue('raison_sociale', nom); clearError('siren') }
+  else setError('siren', 'SIREN introuvable')
+}`}</Pre>
+            <Note><C>callConnector</C> renvoie <C>null</C> en cas d’erreur ; <C>lib.get</C> lit le résultat sans planter si le chemin est absent.</Note>
+          </Recipe>
+
+          <Recipe
+            tag="Comportement · on_field_change"
+            title="Objet métier — pré-remplir depuis l’instance sélectionnée"
+            goal={<>Un champ « Véhicule » (objet métier) est pré-résolu : on lit ses propriétés directement.</>}
+          >
+            <Pre>{`const v = getValue('vehicule') // objet complet (BO pré-résolu, pas l'UUID)
+if (v) {
+  setValue('immatriculation', v.immatriculation)
+  setValue('cout_journalier', v.tarif_jour)
+}`}</Pre>
+          </Recipe>
+
+          <Recipe
+            tag="Comportement · on_case_load"
+            title="Masquer un bouton selon le rôle"
+            goal={<>N’exposer « Valider » qu’aux membres du rôle workflow « Manager ».</>}
+          >
+            <Pre>{`const me = getCurrentUser()
+if (!me || !me.wf_role_names.includes('Manager')) hideTransition('Valider')`}</Pre>
+          </Recipe>
+
+          <Recipe
+            tag="Condition de transition"
+            title="N’afficher « Clôturer » que si tout est réglé"
+            goal={<>Le bouton reste masqué tant qu’il existe des dossiers liés en attente.</>}
+          >
+            <Pre>{`const factures = await getIssuesByTemplate('Facture fournisseur', {
+  status: 'À payer',
+  search: getCurrentIssue().reference,
+  limit: 50,
+})
+return factures.length === 0   // false → bouton masqué`}</Pre>
+          </Recipe>
+
+          <Recipe
+            tag="Post-fonction · after_transition"
+            title="Prendre en charge — s’auto-assigner, horodater, notifier"
+            goal={<>Enchaîner assignation, mise à jour de champ, commentaire et e-mail.</>}
+          >
+            <Pre>{`const me = getCurrentUser()
+if (me) {
+  setAssignee(me.id)
+  setField('date_prise_en_charge', lib.today())
+  await addComment('Pris en charge par ' + (me.full_name || me.email) + '.')
+  await sendEmail('notif-prise-en-charge-uuid')
+}`}</Pre>
+          </Recipe>
+
+          <Recipe
+            tag="Post-fonction · before_transition"
+            title="Escalade automatique selon le montant"
+            goal={<>Router l’assignation vers le bon rôle en fonction d’un seuil.</>}
+          >
+            <Pre>{`const montant = Number(getValue('montant') || 0)
+setAssigneeByRole(montant > 5000 ? 'direction' : 'manager')
+await addComment('Demande de ' + lib.currency(montant) + ' routée automatiquement.')`}</Pre>
+          </Recipe>
+
+          <Recipe
+            tag="Post-fonction · after_transition"
+            title="Mettre à jour un dossier lié"
+            goal={<>Décrémenter le budget d’un dossier « Projet » parent à la validation.</>}
+          >
+            <Pre>{`const ref = getValue('projet_ref')
+const projet = await getIssueByKey(ref)
+if (projet) {
+  const budget = Number(lib.get(projet, 'fields_data.budget_restant', 0))
+  const reste = Math.max(0, budget - Number(getValue('montant') || 0))
+  await updateIssue(ref, { budget_restant: reste })
+}`}</Pre>
+          </Recipe>
+        </div>
+
+        <h3 className="mt-10 text-lg font-bold text-navy-900">Bonnes pratiques</h3>
+        <ul className="mt-2 list-disc space-y-1.5 pl-5 text-ink-600">
+          <li>Toujours prévoir les valeurs vides : <C>getValue</C> renvoie <C>''</C> si le champ est absent — encadrer avec <C>Number(x || 0)</C> ou <C>JSON.parse(x || '[]')</C>.</li>
+          <li><C>businessDays</C> et les <C>diff*</C> renvoient <C>null</C> sur date invalide — tester <C>!== null</C> avant d’écrire un résultat.</li>
+          <li>Les fonctions marquées <em>async</em> (<C>callConnector</C>, <C>getIssueByKey</C>, <C>updateIssue</C>, <C>sendEmail</C>, <C>addComment</C>…) s’utilisent avec <C>await</C>.</li>
+          <li>Dans une <strong>condition</strong>, un <C>return false</C> masque le bouton ; toute erreur laisse le bouton visible (fail open) — ne pas compter dessus pour un contrôle de sécurité (le franchissement reste gardé côté serveur).</li>
+          <li>Utiliser <C>setMessage</C> pour informer (non bloquant) et <C>setError</C> pour empêcher la soumission.</li>
+        </ul>
       </>
     ),
   },
