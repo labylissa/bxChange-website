@@ -108,7 +108,11 @@ export function HomePage() {
               Elle était contrainte à une demi-largeur avec un décalage à
               gauche, ce qui la tassait contre le texte alors que le décor
               occupait le reste. */}
-          <div className="mx-auto w-full max-w-lg lg:max-w-none">
+          {/* Décalée vers la droite à partir de `lg` : collée au texte,
+              la carte donnait l'impression de deux blocs accolés plutôt que
+              de deux colonnes. Le retrait ne s'applique qu'en disposition à
+              deux colonnes — empilée, il ne ferait que rogner la carte. */}
+          <div className="mx-auto w-full max-w-lg lg:max-w-none lg:pl-12">
             <HeroVisual />
           </div>
         </div>
