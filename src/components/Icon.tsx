@@ -92,6 +92,17 @@ const processPaths: Record<ProcessIconName, string> = {
   clipboard: 'M9 4h6v3H9zM9 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3M9 12h6M9 16h4',
   lifebuoy: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM5 5l4.5 4.5M14.5 14.5 19 19M19 5l-4.5 4.5M9.5 14.5 5 19',
   building: 'M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M5 21h14M15 9h2a2 2 0 0 1 2 2v10M9 7h2M9 11h2M9 15h2',
+  // Trois icônes ajoutées pour la section « Comment ça marche ». Elle
+  // portait celles de l'ancien discours — une flèche de synchronisation
+  // pour illustrer « vous dessinez le déroulé », c'est-à-dire l'inverse de
+  // ce que la phrase dit.
+  //
+  // `flow` : trois nœuds reliés, le schéma d'un processus.
+  flow: 'M6 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM6 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM6 7v10M8 5h6a2 2 0 0 1 2 2v1M16 12v5a2 2 0 0 1-2 2H8',
+  // `steps` : une progression jalonnée, cochée à mesure.
+  steps: 'M4 6h2M4 12h2M4 18h2M9 6h11M9 12h11M9 18h11M4.5 5.5l1 1 1.5-2',
+  // `plug` : le raccordement à un logiciel existant.
+  plug: 'M9 3v6M15 3v6M7 9h10v3a5 5 0 0 1-10 0zM12 17v4',
 };
 
 export function ProcessIcon({

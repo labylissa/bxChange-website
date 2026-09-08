@@ -58,10 +58,13 @@ export function Header() {
       }`}
     >
       <div className="container-page flex h-20 items-center justify-between gap-4">
-        <Link to={path('home')} aria-label="bxChange" className="shrink-0">
-          <span className="inline-flex items-center rounded-xl bg-gradient-to-br from-gold to-gold-600 px-3 py-2 shadow-card">
-            <Logo variant="light" className="h-9 w-auto" />
-          </span>
+        {/* Le logotype seul, sans la pastille dorée qui l'enfermait.
+            Cette pastille avait été dessinée autour de l'ancienne marque — un
+            carré monochrome qu'il fallait détacher du fond blanc. Le logotype
+            bxFlow porte son propre doré : posé sur du doré, le mot « Flow »
+            aurait disparu. */}
+        <Link to={path('home')} aria-label="bxFlow" className="shrink-0">
+          <Logo className="h-10 w-auto" />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Principale">

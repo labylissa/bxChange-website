@@ -1,57 +1,57 @@
 export const fr = {
   meta: {
     home: {
-      title: 'bxChange — Connectez vos logiciels, automatisez vos processus',
+      title: 'bxFlow — Modélisez vos processus métier, ils s’exécutent tout seuls',
       description:
-        'bxChange relie vos anciens logiciels aux outils modernes et automatise vos processus métier. Plus de 20 processus prêts à démarrer. PME, cabinets comptables, microfinance.',
+        'Moteur de processus métier : dessinez les étapes, les rôles et les validations, bxFlow fait avancer chaque dossier. Plus de 70 processus prêts à démarrer.',
     },
     product: {
-      title: 'Produit — bxChange | Connecteur et automatisation des processus',
+      title: 'Produit — bxFlow | Moteur de processus métier (BPMN)',
       description:
-        'Reliez vos systèmes existants aux applications modernes, orchestrez vos flux et automatisez vos processus métier avec la lecture automatique de documents.',
+        'Éditeur de processus, rôles et validations, écrans par étape, délais et relances. Vos logiciels existants sont interrogés en chemin, quand une étape en a besoin.',
     },
     useCases: {
-      title: 'Cas d’usage — bxChange | PME, cabinets comptables, microfinance',
+      title: 'Cas d’usage — bxFlow | PME, cabinets comptables, microfinance',
       description:
-        'Découvrez comment bxChange fait gagner du temps et fiabilise les processus des PME, cabinets comptables et institutions de microfinance.',
+        'Découvrez comment bxFlow fait gagner du temps et fiabilise les processus des PME, cabinets comptables et institutions de microfinance.',
     },
     catalog: {
-      title: 'Catalogue de processus — bxChange | 20+ processus prêts à l’emploi',
+      title: 'Catalogue de processus — bxFlow | 70+ processus prêts à l’emploi',
       description:
-        'Plus de 20 processus métier prêts à démarrer : congés, notes de frais, onboarding, ouverture de dossier client. La bibliothèque s’enrichit en continu.',
+        'Plus de 70 processus métier livrés avec leurs étapes, leurs rôles et leurs validations : congés, notes de frais, onboarding, ouverture de dossier client, revue KYC.',
     },
     security: {
-      title: 'Sécurité — bxChange | Chiffrement, isolation, conformité',
+      title: 'Sécurité — bxFlow | Chiffrement, isolation, conformité',
       description:
-        'Chiffrement des données, isolation stricte entre clients, hébergement maîtrisé et conformité : les garanties de confiance de bxChange.',
+        'Chiffrement des données, isolation stricte entre clients, hébergement maîtrisé et conformité : les garanties de confiance de bxFlow.',
     },
     pricing: {
-      title: 'Tarifs — bxChange | Licence pilote et paliers sur mesure',
+      title: 'Tarifs — bxFlow | Licence pilote et paliers sur mesure',
       description:
         'Trois paliers adaptés à votre taille et à vos besoins. Démarrez avec une licence pilote sur 12 mois. Demandez un devis personnalisé.',
     },
     contact: {
-      title: 'Contact & démo — bxChange',
+      title: 'Contact & démo — bxFlow',
       description:
-        'Discutons de votre projet. Demandez une démonstration de bxChange et voyons ensemble comment automatiser vos processus.',
+        'Discutons de votre projet. Demandez une démonstration de bxFlow et voyons ensemble comment automatiser vos processus.',
     },
     demo: {
-      title: 'Planifier une démo — bxChange',
+      title: 'Planifier une démo — bxFlow',
       description:
-        'Réservez en quelques clics un créneau pour une démonstration de bxChange adaptée à vos processus. En ligne, sans engagement.',
+        'Réservez en quelques clics un créneau pour une démonstration de bxFlow adaptée à vos processus. En ligne, sans engagement.',
     },
     documentation: {
-      title: 'Documentation — bxChange | Référence de scripting workflow',
+      title: 'Documentation — bxFlow | Référence de scripting workflow',
       description:
-        'Référence technique pour automatiser vos processus bxChange : bibliothèque lib, comportements de formulaire, conditions, post-fonctions et appel de connecteurs.',
+        'Référence technique pour automatiser vos processus bxFlow : bibliothèque lib, comportements de formulaire, conditions, post-fonctions et appel de connecteurs.',
     },
     legalNotice: {
-      title: 'Mentions légales — bxChange',
-      description: 'Informations légales relatives au site bxChange : éditeur, hébergement, propriété intellectuelle.',
+      title: 'Mentions légales — bxFlow',
+      description: 'Informations légales relatives au site bxFlow : éditeur, hébergement, propriété intellectuelle.',
     },
     privacy: {
-      title: 'Politique de confidentialité — bxChange',
-      description: 'Comment le site bxChange collecte, utilise et protège vos données personnelles.',
+      title: 'Politique de confidentialité — bxFlow',
+      description: 'Comment le site bxFlow collecte, utilise et protège vos données personnelles.',
     },
   },
 
@@ -83,33 +83,33 @@ export const fr = {
 
   home: {
     hero: {
-      eyebrow: 'Plateforme d’automatisation des processus',
-      title: 'bxChange connecte vos logiciels et automatise vos démarches.',
+      eyebrow: 'Moteur de processus métier',
+      title: 'Vos processus métier, modélisés puis exécutés tout seuls.',
       subtitle:
-        'Vos anciens logiciels et vos nouveaux outils travaillent enfin ensemble. bxChange fait circuler l’information automatiquement et prend en charge vos démarches internes — sans ressaisie, sans erreurs, sans dépendre du service informatique.',
+        'Congés, notes de frais, ouverture de dossier, validation de facture : vous dessinez le déroulé — les étapes, les rôles, les validations, les règles — et bxFlow le fait avancer, dossier après dossier, vers la bonne personne au bon moment.',
       ctaPrimary: 'Demander une démo',
       ctaSecondary: 'Voir les processus disponibles',
-      trust: 'Plus de 20 processus prêts à démarrer dès aujourd’hui.',
+      trust: 'Plus de 70 processus prêts à démarrer dès aujourd’hui.',
     },
     how: {
       eyebrow: 'Comment ça marche',
-      title: 'De vos outils existants à des processus automatisés, en 4 temps',
+      title: 'Du schéma de votre processus à son exécution, en 4 temps',
       steps: [
         {
-          title: 'On se branche à vos outils',
-          text: 'bxChange se connecte à vos logiciels actuels, même anciens, sans les remplacer ni tout redémarrer.',
+          title: 'Vous dessinez le déroulé',
+          text: 'Les étapes, qui intervient à chacune, ce qui déclenche le passage à la suivante. Sur un écran, en glissant des blocs — pas une ligne de code.',
         },
         {
-          title: 'L’information circule toute seule',
-          text: 'Les données passent d’un outil à l’autre automatiquement. Fini les copier-coller et les doubles saisies.',
+          title: 'Une demande ouvre un dossier',
+          text: 'Un formulaire, un email ou un autre logiciel déclenche le processus. Le dossier part à l’étape de départ, avec sa référence.',
         },
         {
-          title: 'Les documents sont lus pour vous',
-          text: 'Un email ou une pièce jointe arrive ? Les informations utiles en sont extraites automatiquement pour ouvrir un dossier.',
+          title: 'Chaque étape avance toute seule',
+          text: 'Le dossier arrive chez la bonne personne, attend sa validation, relance en cas de retard, se referme quand tout est fait.',
         },
         {
-          title: 'Vos démarches se déroulent d’elles-mêmes',
-          text: 'Demandes, validations, relances : chaque étape avance au bon moment, vers la bonne personne.',
+          title: 'Vos logiciels suivent le mouvement',
+          text: 'Quand une étape a besoin d’une information ou doit en écrire une ailleurs, bxFlow interroge vos logiciels existants — même anciens.',
         },
       ],
     },
@@ -130,16 +130,26 @@ export const fr = {
           text: 'Chaque étape est enregistrée. Vous savez qui a fait quoi, quand, et où en est chaque dossier.',
         },
         {
-          title: 'Autonome, sans l’IT',
-          text: 'Vos équipes métier lancent et suivent les processus elles-mêmes, sans attendre le service informatique.',
+          title: 'Vos règles, modifiables',
+          text: 'Une étape à ajouter, un validateur à changer : vos équipes métier le font elles-mêmes, sans développement ni attente.',
         },
       ],
     },
+    // Aperçu des capacités. Le contenu vient de `product.capabilities`,
+    // seuls les intitulés de section vivent ici — deux listes finiraient
+    // par diverger, et c'est l'accueil qui resterait en retard.
+    capabilities: {
+      eyebrow: 'Tout ce que fait bxFlow',
+      title: 'Un aperçu complet, avant d’entrer dans le détail',
+      subtitle:
+        'De la modélisation d’un processus à la génération de vos courriers, en passant par les traitements en masse et les référentiels métier.',
+      cta: 'Voir le détail de chaque capacité',
+    },
     catalog: {
       eyebrow: 'Catalogue de processus',
-      title: 'Plus de 20 processus prêts à démarrer dès aujourd’hui',
+      title: 'Plus de 70 processus prêts à démarrer dès aujourd’hui',
       subtitle:
-        'Pas besoin de tout construire de zéro. bxChange arrive avec une bibliothèque de processus métier déjà prêts — et elle s’enrichit en continu.',
+        'Pas besoin de partir d’une page blanche. Chaque processus arrive avec ses étapes, ses rôles et ses validations déjà en place — vous n’avez qu’à les ajuster à votre organisation.',
       cardCta: 'Voir tous les processus',
       missingTitle: 'Votre process n’y est pas ?',
       missingText:
@@ -152,7 +162,7 @@ export const fr = {
       cta: 'Voir tous les cas d’usage',
     },
     finalCta: {
-      title: 'Voyons ce que bxChange peut automatiser chez vous',
+      title: 'Voyons ce que bxFlow peut automatiser chez vous',
       subtitle:
         'Une démonstration courte, centrée sur vos processus. Sans engagement.',
       cta: 'Demander une démo',
@@ -162,59 +172,101 @@ export const fr = {
   product: {
     hero: {
       eyebrow: 'Le produit',
-      title: 'Une plateforme qui relie vos outils et automatise vos processus',
+      title: 'Un moteur de processus, et tout ce qu’il faut autour',
       subtitle:
-        'bxChange rassemble tout ce qu’il faut pour connecter vos logiciels, faire circuler vos données et piloter vos démarches métier de bout en bout.',
+        'Modélisez le déroulé de vos démarches — étapes, rôles, validations, règles de passage — et laissez bxFlow les exécuter. Vos logiciels existants sont interrogés en chemin, quand une étape en a besoin.',
+    },
+    // Le schéma animé du hero. Quatre étapes ET une bifurcation : sans
+    // elle, le dessin décrirait un tapis roulant plutôt qu'un processus.
+    heroFlow: {
+      steps: ['Nouvelle demande', 'Validation', 'Instruction', 'Clôturé'],
+      rejected: 'Rejeté',
+      // Les transitions portent leur nom : sans elles, le schéma décrit
+      // un tapis roulant et rien ne dit qui fait avancer le dossier.
+      transitions: ['Soumettre', 'Valider', 'Clôturer'],
+      reject: 'Rejeter',
+      alt:
+        'Un dossier traverse un processus : nouvelle demande, validation, instruction, clôture — avec une bifurcation vers le rejet.',
     },
     capabilities: {
-      title: 'Ce que fait bxChange',
+      title: 'Ce que fait bxFlow',
       items: [
         {
-          title: 'Connexion de vos logiciels',
-          plain: 'Vos anciens et nouveaux logiciels échangent enfin des données.',
-          tech: 'Passerelle entre systèmes existants (SOAP/WSDL/XML) et applications modernes (API REST/JSON).',
+          title: 'Modélisation du processus',
+          plain: 'Vous dessinez le déroulé de votre démarche sur un écran, en glissant des blocs.',
+          tech: 'Éditeur BPMN : étapes, transitions, conditions de passage, étapes de validation et étapes automatiques.',
         },
         {
-          title: 'Orchestration des flux',
-          plain: 'L’information suit le bon chemin, d’un outil à l’autre, automatiquement.',
-          tech: 'Pipelines d’intégration configurables pour transformer, router et fiabiliser les échanges de données.',
+          title: 'Rôles et validations',
+          plain: 'Chaque étape sait qui doit intervenir, et attend sa décision.',
+          tech: 'Rôles propres au processus, habilitations par action, validations à un ou plusieurs approbateurs.',
         },
         {
-          title: 'Moteur de processus (workflow)',
-          plain: 'Vos démarches internes se déroulent étape par étape, vers les bonnes personnes.',
-          tech: 'Moteur workflow BPM : étapes, rôles, validations et règles métier orchestrés de bout en bout.',
+          title: 'Écrans et champs sur mesure',
+          plain: 'Vous choisissez ce qui est saisi à chaque étape, et par qui.',
+          tech: 'Écrans par étape (création, édition, consultation), catalogue de champs typés, règles d’affichage.',
+        },
+        {
+          title: 'Délais et relances',
+          plain: 'Un dossier qui traîne se signale tout seul, avant que quelqu’un ne s’en plaigne.',
+          tech: 'Échéances par étape, relances automatiques par courriel ou SMS, tableau des dépassements.',
         },
         {
           title: 'Réception automatique des demandes',
-          plain: 'Un email ou un formulaire arrive et déclenche tout seul le bon processus.',
-          tech: 'Ingestion automatique via API et email, avec déclenchement des workflows associés.',
+          plain: 'Un formulaire, un courriel ou un autre logiciel ouvre le dossier sans que personne ne le saisisse.',
+          tech: 'Ingestion par API et par boîte courriel dédiée, avec déclenchement du processus cible.',
         },
         {
-          title: 'Lecture automatique de documents',
-          plain: 'Les informations utiles d’un document sont extraites sans saisie manuelle.',
-          tech: 'Traitement automatique des pièces jointes pour extraire et pré-remplir les champs d’un dossier (factures, formulaires, courriers, et autres pièces).',
+          title: 'Vos logiciels existants, sollicités en chemin',
+          plain: 'Quand une étape a besoin d’une donnée qui vit ailleurs, elle va la chercher.',
+          tech: 'Connecteurs vers systèmes existants (SOAP/WSDL/XML) et applications modernes (API REST/JSON), appelés depuis une étape ou une transition.',
+        },
+        {
+          title: 'Lecture des documents',
+          plain: 'Un document joint est lu, et les champs qu’il désigne clairement sont pré-remplis.',
+          tech: 'Reconnaissance de texte sur les pièces jointes (PDF et images numérisées) ; les champs identifiés par une étiquette lisible sont proposés en pré-remplissage, toujours soumis à votre validation.',
+        },
+        {
+          title: 'Éditique',
+          plain: 'Vos courriers et attestations sortent remplis, à votre en-tête, en un clic.',
+          tech: 'Le client dépose SON modèle Word ou Excel et y place des balises ; tout ce que les balises ne touchent pas est conservé — en-tête, logo, styles. Génération à l’unité ou en publipostage sur une sélection de dossiers.',
+        },
+        {
+          title: 'Traitement en masse',
+          plain: 'Mille dossiers se créent, avancent ou s’extraient en une opération.',
+          tech: 'Modèle d’import généré depuis les champs du process (Excel ou CSV), rapport ligne par ligne, franchissement d’étape et extraction sur une sélection — avec plafonds et compte attendu pour éviter les opérations à l’aveugle.',
+        },
+        {
+          title: 'Automatisations',
+          plain: 'Des actions se déclenchent seules : à une étape, à une date, ou sur une condition.',
+          tech: 'Post-fonctions à l’entrée d’une étape ou au franchissement, règles planifiées, comportements de formulaire (champs affichés, masqués ou verrouillés selon la saisie), notifications courriel et SMS.',
+        },
+        {
+          title: 'Référentiels métier',
+          plain: 'Vos clients, fournisseurs ou agences vivent dans l’outil, à jour.',
+          tech: 'Fiches répliquées depuis un système source à intervalle régulier, sélectionnables dans un dossier, recopiées dans ses champs — et capables d’ouvrir un dossier quand un attribut change (« client passé en risque élevé → revue KYC »).',
         },
         {
           title: 'Suivi et traçabilité',
-          plain: 'Vous voyez en temps réel où en est chaque dossier.',
-          tech: 'Journalisation complète des étapes, historique et tableau de suivi par dossier.',
+          plain: 'Vous voyez en temps réel où en est chaque dossier, et qui a fait quoi.',
+          tech: 'Historique horodaté par dossier, journal d’audit, tableaux de bord et extractions.',
         },
       ],
     },
     diagram: {
       title: 'Le principe, en une image',
-      legacy: 'Vos logiciels existants',
-      legacyNote: 'Systèmes anciens, souvent isolés',
-      engine: 'bxChange',
-      engineNote: 'Connecte, traduit, automatise',
-      modern: 'Vos outils modernes',
-      modernNote: 'Applications et services d’aujourd’hui',
+      legacy: 'Une demande arrive',
+      legacyNote: 'Formulaire, courriel ou autre logiciel',
+      engine: 'Le processus se déroule',
+      engineNote: 'Étapes, rôles, validations, règles',
+      modern: 'Le dossier est traité',
+      modernNote: 'Tracé de bout en bout, sans relance manuelle',
       caption:
-        'bxChange se place au milieu : il traduit ce que vos anciens logiciels « disent » dans un langage que vos outils modernes comprennent, et inversement.',
+        'Au centre, votre processus : le déroulé que vous avez dessiné. Vos logiciels existants ne disparaissent pas — ils sont interrogés en chemin, à l’étape qui en a besoin.',
     },
     note: {
-      title: 'Un mot sur la lecture automatique',
-      text: 'bxChange lit une large variété de documents pour pré-remplir vos dossiers. L’objectif n’est jamais de remplacer votre jugement, mais de vous éviter la saisie répétitive et les oublis. Vous gardez toujours la main sur la validation finale.',
+      title: 'Un mot sur la lecture des documents',
+      text: 'bxFlow lit les documents joints à un dossier et propose de pré-remplir les champs qu’il sait reconnaître. C’est une aide à la saisie, pas une compréhension du document : la qualité dépend de la lisibilité de la pièce, et la validation vous revient toujours. Nous préférons l’annoncer ainsi plutôt que de vous laisser le découvrir en démonstration.',
     },
     cta: {
       title: 'Envie de voir tout ça en action ?',
@@ -227,11 +279,11 @@ export const fr = {
       eyebrow: 'Cas d’usage',
       title: 'Des bénéfices concrets, secteur par secteur',
       subtitle:
-        'bxChange s’adapte à votre métier. Voici comment il change le quotidien de nos secteurs prioritaires.',
+        'bxFlow s’adapte à votre métier. Voici comment il change le quotidien de nos secteurs prioritaires.',
     },
     pattern: {
       problem: 'Le problème',
-      solution: 'Avec bxChange',
+      solution: 'Avec bxFlow',
       benefit: 'Le bénéfice',
     },
     sectors: {
@@ -240,7 +292,7 @@ export const fr = {
         problem:
           'Plusieurs logiciels qui ne communiquent pas, des tâches administratives répétitives et des informations ressaisies plusieurs fois.',
         solution:
-          'On relie vos outils et on automatise vos démarches internes (congés, notes de frais, onboarding) avec des processus prêts à l’emploi.',
+          'On installe vos démarches internes comme des processus qui se déroulent seuls — congés, notes de frais, onboarding — et on va chercher l’information dans vos logiciels quand une étape en a besoin.',
         benefit:
           'Vos équipes gagnent des heures chaque semaine et arrêtent de courir après l’information.',
       },
@@ -267,7 +319,7 @@ export const fr = {
         problem:
           'Des processus réglementés, de nombreux systèmes en place et une exigence forte de traçabilité.',
         solution:
-          'bxChange orchestre les flux entre vos systèmes et fiabilise chaque étape, avec un historique complet.',
+          'bxFlow orchestre les flux entre vos systèmes et fiabilise chaque étape, avec un historique complet.',
         benefit:
           'Une base solide pour digitaliser des processus exigeants — parlons-en pour évaluer votre contexte.',
       },
@@ -275,14 +327,14 @@ export const fr = {
     cta: {
       title: 'Votre secteur n’est pas listé ?',
       subtitle:
-        'bxChange s’adapte à la plupart des organisations qui jonglent avec plusieurs logiciels. Voyons votre cas.',
+        'bxFlow s’adapte à la plupart des organisations qui jonglent avec plusieurs logiciels. Voyons votre cas.',
     },
   },
 
   catalog: {
     hero: {
       eyebrow: 'Catalogue de processus',
-      title: 'Plus de 20 processus prêts à démarrer',
+      title: 'Plus de 70 processus prêts à démarrer',
       subtitle:
         'Chaque processus est prêt à l’emploi et personnalisable. La bibliothèque s’enrichit en continu — et nous ajoutons les vôtres.',
     },
@@ -292,11 +344,16 @@ export const fr = {
       results_one: '{{count}} processus',
       results_other: '{{count}} processus',
     },
+    // Intitulé posé au-dessus des étapes, sur chaque carte du catalogue.
+    stepsLabel: 'Le déroulé',
     categories: {
       rh: 'RH',
       finance: 'Finance',
-      commercial: 'Commercial',
-      support: 'Support',
+      client: 'Client & moyens de paiement',
+      achats: 'Achats',
+      juridique: 'Juridique',
+      it: 'IT & sécurité',
+      conformite: 'Conformité & risques',
       operations: 'Opérations',
     },
     missing: {
@@ -311,7 +368,7 @@ export const fr = {
       eyebrow: 'Sécurité & confiance',
       title: 'Vos données, protégées à chaque étape',
       subtitle:
-        'La sécurité n’est pas une option chez bxChange. Voici les garanties clés sur lesquelles vous pouvez vous appuyer.',
+        'La sécurité n’est pas une option chez bxFlow. Voici les garanties clés sur lesquelles vous pouvez vous appuyer.',
     },
     pillars: [
       {
@@ -364,7 +421,7 @@ export const fr = {
     onQuote: 'Sur devis',
     onQuoteSub: 'tarif adapté à votre périmètre',
     ctaNote: 'Réponse sous 24–48h · Sans engagement',
-    allTiersNote: 'Tous les paliers incluent l’accès au catalogue de 20+ processus prêts à l’emploi.',
+    allTiersNote: 'Tous les paliers incluent l’accès au catalogue de 70+ processus prêts à l’emploi.',
     tiers: [
       {
         name: 'Starter',
@@ -457,7 +514,7 @@ export const fr = {
     benefits: [
       'Une démonstration adaptée à votre secteur et à vos besoins',
       'Des réponses concrètes à vos questions, en direct',
-      'Une estimation claire de ce que bxChange peut automatiser chez vous',
+      'Une estimation claire de ce que bxFlow peut automatiser chez vous',
     ],
     duration: '30 minutes',
     durationLabel: 'Durée',
@@ -487,6 +544,9 @@ export const fr = {
     legalNotice: 'Mentions légales',
     privacy: 'Confidentialité',
     followUs: 'Suivez-nous',
+    // L'éditeur, nommé une fois et discrètement. bxFlow reste le sujet
+    // de ce site ; le groupe apparaît là où l'on cherche qui est derrière.
+    editeur: 'Un produit bxGroup',
     rights: 'Tous droits réservés.',
     madeWith: 'Fait pour les organisations d’Afrique francophone et d’ailleurs.',
   },

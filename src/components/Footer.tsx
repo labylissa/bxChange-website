@@ -100,7 +100,13 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/40 sm:flex-row">
-          <p>© {year} bxChange. {t('footer.rights')}</p>
+          {/* L'éditeur, nommé une fois. bxFlow reste le sujet du site : la
+              mention se lit là où l'on cherche qui est derrière le produit,
+              pas en tête de page. */}
+          <p>
+            © {year} bxFlow — <span className="text-white/60">{t('footer.editeur')}</span>.{' '}
+            {t('footer.rights')}
+          </p>
           <p>{t('footer.madeWith')}</p>
         </div>
       </div>

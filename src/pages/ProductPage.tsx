@@ -6,7 +6,14 @@ import { Reveal } from '@/components/Reveal';
 import { useContent } from '@/hooks/useContent';
 import type { ProcessIconName } from '@/data/processes';
 
-const CAP_ICONS: ProcessIconName[] = ['refresh', 'chart', 'clipboard', 'inbox', 'file-check', 'clock'];
+// Une icône par capacité, dans l'ordre du contenu. La liste précédente en
+// comptait six pour six capacités ; il y en a douze depuis que la page dit
+// ce que le produit fait réellement — éditique, traitement en masse,
+// automatisations et référentiels n'y figuraient pas.
+const CAP_ICONS: ProcessIconName[] = [
+  'flow', 'user-plus', 'clipboard', 'clock', 'inbox', 'plug',
+  'receipt', 'chart', 'steps', 'folder', 'file-check', 'lifebuoy',
+];
 
 /** Connecteur animé (point qui circule) entre deux nœuds du flux. */
 function Connector({ vertical = false }: { vertical?: boolean }) {
@@ -85,6 +92,9 @@ export function ProductPage() {
         eyebrow={c.product.hero.eyebrow}
         title={c.product.hero.title}
         subtitle={c.product.hero.subtitle}
+        // Schéma retiré : la page détaille douze capacités et porte déjà
+        // son propre diagramme plus bas ; deux schémas se concurrencent.
+        flow={false}
       />
 
       <Section>
@@ -113,8 +123,14 @@ export function ProductPage() {
         <Reveal>
           <SectionHeading title={c.product.diagram.title} />
         </Reveal>
-        <Reveal delay={120}>
-          <div className="mt-14">
+        {/* L'illustration posée ici a été retirée : dessin abstrait de bureau,
+            et elle portait l'ANCIEN logo bxChange en son centre. Le schéma
+            ci-dessous dit la même chose avec les mots du produit, sans meubler.
+            Sa place revient à une capture réelle de l'application le jour où
+            l'on en aura — rien ne rassure autant qu'un logiciel qu'on voit
+            fonctionner. */}
+        <Reveal delay={80}>
+          <div className="mt-10">
             <FlowDiagram />
           </div>
         </Reveal>

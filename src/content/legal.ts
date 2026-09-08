@@ -37,7 +37,7 @@ export interface LegalDoc {
 const legalNoticeFr: LegalDoc = {
   title: 'Mentions légales',
   intro:
-    'Informations légales relatives au site bxChange. Les champs entre crochets seront complétés avec les informations officielles de la société.',
+    'Informations légales relatives au site bxFlow. Les champs entre crochets seront complétés avec les informations officielles de la société.',
   updatedLabel: 'Dernière mise à jour',
   updated: '1 juillet 2026',
   sections: [
@@ -47,7 +47,7 @@ const legalNoticeFr: LegalDoc = {
         { p: `Le site accessible à l’adresse ${SITE_URL} (ci-après « le Site ») est édité par :` },
         {
           ul: [
-            'Raison sociale / Nom commercial : bxChange',
+            'Raison sociale / Nom commercial : bxFlow',
             'Forme juridique : [À COMPLÉTER — SAS, SARL, auto-entreprise, etc.]',
             'Capital social : [À COMPLÉTER, si applicable]',
             'Siège social : [Adresse complète]',
@@ -77,10 +77,10 @@ const legalNoticeFr: LegalDoc = {
       title: '3. Propriété intellectuelle',
       blocks: [
         {
-          p: 'L’ensemble des contenus présents sur le Site (textes, graphismes, logos, icônes, mise en page, structure du catalogue de processus, etc.) est la propriété exclusive de bxChange, sauf mention contraire. Toute reproduction, représentation, modification, publication ou adaptation de tout ou partie des éléments du Site, quel que soit le moyen ou le procédé utilisé, est interdite sans l’autorisation écrite préalable de bxChange.',
+          p: 'L’ensemble des contenus présents sur le Site (textes, graphismes, logos, icônes, mise en page, structure du catalogue de processus, etc.) est la propriété exclusive de bxFlow, sauf mention contraire. Toute reproduction, représentation, modification, publication ou adaptation de tout ou partie des éléments du Site, quel que soit le moyen ou le procédé utilisé, est interdite sans l’autorisation écrite préalable de bxFlow.',
         },
         {
-          p: 'La marque bxChange ainsi que le logo associé sont la propriété de bxChange.',
+          p: 'La marque bxFlow ainsi que le logo associé sont la propriété de bxFlow.',
         },
       ],
     },
@@ -88,10 +88,10 @@ const legalNoticeFr: LegalDoc = {
       title: '4. Limitation de responsabilité',
       blocks: [
         {
-          p: 'bxChange s’efforce d’assurer l’exactitude et la mise à jour des informations diffusées sur le Site, mais ne peut garantir l’exactitude, la précision ou l’exhaustivité des informations mises à disposition. En conséquence, bxChange décline toute responsabilité pour toute imprécision, inexactitude ou omission portant sur des informations disponibles sur le Site.',
+          p: 'bxFlow s’efforce d’assurer l’exactitude et la mise à jour des informations diffusées sur le Site, mais ne peut garantir l’exactitude, la précision ou l’exhaustivité des informations mises à disposition. En conséquence, bxFlow décline toute responsabilité pour toute imprécision, inexactitude ou omission portant sur des informations disponibles sur le Site.',
         },
         {
-          p: 'Le Site peut contenir des liens vers des services tiers (Calendly pour la prise de rendez-vous, Formspree pour le formulaire de contact). bxChange n’exerce aucun contrôle sur ces services tiers et décline toute responsabilité quant à leur contenu ou leurs pratiques.',
+          p: 'Le Site peut contenir des liens vers des services tiers (Calendly pour la prise de rendez-vous, Formspree pour le formulaire de contact). bxFlow n’exerce aucun contrôle sur ces services tiers et décline toute responsabilité quant à leur contenu ou leurs pratiques.',
         },
       ],
     },
@@ -117,7 +117,7 @@ const legalNoticeFr: LegalDoc = {
 const legalNoticeEn: LegalDoc = {
   title: 'Legal notice',
   intro:
-    'Legal information about the bxChange website. Bracketed fields will be completed with the company’s official details.',
+    'Legal information about the bxFlow website. Bracketed fields will be completed with the company’s official details.',
   updatedLabel: 'Last updated',
   updated: 'July 1, 2026',
   sections: [
@@ -127,7 +127,7 @@ const legalNoticeEn: LegalDoc = {
         { p: `The website available at ${SITE_URL} (the “Site”) is published by:` },
         {
           ul: [
-            'Company / trade name: bxChange',
+            'Company / trade name: bxFlow',
             'Legal form: [TO COMPLETE — SAS, SARL, sole trader, etc.]',
             'Share capital: [TO COMPLETE, if applicable]',
             'Registered office: [Full address]',
@@ -157,10 +157,10 @@ const legalNoticeEn: LegalDoc = {
       title: '3. Intellectual property',
       blocks: [
         {
-          p: 'All content on the Site (text, graphics, logos, icons, layout, the structure of the process catalogue, etc.) is the exclusive property of bxChange, unless otherwise stated. Any reproduction, representation, modification, publication or adaptation of all or part of the Site, by any means whatsoever, is prohibited without the prior written consent of bxChange.',
+          p: 'All content on the Site (text, graphics, logos, icons, layout, the structure of the process catalogue, etc.) is the exclusive property of bxFlow, unless otherwise stated. Any reproduction, representation, modification, publication or adaptation of all or part of the Site, by any means whatsoever, is prohibited without the prior written consent of bxFlow.',
         },
         {
-          p: 'The bxChange trademark and associated logo are owned by bxChange.',
+          p: 'The bxFlow trademark and associated logo are owned by bxFlow.',
         },
       ],
     },
@@ -168,10 +168,10 @@ const legalNoticeEn: LegalDoc = {
       title: '4. Limitation of liability',
       blocks: [
         {
-          p: 'bxChange strives to ensure that the information published on the Site is accurate and up to date, but cannot guarantee the accuracy, precision or completeness of the information made available. Accordingly, bxChange disclaims all liability for any imprecision, inaccuracy or omission in the information available on the Site.',
+          p: 'bxFlow strives to ensure that the information published on the Site is accurate and up to date, but cannot guarantee the accuracy, precision or completeness of the information made available. Accordingly, bxFlow disclaims all liability for any imprecision, inaccuracy or omission in the information available on the Site.',
         },
         {
-          p: 'The Site may contain links to third-party services (Calendly for booking, Formspree for the contact form). bxChange has no control over these third-party services and disclaims all liability for their content or practices.',
+          p: 'The Site may contain links to third-party services (Calendly for booking, Formspree for the contact form). bxFlow has no control over these third-party services and disclaims all liability for their content or practices.',
         },
       ],
     },
@@ -201,7 +201,7 @@ const legalNoticeEn: LegalDoc = {
 const privacyFr: LegalDoc = {
   title: 'Politique de confidentialité',
   intro:
-    'Comment le site bxChange collecte, utilise et protège vos données personnelles. Les champs entre crochets seront complétés avant publication.',
+    'Comment le site bxFlow collecte, utilise et protège vos données personnelles. Les champs entre crochets seront complétés avant publication.',
   updatedLabel: 'Dernière mise à jour',
   updated: '1 juillet 2026',
   sections: [
@@ -211,7 +211,7 @@ const privacyFr: LegalDoc = {
         { p: `Le responsable du traitement des données collectées sur le site ${SITE_URL} est :` },
         {
           ul: [
-            'bxChange, [forme juridique], dont le siège social est situé [adresse]',
+            'bxFlow, [forme juridique], dont le siège social est situé [adresse]',
             `Contact : ${CONTACT_EMAIL}`,
           ],
         },
@@ -230,7 +230,7 @@ const privacyFr: LegalDoc = {
         },
         { h: 'b) Prise de rendez-vous / démo' },
         {
-          p: 'Lorsque vous planifiez une démonstration (page Démo), le widget est fourni par Calendly (calendly.com). Calendly collecte directement les données que vous saisissez (nom, email, créneau choisi, réponses aux éventuelles questions de qualification). bxChange reçoit une confirmation du rendez-vous, mais Calendly reste responsable du traitement technique de la prise de rendez-vous. Politique de confidentialité de Calendly : https://calendly.com/privacy',
+          p: 'Lorsque vous planifiez une démonstration (page Démo), le widget est fourni par Calendly (calendly.com). Calendly collecte directement les données que vous saisissez (nom, email, créneau choisi, réponses aux éventuelles questions de qualification). bxFlow reçoit une confirmation du rendez-vous, mais Calendly reste responsable du traitement technique de la prise de rendez-vous. Politique de confidentialité de Calendly : https://calendly.com/privacy',
         },
         { h: 'c) Données de navigation' },
         {
@@ -275,7 +275,7 @@ const privacyFr: LegalDoc = {
         { p: 'Vos données sont accessibles :' },
         {
           ul: [
-            'À l’équipe bxChange en charge du traitement commercial',
+            'À l’équipe bxFlow en charge du traitement commercial',
             'Aux sous-traitants techniques mentionnés ci-dessus (Formspree, Calendly), dans la limite nécessaire à la fourniture du service',
             'Le cas échéant, à l’hébergeur Cloudflare pour les données techniques',
           ],
@@ -316,7 +316,7 @@ const privacyFr: LegalDoc = {
       title: '8. Sécurité',
       blocks: [
         {
-          p: 'bxChange met en œuvre des mesures techniques et organisationnelles raisonnables pour protéger vos données contre la perte, l’accès non autorisé, la divulgation ou l’altération. La sécurité de ce site vitrine est distincte de celle de la plateforme bxChange elle-même.',
+          p: 'bxFlow met en œuvre des mesures techniques et organisationnelles raisonnables pour protéger vos données contre la perte, l’accès non autorisé, la divulgation ou l’altération. La sécurité de ce site vitrine est distincte de celle de la plateforme bxFlow elle-même.',
         },
       ],
     },
@@ -342,7 +342,7 @@ const privacyFr: LegalDoc = {
 const privacyEn: LegalDoc = {
   title: 'Privacy policy',
   intro:
-    'How the bxChange website collects, uses and protects your personal data. Bracketed fields will be completed before publication.',
+    'How the bxFlow website collects, uses and protects your personal data. Bracketed fields will be completed before publication.',
   updatedLabel: 'Last updated',
   updated: 'July 1, 2026',
   sections: [
@@ -352,7 +352,7 @@ const privacyEn: LegalDoc = {
         { p: `The controller of the data collected on the website ${SITE_URL} is:` },
         {
           ul: [
-            'bxChange, [legal form], whose registered office is located at [address]',
+            'bxFlow, [legal form], whose registered office is located at [address]',
             `Contact: ${CONTACT_EMAIL}`,
           ],
         },
@@ -371,7 +371,7 @@ const privacyEn: LegalDoc = {
         },
         { h: 'b) Demo booking' },
         {
-          p: 'When you book a demo (Demo page), the widget is provided by Calendly (calendly.com). Calendly directly collects the data you enter (name, email, chosen slot, answers to any qualifying questions). bxChange receives a booking confirmation, but Calendly remains responsible for the technical processing of the booking itself. Calendly privacy policy: https://calendly.com/privacy',
+          p: 'When you book a demo (Demo page), the widget is provided by Calendly (calendly.com). Calendly directly collects the data you enter (name, email, chosen slot, answers to any qualifying questions). bxFlow receives a booking confirmation, but Calendly remains responsible for the technical processing of the booking itself. Calendly privacy policy: https://calendly.com/privacy',
         },
         { h: 'c) Browsing data' },
         {
@@ -416,7 +416,7 @@ const privacyEn: LegalDoc = {
         { p: 'Your data is accessible:' },
         {
           ul: [
-            'To the bxChange team in charge of commercial handling',
+            'To the bxFlow team in charge of commercial handling',
             'To the technical sub-processors mentioned above (Formspree, Calendly), as needed to provide the service',
             'Where applicable, to the host Cloudflare for technical data',
           ],
@@ -457,7 +457,7 @@ const privacyEn: LegalDoc = {
       title: '8. Security',
       blocks: [
         {
-          p: 'bxChange implements reasonable technical and organisational measures to protect your data against loss, unauthorised access, disclosure or alteration. The security of this marketing website is distinct from that of the bxChange platform itself.',
+          p: 'bxFlow implements reasonable technical and organisational measures to protect your data against loss, unauthorised access, disclosure or alteration. The security of this marketing website is distinct from that of the bxFlow platform itself.',
         },
       ],
     },

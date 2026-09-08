@@ -2,24 +2,24 @@ import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
 import { Section, SectionHeading, CtaBand } from '@/components/ui';
 import { Icons, ProcessIcon } from '@/components/Icon';
-import { SyncMark } from '@/components/Logo';
-import { HeroAtmosphere } from '@/components/HeroAtmosphere';
+import { WorkflowMini } from '@/components/WorkflowAnimation';
 import { ProcessCard } from '@/components/ProcessCard';
 import { Reveal } from '@/components/Reveal';
 import { useContent } from '@/hooks/useContent';
 import { useLang } from '@/hooks/useLang';
 import { getFeaturedProcesses, processes, type ProcessIconName } from '@/data/processes';
 
-const HOW_ICONS: ProcessIconName[] = ['refresh', 'inbox', 'file-check', 'clipboard'];
+// Une icône par étape, dans l'ordre du texte : on dessine le déroulé, une
+// demande ouvre un dossier, les étapes avancent, les logiciels existants
+// sont sollicités. L'ancienne liste illustrait le discours d'avant.
+const HOW_ICONS: ProcessIconName[] = ['flow', 'inbox', 'steps', 'plug'];
 
-/** Petit connecteur horizontal avec un point qui circule (effet flux de données). */
-function FlowLine({ className = '' }: { className?: string }) {
-  return (
-    <div className={`relative h-0.5 flex-1 rounded bg-gradient-to-r from-teal/50 to-mint/50 ${className}`}>
-      <span className="absolute top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-teal shadow-[0_0_10px_2px] shadow-teal/60 animate-travel motion-reduce:hidden" />
-    </div>
-  );
-}
+// Reprise à l'identique de la page Produit : l'aperçu et le détail
+// montrent la même capacité, ils doivent montrer la même icône.
+const CAP_ICONS: ProcessIconName[] = [
+  'flow', 'user-plus', 'clipboard', 'clock', 'inbox', 'plug',
+  'receipt', 'chart', 'steps', 'folder', 'file-check', 'lifebuoy',
+];
 
 function HeroVisual() {
   const c = useContent();
@@ -33,35 +33,17 @@ function HeroVisual() {
           <span className="h-2.5 w-2.5 rounded-full bg-teal" />
           <span className="h-2.5 w-2.5 rounded-full bg-mint" />
           <span className="h-2.5 w-2.5 rounded-full bg-gold" />
-          <span className="ml-2 text-xs font-medium text-ink-400">bxChange</span>
+          <span className="ml-2 text-xs font-medium text-ink-400">bxFlow</span>
         </div>
 
-        {/* Mini-flux : logiciels existants → bxChange → automatisé */}
-        <div className="flex items-center gap-2 pt-5">
-          <div className="flex flex-col items-center gap-1.5">
-            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-ink-200 bg-ink-50 text-ink-500">
-              <ProcessIcon name="building" className="h-5 w-5" />
-            </span>
-            <span className="text-[10px] font-medium text-ink-400">
-              {lang === 'fr' ? 'Vos logiciels' : 'Your software'}
-            </span>
-          </div>
-          <FlowLine />
-          <div className="flex flex-col items-center gap-1.5">
-            <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-teal/10 ring-1 ring-teal/30">
-              <SyncMark className="h-9 w-9 animate-spin-slow motion-reduce:animate-none" />
-            </span>
-            <span className="text-[10px] font-semibold text-teal-500">bxChange</span>
-          </div>
-          <FlowLine />
-          <div className="flex flex-col items-center gap-1.5">
-            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-mint/10 text-mint ring-1 ring-mint/30">
-              <Icons.check className="h-5 w-5" strokeWidth={2.5} />
-            </span>
-            <span className="text-[10px] font-medium text-ink-400">
-              {lang === 'fr' ? 'Automatisé' : 'Automated'}
-            </span>
-          </div>
+        {/* Un dossier qui traverse un processus, étapes et transitions nommées.
+
+            Ce bloc montrait « Vos logiciels → bxFlow → Automatisé » : la
+            définition d'une passerelle, pas d'un moteur de processus. C'était
+            le premier visuel de la page d'accueil, donc la première idée que
+            le visiteur se faisait du produit — et c'était la mauvaise. */}
+        <div className="pt-5">
+          <WorkflowMini />
         </div>
 
         <div className="mt-5 grid gap-2.5">
@@ -100,9 +82,11 @@ export function HomePage() {
       <Seo page="home" title={c.meta.home.title} description={c.meta.home.description} />
 
       {/* HERO */}
-      <section className="relative overflow-hidden border-b border-ink-100 bg-white">
-        <HeroAtmosphere />
-        <div className="container-page relative grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
+      {/* Le décor de fond a été retiré : cercles concentriques et grille de
+          points remplissaient la moitié droite du hero sans rien dire, et la
+          carte du processus s'en trouvait repoussée dans un coin. */}
+      <section className="relative border-b border-ink-100 bg-white">
+        <div className="container-page relative grid items-center gap-10 py-16 lg:grid-cols-[1fr_1.15fr] lg:py-20">
           <div className="animate-fade-up">
             <span className="eyebrow">{c.home.hero.eyebrow}</span>
             <h1 className="mt-5 text-4xl font-bold leading-[1.1] text-navy-900 sm:text-5xl lg:text-6xl">
@@ -120,7 +104,11 @@ export function HomePage() {
             </div>
             <p className="mt-6 text-sm text-ink-400">{c.home.hero.trust}</p>
           </div>
-          <div className="lg:pl-6">
+          {/* La carte occupe désormais la colonne la plus large et s'y centre.
+              Elle était contrainte à une demi-largeur avec un décalage à
+              gauche, ce qui la tassait contre le texte alors que le décor
+              occupait le reste. */}
+          <div className="mx-auto w-full max-w-lg lg:max-w-none">
             <HeroVisual />
           </div>
         </div>
@@ -153,13 +141,60 @@ export function HomePage() {
                   <span className="mt-5 font-display text-sm font-bold uppercase tracking-[0.2em] text-gold-600">
                     {lang === 'fr' ? 'Étape' : 'Step'} {String(i + 1).padStart(2, '0')}
                   </span>
-                  <h3 className="mt-2 text-lg font-semibold text-navy-900">{step.title}</h3>
+                  {/* Hauteur réservée pour deux lignes à partir de `lg`.
+                      Sans elle, un titre qui tient sur une ligne fait remonter
+                      son paragraphe et la rangée décroche : quatre colonnes dont
+                      les textes commencent à quatre hauteurs différentes. La
+                      réserve ne s'applique qu'en disposition à quatre colonnes —
+                      empilées, il n'y a rien à aligner et le blanc serait inutile. */}
+                  <h3 className="mt-2 text-lg font-semibold leading-snug text-navy-900 lg:min-h-[3.25rem]">
+                    {step.title}
+                  </h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-500">{step.text}</p>
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
+      </Section>
+
+      {/* APERÇU DES CAPACITÉS
+
+          Douze cartes compactes — un intitulé, une phrase — qui lisent la liste
+          de la page Produit. On y perd la ligne technique, volontairement :
+          l'accueil s'adresse à quelqu'un qui ne connaît pas encore le produit,
+          et le détail l'attend une page plus loin. */}
+      <Section>
+        <Reveal>
+          <SectionHeading
+            eyebrow={c.home.capabilities.eyebrow}
+            title={c.home.capabilities.title}
+            subtitle={c.home.capabilities.subtitle}
+          />
+        </Reveal>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {c.product.capabilities.items.map((item, i) => (
+            <Reveal key={i} delay={Math.min(i, 5) * 70} from="up">
+              <div className="flex h-full items-start gap-3 rounded-xl border border-ink-100 bg-white p-4 transition-colors hover:border-gold/40">
+                <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-gold/15 to-gold/5 text-gold-600 ring-1 ring-gold/20">
+                  <ProcessIcon name={CAP_ICONS[i] ?? 'flow'} className="h-5 w-5" />
+                </span>
+                <div>
+                  <h3 className="text-sm font-semibold text-navy-900">{item.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-ink-500">{item.plain}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <Reveal delay={120}>
+          <div className="mt-10 text-center">
+            <Link to={path('product')} className="btn-secondary">
+              {c.home.capabilities.cta}
+              <Icons.arrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </Reveal>
       </Section>
 
       {/* BÉNÉFICES */}

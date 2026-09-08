@@ -28,6 +28,8 @@ export function SecurityPage() {
         eyebrow={c.security.hero.eyebrow}
         title={c.security.hero.title}
         subtitle={c.security.hero.subtitle}
+        // Schéma retiré : un RSSI n’y cherche pas une démonstration du moteur.
+        flow={false}
       />
 
       <Section>

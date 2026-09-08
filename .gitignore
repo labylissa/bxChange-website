@@ -33,3 +33,6 @@ doc/
 .env
 .env.local
 .env.*.local
+
+# Cache Python du generateur de catalogue
+scripts/__pycache__/

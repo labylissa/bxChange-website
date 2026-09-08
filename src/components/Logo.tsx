@@ -38,22 +38,62 @@ export function SyncMark({ className = '' }: { className?: string }) {
 }
 
 /**
- * Logo de marque bxChange (artwork original détouré, recoloré depuis img/).
- * - `dark`  : glyphes encre chaude — pour fonds clairs / pastille dorée (header).
- * - `light` : glyphes blancs — pour fonds sombres (footer).
+ * Le logo bxFlow, dans sa forme livrée avec le produit.
+ *
+ * Le site portait encore l'ancienne marque — un carré « bx » surmontant le mot
+ * « Change ». Le produit s'appelle bxFlow et dispose de son logotype : un
+ * motif de flux doré, « bx » en encre marine, « Flow » en doré.
+ *
+ * ## Deux fonds, deux traitements — et pourquoi pas une seule image
+ *
+ * Le logotype porte du marine sur fond transparent. Sur le pied de page, qui
+ * est marine, le « bx » disparaîtrait purement et simplement. Sur fond sombre
+ * on assemble donc la tuile (qui apporte son propre fond) et le mot en texte,
+ * aux couleurs de la marque.
+ *
+ * Ce n'est pas la solution idéale : un export clair du logotype — « bx » en
+ * blanc — serait plus fidèle et remplacerait ce montage par une simple image.
+ * À demander au moment où la charte sera figée.
  */
 export function Logo({ variant = 'dark', className = '', markOnly = false }: LogoProps) {
   if (markOnly) {
-    return <SyncMark className={className || 'h-9 w-9'} />;
+    return (
+      <img
+        src="/icone-bxflow.png"
+        alt="bxFlow"
+        className={className || 'h-9 w-9 rounded-lg'}
+        width={512}
+        height={512}
+      />
+    );
+  }
+
+  // Fond sombre : la tuile porte son propre marine, le mot est écrit.
+  if (variant === 'light') {
+    return (
+      <span className={`inline-flex items-center gap-2.5 ${className}`}>
+        <img
+          src="/icone-bxflow.png"
+          alt=""
+          aria-hidden="true"
+          className="h-9 w-9 rounded-lg"
+          width={512}
+          height={512}
+        />
+        <span className="text-xl font-bold tracking-tight text-white">
+          bx<span className="text-gold">Flow</span>
+        </span>
+      </span>
+    );
   }
 
   return (
     <img
-      src={variant === 'light' ? '/logo-mark-light.png' : '/logo-mark-dark.png'}
-      alt="bxChange"
-      className={className || 'h-14 w-auto'}
-      width={951}
-      height={921}
+      src="/logo-bxflow.png"
+      alt="bxFlow"
+      className={className || 'h-10 w-auto'}
+      width={1000}
+      height={250}
     />
   );
 }

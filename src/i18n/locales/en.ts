@@ -3,57 +3,57 @@ import type { Translation } from './fr';
 export const en: Translation = {
   meta: {
     home: {
-      title: 'bxChange — Connect your software, automate your processes',
+      title: 'bxFlow — Connect your software, automate your processes',
       description:
-        'bxChange links your legacy software to modern tools and automates your business processes. 20+ ready-to-run processes. SMEs, accounting firms, microfinance.',
+        'bxFlow links your legacy software to modern tools and automates your business processes. 70+ ready-to-run processes. SMEs, accounting firms, microfinance.',
     },
     product: {
-      title: 'Product — bxChange | Connector and process automation',
+      title: 'Product — bxFlow | Connector and process automation',
       description:
         'Connect your existing systems to modern apps, orchestrate your flows and automate business processes with automated document reading.',
     },
     useCases: {
-      title: 'Use cases — bxChange | SMEs, accounting firms, microfinance',
+      title: 'Use cases — bxFlow | SMEs, accounting firms, microfinance',
       description:
-        'See how bxChange saves time and makes processes more reliable for SMEs, accounting firms and microfinance institutions.',
+        'See how bxFlow saves time and makes processes more reliable for SMEs, accounting firms and microfinance institutions.',
     },
     catalog: {
-      title: 'Process catalogue — bxChange | 20+ ready-to-use processes',
+      title: 'Process catalogue — bxFlow | 70+ ready-to-use processes',
       description:
-        'More than 20 business processes ready to run: leave requests, expense reports, onboarding, client file opening. The library keeps growing.',
+        'More than 70 business processes ready to run: leave requests, expense reports, onboarding, client file opening. The library keeps growing.',
     },
     security: {
-      title: 'Security — bxChange | Encryption, isolation, compliance',
+      title: 'Security — bxFlow | Encryption, isolation, compliance',
       description:
-        'Data encryption, strict isolation between clients, controlled hosting and compliance: the trust guarantees of bxChange.',
+        'Data encryption, strict isolation between clients, controlled hosting and compliance: the trust guarantees of bxFlow.',
     },
     pricing: {
-      title: 'Pricing — bxChange | Pilot licence and tailored tiers',
+      title: 'Pricing — bxFlow | Pilot licence and tailored tiers',
       description:
         'Three tiers matched to your size and needs. Start with a 12-month pilot licence. Request a custom quote.',
     },
     contact: {
-      title: 'Contact & demo — bxChange',
+      title: 'Contact & demo — bxFlow',
       description:
-        'Let’s talk about your project. Request a demo of bxChange and see how to automate your processes together.',
+        'Let’s talk about your project. Request a demo of bxFlow and see how to automate your processes together.',
     },
     demo: {
-      title: 'Book a demo — bxChange',
+      title: 'Book a demo — bxFlow',
       description:
-        'Book a slot in a few clicks for a bxChange demo tailored to your processes. Online, no commitment.',
+        'Book a slot in a few clicks for a bxFlow demo tailored to your processes. Online, no commitment.',
     },
     documentation: {
-      title: 'Documentation — bxChange | Workflow scripting reference',
+      title: 'Documentation — bxFlow | Workflow scripting reference',
       description:
-        'Technical reference to automate your bxChange processes: the lib library, form behaviours, conditions, post-functions and calling connectors.',
+        'Technical reference to automate your bxFlow processes: the lib library, form behaviours, conditions, post-functions and calling connectors.',
     },
     legalNotice: {
-      title: 'Legal notice — bxChange',
-      description: 'Legal information about the bxChange website: publisher, hosting, intellectual property.',
+      title: 'Legal notice — bxFlow',
+      description: 'Legal information about the bxFlow website: publisher, hosting, intellectual property.',
     },
     privacy: {
-      title: 'Privacy policy — bxChange',
-      description: 'How the bxChange website collects, uses and protects your personal data.',
+      title: 'Privacy policy — bxFlow',
+      description: 'How the bxFlow website collects, uses and protects your personal data.',
     },
   },
 
@@ -85,33 +85,33 @@ export const en: Translation = {
 
   home: {
     hero: {
-      eyebrow: 'Process automation platform',
-      title: 'Your software doesn’t talk to each other? bxChange connects it.',
+      eyebrow: 'Business process engine',
+      title: 'Map your business processes, then let them run themselves.',
       subtitle:
-        'Your legacy software and your new tools finally work together. bxChange moves information automatically and takes care of your internal procedures — no re-keying, no errors, no waiting on IT.',
+        'Leave requests, expense reports, client onboarding, invoice approval: you draw the flow — the steps, the roles, the approvals, the rules — and bxFlow moves every case forward, to the right person at the right time.',
       ctaPrimary: 'Request a demo',
       ctaSecondary: 'See available processes',
-      trust: 'More than 20 processes ready to run today.',
+      trust: 'More than 70 processes ready to run today.',
     },
     how: {
       eyebrow: 'How it works',
-      title: 'From your existing tools to automated processes, in 4 steps',
+      title: 'From the map of your process to its execution, in 4 steps',
       steps: [
         {
-          title: 'We plug into your tools',
-          text: 'bxChange connects to your current software, even legacy ones, without replacing them or restarting everything.',
+          title: 'You draw the flow',
+          text: 'The steps, who acts at each one, what triggers the move to the next. On screen, by dragging blocks — not a line of code.',
         },
         {
-          title: 'Information flows on its own',
-          text: 'Data moves from one tool to another automatically. No more copy-pasting or double entry.',
+          title: 'A request opens a case',
+          text: 'A form, an email or another system starts the process. The case lands on the first step, with its own reference.',
         },
         {
-          title: 'Documents are read for you',
-          text: 'An email or attachment comes in? The useful information is extracted automatically to open a file.',
+          title: 'Every step moves on its own',
+          text: 'The case reaches the right person, waits for their approval, chases when it is late, and closes when everything is done.',
         },
         {
-          title: 'Your procedures run themselves',
-          text: 'Requests, approvals, reminders: each step moves at the right time, to the right person.',
+          title: 'Your existing software follows along',
+          text: 'When a step needs a piece of information, or must write one elsewhere, bxFlow queries your existing systems — even legacy ones.',
         },
       ],
     },
@@ -132,16 +132,26 @@ export const en: Translation = {
           text: 'Every step is recorded. You know who did what, when, and where each file stands.',
         },
         {
-          title: 'Autonomous, without IT',
-          text: 'Your business teams launch and track processes themselves, without waiting on IT.',
+          title: 'Your rules, yours to change',
+          text: 'A step to add, an approver to change: your business teams do it themselves, with no development and no waiting.',
         },
       ],
     },
+    // Aperçu des capacités. Le contenu vient de `product.capabilities`,
+    // seuls les intitulés de section vivent ici — deux listes finiraient
+    // par diverger, et c'est l'accueil qui resterait en retard.
+    capabilities: {
+      eyebrow: 'Everything bxFlow does',
+      title: 'The full picture, before the details',
+      subtitle:
+        'From mapping a process to generating your letters, by way of bulk handling and business reference data.',
+      cta: 'See every capability in detail',
+    },
     catalog: {
       eyebrow: 'Process catalogue',
-      title: 'More than 20 processes ready to run today',
+      title: 'More than 70 processes ready to run today',
       subtitle:
-        'No need to build everything from scratch. bxChange ships with a library of ready-made business processes — and it keeps growing.',
+        'No need to build everything from scratch. bxFlow ships with a library of ready-made business processes — and it keeps growing.',
       cardCta: 'See all processes',
       missingTitle: 'Don’t see your process?',
       missingText:
@@ -154,7 +164,7 @@ export const en: Translation = {
       cta: 'See all use cases',
     },
     finalCta: {
-      title: 'Let’s see what bxChange can automate for you',
+      title: 'Let’s see what bxFlow can automate for you',
       subtitle: 'A short demo, focused on your processes. No commitment.',
       cta: 'Request a demo',
     },
@@ -163,12 +173,24 @@ export const en: Translation = {
   product: {
     hero: {
       eyebrow: 'The product',
-      title: 'A platform that links your tools and automates your processes',
+      title: 'A process engine, and everything it needs around it',
       subtitle:
-        'bxChange brings together everything you need to connect your software, move your data and drive your business procedures end to end.',
+        'Map how your procedures unfold — steps, roles, approvals, transition rules — and let bxFlow execute them. Your existing software is queried along the way, whenever a step needs it.',
+    },
+    // Le schéma animé du hero. Quatre étapes ET une bifurcation : sans
+    // elle, le dessin décrirait un tapis roulant plutôt qu'un processus.
+    heroFlow: {
+      steps: ['New request', 'Approval', 'Processing', 'Closed'],
+      rejected: 'Rejected',
+      // Les transitions portent leur nom : sans elles, le schéma décrit
+      // un tapis roulant et rien ne dit qui fait avancer le dossier.
+      transitions: ['Submit', 'Approve', 'Close'],
+      reject: 'Reject',
+      alt:
+        'A case moving through a process: new request, approval, processing, closure — with a branch to rejection.',
     },
     capabilities: {
-      title: 'What bxChange does',
+      title: 'What bxFlow does',
       items: [
         {
           title: 'Connecting your software',
@@ -196,6 +218,26 @@ export const en: Translation = {
           tech: 'Automatic processing of attachments to extract and pre-fill a file’s fields (invoices, forms, letters and other documents).',
         },
         {
+          title: 'Document generation',
+          plain: 'Your letters and certificates come out filled in, on your own letterhead, in one click.',
+          tech: 'The customer uploads THEIR own Word or Excel template and places tags in it; everything the tags do not touch is preserved — letterhead, logo, styles. One document, or a mail merge over a selection of cases.',
+        },
+        {
+          title: 'Bulk handling',
+          plain: 'A thousand cases can be created, moved forward or exported in a single operation.',
+          tech: 'Import template generated from the process fields (Excel or CSV), row-by-row report, bulk step transition and export over a selection — with caps and an expected count, so nothing runs blind.',
+        },
+        {
+          title: 'Automations',
+          plain: 'Actions fire on their own: at a step, on a date, or when a condition is met.',
+          tech: 'Post-functions on entering a step or crossing a transition, scheduled rules, form behaviours (fields shown, hidden or locked depending on what is entered), email and SMS notifications.',
+        },
+        {
+          title: 'Business reference data',
+          plain: 'Your customers, suppliers or branches live inside the tool, kept up to date.',
+          tech: 'Records replicated from a source system at a regular interval, selectable inside a case, copied into its fields — and able to open a case when an attribute changes (“customer moved to high risk → KYC review”).',
+        },
+        {
           title: 'Tracking and traceability',
           plain: 'You see in real time where each file stands.',
           tech: 'Full logging of steps, history and a tracking dashboard per file.',
@@ -204,18 +246,18 @@ export const en: Translation = {
     },
     diagram: {
       title: 'The principle, in one picture',
-      legacy: 'Your existing software',
-      legacyNote: 'Legacy systems, often isolated',
-      engine: 'bxChange',
-      engineNote: 'Connects, translates, automates',
-      modern: 'Your modern tools',
-      modernNote: 'Today’s apps and services',
+      legacy: 'A request comes in',
+      legacyNote: 'Form, email or another system',
+      engine: 'The process unfolds',
+      engineNote: 'Steps, roles, approvals, rules',
+      modern: 'The case is handled',
+      modernNote: 'Traced end to end, with no manual chasing',
       caption:
-        'bxChange sits in the middle: it translates what your legacy software “says” into a language your modern tools understand, and vice versa.',
+        'At the centre sits your process: the flow you drew. Your existing software does not go away — it is queried along the way, at the step that needs it.',
     },
     note: {
       title: 'A word on automated reading',
-      text: 'bxChange reads a wide range of documents to pre-fill your files. The goal is never to replace your judgement, but to spare you repetitive entry and oversights. You always keep control of the final validation.',
+      text: 'bxFlow reads a wide range of documents to pre-fill your files. The goal is never to replace your judgement, but to spare you repetitive entry and oversights. You always keep control of the final validation.',
     },
     cta: {
       title: 'Want to see it all in action?',
@@ -228,11 +270,11 @@ export const en: Translation = {
       eyebrow: 'Use cases',
       title: 'Concrete benefits, sector by sector',
       subtitle:
-        'bxChange adapts to your business. Here’s how it changes daily life in our priority sectors.',
+        'bxFlow adapts to your business. Here’s how it changes daily life in our priority sectors.',
     },
     pattern: {
       problem: 'The problem',
-      solution: 'With bxChange',
+      solution: 'With bxFlow',
       benefit: 'The benefit',
     },
     sectors: {
@@ -268,7 +310,7 @@ export const en: Translation = {
         problem:
           'Regulated processes, many systems in place and a strong requirement for traceability.',
         solution:
-          'bxChange orchestrates flows between your systems and hardens every step, with a full history.',
+          'bxFlow orchestrates flows between your systems and hardens every step, with a full history.',
         benefit:
           'A solid base to digitalise demanding processes — let’s talk to assess your context.',
       },
@@ -276,14 +318,14 @@ export const en: Translation = {
     cta: {
       title: 'Your sector isn’t listed?',
       subtitle:
-        'bxChange adapts to most organisations juggling several software tools. Let’s look at your case.',
+        'bxFlow adapts to most organisations juggling several software tools. Let’s look at your case.',
     },
   },
 
   catalog: {
     hero: {
       eyebrow: 'Process catalogue',
-      title: 'More than 20 processes ready to run',
+      title: 'More than 70 processes ready to run',
       subtitle:
         'Each process is ready to use and customisable. The library keeps growing — and we add yours.',
     },
@@ -293,11 +335,16 @@ export const en: Translation = {
       results_one: '{{count}} process',
       results_other: '{{count}} processes',
     },
+    // Intitulé posé au-dessus des étapes, sur chaque carte du catalogue.
+    stepsLabel: 'The flow',
     categories: {
       rh: 'HR',
       finance: 'Finance',
-      commercial: 'Sales',
-      support: 'Support',
+      client: 'Client and payments',
+      achats: 'Procurement',
+      juridique: 'Legal',
+      it: 'IT and security',
+      conformite: 'Compliance and risk',
       operations: 'Operations',
     },
     missing: {
@@ -312,7 +359,7 @@ export const en: Translation = {
       eyebrow: 'Security & trust',
       title: 'Your data, protected at every step',
       subtitle:
-        'Security is not an option at bxChange. Here are the key guarantees you can rely on.',
+        'Security is not an option at bxFlow. Here are the key guarantees you can rely on.',
     },
     pillars: [
       {
@@ -365,7 +412,7 @@ export const en: Translation = {
     onQuote: 'On request',
     onQuoteSub: 'priced to your scope',
     ctaNote: 'Reply within 24–48h · No commitment',
-    allTiersNote: 'All tiers include access to the catalogue of 20+ ready-to-use processes.',
+    allTiersNote: 'All tiers include access to the catalogue of 70+ ready-to-use processes.',
     tiers: [
       {
         name: 'Starter',
@@ -456,7 +503,7 @@ export const en: Translation = {
     benefits: [
       'A demo tailored to your sector and needs',
       'Concrete answers to your questions, live',
-      'A clear estimate of what bxChange can automate for you',
+      'A clear estimate of what bxFlow can automate for you',
     ],
     duration: '30 minutes',
     durationLabel: 'Duration',
@@ -486,6 +533,9 @@ export const en: Translation = {
     legalNotice: 'Legal notice',
     privacy: 'Privacy',
     followUs: 'Follow us',
+    // L'éditeur, nommé une fois et discrètement. bxFlow reste le sujet
+    // de ce site ; le groupe apparaît là où l'on cherche qui est derrière.
+    editeur: 'A bxGroup product',
     rights: 'All rights reserved.',
     madeWith: 'Built for organisations across French-speaking Africa and beyond.',
   },

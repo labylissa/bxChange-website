@@ -1,6 +1,5 @@
 import { useMemo, useRef, useState, type ReactNode } from 'react';
 import { Seo } from '@/components/Seo';
-import { PageHero } from '@/components/ui';
 import { Icons } from '@/components/Icon';
 import { useContent } from '@/hooks/useContent';
 
@@ -189,7 +188,7 @@ const SECTIONS: DocSection[] = [
     body: (
       <>
         <p className="text-ink-500">
-          Le moteur workflow de bxChange est <strong>configurable sans déployer de code</strong> : un
+          Le moteur workflow de bxFlow est <strong>configurable sans déployer de code</strong> : un
           administrateur de processus définit les étapes, les écrans et les transitions depuis
           l’interface. Pour tout ce qui ne se règle pas par configuration — calculs, validations,
           règles conditionnelles, effets de bord — il branche de petits scripts <strong>JavaScript</strong>.
@@ -318,7 +317,7 @@ const SECTIONS: DocSection[] = [
         <Note tone="warn">
           Le <strong>seul moyen d’appeler l’extérieur</strong> est de passer par les helpers injectés
           (<C>callConnector</C>, <C>getIssuesByTemplate</C>, <C>updateIssue</C>…), qui tapent l’API
-          bxChange <strong>authentifiée</strong> avec vos droits. Aucune dépendance externe : tout est
+          bxFlow <strong>authentifiée</strong> avec vos droits. Aucune dépendance externe : tout est
           code maison, on n’importe jamais depuis une URL.
         </Note>
       </>
@@ -618,7 +617,7 @@ setMessage('client', clients.length + ' client(s) trouvé(s)')`}</Pre>
         <H3>Connecteurs &amp; utilitaires</H3>
         <div className="mt-4 flex flex-col gap-1">
           <Method name="callConnector(connectorId, params?)" returns="Promise<unknown>">
-            <p><em>async</em> — Exécute un connecteur bxChange (SOAP ou REST) et renvoie son résultat. Renvoie <C>null</C> en cas d’erreur (à tester). Le résultat REST a la forme <C>{'{ status_code, headers, body }'}</C> — lisez-le avec <C>lib.get(res, 'body.…')</C>.</p>
+            <p><em>async</em> — Exécute un connecteur bxFlow (SOAP ou REST) et renvoie son résultat. Renvoie <C>null</C> en cas d’erreur (à tester). Le résultat REST a la forme <C>{'{ status_code, headers, body }'}</C> — lisez-le avec <C>lib.get(res, 'body.…')</C>.</p>
             <Params rows={[
               ['connectorId', 'string', 'UUID du connecteur à exécuter.'],
               ['params', 'object?', 'Paramètres passés au connecteur (query, body…).'],
@@ -1038,13 +1037,59 @@ export function DocumentationPage() {
     <>
       <Seo page="documentation" title={c.meta.documentation.title} description={c.meta.documentation.description} />
 
-      <PageHero
-        eyebrow="Documentation technique"
-        title="Automatiser vos processus avec bxChange"
-        subtitle="La référence complète des points d’extension du moteur workflow : bibliothèque lib, comportements, conditions, post-fonctions et appel de connecteurs — chaque fonction documentée, avec exemples."
-      />
+      {/* En-tête compact plutôt qu'un hero.
 
-      <section className="py-14 sm:py-16">
+          Cette page est une référence : on y arrive en cherchant une fonction
+          précise, pas en découvrant le produit. Un hero pleine hauteur, avec
+          son schéma animé, repoussait la barre de recherche sous la ligne de
+          flottaison — c'est-à-dire l'outil qu'on vient chercher. Le titre
+          reste, pour que la page garde un H1 et un sens hors contexte. */}
+      <section className="border-b border-ink-100 bg-ink-50/60 py-8">
+        <div className="container-page">
+          <span className="eyebrow">Documentation technique</span>
+          <h1 className="mt-2 text-2xl font-bold text-navy-900 sm:text-3xl">
+            Automatiser vos processus avec bxFlow
+          </h1>
+          <p className="mt-2 max-w-3xl text-sm text-ink-500">
+            La référence des points d’extension du moteur : bibliothèque lib,
+            comportements, conditions, post-fonctions et appel de connecteurs.
+          </p>
+        </div>
+      </section>
+
+      {/* La recherche, remontée avant la grille et sur toute la largeur.
+
+          Elle était enfouie dans la colonne de contenu, sous le hero — donc
+          invisible à l'arrivée sur une page de mille lignes, alors qu'elle
+          filtre le sommaire ET le contenu. C'est l'outil principal de cette
+          page, il se présente en premier. */}
+      <section className="pt-8">
+        <div className="container-page">
+          <div className="relative">
+            <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-400">
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2}>
+                <circle cx="11" cy="11" r="7" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+            </span>
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Rechercher une fonction… (ex. businessDays, callConnector, setError)"
+              aria-label="Rechercher dans la documentation"
+              className="w-full rounded-xl border border-ink-200 bg-white py-3 pl-10 pr-4 text-sm text-navy-900 shadow-card placeholder:text-ink-400 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
+            />
+            {q !== '' && (
+              <p className="mt-2 text-xs text-ink-400">
+                {visible.length} {visible.length > 1 ? 'sections correspondent' : 'section correspond'} à « {query.trim()} »
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-10 sm:py-12">
         <div className="container-page grid gap-10 lg:grid-cols-[230px_1fr] lg:items-start">
           {/* Sommaire */}
           <aside className="hidden lg:block">
@@ -1066,28 +1111,6 @@ export function DocumentationPage() {
 
           {/* Contenu */}
           <div className="min-w-0">
-            <div className="relative mb-8">
-              <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-400">
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2}>
-                  <circle cx="11" cy="11" r="7" />
-                  <path d="m21 21-4.3-4.3" />
-                </svg>
-              </span>
-              <input
-                type="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Rechercher une fonction… (ex. businessDays, callConnector, setError)"
-                aria-label="Rechercher dans la documentation"
-                className="w-full rounded-xl border border-ink-200 bg-white py-3 pl-10 pr-4 text-sm text-navy-900 shadow-card placeholder:text-ink-400 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
-              />
-              {q !== '' && (
-                <p className="mt-2 text-xs text-ink-400">
-                  {visible.length} {visible.length > 1 ? 'sections correspondent' : 'section correspond'} à « {query.trim()} »
-                </p>
-              )}
-            </div>
-
             {visible.length === 0 ? (
               <div className="rounded-xl border border-dashed border-ink-200 bg-ink-50 p-10 text-center text-ink-500">
                 Aucun résultat. Essaie <C>businessDays</C>, <C>connecteur</C>, <C>assignation</C> ou <C>validation</C>.
