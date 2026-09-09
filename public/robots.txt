@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bxchange.pages.dev/sitemap.xml
+Sitemap: https://bxgroup.io/sitemap.xml

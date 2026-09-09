@@ -29,7 +29,15 @@ export function Seo({ title, description, page }: SeoProps) {
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
       <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+      {/* L'image manquait alors que `twitter:card` en promettait une grande :
+          les robots qui rendent le JavaScript affichaient donc une carte vide.
+          Ceux qui ne le rendent pas — LinkedIn, WhatsApp, Slack — lisent la
+          version en dur d'`index.html`. */}
+      <meta property="og:image" content={`${SITE_URL}/apercu-social.png`} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content={`${SITE_URL}/apercu-social.png`} />
     </Helmet>
   );
 }

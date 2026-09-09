@@ -4,7 +4,7 @@ import { Logo } from './Logo';
 import { Icons } from './Icon';
 import { useLang } from '@/hooks/useLang';
 import { NAV_PAGES, type PageKey } from '@/lib/routes';
-import { CONTACT_EMAIL, LINKEDIN_URL } from '@/lib/site';
+import { CONTACT_EMAIL } from '@/lib/site';
 
 const NAV_KEY: Record<PageKey, string> = {
   home: 'nav.home',
@@ -31,15 +31,10 @@ export function Footer() {
         <div className="lg:col-span-1">
           <Logo variant="light" />
           <p className="mt-4 max-w-xs text-sm text-white/60">{t('footer.tagline')}</p>
-          <a
-            href={LINKEDIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-teal"
-          >
-            <Icons.linkedin className="h-5 w-5" />
-            LinkedIn
-          </a>
+          {/* Lien LinkedIn retiré : la page n'existe pas encore, et il menait à
+              l'accueil de LinkedIn. Un lien qui ne mène pas où il annonce coûte
+              plus que son absence — il se clique une fois, et la confiance avec.
+              À rétablir avec l'URL réelle. */}
         </div>
 
         <div>
