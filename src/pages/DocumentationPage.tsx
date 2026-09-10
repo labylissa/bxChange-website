@@ -47,7 +47,17 @@ function Table({ head, rows }: { head: ReactNode[]; rows: ReactNode[][] }) {
   );
 }
 
-function Pre({ children }: { children: ReactNode }) {
+/**
+ * Bloc de code, avec son contexte annoncé et sa copie évidente.
+ *
+ * Le bouton flottait auparavant par-dessus le code, en blanc sur blanc : on ne
+ * le trouvait qu'en le cherchant, et il masquait la première ligne sur un écran
+ * étroit. Il occupe maintenant sa propre bande, à côté du contexte auquel
+ * l'exemple appartient — c'est la question qu'on se pose en copiant un extrait
+ * de cette page, où la même fonction n'existe justement pas dans les trois
+ * contextes.
+ */
+function Pre({ children, label }: { children: ReactNode; label?: string }) {
   const ref = useRef<HTMLPreElement>(null);
   const [copied, setCopied] = useState(false);
 
@@ -56,6 +66,8 @@ function Pre({ children }: { children: ReactNode }) {
     try {
       await navigator.clipboard.writeText(text);
     } catch {
+      // `navigator.clipboard` exige un contexte sécurisé et n'existe pas
+      // partout ; sans ce repli, le bouton resterait sans effet et sans un mot.
       const ta = document.createElement('textarea');
       ta.value = text;
       ta.style.position = 'fixed';
@@ -74,28 +86,37 @@ function Pre({ children }: { children: ReactNode }) {
   };
 
   return (
-    <div className="group relative my-4">
-      <button
-        type="button"
-        onClick={copy}
-        aria-label={copied ? 'Code copié' : 'Copier le code'}
-        className="absolute right-2.5 top-2.5 z-10 inline-flex items-center gap-1.5 rounded-lg border border-ink-200 bg-white/90 px-2.5 py-1.5 text-xs font-semibold text-ink-500 shadow-sm backdrop-blur transition-colors hover:border-gold hover:text-gold-600"
-      >
-        {copied ? (
-          <>
-            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-mint" fill="none" stroke="currentColor" strokeWidth={2.5}><path d="M20 6 9 17l-5-5" /></svg>
-            Copié
-          </>
-        ) : (
-          <>
-            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2}><rect x="9" y="9" width="12" height="12" rx="2" /><path d="M5 15V5a2 2 0 0 1 2-2h10" /></svg>
-            Copier
-          </>
-        )}
-      </button>
+    <div className="my-4 overflow-hidden rounded-xl border border-ink-100 shadow-card">
+      <div className="flex items-center justify-between gap-3 border-b border-ink-100 bg-ink-50 py-1.5 pl-3.5 pr-1.5">
+        <span className="truncate text-[11px] font-semibold uppercase tracking-wide text-ink-400">
+          {label ?? 'JavaScript'}
+        </span>
+        <button
+          type="button"
+          onClick={copy}
+          aria-label={copied ? 'Code copié' : 'Copier le code'}
+          className={`inline-flex shrink-0 items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold transition-colors ${
+            copied
+              ? 'border-mint/50 bg-mint/10 text-mint'
+              : 'border-ink-200 bg-white text-ink-500 hover:border-gold hover:bg-gold/5 hover:text-gold-600'
+          }`}
+        >
+          {copied ? (
+            <>
+              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.5}><path d="M20 6 9 17l-5-5" /></svg>
+              Copié
+            </>
+          ) : (
+            <>
+              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2}><rect x="9" y="9" width="12" height="12" rx="2" /><path d="M5 15V5a2 2 0 0 1 2-2h10" /></svg>
+              Copier
+            </>
+          )}
+        </button>
+      </div>
       <pre
         ref={ref}
-        className="overflow-x-auto rounded-xl border border-ink-100 border-l-[3px] border-l-gold bg-white p-4 pr-16 font-mono text-[13px] leading-relaxed text-navy-900 shadow-card"
+        className="overflow-x-auto border-l-[3px] border-l-gold bg-white p-4 font-mono text-[13px] leading-relaxed text-navy-900"
       >
         {children}
       </pre>
@@ -334,7 +355,9 @@ const SECTIONS: DocSection[] = [
       <>
         <p className="text-ink-500">
           <C>lib</C> est une bibliothèque utilitaire maison, disponible dans les <strong>trois
-          contextes</strong> (directement comme <C>lib</C>, ou via <C>require('lib')</C>). Elle est{' '}
+          contextes</strong> sous le nom <C>lib</C>. <C>require('lib')</C> renvoie le même objet mais{' '}
+          <strong>n’est injecté que dans les comportements</strong> : l’appeler depuis une
+          post-fonction ou une condition lève <C>require is not defined</C>. Elle est{' '}
           <strong>100 % pure et tolérante</strong> : sur une entrée invalide, elle renvoie une valeur
           neutre (<C>''</C>, <C>null</C>, <C>0</C>) plutôt que de lever une exception. Vous pouvez donc
           l’appeler sans multiplier les <C>try/catch</C>.
@@ -354,7 +377,7 @@ const SECTIONS: DocSection[] = [
           </Method>
           <Method name="formatDate(date, fmt?)" returns="string">
             <p>Formate une date. <C>fmt</C> vaut <C>'iso'</C> (défaut, <C>2026-07-06</C>) ou <C>'fr'</C> (<C>06/07/2026</C>). Renvoie <C>''</C> si la date est invalide.</p>
-            <Pre>{`lib.formatDate('2026-07-06', 'fr')   // → '06/07/2026'
+            <Pre label="Bibliothèque lib">{`lib.formatDate('2026-07-06', 'fr')   // → '06/07/2026'
 lib.formatDate('n’importe quoi')     // → ''`}</Pre>
           </Method>
           <Method name="today()" returns="string">
@@ -362,7 +385,7 @@ lib.formatDate('n’importe quoi')     // → ''`}</Pre>
           </Method>
           <Method name="addDays(date, n) · subDays(date, n)" returns="string">
             <p>Ajoute (ou retire) <C>n</C> jours calendaires. <C>n</C> peut être négatif. Renvoie une date ISO, ou <C>''</C> si l’entrée est invalide.</p>
-            <Pre>{`lib.addDays(lib.today(), 30)   // échéance à J+30
+            <Pre label="Bibliothèque lib">{`lib.addDays(lib.today(), 30)   // échéance à J+30
 lib.subDays('2026-07-06', 7)   // → '2026-06-29'`}</Pre>
           </Method>
           <Method name="addMonths(date, n)" returns="string">
@@ -376,7 +399,7 @@ lib.subDays('2026-07-06', 7)   // → '2026-06-29'`}</Pre>
           </Method>
           <Method name="businessDays(start, end)" returns="number | null">
             <p>Nombre de <strong>jours ouvrés (lundi→vendredi)</strong> entre deux dates, <strong>bornes incluses</strong>. Exclut uniquement les week-ends — <strong>pas</strong> les jours fériés.</p>
-            <Pre>{`lib.businessDays('2026-07-06', '2026-07-10')  // → 5 (lun→ven)
+            <Pre label="Bibliothèque lib">{`lib.businessDays('2026-07-06', '2026-07-10')  // → 5 (lun→ven)
 lib.businessDays('2026-07-04', '2026-07-06')  // → 1 (sam+dim exclus, lun inclus)`}</Pre>
             <Note>Pour des « ouvrés hors fériés », soustrayez manuellement les fériés connus de votre pays : <C>lib.businessDays(a,b) - nbFeriesDansIntervalle</C>.</Note>
           </Method>
@@ -404,7 +427,7 @@ lib.businessDays('2026-07-04', '2026-07-06')  // → 1 (sam+dim exclus, lun incl
         <div className="mt-4 flex flex-col gap-1">
           <Method name="groupBy(arr, key)" returns="Record<string, T[]>">
             <p>Regroupe les éléments dans un objet, indexé par la valeur de <C>key</C>. Chaque entrée est un tableau.</p>
-            <Pre>{`lib.groupBy(lignes, l => l.categorie)
+            <Pre label="Bibliothèque lib">{`lib.groupBy(lignes, l => l.categorie)
 // → { transport: [...], repas: [...] }`}</Pre>
           </Method>
           <Method name="keyBy(arr, key)" returns="Record<string, T>">
@@ -421,7 +444,7 @@ lib.businessDays('2026-07-04', '2026-07-06')  // → 1 (sam+dim exclus, lun incl
           </Method>
           <Method name="sumBy(arr, key) · meanBy(arr, key)" returns="number">
             <p>Somme / moyenne des valeurs. Les valeurs non numériques comptent pour <C>0</C> ; <C>meanBy</C> d’un tableau vide vaut <C>0</C>.</p>
-            <Pre>{`lib.sumBy(lignes, 'montant')   // total des montants`}</Pre>
+            <Pre label="Bibliothèque lib">{`lib.sumBy(lignes, 'montant')   // total des montants`}</Pre>
           </Method>
           <Method name="maxBy(arr, key) · minBy(arr, key)" returns="T | null">
             <p>Renvoie l’<strong>élément</strong> (pas la valeur) au maximum / minimum de la clé, ou <C>null</C> si le tableau est vide.</p>
@@ -434,7 +457,7 @@ lib.businessDays('2026-07-04', '2026-07-06')  // → 1 (sam+dim exclus, lun incl
           </Method>
           <Method name="get(obj, path, def?)" returns="unknown">
             <p>Accès <strong>sûr</strong> à une valeur imbriquée par chemin, sans planter si un maillon est absent. Supporte la notation pointée et les index (<C>a.b.0.c</C> ou <C>a.b[0].c</C>). Renvoie <C>def</C> si le chemin n’existe pas.</p>
-            <Pre>{`lib.get(resultatConnecteur, 'body.items.0.id', null)`}</Pre>
+            <Pre label="Bibliothèque lib">{`lib.get(resultatConnecteur, 'body.items.0.id', null)`}</Pre>
           </Method>
         </div>
 
@@ -484,7 +507,7 @@ lib.businessDays('2026-07-04', '2026-07-06')  // → 1 (sam+dim exclus, lun incl
     id: 'behaviours',
     label: 'Comportements — API',
     terms:
-      'comportements getValue setValue show hide setRequired disable enable setError clearError setMessage clearMessage showTransition hideTransition getAssignee setAssignee setAssigneeByRole getRoles getMembers getCurrentUser getCurrentIssue getIssueByKey getIssuesByTemplate updateIssue addComment sendEmail setBoField searchBoInstances getBoInstance updateBoInstance createBoInstance callConnector setMemberAttributes updateUserAttribute log require',
+      'comportements getValue setValue show hide setRequired disable enable setError clearError setMessage clearMessage showTransition hideTransition getAssignee setAssignee setAssigneeByRole getRoles getMembers getCurrentUser getCurrentIssue getIssueByKey getIssuesByTemplate updateIssue addComment sendEmail setBoField searchBoInstances getBoInstance updateBoInstance createBoInstance callConnector setMemberAttributes updateUserAttribute log require disableGridColumn enableGridColumn disableGridCell enableGridCell grille tableGrid colonne cellule ligne verrouiller',
     body: (
       <>
         <p className="text-ink-500">
@@ -537,7 +560,7 @@ lib.businessDays('2026-07-04', '2026-07-06')  // → 1 (sam+dim exclus, lun incl
         <div className="mt-4 flex flex-col gap-1">
           <Method name="showTransition(nameOrId) · hideTransition(nameOrId)" returns="void">
             <p>Affiche / masque un bouton de transition, par <strong>nom</strong> ou par <strong>ID</strong>. N’a de sens que dans <C>on_case_load</C>. Pour une règle purement déclarative, préférez une <strong>condition de transition</strong> (section suivante).</p>
-            <Pre>{`// Masquer "Valider" sauf pour le rôle Manager
+            <Pre label="Comportement">{`// Masquer "Valider" sauf pour le rôle Manager
 const me = getCurrentUser()
 if (!me || !me.wf_role_names.includes('Manager')) hideTransition('Valider')`}</Pre>
           </Method>
@@ -559,7 +582,7 @@ if (!me || !me.wf_role_names.includes('Manager')) hideTransition('Valider')`}</P
           </Method>
           <Method name="getMembers()" returns="BehaviourMember[]">
             <p>Membres du tenant : <C>{'{ id, email, full_name, wf_role_id, wf_role_name, wf_role_slug, wf_role_names[], wf_role_slugs[], attributes }'}</C>. Un membre peut porter plusieurs rôles (<C>wf_role_slugs</C>) et des <C>attributes</C> de profil personnalisés — la base pour router intelligemment.</p>
-            <Pre>{`// Tous les membres du rôle "Manager" de la région "Sud"
+            <Pre label="Comportement">{`// Tous les membres du rôle "Manager" de la région "Sud"
 const managers = getMembers().filter(m =>
   m.wf_role_slugs.includes('manager') &&
   m.attributes && m.attributes.region === 'sud'
@@ -580,7 +603,7 @@ const managers = getMembers().filter(m =>
           </Method>
           <Method name="getIssuesByTemplate(templateName, filters?)" returns="Promise<object[]>">
             <p><em>async</em> — Liste des dossiers d’un template. <C>filters</C> optionnel : <C>{'{ status, priority, search, limit }'}</C>.</p>
-            <Pre>{`const enCours = await getIssuesByTemplate('Demande de congés', {
+            <Pre label="Comportement">{`const enCours = await getIssuesByTemplate('Demande de congés', {
   status: 'En attente', limit: 100,
 })`}</Pre>
           </Method>
@@ -595,6 +618,35 @@ const managers = getMembers().filter(m =>
           </Method>
         </div>
 
+        <H3>Champ grille</H3>
+        <p className="text-sm text-ink-500">
+          Un champ <strong>grille</strong> porte un petit tableau saisi dans le dossier : des
+          colonnes déclarées sur la définition du champ, des lignes ajoutées par l’utilisateur. Ces
+          quatre fonctions verrouillent une <strong>colonne entière</strong> ou une{' '}
+          <strong>cellule précise</strong>, sans toucher au reste de la grille. Elles n’existent
+          que dans les comportements.
+        </p>
+        <div className="mt-4 flex flex-col gap-1">
+          <Method name="disableGridColumn(key, colonne) · enableGridColumn(key, colonne)" returns="void">
+            <p>Verrouille (ou rouvre) une colonne sur <strong>toutes</strong> les lignes de la grille <C>key</C>. <C>colonne</C> est la clé de colonne déclarée sur le champ.</p>
+          </Method>
+          <Method name="disableGridCell(key, colonne, ligne) · enableGridCell(key, colonne, ligne)" returns="void">
+            <p>Verrouille (ou rouvre) une seule cellule. <C>ligne</C> est l’index de la ligne, à partir de <C>0</C>.</p>
+          </Method>
+        </div>
+        <Note>
+          <strong>La règle la plus précise l’emporte</strong> : cellule, puis colonne, puis champ.
+          Un <C>disable(key)</C> sur le champ entier peut donc être contredit par un{' '}
+          <C>enableGridCell</C> sur une cellule — une règle générale ne doit jamais écraser une règle
+          particulière, l’inverse serait indéchiffrable pour qui paramètre l’écran.
+        </Note>
+        <Pre label="Comportement · on_form_load">{`// Le montant se calcule, il ne se saisit pas : colonne verrouillée
+disableGridColumn('lignes_facture', 'total_ligne')
+
+// La première ligne est imposée par le contrat : on la fige entièrement
+disableGridCell('lignes_facture', 'designation', 0)
+disableGridCell('lignes_facture', 'quantite', 0)`}</Pre>
+
         <H3>Objets métier</H3>
         <div className="mt-4 flex flex-col gap-1">
           <Method name="setBoField(key, instanceId | null)" returns="void">
@@ -602,7 +654,7 @@ const managers = getMembers().filter(m =>
           </Method>
           <Method name="searchBoInstances(typeName, query?, limit?)" returns="Promise<object[]>">
             <p><em>async</em> — Recherche des instances d’un type d’objet métier par nom de type. <C>query</C> filtre sur le texte, <C>limit</C> par défaut <C>20</C>. Renvoie un tableau (vide si rien).</p>
-            <Pre>{`// Proposer les 10 clients dont le nom contient la saisie
+            <Pre label="Comportement">{`// Proposer les 10 clients dont le nom contient la saisie
 const clients = await searchBoInstances('Client', getValue('recherche_client'), 10)
 setMessage('client', clients.length + ' client(s) trouvé(s)')`}</Pre>
           </Method>
@@ -610,9 +662,27 @@ setMessage('client', clients.length + ' client(s) trouvé(s)')`}</Pre>
             <p><em>async</em> — Récupère une instance précise.</p>
           </Method>
           <Method name="updateBoInstance(typeId, instanceId, data) · createBoInstance(typeId, data)" returns="Promise<object | null>">
-            <p><em>async</em> — Met à jour ou crée une instance d’objet métier.</p>
+            <p><em>async</em> — Met à jour (remplacement complet des attributs) ou crée une instance.</p>
           </Method>
         </div>
+        <Note tone="warn">
+          <strong>Deux pièges propres aux comportements, à connaître avant d’écrire.</strong>
+          <br />
+          <strong>1. L’identifiant du type.</strong> <C>getBoInstance</C>, <C>updateBoInstance</C> et{' '}
+          <C>createBoInstance</C> attendent ici l’<strong>UUID</strong> du type, alors que{' '}
+          <C>searchBoInstances</C> attend son <strong>nom</strong> — et que les mêmes fonctions
+          acceptent le nom dans une post-fonction. L’autocomplétion de l’éditeur annonce{' '}
+          <C>typeName</C> partout : elle se trompe pour les comportements. Passer un nom ici renvoie{' '}
+          <C>null</C>, sans erreur.
+          <br />
+          <strong>2. Les échecs sont muets.</strong> Une écriture refusée faute de droit{' '}
+          <C>wf.bo_create</C> renvoie <C>null</C> et n’écrit qu’une ligne dans la console du
+          comportement. <strong>Testez la valeur de retour</strong> plutôt que de supposer la
+          réussite. En post-fonction, la même erreur remonte dans un bandeau visible.
+          <br />
+          <C>patchBoInstance</C> n’existe <strong>pas</strong> dans ce contexte : pour ne modifier
+          qu’une partie d’une fiche, passez par une post-fonction.
+        </Note>
 
         <H3>Connecteurs &amp; utilitaires</H3>
         <div className="mt-4 flex flex-col gap-1">
@@ -628,7 +698,7 @@ setMessage('client', clients.length + ' client(s) trouvé(s)')`}</Pre>
           </Method>
           <Method name="updateUserAttribute(userId, key, value)" returns="Promise<void>">
             <p><em>async</em> — Met à jour <strong>un seul</strong> attribut de profil sans écraser les autres. À préférer à <C>setMemberAttributes</C> quand on ne touche qu’une clé.</p>
-            <Pre>{`const me = getCurrentUser()
+            <Pre label="Comportement">{`const me = getCurrentUser()
 if (me) await updateUserAttribute(me.id, 'derniere_action', lib.today())`}</Pre>
           </Method>
           <Method name="log(...args)" returns="void">
@@ -639,7 +709,7 @@ if (me) await updateUserAttribute(me.id, 'derniere_action', lib.today())`}</Pre>
           </Method>
         </div>
 
-        <Pre>{`// Exemple complet — on_field_change sur 'type_contrat'
+        <Pre label="Comportement">{`// Exemple complet — on_field_change sur 'type_contrat'
 if (getValue('type_contrat') === 'CDD') {
   show('date_fin'); setRequired('date_fin', true)
 } else {
@@ -686,7 +756,7 @@ else { clearError('date_fin'); setValue('nombre_jours', nb ?? 0) }`}</Pre>
           <C>searchBoInstances</C>, <C>getBoInstance</C>, <C>lib</C>, <C>log</C>. Leur comportement est
           identique à celui décrit pour les comportements.
         </p>
-        <Pre>{`// "Clôturer" visible seulement si soldé ET gestionnaire
+        <Pre label="Condition de transition">{`// "Clôturer" visible seulement si soldé ET gestionnaire
 const solde = Number(getValue('montant_restant') || 0)
 const me = getCurrentUser()
 return solde === 0 && !!me && me.wf_role_names.includes('Gestionnaire')`}</Pre>
@@ -725,7 +795,7 @@ return solde === 0 && !!me && me.wf_role_names.includes('Gestionnaire')`}</Pre>
     id: 'postfn',
     label: 'Post-fonctions — API',
     terms:
-      'post-fonctions setField setAssignee setAssigneeByRole before_transition after_transition persistance mode test addComment sendEmail updateIssue objets métier',
+      'post-fonctions setField setAssignee setAssigneeByRole before_transition after_transition persistance mode test addComment sendEmail updateIssue objets métier référentiel patchBoInstance updateBoInstance createBoInstance getBoInstance nom de type partiel',
     body: (
       <>
         <p className="text-ink-500">
@@ -763,8 +833,30 @@ return solde === 0 && !!me && me.wf_role_names.includes('Gestionnaire')`}</Pre>
           <Method name="addComment(text) · sendEmail(notificationId)" returns="Promise<void>">
             <p><em>async</em> — Commente le dossier ; envoie une notification e-mail préconfigurée.</p>
           </Method>
-          <Method name="callConnector · searchBoInstances · getBoInstance · updateBoInstance · createBoInstance · setBoField" returns="—">
-            <p>Connecteurs et objets métier, identiques aux comportements (<C>setBoField</C> est persisté avec les champs).</p>
+          <Method name="callConnector(connectorId, params?) · setBoField(key, instanceId | null)" returns="—">
+            <p>Exécute un connecteur ; affecte un champ Objet métier (<C>setBoField</C> est persisté avec les autres champs).</p>
+          </Method>
+          <Method name="searchBoInstances(typeName, query?, limit?) · getBoInstance(typeName, instanceId) · createBoInstance(typeName, data) · updateBoInstance(typeName, instanceId, data)" returns="Promise<…>">
+            <p>
+              <em>async</em> — Référentiels. <strong>Ici, le premier argument est le NOM du type</strong>{' '}
+              (l’UUID reste accepté) : un script exporté dans un <C>.bxflow</C> reste ainsi valable
+              chez le destinataire, là où un UUID y désignerait un type inexistant. Une erreur de
+              droit ou de type <strong>lève une exception</strong> affichée dans un bandeau — elle
+              n’est pas avalée comme dans un comportement.
+            </p>
+          </Method>
+          <Method name="patchBoInstance(typeName, instanceId, data)" returns="Promise<object>">
+            <p>
+              <em>async</em> — Met à jour <strong>uniquement les attributs fournis</strong>, sans
+              toucher au reste de la fiche. C’est presque toujours ce qu’on veut depuis un dossier :
+              écrire une date de revue ou un niveau de risque sans effacer l’adresse et le téléphone
+              saisis ailleurs. <C>updateBoInstance</C>, lui, remplace tout.
+            </p>
+            <Pre label="Post-fonction · after_transition">{`// Clôture d'une revue KYC : on ne touche qu'au risque et à la date
+await patchBoInstance('Client', getValue('bo_client'), {
+  niveau_risque_lcbft: getValue('rkyc_nouveau_risque'),
+  date_derniere_revue: lib.today(),
+})`}</Pre>
           </Method>
           <Method name="setMemberAttributes · updateUserAttribute · getRoles · getMembers · getCurrentUser · lib · log" returns="—">
             <p>Annuaire, attributs de profil, bibliothèque maison et trace de debug.</p>
@@ -777,7 +869,7 @@ return solde === 0 && !!me && me.wf_role_names.includes('Gestionnaire')`}</Pre>
           avant de l’activer.
         </Note>
 
-        <Pre>{`// after_transition "Prendre en charge"
+        <Pre label="Post-fonction">{`// after_transition "Prendre en charge"
 const me = getCurrentUser()
 if (me) {
   setAssignee(me.id)
@@ -803,7 +895,7 @@ if (me) {
         </p>
         <div className="mt-6 flex flex-col gap-5">
           <Recipe tag="Comportement · on_field_change" title="Congés — calcul auto & contrôle du solde" goal="Motif conditionnel, jours ouvrés calculés, blocage au-delà du solde.">
-            <Pre>{`const type = getValue('type_conge')
+            <Pre label="Comportement · on_field_change">{`const type = getValue('type_conge')
 if (type === 'exceptionnel') { show('motif'); setRequired('motif', true) }
 else { hide('motif'); setRequired('motif', false) }
 
@@ -817,7 +909,7 @@ if (nb !== null && nb > solde) {
           </Recipe>
 
           <Recipe tag="Comportement · on_field_change" title="Note de frais — total dynamique & plafond" goal="Sommer des lignes, afficher le total, signaler un dépassement par catégorie.">
-            <Pre>{`const lignes = JSON.parse(getValue('lignes_frais') || '[]')
+            <Pre label="Comportement · on_field_change">{`const lignes = JSON.parse(getValue('lignes_frais') || '[]')
 setValue('total', lib.sumBy(lignes, 'montant'))
 setMessage('total', lib.currency(lib.sumBy(lignes, 'montant')) + ' sur ' + lignes.length + ' ligne(s)')
 
@@ -827,7 +919,7 @@ else clearError('lignes_frais')`}</Pre>
           </Recipe>
 
           <Recipe tag="Comportement · async" title="Enrichir via un connecteur (SIREN → raison sociale)" goal="Appeler un connecteur et exploiter son résultat en sécurité.">
-            <Pre>{`const siren = String(getValue('siren') || '').replace(/\\s/g, '')
+            <Pre label="Comportement · async">{`const siren = String(getValue('siren') || '').replace(/\\s/g, '')
 if (siren.length === 9) {
   const res = await callConnector('annuaire-entreprises-uuid', { siren })
   const nom = lib.get(res, 'body.results.0.nom_complet', null)
@@ -837,20 +929,20 @@ if (siren.length === 9) {
           </Recipe>
 
           <Recipe tag="Condition de transition" title="« Clôturer » visible seulement si tout est réglé" goal="Masquer le bouton tant qu’il reste des dossiers liés en attente.">
-            <Pre>{`const factures = await getIssuesByTemplate('Facture fournisseur', {
+            <Pre label="Condition de transition">{`const factures = await getIssuesByTemplate('Facture fournisseur', {
   status: 'À payer', search: getCurrentIssue().reference, limit: 50,
 })
 return factures.length === 0   // false → bouton masqué`}</Pre>
           </Recipe>
 
           <Recipe tag="Post-fonction · before_transition" title="Escalade d’assignation selon le montant" goal="Router vers le bon rôle en fonction d’un seuil.">
-            <Pre>{`const montant = Number(getValue('montant') || 0)
+            <Pre label="Post-fonction · before_transition">{`const montant = Number(getValue('montant') || 0)
 setAssigneeByRole(montant > 5000 ? 'direction' : 'manager')
 await addComment('Demande de ' + lib.currency(montant) + ' routée automatiquement.')`}</Pre>
           </Recipe>
 
           <Recipe tag="Post-fonction · after_transition" title="Mettre à jour un dossier lié (budget parent)" goal="Décrémenter le budget d’un dossier « Projet » à la validation.">
-            <Pre>{`const ref = getValue('projet_ref')
+            <Pre label="Post-fonction · after_transition">{`const ref = getValue('projet_ref')
 const projet = await getIssueByKey(ref)
 if (projet) {
   const budget = Number(lib.get(projet, 'fields_data.budget_restant', 0))
@@ -866,7 +958,7 @@ if (projet) {
         </p>
         <div className="mt-4 flex flex-col gap-5">
           <Recipe tag="Comportement · on_field_change" title="Pré-remplir depuis l’instance sélectionnée" goal="Lire les propriétés d’un champ « Véhicule » (BO pré-résolu) pour remplir d’autres champs.">
-            <Pre>{`const v = getValue('vehicule') // objet BO complet (pas l'UUID)
+            <Pre label="Comportement · on_field_change">{`const v = getValue('vehicule') // objet BO complet (pas l'UUID)
 if (v) {
   setValue('immatriculation', v.immatriculation)
   setValue('cout_journalier', v.tarif_jour)
@@ -875,7 +967,7 @@ if (v) {
           </Recipe>
 
           <Recipe tag="Comportement · async" title="Sélection en cascade (client → contrat)" goal="Quand on choisit un client, proposer automatiquement son contrat.">
-            <Pre>{`const client = getValue('client') // BO pré-résolu
+            <Pre label="Comportement · async">{`const client = getValue('client') // BO pré-résolu
 if (client) {
   const contrats = await searchBoInstances('Contrat', client.reference, 50)
   setMessage('contrat', contrats.length + ' contrat(s) pour ce client')
@@ -884,7 +976,7 @@ if (client) {
           </Recipe>
 
           <Recipe tag="Comportement · async" title="Créer une instance à la volée puis la lier" goal="Réutiliser un fournisseur existant, sinon le créer, puis l’affecter au dossier.">
-            <Pre>{`const email = getValue('email_fournisseur')
+            <Pre label="Comportement · async">{`const email = getValue('email_fournisseur')
 const existants = await searchBoInstances('Fournisseur', email, 1)
 let instance = existants[0]
 if (!instance) {
@@ -897,7 +989,7 @@ if (instance) setBoField('fournisseur', instance.id)`}</Pre>
           </Recipe>
 
           <Recipe tag="Post-fonction · after_transition" title="Mettre à jour une instance (décrément de stock)" goal="À la validation, retirer la quantité commandée du stock de l’article.">
-            <Pre>{`const article = getValue('article') // BO pré-résolu
+            <Pre label="Post-fonction · after_transition">{`const article = getValue('article') // BO pré-résolu
 if (article) {
   const stock = Number(article.stock || 0) - Number(getValue('quantite') || 0)
   await updateBoInstance('type-article-uuid', article.id, { stock: Math.max(0, stock) })
@@ -905,7 +997,7 @@ if (article) {
           </Recipe>
 
           <Recipe tag="Condition de transition · async" title="Bloquer selon un attribut de l’instance" goal="Empêcher l’avancement si le client lié est en liste noire.">
-            <Pre>{`const res = await searchBoInstances('Client', getValue('siren'), 1)
+            <Pre label="Condition de transition · async">{`const res = await searchBoInstances('Client', getValue('siren'), 1)
 const client = res[0]
 return !(client && client.blacklist === true) // false → bouton masqué`}</Pre>
           </Recipe>
@@ -919,19 +1011,19 @@ return !(client && client.blacklist === true) // false → bouton masqué`}</Pre
         </p>
         <div className="mt-4 flex flex-col gap-5">
           <Recipe tag="Comportement · on_form_load" title="Pré-sélectionner un utilisateur (champ « valideur »)" goal="Remplir un champ utilisateur avec le manager du demandeur, depuis un attribut de profil.">
-            <Pre>{`const me = getCurrentUser()
+            <Pre label="Comportement · on_form_load">{`const me = getCurrentUser()
 const managerId = me && me.attributes ? me.attributes.manager_id : null
 if (managerId) setValue('valideur', managerId) // champ utilisateur = UUID`}</Pre>
           </Recipe>
 
           <Recipe tag="Comportement · on_field_change" title="Afficher le nom d’un champ utilisateur" goal="Un champ utilisateur contient un UUID ; retrouver le nom via l’annuaire pour informer.">
-            <Pre>{`const uid = getValue('valideur')
+            <Pre label="Comportement · on_field_change">{`const uid = getValue('valideur')
 const membre = getMembers().find(m => m.id === uid)
 setMessage('valideur', membre ? 'Validation par ' + (membre.full_name || membre.email) : '')`}</Pre>
           </Recipe>
 
           <Recipe tag="Post-fonction · async" title="Assigner au bon référent selon un attribut" goal="Router vers le référent RH de la région du dossier, avec repli sur le rôle.">
-            <Pre>{`const region = getValue('region')
+            <Pre label="Post-fonction · async">{`const region = getValue('region')
 const referent = getMembers().find(m =>
   m.wf_role_slugs.includes('rh') && m.attributes && m.attributes.region === region
 )
@@ -940,7 +1032,7 @@ else setAssigneeByRole('rh') // repli si aucun référent`}</Pre>
           </Recipe>
 
           <Recipe tag="Post-fonction · async" title="Assigner au membre le moins chargé d’un rôle" goal="Répartition simple : compter les dossiers ouverts par membre et choisir le minimum.">
-            <Pre>{`const support = getMembers().filter(m => m.wf_role_slugs.includes('support'))
+            <Pre label="Post-fonction · async">{`const support = getMembers().filter(m => m.wf_role_slugs.includes('support'))
 const ouverts = await getIssuesByTemplate('Ticket', { status: 'Ouvert', limit: 500 })
 const charge = lib.countBy(ouverts, o => lib.get(o, 'assigned_to', ''))
 const cible = lib.minBy(support.map(m => ({ id: m.id, n: charge[m.id] || 0 })), 'n')
@@ -948,13 +1040,13 @@ if (cible) setAssignee(cible.id)`}</Pre>
           </Recipe>
 
           <Recipe tag="Comportement · on_case_load" title="Masquer une action selon le profil courant" goal="N’exposer « Valider budget » qu’aux membres dont le plafond couvre le montant.">
-            <Pre>{`const me = getCurrentUser()
+            <Pre label="Comportement · on_case_load">{`const me = getCurrentUser()
 const plafond = me && me.attributes ? Number(me.attributes.plafond_validation || 0) : 0
 if (Number(getValue('montant') || 0) > plafond) hideTransition('Valider budget')`}</Pre>
           </Recipe>
 
           <Recipe tag="Post-fonction · after_transition" title="Horodater une action sur le profil" goal="Enregistrer la date de dernière prise en charge sur le profil du membre.">
-            <Pre>{`const me = getCurrentUser()
+            <Pre label="Post-fonction · after_transition">{`const me = getCurrentUser()
 if (me) await updateUserAttribute(me.id, 'derniere_prise_en_charge', lib.today())`}</Pre>
           </Recipe>
         </div>
@@ -1010,10 +1102,21 @@ if (me) await updateUserAttribute(me.id, 'derniere_prise_en_charge', lib.today()
               [<C>callConnector</C>, y, y, y],
               [<>BO : <C>searchBoInstances/getBoInstance</C></>, y, y, y],
               [<>BO : <C>setBoField/updateBoInstance/createBoInstance</C></>, y, n, y],
+              [<>BO : <C>patchBoInstance</C> (partiel)</>, n, n, y],
+              [<>BO : 1er argument</>, <>UUID du type<sup>*</sup></>, <>nom du type</>, <>nom du type</>],
+              [<>Grille : <C>disable/enableGridColumn</C> · <C>disable/enableGridCell</C></>, y, n, n],
+              [<C>setMemberAttributes/updateUserAttribute</C>, y, n, y],
+              [<C>require('lib')</C>, y, n, n],
               [<><C>lib</C> · <C>log</C></>, y, y, y],
             ];
           })()}
         />
+        <p className="mt-3 text-xs text-ink-400">
+          <sup>*</sup> Divergence du moteur, pas un choix de conception : dans un comportement,{' '}
+          <C>getBoInstance</C> et consorts n’acceptent que l’UUID du type, alors que{' '}
+          <C>searchBoInstances</C> y accepte le nom. Voir l’avertissement de la section{' '}
+          <a href="#behaviours" className="text-gold-600 underline">Comportements</a>.
+        </p>
       </>
     ),
   },
