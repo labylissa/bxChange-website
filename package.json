@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "node scripts/generate-sitemap.mjs",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview",
     "sitemap": "node scripts/generate-sitemap.mjs",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "prerender": "node scripts/prerender.mjs"
   },
   "dependencies": {
     "i18next": "^23.11.5",

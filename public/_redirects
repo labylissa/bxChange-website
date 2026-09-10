@@ -1,2 +1,9 @@
-# Cloudflare Pages — SPA fallback : toutes les routes servent index.html (routing géré côté client)
-/*    /index.html    200
+# La racine part vers la langue par défaut côté serveur, plutôt qu'en
+# JavaScript : un moteur de recherche suit une 302 sans rien exécuter, là où
+# une redirection côté client lui demande de rendre la page pour la découvrir.
+/                 /fr              302
+
+# Repli des adresses inconnues. Cloudflare Pages sert d'abord les fichiers
+# statiques, donc les pages prérendues (/fr/produit/index.html, …) passent
+# AVANT cette règle — elle ne s'applique qu'à ce qui n'a pas été prérendu.
+/*                /index.html      200

@@ -3,14 +3,14 @@ import type { Translation } from './fr';
 export const en: Translation = {
   meta: {
     home: {
-      title: 'bxFlow — Connect your software, automate your processes',
+      title: 'bxFlow — Model your business processes, they run themselves',
       description:
-        'bxFlow links your legacy software to modern tools and automates your business processes. 70+ ready-to-run processes. SMEs, accounting firms, microfinance.',
+        'Business process engine: draw the steps, the roles and the approvals, and bxFlow moves every case forward. More than 70 processes ready to run.',
     },
     product: {
-      title: 'Product — bxFlow | Connector and process automation',
+      title: 'Product — bxFlow | Business process engine (BPMN)',
       description:
-        'Connect your existing systems to modern apps, orchestrate your flows and automate business processes with automated document reading.',
+        'Process editor, roles and approvals, screens per step, deadlines and reminders. Your existing software is queried along the way, when a step needs it.',
     },
     useCases: {
       title: 'Use cases — bxFlow | SMEs, accounting firms, microfinance',
