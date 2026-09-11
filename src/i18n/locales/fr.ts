@@ -25,6 +25,11 @@ export const fr = {
       description:
         'Chiffrement des données, isolation stricte entre clients, hébergement maîtrisé et conformité : les garanties de confiance de bxFlow.',
     },
+    deployment: {
+      title: 'Déploiement — bxFlow | Sur vos serveurs ou hébergé, de bout en bout',
+      description:
+        'Comment bxFlow s’installe : hébergé chez nous, ou sur vos serveurs derrière votre pare-feu. Prérequis, étapes, recette, sauvegardes, mises à jour.',
+    },
     pricing: {
       title: 'Tarifs — bxFlow | Licence pilote et paliers sur mesure',
       description:
@@ -62,6 +67,7 @@ export const fr = {
     catalog: 'Catalogue',
     security: 'Sécurité',
     pricing: 'Tarifs',
+    deployment: 'Déploiement',
     contact: 'Contact',
     demo: 'Planifier une démo',
     documentation: 'Documentation',
@@ -403,6 +409,194 @@ export const fr = {
     },
   },
 
+  deployment: {
+    hero: {
+      eyebrow: 'Déploiement',
+      title: 'Où vivent vos données, et comment le logiciel arrive chez vous',
+      subtitle:
+        'Deux façons d’installer bxFlow, le même logiciel dans les deux cas. Cette page décrit la seconde de bout en bout — celle qu’on vous demandera de justifier en comité.',
+    },
+    models: [
+      {
+        tag: 'En ligne',
+        title: 'Hébergé chez nous',
+        lead: 'Vous ouvrez un navigateur, et c’est tout.',
+        text:
+          'Nous installons, surveillons, mettons à jour et sauvegardons. Vos équipes se connectent sur une adresse qui vous appartient, à votre marque. Mise en service en une journée.',
+        forWho: 'Pour démarrer vite, quand l’hébergement externe ne pose pas de difficulté réglementaire.',
+      },
+      {
+        tag: 'Chez vous',
+        title: 'Installé sur vos serveurs',
+        lead: 'Le logiciel s’installe derrière votre pare-feu.',
+        text:
+          'Vos données ne sortent jamais de votre réseau. Aucune connexion Internet n’est nécessaire, ni pour installer, ni pour fonctionner ensuite. Les clés de chiffrement sont générées chez vous.',
+        forWho: 'Pour les établissements dont les données ne peuvent pas quitter l’infrastructure.',
+      },
+    ],
+    same: {
+      title: 'Le même logiciel, pas une version allégée',
+      text:
+        'Il n’existe qu’une seule base de code. Ce que vous voyez en démonstration est ce qui s’installe chez vous : mêmes écrans, mêmes processus, mêmes contrôles. Et changer d’avis plus tard ne demande pas de tout refaire — vos processus s’exportent dans un fichier et se réimportent ailleurs.',
+    },
+    compare: {
+      title: 'Comment choisir',
+      lead: 'Les huit questions qui reviennent en comité, et leur réponse dans chaque cas.',
+      head: ['', 'Hébergé chez nous', 'Sur vos serveurs'],
+      rows: [
+        ['Où vivent les données', 'Sur notre infrastructure, dans un espace séparé par client', 'Sur vos serveurs, dans votre réseau'],
+        ['Qui exploite au quotidien', 'Nous', 'Vos équipes, avec notre documentation'],
+        ['Mises à jour', 'Appliquées par nous, sans intervention de votre part', 'Vous décidez du moment ; nous livrons la version'],
+        ['Sauvegardes', 'Automatiques et chiffrées, avec une copie déposée ailleurs', 'Automatiques et chiffrées — vous en détenez les clés et les copies'],
+        ['Accès Internet nécessaire', 'Oui, c’est un service en ligne', 'Aucun, ni à l’installation ni ensuite'],
+        ['Délai de mise en service', 'Une journée', 'Deux à trois jours ouvrés, une fois les prérequis réunis'],
+        ['Qui détient les clés de chiffrement', 'Nous', 'Vous, et elles ne nous sont jamais transmises'],
+        ['Ce que l’éditeur peut consulter', 'Rien sans votre demande, et toute intervention est tracée', 'Rien : nous n’avons aucun accès à l’instance'],
+      ],
+    },
+    onprem: {
+      eyebrow: 'De bout en bout',
+      title: 'Un déploiement sur vos serveurs, étape par étape',
+      lead:
+        'Ce qui se passe réellement, dans l’ordre, avec ce que nous attendons de vous à chaque fois. Rien d’implicite : c’est le document que votre direction informatique peut lire avant de s’engager.',
+      detailLabel: 'Côté technique',
+      steps: [
+        {
+          title: 'Cadrage',
+          who: 'Une réunion, vous et nous',
+          text:
+            'Nous vous remettons la liste de ce qu’il faut : une machine, une adresse, un certificat. Vous nous dites ce qui est disponible. Rien ne commence tant que cette liste n’est pas verte — c’est ce qui évite les installations qui s’enlisent.',
+          detail:
+            'Serveur Linux avec Docker. Quatre cœurs, 8 Go de mémoire et 40 Go de disque suffisent pour démarrer ; huit cœurs et 16 Go pour un usage soutenu. Un seul port à ouvrir vers vos utilisateurs, aucun flux sortant requis.',
+        },
+        {
+          title: 'Préparation de la livraison',
+          who: 'Nous, chez nous',
+          text:
+            'Nous construisons votre paquet à partir de la version exacte qui a passé tous les tests automatisés. Il contient le logiciel, votre fichier de licence, la documentation d’exploitation et les empreintes qui vous permettront de vérifier que rien n’a été altéré en chemin.',
+          detail:
+            'La documentation part AVEC le paquet, jamais après : une procédure de restauration se lit un jour d’incident, souvent sans accès à autre chose.',
+        },
+        {
+          title: 'Livraison',
+          who: 'Par le canal que vous choisissez',
+          text:
+            'Support chiffré, dépôt sécurisé, remise en main propre : c’est votre politique qui décide. Nous ne vous demandons jamais d’ouvrir un accès vers nos serveurs, ni de créer un compte chez nous.',
+          detail:
+            'C’est le point que beaucoup escamotent : exiger un accès sortant vers un registre d’images annule le bénéfice d’une installation isolée. Nous ne le demandons pas, et l’installation n’en a pas besoin.',
+        },
+        {
+          title: 'Installation',
+          who: 'Votre exploitant, nous à ses côtés',
+          text:
+            'Deux commandes : charger, démarrer. La base de données se met à niveau toute seule au premier démarrage. Un compte administrateur est créé — le vôtre — et vous en changez le mot de passe avant que nous quittions la salle.',
+          detail:
+            'La base de données et le cache ne sont joignables que depuis l’intérieur de l’application ; un seul composant écoute sur le réseau. La documentation technique publique de l’interface de programmation est fermée.',
+        },
+        {
+          title: 'Mise en réseau et chiffrement du transport',
+          who: 'Votre équipe réseau',
+          text:
+            'bxFlow se place derrière votre proxy et votre certificat. Un fichier prévu à cet effet lui apprend à faire confiance à ce proxy, pour que les protections par adresse voient l’adresse réelle de l’utilisateur et non celle du proxy.',
+          detail:
+            'Sans ce réglage, la limitation du nombre de tentatives devient inopérante : tout le monde partagerait la même adresse. L’erreur est classique et invisible — d’où le fichier fourni d’avance plutôt qu’une ligne à trouver soi-même.',
+        },
+        {
+          title: 'Recette',
+          who: 'Ensemble, liste en main',
+          text:
+            'Une liste de contrôles se coche point par point : services démarrés, connexion réussie, quotas conformes au contrat, journal des tâches propre, essai d’un connecteur de bout en bout. Nous ne partons pas avant que tout soit vert.',
+          detail:
+            'La liste vérifie aussi que l’instance tourne bien en mode hors ligne — c’est ce qui distingue une livraison sur site d’une image destinée au service en ligne, et rien d’autre à l’écran ne le signale.',
+        },
+        {
+          title: 'Sauvegardes, et une restauration éprouvée',
+          who: 'Vous, avec notre guide',
+          text:
+            'Le produit se sauvegarde lui-même : une archive chiffrée de l’instance entière, à l’heure et à la fréquence que vous réglez depuis l’écran, avec une copie déposée ailleurs. Et nous éprouvons une restauration ensemble, avant de partir.',
+          detail:
+            'Une sauvegarde jamais restaurée n’est pas une sauvegarde. L’application ne peut pas effacer la copie déposée hors site : c’est délibéré, et c’est ce qui la protège d’un rançongiciel qui atteindrait la machine.',
+        },
+        {
+          title: 'Mises à jour',
+          who: 'Quand vous le décidez',
+          text:
+            'Nous livrons une version accompagnée d’une note qui dit ce qu’elle change. Vous chargez, vous basculez, vous vérifiez. Le retour en arrière reste possible.',
+          detail:
+            'Une mise à jour ne touche ni votre configuration, ni vos données, ni votre licence : celle-ci vit dans un fichier séparé et traverse les versions sans être affectée.',
+        },
+        {
+          title: 'Suivi',
+          who: 'Nous',
+          text:
+            'L’échéance de votre licence est annoncée dans l’application trente jours à l’avance. Nous revenons vers vous avant, pas après.',
+          detail: '',
+        },
+      ],
+    },
+    cannot: {
+      eyebrow: 'Ce que nous ne pouvons pas faire',
+      title: 'Les limites que nous nous imposons, et pourquoi elles vous protègent',
+      lead:
+        'Une installation chez vous n’a de sens que si l’éditeur ne garde pas la main. Voici ce que cela veut dire concrètement — y compris ce que cela vous coûte.',
+      items: [
+        {
+          title: 'Aucun accès à distance',
+          text:
+            'Pas de tunnel de maintenance, pas de remontée d’informations, aucun appel vers nos serveurs. Une instance installée chez vous fonctionne indéfiniment sans jamais nous joindre. En contrepartie, une intervention de notre part suppose que vous nous ouvriez un accès, ponctuellement et sous votre contrôle.',
+        },
+        {
+          title: 'Nous ne pouvons pas lire vos données',
+          text:
+            'Les clés de chiffrement sont produites sur votre machine à l’installation et ne nous sont jamais transmises. Nous ne pouvons donc ni ouvrir une archive, ni restaurer une sauvegarde à votre place. C’est la contrepartie assumée de la maîtrise : la garde des clés est la vôtre, et elle se prépare.',
+        },
+        {
+          title: 'Aucun compte éditeur sur votre instance',
+          text:
+            'L’installation crée votre administrateur, et lui seul. Les écrans d’administration de la plateforme ne sont même pas présents. C’est le point qui compte devant un contrôle : personne chez nous ne peut endosser l’identité d’un de vos collaborateurs, donc les validations enregistrées dans vos dossiers gardent leur valeur de preuve.',
+        },
+      ],
+    },
+    saas: {
+      eyebrow: 'L’autre voie',
+      title: 'L’hébergement chez nous, en pratique',
+      lead:
+        'Si l’hébergement externe est acceptable pour vous, la mise en service se compte en heures plutôt qu’en jours. Le reste ne change pas.',
+      points: [
+        {
+          title: 'Votre adresse, votre marque',
+          text:
+            'Vos collaborateurs se connectent sur une adresse qui vous appartient, laquelle affiche votre logo et vos couleurs avant même la saisie du mot de passe. Ajouter un client ne demande aucun redémarrage.',
+        },
+        {
+          title: 'Séparation entre clients, éprouvée en continu',
+          text:
+            'Chaque client vit dans un espace distinct. Cette séparation n’est pas seulement affirmée : elle est vérifiée automatiquement à chaque modification du logiciel, famille de données par famille de données, et une famille non couverte fait échouer la livraison.',
+        },
+        {
+          title: 'Sauvegardes et copie hors site',
+          text:
+            'Chiffrées, planifiées, déposées sur un second emplacement dont le logiciel ne peut rien effacer. Leur fraîcheur se lit depuis l’application.',
+        },
+        {
+          title: 'Connexion par votre annuaire',
+          text:
+            'Authentification unique SAML ou OpenID Connect, et création automatique des comptes depuis votre annuaire. Les arrivées et les départs se répercutent sans double saisie.',
+        },
+        {
+          title: 'Réversibilité',
+          text:
+            'Vos processus et vos dossiers s’exportent dans des fichiers que vous conservez. À demander avant la signature plutôt qu’après un incident — et à rejouer une fois, pour vérifier que le fichier vous suffirait vraiment.',
+        },
+      ],
+    },
+    cta: {
+      title: 'Un dossier technique pour votre direction informatique ?',
+      text:
+        'Prérequis détaillés, schéma des flux réseau, procédure de restauration, matrice des habilitations : nous remettons le dossier complet sur demande, avant toute discussion commerciale.',
+      cta: 'Demander le dossier',
+    },
+  },
   pricing: {
     hero: {
       eyebrow: 'Tarifs',

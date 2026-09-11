@@ -27,6 +27,11 @@ export const en: Translation = {
       description:
         'Data encryption, strict isolation between clients, controlled hosting and compliance: the trust guarantees of bxFlow.',
     },
+    deployment: {
+      title: 'Deployment — bxFlow | On your servers or hosted, end to end',
+      description:
+        'How bxFlow is installed: hosted by us, or on your own servers behind your firewall. Prerequisites, steps, acceptance, backups, updates.',
+    },
     pricing: {
       title: 'Pricing — bxFlow | Pilot licence and tailored tiers',
       description:
@@ -64,6 +69,7 @@ export const en: Translation = {
     catalog: 'Catalogue',
     security: 'Security',
     pricing: 'Pricing',
+    deployment: 'Deployment',
     contact: 'Contact',
     demo: 'Book a demo',
     documentation: 'Documentation',
@@ -394,6 +400,194 @@ export const en: Translation = {
     },
   },
 
+  deployment: {
+    hero: {
+      eyebrow: 'Deployment',
+      title: 'Where your data lives, and how the software reaches you',
+      subtitle:
+        'Two ways to install bxFlow, the same software in both cases. This page describes the second one end to end — the one you will be asked to justify in committee.',
+    },
+    models: [
+      {
+        tag: 'Online',
+        title: 'Hosted by us',
+        lead: 'You open a browser, and that is all.',
+        text:
+          'We install, monitor, update and back up. Your teams sign in on an address that belongs to you, carrying your brand. Live within a day.',
+        forWho: 'To start quickly, when external hosting raises no regulatory difficulty.',
+      },
+      {
+        tag: 'On your servers',
+        title: 'Installed on your premises',
+        lead: 'The software runs behind your firewall.',
+        text:
+          'Your data never leaves your network. No internet connection is required, neither to install nor to run afterwards. Encryption keys are generated on your machine.',
+        forWho: 'For institutions whose data cannot leave their own infrastructure.',
+      },
+    ],
+    same: {
+      title: 'The same software, not a stripped-down edition',
+      text:
+        'There is a single codebase. What you see in a demonstration is what gets installed: same screens, same processes, same controls. And changing your mind later does not mean starting over — your processes export to a file and import elsewhere.',
+    },
+    compare: {
+      title: 'How to choose',
+      lead: 'The eight questions that come up in committee, answered for each option.',
+      head: ['', 'Hosted by us', 'On your servers'],
+      rows: [
+        ['Where the data lives', 'On our infrastructure, in a space separated per client', 'On your servers, inside your network'],
+        ['Who runs it day to day', 'We do', 'Your teams, with our documentation'],
+        ['Updates', 'Applied by us, with nothing to do on your side', 'You choose when; we ship the version'],
+        ['Backups', 'Automatic and encrypted, with a copy held elsewhere', 'Automatic and encrypted — you hold the keys and the copies'],
+        ['Internet access required', 'Yes, it is an online service', 'None, neither to install nor afterwards'],
+        ['Time to go live', 'One day', 'Two to three working days, once the prerequisites are met'],
+        ['Who holds the encryption keys', 'We do', 'You do, and they are never passed to us'],
+        ['What the vendor can see', 'Nothing without your request, and every action is logged', 'Nothing: we have no access to the instance'],
+      ],
+    },
+    onprem: {
+      eyebrow: 'End to end',
+      title: 'An on-premise deployment, step by step',
+      lead:
+        'What actually happens, in order, with what we expect from you at each stage. Nothing implicit: this is the document your IT department can read before committing.',
+      detailLabel: 'Technical detail',
+      steps: [
+        {
+          title: 'Scoping',
+          who: 'One meeting, you and us',
+          text:
+            'We hand you the list of what is needed: a machine, an address, a certificate. You tell us what is available. Nothing starts until that list is green — which is what keeps installations from stalling.',
+          detail:
+            'A Linux server with Docker. Four cores, 8 GB of memory and 40 GB of disk are enough to start; eight cores and 16 GB for sustained use. A single port to open towards your users, no outbound traffic required.',
+        },
+        {
+          title: 'Preparing the delivery',
+          who: 'Us, on our side',
+          text:
+            'We build your package from the exact version that passed every automated test. It carries the software, your licence file, the operations documentation, and the fingerprints that let you verify nothing was altered on the way.',
+          detail:
+            'The documentation ships WITH the package, never after: a restore procedure is read on the day of an incident, often with access to nothing else.',
+        },
+        {
+          title: 'Delivery',
+          who: 'Through the channel you choose',
+          text:
+            'Encrypted media, secure drop, hand delivery: your policy decides. We never ask you to open access towards our servers, nor to create an account with us.',
+          detail:
+            'This is the point many vendors gloss over: requiring outbound access to an image registry cancels the benefit of an isolated installation. We do not ask for it, and the installation does not need it.',
+        },
+        {
+          title: 'Installation',
+          who: 'Your operator, with us alongside',
+          text:
+            'Two commands: load, start. The database upgrades itself on first start. An administrator account is created — yours — and you change its password before we leave the room.',
+          detail:
+            'The database and the cache are reachable only from inside the application; a single component listens on the network. The public technical documentation of the programming interface is closed.',
+        },
+        {
+          title: 'Networking and transport encryption',
+          who: 'Your network team',
+          text:
+            'bxFlow sits behind your proxy and your certificate. A file provided for the purpose teaches it to trust that proxy, so that address-based protections see the user’s real address rather than the proxy’s.',
+          detail:
+            'Without that setting, rate limiting stops working: everyone would share one address. The mistake is common and invisible — hence a file shipped in advance rather than a line to find on your own.',
+        },
+        {
+          title: 'Acceptance',
+          who: 'Together, list in hand',
+          text:
+            'A checklist is ticked point by point: services running, sign-in working, quotas matching the contract, a clean task log, one connector tested end to end. We do not leave before everything is green.',
+          detail:
+            'The list also verifies the instance is running in offline mode — that is what distinguishes an on-premise delivery from an image meant for the online service, and nothing else on screen shows it.',
+        },
+        {
+          title: 'Backups, and a restore actually tested',
+          who: 'You, with our guide',
+          text:
+            'The product backs itself up: an encrypted archive of the whole instance, at the time and frequency you set from the screen, with a copy dropped elsewhere. And we test a restore together before we leave.',
+          detail:
+            'A backup never restored is not a backup. The application cannot delete the off-site copy: that is deliberate, and it is what protects it from ransomware reaching the machine.',
+        },
+        {
+          title: 'Updates',
+          who: 'When you decide',
+          text:
+            'We ship a version with a note saying what it changes. You load, you switch over, you verify. Rolling back stays possible.',
+          detail:
+            'An update touches neither your configuration, nor your data, nor your licence: the licence lives in a separate file and crosses versions untouched.',
+        },
+        {
+          title: 'Follow-up',
+          who: 'Us',
+          text:
+            'Your licence expiry is announced inside the application thirty days ahead. We come back to you before it, not after.',
+          detail: '',
+        },
+      ],
+    },
+    cannot: {
+      eyebrow: 'What we cannot do',
+      title: 'The limits we impose on ourselves, and why they protect you',
+      lead:
+        'An installation on your premises only means something if the vendor does not keep the keys. Here is what that means in practice — including what it costs you.',
+      items: [
+        {
+          title: 'No remote access',
+          text:
+            'No maintenance tunnel, no telemetry, no call back to our servers. An instance installed on your premises runs indefinitely without ever reaching us. In return, any intervention on our part requires you to open access, temporarily and under your control.',
+        },
+        {
+          title: 'We cannot read your data',
+          text:
+            'Encryption keys are produced on your machine at installation and never passed to us. We can therefore neither open an archive nor restore a backup on your behalf. That is the accepted cost of control: custody of the keys is yours, and it has to be prepared for.',
+        },
+        {
+          title: 'No vendor account on your instance',
+          text:
+            'The installation creates your administrator, and only that. The platform administration screens are not even present. This is what matters under audit: nobody on our side can assume one of your staff members’ identity, so the approvals recorded in your cases keep their evidential value.',
+        },
+      ],
+    },
+    saas: {
+      eyebrow: 'The other route',
+      title: 'Hosting with us, in practice',
+      lead:
+        'If external hosting is acceptable to you, going live is measured in hours rather than days. Nothing else changes.',
+      points: [
+        {
+          title: 'Your address, your brand',
+          text:
+            'Your staff sign in on an address that belongs to you, showing your logo and your colours before the password is even typed. Adding a client requires no restart.',
+        },
+        {
+          title: 'Separation between clients, continuously tested',
+          text:
+            'Each client lives in a distinct space. That separation is not merely asserted: it is verified automatically on every change to the software, data family by data family, and an uncovered family fails the release.',
+        },
+        {
+          title: 'Backups and an off-site copy',
+          text:
+            'Encrypted, scheduled, dropped to a second location that the software cannot erase anything from. Their freshness is visible from inside the application.',
+        },
+        {
+          title: 'Sign-in through your directory',
+          text:
+            'Single sign-on via SAML or OpenID Connect, and automatic account provisioning from your directory. Joiners and leavers propagate without double entry.',
+        },
+        {
+          title: 'Reversibility',
+          text:
+            'Your processes and your cases export to files you keep. Ask for it before signing rather than after an incident — and replay it once, to check the file would really be enough.',
+        },
+      ],
+    },
+    cta: {
+      title: 'A technical dossier for your IT department?',
+      text:
+        'Detailed prerequisites, network flow diagram, restore procedure, authorisation matrix: we hand over the full dossier on request, before any commercial discussion.',
+      cta: 'Request the dossier',
+    },
+  },
   pricing: {
     hero: {
       eyebrow: 'Pricing',

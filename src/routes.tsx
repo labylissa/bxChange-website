@@ -6,6 +6,7 @@ import { ProductPage } from './pages/ProductPage';
 import { UseCasesPage } from './pages/UseCasesPage';
 import { CatalogPage } from './pages/CatalogPage';
 import { SecurityPage } from './pages/SecurityPage';
+import { DeploymentPage } from './pages/DeploymentPage';
 import { PricingPage } from './pages/PricingPage';
 import { ContactPage } from './pages/ContactPage';
 import { DemoPage } from './pages/DemoPage';
@@ -36,6 +37,7 @@ export const routes: RouteObject[] = [
       { path: 'cas-usage', element: <UseCasesPage /> },
       { path: 'catalogue', element: <CatalogPage /> },
       { path: 'securite', element: <SecurityPage /> },
+      { path: 'deploiement', element: <DeploymentPage /> },
       { path: 'tarifs', element: <PricingPage /> },
       { path: 'contact', element: <ContactPage /> },
       { path: 'demo', element: <DemoPage /> },

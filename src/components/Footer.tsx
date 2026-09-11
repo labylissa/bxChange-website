@@ -3,23 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Logo } from './Logo';
 import { Icons } from './Icon';
 import { useLang } from '@/hooks/useLang';
-import { NAV_PAGES, type PageKey } from '@/lib/routes';
+import { NAV_PAGES, PAGE_LABEL_KEY } from '@/lib/routes';
 import { CONTACT_EMAIL } from '@/lib/site';
-
-const NAV_KEY: Record<PageKey, string> = {
-  home: 'nav.home',
-  product: 'nav.product',
-  useCases: 'nav.useCases',
-  catalog: 'nav.catalog',
-  security: 'nav.security',
-  pricing: 'nav.pricing',
-  contact: 'nav.contact',
-  demo: 'nav.demo',
-  documentation: 'nav.documentation',
-  legalNotice: 'footer.legalNotice',
-  privacy: 'footer.privacy',
-};
-
 export function Footer() {
   const { t } = useTranslation();
   const { path } = useLang();
@@ -45,7 +30,7 @@ export function Footer() {
             {NAV_PAGES.map((page) => (
               <li key={page}>
                 <Link to={path(page)} className="text-white/70 transition-colors hover:text-teal">
-                  {t(NAV_KEY[page])}
+                  {t(PAGE_LABEL_KEY[page])}
                 </Link>
               </li>
             ))}

@@ -5,22 +5,7 @@ import { Logo } from './Logo';
 import { Icons } from './Icon';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useLang } from '@/hooks/useLang';
-import { NAV_PAGES, type PageKey } from '@/lib/routes';
-
-const NAV_KEY: Record<PageKey, string> = {
-  home: 'nav.home',
-  product: 'nav.product',
-  useCases: 'nav.useCases',
-  catalog: 'nav.catalog',
-  security: 'nav.security',
-  pricing: 'nav.pricing',
-  contact: 'nav.contact',
-  demo: 'nav.demo',
-  documentation: 'nav.documentation',
-  legalNotice: 'footer.legalNotice',
-  privacy: 'footer.privacy',
-};
-
+import { NAV_PAGES, PAGE_LABEL_KEY } from '@/lib/routes';
 export function Header() {
   const { t } = useTranslation();
   const { path } = useLang();
@@ -70,7 +55,7 @@ export function Header() {
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Principale">
           {NAV_PAGES.map((page) => (
             <NavLink key={page} to={path(page)} className={linkClass}>
-              {t(NAV_KEY[page])}
+              {t(PAGE_LABEL_KEY[page])}
             </NavLink>
           ))}
         </nav>
@@ -106,7 +91,7 @@ export function Header() {
                   }`
                 }
               >
-                {t(NAV_KEY[page])}
+                {t(PAGE_LABEL_KEY[page])}
               </NavLink>
             ))}
             <div className="mt-3 flex items-center justify-between border-t border-ink-100 pt-4">
