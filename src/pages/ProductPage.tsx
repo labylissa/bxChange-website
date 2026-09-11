@@ -3,6 +3,8 @@ import { Section, SectionHeading, CtaBand, PageHero } from '@/components/ui';
 import { ProcessIcon } from '@/components/Icon';
 import { SyncMark } from '@/components/Logo';
 import { Reveal } from '@/components/Reveal';
+import { Capture } from '@/components/Capture';
+import type { CaptureId } from '@/data/captures';
 import { useContent } from '@/hooks/useContent';
 import type { ProcessIconName } from '@/data/processes';
 
@@ -81,6 +83,14 @@ function FlowDiagram() {
   );
 }
 
+// Dans l'ordre des textes de `screens.items`.
+const GALERIE: CaptureId[] = [
+  'concepteur-kyc',
+  'formulaire-sinistre', 'dossier-kyc-pays',
+  'connecteur-soap', 'referentiel-clients',
+  'tableau-de-bord', 'audit',
+];
+
 export function ProductPage() {
   const c = useContent();
 
@@ -119,16 +129,41 @@ export function ProductPage() {
         </div>
       </Section>
 
+      {/* LE PRODUIT EN IMAGES — douze capacités décrites ne remplacent pas un
+          écran vu. Captures prises sur des dossiers de démonstration. */}
+      <Section className="bg-ink-50/60">
+        <Reveal>
+          <SectionHeading
+            eyebrow={c.screens.eyebrow}
+            title={c.screens.title}
+            subtitle={c.screens.subtitle}
+          />
+        </Reveal>
+        <div className="mt-12 grid items-start gap-x-8 gap-y-12 md:grid-cols-2">
+          {GALERIE.map((id, i) => {
+            const item = c.screens.items[i];
+            return (
+              <Reveal key={id} delay={(i % 2) * 100} from="up" className={id === 'concepteur-kyc' ? 'md:col-span-2' : ''}>
+                <Capture
+                  id={id}
+                  alt={item.alt}
+                  className={id === 'formulaire-sinistre' ? 'mx-auto max-w-md' : ''}
+                />
+                <h3 className="mt-4 text-base font-semibold text-navy-900">{item.title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-ink-500">{item.text}</p>
+              </Reveal>
+            );
+          })}
+        </div>
+      </Section>
+
       <Section className="bg-ink-50">
         <Reveal>
           <SectionHeading title={c.product.diagram.title} />
         </Reveal>
-        {/* L'illustration posée ici a été retirée : dessin abstrait de bureau,
-            et elle portait l'ANCIEN logo bxChange en son centre. Le schéma
-            ci-dessous dit la même chose avec les mots du produit, sans meubler.
-            Sa place revient à une capture réelle de l'application le jour où
-            l'on en aura — rien ne rassure autant qu'un logiciel qu'on voit
-            fonctionner. */}
+        {/* Le principe, en schéma. Les écrans réels sont montrés juste au-dessus :
+            ce dessin ne sert plus à prouver que le produit existe, seulement à
+            dire où il se place entre vos logiciels. */}
         <Reveal delay={80}>
           <div className="mt-10">
             <FlowDiagram />

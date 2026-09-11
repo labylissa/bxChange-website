@@ -26,9 +26,15 @@ import { useContent } from '@/hooks/useContent';
  */
 const CYCLE_MS = 1500;
 
-/** Cinq positions : les quatre étapes, puis la branche de rejet. */
-function useEtapeActive(): number {
-  const [actif, setActif] = useState(0);
+/**
+ * Position active d'un cycle de `positions` étapes.
+ *
+ * Par défaut cinq : les quatre étapes du schéma, puis la branche de rejet.
+ * `depart` est la position du premier rendu — donc aussi celle de la page
+ * prérendue et de l'état figé en mouvement réduit.
+ */
+function useEtapeActive(positions = 5, cycleMs = CYCLE_MS, depart = 0): number {
+  const [actif, setActif] = useState(depart);
 
   useEffect(() => {
     const reduit =
@@ -36,9 +42,9 @@ function useEtapeActive(): number {
       window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     if (reduit) return;
 
-    const t = setInterval(() => setActif((i) => (i + 1) % 5), CYCLE_MS);
+    const t = setInterval(() => setActif((i) => (i + 1) % positions), cycleMs);
     return () => clearInterval(t);
-  }, []);
+  }, [positions, cycleMs]);
 
   return actif;
 }
@@ -268,6 +274,96 @@ export function WorkflowMini() {
         />
         <span className="text-xs font-semibold">{flux.rejected}</span>
       </div>
+    </div>
+  );
+}
+
+/**
+ * Le suivi d'un dossier, posé sur la capture du hero d'accueil.
+ *
+ * La capture montre un dossier arrêté à une étape ; cette bande montre qu'il
+ * avance, transition nommée à chaque pas. Seule, la capture se lisait comme
+ * une image fixe ; seule, l'animation ne prouvait rien.
+ *
+ * Elle suit les étapes RÉELLES du dossier affiché et démarre sur celle où
+ * l'écran le montre : la page prérendue et le mouvement réduit présentent
+ * donc exactement l'état de la capture.
+ *
+ * Décorative pour un lecteur d'écran : l'alternative de la capture décrit
+ * déjà le dossier, lui faire épeler cinq étapes n'apporterait que du bruit.
+ */
+const ETAPE_DE_LA_CAPTURE = 3;
+
+export function SuiviDossier({ className = '' }: { className?: string }) {
+  const c = useContent();
+  const suivi = c.home.hero.live;
+  const actif = useEtapeActive(suivi.steps.length, 1900, ETAPE_DE_LA_CAPTURE);
+  const derniere = actif === 0 ? suivi.created : suivi.transitions[actif - 1];
+
+  return (
+    <div
+      aria-hidden
+      className={`rounded-2xl border border-white/70 bg-white/90 px-4 py-3.5 shadow-[0_24px_60px_-18px_rgba(44,46,53,0.35)] ring-1 ring-gold/20 backdrop-blur-xl ${className}`}
+    >
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex min-w-0 items-center gap-2">
+          <span className="relative flex h-2 w-2 shrink-0">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-60 motion-reduce:animate-none" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
+          </span>
+          <span className="truncate text-xs font-semibold text-navy-900">{suivi.label}</span>
+          <span className="hidden font-mono text-[11px] text-ink-400 sm:inline">{suivi.reference}</span>
+        </div>
+        {/* La clé relance l'apparition à chaque pas : le libellé change ET se voit changer. */}
+        <span
+          key={actif}
+          className="shrink-0 animate-fade-up rounded-full bg-gold/10 px-2.5 py-0.5 text-[11px] font-semibold text-gold-600"
+        >
+          {derniere}
+        </span>
+      </div>
+
+      <ol className="mt-3 grid" style={{ gridTemplateColumns: `repeat(${suivi.steps.length}, minmax(0, 1fr))` }}>
+        {suivi.steps.map((label: string, i: number) => {
+          const franchie = i < actif;
+          const allumee = i === actif;
+          return (
+            <li key={label} className="relative flex flex-col items-center">
+              {/* Le trait relie le centre de l'étape précédente à celui-ci. */}
+              {i > 0 && (
+                <span
+                  className={`absolute right-1/2 top-[11px] h-0.5 w-full transition-colors duration-700 ${
+                    i <= actif ? 'bg-gold' : 'bg-ink-200'
+                  }`}
+                />
+              )}
+              <span
+                className={`relative flex h-6 w-6 items-center justify-center rounded-full border-2 transition-all duration-500 ${
+                  franchie
+                    ? 'border-gold bg-gold text-white'
+                    : allumee
+                      ? 'border-gold bg-navy-900 ring-4 ring-gold/20'
+                      : 'border-ink-200 bg-white'
+                }`}
+              >
+                {franchie && (
+                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12.5l4.5 4.5L19 7.5" />
+                  </svg>
+                )}
+                {allumee && <span className="h-2 w-2 rounded-full bg-gold" />}
+              </span>
+              <span
+                className={`mt-1.5 px-1 text-center text-[10px] font-semibold leading-tight transition-colors duration-500 sm:text-[11px] ${
+                  allumee ? 'text-navy-900' : franchie ? 'text-ink-500' : 'text-ink-400'
+                }`}
+              >
+                {label}
+              </span>
+            </li>
+          );
+        })}
+      </ol>
     </div>
   );
 }

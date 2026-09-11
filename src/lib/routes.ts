@@ -72,7 +72,6 @@ export const NAV_ENTRIES: NavEntry[] = [
     ],
   },
   { kind: 'page', page: 'pricing' },
-  { kind: 'page', page: 'documentation' },
 ];
 
 /**

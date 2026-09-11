@@ -19,6 +19,9 @@ export function ProcessCard({ process }: { process: Process }) {
   const { lang } = useLang();
   const { t } = useTranslation();
   const steps = process.steps[lang];
+  // La carte montre trois étapes ; le total dit que le processus en compte plus.
+  // Sans lui, soixante et onze processus paraissaient en faire trois chacun.
+  const autres = process.stepCount - steps.length;
 
   return (
     <div className="card group flex h-full flex-col hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-card-hover">
@@ -42,8 +45,12 @@ export function ProcessCard({ process }: { process: Process }) {
           leurs étapes à des hauteurs différentes, et l'ensemble paraîtrait
           bancal sans qu'on sache pourquoi. */}
       <div className="mt-auto pt-5">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-400">
-          {t('catalog.stepsLabel')}
+        <p className="flex items-baseline justify-between gap-2 text-[11px] font-semibold uppercase tracking-wide text-ink-400">
+          <span>{t('catalog.stepsLabel')}</span>
+          <span className="normal-case tracking-normal">
+            {t('catalog.stepCount', { n: process.stepCount })}
+            {process.roleCount > 0 && <> · {t('catalog.roleCount', { n: process.roleCount })}</>}
+          </span>
         </p>
         <ol className="mt-2.5 space-y-1.5">
           {steps.map((step, i) => (
@@ -58,6 +65,9 @@ export function ProcessCard({ process }: { process: Process }) {
             </li>
           ))}
         </ol>
+        {autres > 0 && (
+          <p className="mt-1.5 pl-6 text-xs text-ink-400">{t('catalog.moreSteps', { n: autres })}</p>
+        )}
       </div>
     </div>
   );

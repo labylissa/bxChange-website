@@ -1,9 +1,9 @@
 export const fr = {
   meta: {
     home: {
-      title: 'bxFlow — Modélisez vos processus métier, ils s’exécutent tout seuls',
+      title: 'bxFlow — Vos processus métier, sous contrôle de bout en bout',
       description:
-        'Moteur de processus métier : dessinez les étapes, les rôles et les validations, bxFlow fait avancer chaque dossier. Plus de 70 processus prêts à démarrer.',
+        'Moteur de processus métier pour la banque, l’assurance et l’entreprise : KYC, LCB-FT, sinistres, achats. Plus de 70 processus prêts à l’emploi, hébergés ou installés sur vos serveurs.',
     },
     product: {
       title: 'Produit — bxFlow | Moteur de processus métier (BPMN)',
@@ -11,9 +11,9 @@ export const fr = {
         'Éditeur de processus, rôles et validations, écrans par étape, délais et relances. Vos logiciels existants sont interrogés en chemin, quand une étape en a besoin.',
     },
     useCases: {
-      title: 'Cas d’usage — bxFlow | PME, cabinets comptables, microfinance',
+      title: 'Cas d’usage — bxFlow | Banque, assurance, microfinance, entreprises',
       description:
-        'Découvrez comment bxFlow fait gagner du temps et fiabilise les processus des PME, cabinets comptables et institutions de microfinance.',
+        'Comment bxFlow sert la banque, l’assurance, la microfinance et l’entreprise : processus livrés, décisions tracées, installation possible sur vos serveurs.',
     },
     catalog: {
       title: 'Catalogue de processus — bxFlow | 70+ processus prêts à l’emploi',
@@ -93,12 +93,30 @@ export const fr = {
   home: {
     hero: {
       eyebrow: 'Moteur de processus métier',
-      title: 'Vos processus métier, modélisés puis exécutés tout seuls.',
+      title: 'Vos processus métier, sous contrôle de bout en bout.',
       subtitle:
-        'Congés, notes de frais, ouverture de dossier, validation de facture : vous dessinez le déroulé — les étapes, les rôles, les validations, les règles — et bxFlow le fait avancer, dossier après dossier, vers la bonne personne au bon moment.',
+        'Entrée en relation, déclaration de soupçon, sinistre, achat : chaque dossier suit ses étapes, ses rôles et ses validations, avec un historique qui fait foi. Plus de 70 processus prêts à l’emploi, hébergés chez nous ou installés sur vos serveurs.',
       ctaPrimary: 'Demander une démo',
       ctaSecondary: 'Voir les processus disponibles',
       trust: 'Plus de 70 processus prêts à démarrer dès aujourd’hui.',
+      proofs: [
+        'Installable sur vos serveurs, sans aucun accès de l’éditeur',
+        'Processus LCB-FT calibrés pour l’UEMOA, la CEMAC et le Maroc',
+        'Séparation des tâches et historique opposable',
+      ],
+      shotAlt:
+        'Écran de bxFlow : un dossier d’entrée en relation en validation conformité, avec la fiche client, le délai restant et les actions possibles.',
+      // Le suivi animé posé sur la capture du hero. Ce sont les étapes RÉELLES
+      // du dossier affiché (CONF-0002, entrée en relation), avec leurs noms exacts :
+      // une animation qui raconterait un autre processus que l'écran montré
+      // se remarquerait aussitôt.
+      live: {
+        label: 'Dossier en cours',
+        reference: 'CONF-0002',
+        steps: ['Collecte du dossier', 'Vérification des pièces', 'Criblage & scoring', 'Validation conformité', 'Relation ouverte'],
+        transitions: ['Soumettre le dossier', 'Valider', 'Valider', 'Valider'],
+        created: 'Dossier créé',
+      },
     },
     how: {
       eyebrow: 'Comment ça marche',
@@ -110,11 +128,11 @@ export const fr = {
         },
         {
           title: 'Une demande ouvre un dossier',
-          text: 'Un formulaire, un email ou un autre logiciel déclenche le processus. Le dossier part à l’étape de départ, avec sa référence.',
+          text: 'Un formulaire, un courriel ou un autre logiciel déclenche le processus. Le dossier part à l’étape de départ, avec sa référence.',
         },
         {
-          title: 'Chaque étape avance toute seule',
-          text: 'Le dossier arrive chez la bonne personne, attend sa validation, relance en cas de retard, se referme quand tout est fait.',
+          title: 'Chaque étape va à la bonne personne',
+          text: 'Le dossier arrive chez qui doit décider, attend sa validation, relance en cas de retard, et se referme quand tout est fait.',
         },
         {
           title: 'Vos logiciels suivent le mouvement',
@@ -124,19 +142,19 @@ export const fr = {
     },
     benefits: {
       eyebrow: 'Bénéfices concrets',
-      title: 'Ce que vous y gagnez, tout de suite',
+      title: 'Ce que vous y gagnez',
       items: [
         {
+          title: 'Des décisions qui tiennent',
+          text: 'Chaque validation porte son auteur, sa date et son motif. Devant un auditeur, le dossier parle de lui-même.',
+        },
+        {
           title: 'Du temps récupéré',
-          text: 'Les tâches répétitives se font seules. Vos équipes se concentrent sur ce qui compte vraiment.',
+          text: 'Les dossiers vont seuls à la bonne personne et se signalent quand ils traînent. Plus de relance à la main.',
         },
         {
           title: 'Moins d’erreurs',
-          text: 'Plus de ressaisie manuelle : les informations restent justes d’un bout à l’autre de la chaîne.',
-        },
-        {
-          title: 'Une traçabilité totale',
-          text: 'Chaque étape est enregistrée. Vous savez qui a fait quoi, quand, et où en est chaque dossier.',
+          text: 'L’information est saisie une fois, contrôlée à l’écran, et reprise dans vos logiciels sans ressaisie.',
         },
         {
           title: 'Vos règles, modifiables',
@@ -156,19 +174,47 @@ export const fr = {
     },
     catalog: {
       eyebrow: 'Catalogue de processus',
-      title: 'Plus de 70 processus prêts à démarrer dès aujourd’hui',
+      title: 'Vous ne partez pas d’une page blanche',
       subtitle:
-        'Pas besoin de partir d’une page blanche. Chaque processus arrive avec ses étapes, ses rôles et ses validations déjà en place — vous n’avez qu’à les ajuster à votre organisation.',
+        'Plus de 70 processus livrés avec leurs étapes, leurs rôles, leurs écrans et leurs validations : entrée en relation, déclaration de soupçon, sinistres, achats, congés. Vous les ajustez à votre organisation au lieu de les construire.',
       cardCta: 'Voir tous les processus',
-      missingTitle: 'Votre process n’y est pas ?',
-      missingText:
-        'La bibliothèque grandit chaque mois, et nous ajoutons vos processus spécifiques. Parlons-en.',
-      missingCta: 'Discutons-en',
+      missingTitle: 'Votre processus n’y est pas ?',
+      missingText: 'Nous l’ajoutons au catalogue avec vous, à partir de votre circuit actuel.',
+      missingCta: 'Parlons-en',
+    },
+    shots: {
+      eyebrow: 'Le produit, tel qu’il est',
+      title: 'Pas une maquette : les écrans que vos équipes utiliseront',
+      subtitle:
+        'Captures de l’application, prises sur des dossiers de démonstration. Personnes, clients et montants sont fictifs ; le reste est le produit.',
+      items: [
+        {
+          title: 'Le processus, dessiné',
+          text: 'La déclaration de soupçon telle qu’elle est livrée : signalement, analyse conformité, décision, transmission à la cellule de renseignement financier.',
+          alt: 'Concepteur de processus de bxFlow affichant le circuit de déclaration de soupçon, de bout en bout.',
+        },
+        {
+          title: 'Un sinistre, complet',
+          text: 'Un incendie d’entrepôt à l’analyse de la garantie : police, assuré, facteurs de complexité, rapport d’expertise joint — et la contre-expertise parmi les actions possibles.',
+          alt: 'Dossier de sinistre incendie dans bxFlow, à l’étape d’analyse de la garantie.',
+        },
+        {
+          title: 'Qui a fait quoi, et quand',
+          text: 'L’historique d’un dossier : quatre intervenants, quatre décisions commentées. Personne ne valide son propre travail.',
+          alt: 'Historique d’un dossier bxFlow montrant les transitions successives, leurs auteurs et leurs commentaires.',
+        },
+      ],
+    },
+    deploy: {
+      eyebrow: 'Déploiement',
+      title: 'Hébergé chez nous, ou installé sur vos serveurs',
+      text: 'Le même logiciel dans les deux cas. Sur vos serveurs, bxFlow fonctionne sans aucune connexion vers l’éditeur, et aucun compte éditeur n’existe sur votre instance.',
+      cta: 'Voir le déploiement de bout en bout',
     },
     sectors: {
       eyebrow: 'Pour qui',
-      title: 'Pensé pour les organisations qui veulent avancer',
-      cta: 'Voir tous les cas d’usage',
+      title: 'Pensé pour les dossiers qui doivent tenir devant un contrôle',
+      cta: 'Voir les cas d’usage',
     },
     finalCta: {
       title: 'Voyons ce que bxFlow peut automatiser chez vous',
@@ -283,69 +329,118 @@ export const fr = {
     },
   },
 
+  screens: {
+    eyebrow: 'En images',
+    title: 'Le produit, écran par écran',
+    subtitle:
+      'Captures de l’application sur des dossiers de démonstration. Personnes, clients et montants sont fictifs.',
+    items: [
+      {
+        title: 'L’entrée en relation, dessinée',
+        text: 'Du dépôt du dossier à l’ouverture de la relation, avec renvoi pour correction et rejet motivé.',
+        alt: 'Concepteur de processus de bxFlow affichant le circuit d’entrée en relation.',
+      },
+      {
+        title: 'Une saisie guidée',
+        text: 'Des listes fermées plutôt que de la saisie libre : chaque dossier se classe et se compare, et les champs obligatoires sont vérifiés avant l’envoi.',
+        alt: 'Formulaire de déclaration de sinistre dans bxFlow, liste à choix multiples ouverte.',
+      },
+      {
+        title: 'Un dossier qui interroge vos systèmes',
+        text: 'À l’ouverture du dossier, la fiche pays est lue dans le service externe à partir du code ISO saisi : rien n’est recopié à la main.',
+        alt: 'Dossier d’entrée en relation dans bxFlow : fiche pays chargée depuis un service SOAP à l’ouverture.',
+      },
+      {
+        title: 'Un système existant, interrogé',
+        text: 'Un vrai service SOAP appelé depuis bxFlow : la réponse XML revient en JSON, prête à remplir les champs d’un dossier.',
+        alt: 'Test d’un connecteur SOAP dans bxFlow : appel FullCountryInfo sur le Sénégal, réponse affichée en JSON.',
+      },
+      {
+        title: 'Des référentiels partagés',
+        text: 'Clients, fournisseurs, agences : des fiches communes à tous les process, saisies à la main, importées depuis un fichier CSV ou tenues à jour par un connecteur.',
+        alt: 'Référentiel Clients dans bxFlow : fiches avec référence KYC, segment et zone de résidence.',
+      },
+      {
+        title: 'Le pilotage en direct',
+        text: 'Plus de 20 000 contestations de transaction carte, réparties par statut et par canal.',
+        alt: 'Tableau de bord bxFlow des contestations de transaction carte.',
+      },
+      {
+        title: 'Le journal d’audit',
+        text: 'Chaque action, son auteur et sa date, filtrable et exportable pour un contrôle.',
+        alt: 'Journal d’audit de bxFlow filtré sur des dossiers de conformité.',
+      },
+    ],
+  },
+
   useCases: {
     hero: {
       eyebrow: 'Cas d’usage',
-      title: 'Des bénéfices concrets, secteur par secteur',
+      title: 'Des processus réglementés aux démarches du quotidien',
       subtitle:
-        'bxFlow s’adapte à votre métier. Voici comment il change le quotidien de nos secteurs prioritaires.',
+        'bxFlow est d’abord pensé pour les établissements financiers, où chaque dossier doit tenir devant un contrôle. La même rigueur sert ensuite toutes les organisations.',
     },
     pattern: {
       problem: 'Le problème',
       solution: 'Avec bxFlow',
       benefit: 'Le bénéfice',
+      examples: 'Processus livrés',
     },
     sectors: {
-      pme: {
-        name: 'PME',
+      banque: {
+        name: 'Banque',
         problem:
-          'Plusieurs logiciels qui ne communiquent pas, des tâches administratives répétitives et des informations ressaisies plusieurs fois.',
+          'Des obligations LCB-FT qui ne tolèrent pas l’approximation, des validations à quatre yeux, et un corebanking qu’on ne remplace pas.',
         solution:
-          'On installe vos démarches internes comme des processus qui se déroulent seuls — congés, notes de frais, onboarding — et on va chercher l’information dans vos logiciels quand une étape en a besoin.',
+          'Les processus de conformité sont livrés, jusqu’à la transmission à la cellule de renseignement financier, et bxFlow interroge votre corebanking en chemin, y compris en SOAP.',
         benefit:
-          'Vos équipes gagnent des heures chaque semaine et arrêtent de courir après l’information.',
+          'Chaque décision est tracée — qui, quand, sur quelle base — et l’installation peut rester entièrement sur vos serveurs.',
+        examples: ['Entrée en relation (KYC)', 'Déclaration d’opération suspecte', 'Revue périodique KYC', 'Contestation de transaction carte'],
       },
-      accounting: {
-        name: 'Cabinets comptables',
+      assurance: {
+        name: 'Assurance',
         problem:
-          'Des pièces qui arrivent par email en vrac, une saisie manuelle chronophage et un risque d’erreur sur les dossiers clients.',
+          'Des sinistres complexes qui passent par plusieurs mains — gestionnaire, expert, souscripteur, comptabilité — avec un délai à tenir.',
         solution:
-          'Les documents reçus sont lus automatiquement, les informations extraites et le dossier client ouvert sans ressaisie.',
+          'Le sinistre suit ses étapes de la déclaration au règlement, contre-expertise comprise ; garantie, franchise et recours sont consignés dans le dossier.',
         benefit:
-          'Moins de saisie, des dossiers traités plus vite et des erreurs évitées en fin de chaîne.',
+          'Un dossier complet et daté pour chaque sinistre, consultable par l’audit interne comme par le contrôle.',
+        examples: ['Gestion des sinistres complexes', 'Référencement courtier / intermédiaire', 'Validation client à risque élevé (PPE)'],
       },
       microfinance: {
         name: 'Microfinance',
         problem:
-          'Des demandes nombreuses, des étapes de validation à suivre et des systèmes anciens difficiles à faire évoluer.',
+          'Des demandes nombreuses, des validations à respecter et des systèmes anciens difficiles à faire évoluer.',
         solution:
-          'Chaque demande déclenche un processus clair, avec les bonnes validations, tout en s’appuyant sur vos systèmes existants.',
+          'Chaque demande suit un circuit clair, avec ses validations et ses délais, en s’appuyant sur vos systèmes existants plutôt qu’en les remplaçant.',
         benefit:
-          'Un traitement plus rapide et plus fiable des demandes, avec une traçabilité complète pour la conformité.',
+          'Des demandes traitées plus vite, et un historique complet prêt pour le superviseur.',
+        examples: ['Validation de crédit exceptionnel', 'Entrée en relation (KYC)', 'Réclamation client'],
       },
-      aspirational: {
-        name: 'Banque & assurance',
+      entreprise: {
+        name: 'Entreprises',
         problem:
-          'Des processus réglementés, de nombreux systèmes en place et une exigence forte de traçabilité.',
+          'Congés, achats, notes de frais, arrivées : des circuits de validation qui passent par des courriels et des tableurs.',
         solution:
-          'bxFlow orchestre les flux entre vos systèmes et fiabilise chaque étape, avec un historique complet.',
+          'Chaque démarche devient un processus avec ses validateurs, ses délais et ses relances, et vos logiciels existants sont interrogés quand une étape en a besoin.',
         benefit:
-          'Une base solide pour digitaliser des processus exigeants — parlons-en pour évaluer votre contexte.',
+          'Des heures récupérées chaque semaine, et plus aucune demande perdue dans une boîte de réception.',
+        examples: ['Demande d’achat', 'Note de frais', 'Onboarding collaborateur', 'Demande de congés'],
       },
     },
     cta: {
-      title: 'Votre secteur n’est pas listé ?',
+      title: 'Votre activité n’est pas listée ?',
       subtitle:
-        'bxFlow s’adapte à la plupart des organisations qui jonglent avec plusieurs logiciels. Voyons votre cas.',
+        'Si vos dossiers passent par plusieurs mains et doivent laisser une trace, bxFlow s’y applique. Voyons votre cas.',
     },
   },
 
   catalog: {
     hero: {
       eyebrow: 'Catalogue de processus',
-      title: 'Plus de 70 processus prêts à démarrer',
+      title: 'Vous ne partez pas d’une page blanche',
       subtitle:
-        'Chaque processus est prêt à l’emploi et personnalisable. La bibliothèque s’enrichit en continu — et nous ajoutons les vôtres.',
+        'Plus de 70 processus livrés avec leurs étapes, leurs rôles et leurs validations. Vous les ajustez à votre organisation au lieu de les construire, et nous ajoutons ceux qui vous manquent.',
     },
     filters: {
       all: 'Tous',
@@ -355,60 +450,63 @@ export const fr = {
     },
     // Intitulé posé au-dessus des étapes, sur chaque carte du catalogue.
     stepsLabel: 'Le déroulé',
+    stepCount: '{{n}} étapes',
+    roleCount: '{{n}} rôles',
+    moreSteps: '+ {{n}} autres étapes',
     categories: {
-      rh: 'RH',
-      finance: 'Finance',
-      client: 'Client & moyens de paiement',
-      achats: 'Achats',
-      juridique: 'Juridique',
-      it: 'IT & sécurité',
       conformite: 'Conformité & risques',
+      client: 'Banque, assurance & clients',
+      finance: 'Finance',
       operations: 'Opérations',
+      achats: 'Achats',
+      it: 'IT & sécurité',
+      juridique: 'Juridique',
+      rh: 'RH',
     },
     missing: {
       title: 'Votre processus n’est pas dans la liste ?',
-      text: 'La bibliothèque grandit chaque mois. Décrivez-nous votre besoin, nous l’ajoutons.',
+      text: 'Décrivez-nous votre circuit actuel : nous l’ajoutons au catalogue avec vous.',
       cta: 'Proposer un processus',
     },
   },
 
   security: {
     hero: {
-      eyebrow: 'Sécurité & confiance',
-      title: 'Vos données, protégées à chaque étape',
+      eyebrow: 'Sécurité',
+      title: 'Ce que nous faisons, concrètement, pour protéger vos dossiers',
       subtitle:
-        'La sécurité n’est pas une option chez bxFlow. Voici les garanties clés sur lesquelles vous pouvez vous appuyer.',
+        'Pas de promesses générales : les mesures en place, vérifiables dans le dossier sécurité que nous remettons à votre RSSI.',
     },
     pillars: [
       {
-        title: 'Chiffrement des données',
-        text: 'Vos données sont chiffrées, en transit comme au repos, pour rester protégées à tout moment.',
+        title: 'Chiffrement',
+        text: 'Les identifiants de connexion à vos systèmes sont chiffrés en AES-256-GCM, tout comme les pièces jointes stockées par l’application. Les échanges sont chiffrés en transit.',
       },
       {
-        title: 'Isolation entre clients',
-        text: 'Chaque client dispose d’un espace strictement séparé. Vos données ne sont jamais mélangées à celles d’un autre.',
+        title: 'Séparation entre clients, éprouvée à chaque version',
+        text: 'Un test automatique tente, pour chaque famille de données, d’atteindre les ressources d’un autre client. Une famille non couverte bloque la livraison.',
       },
       {
-        title: 'Hébergement maîtrisé',
-        text: 'Un hébergement encadré, avec des sauvegardes régulières et une disponibilité surveillée en continu.',
+        title: 'Habilitations par action',
+        text: 'Des rôles propres à chaque processus et des droits accordés action par action : créer, valider, extraire, supprimer. Un droit décoché est un droit retiré.',
       },
       {
-        title: 'Contrôle des accès',
-        text: 'Chaque personne n’accède qu’à ce qui la concerne, selon son rôle. Les accès sont tracés.',
+        title: 'Connexion',
+        text: 'Authentification unique SAML ou OpenID Connect, création des comptes depuis votre annuaire (SCIM), second facteur imposable à toute l’organisation.',
       },
       {
-        title: 'Traçabilité complète',
-        text: 'Chaque action est journalisée. Vous disposez d’un historique clair, utile pour vos audits et votre conformité.',
+        title: 'Traçabilité',
+        text: 'Chaque action est journalisée avec son auteur et sa date, y compris lorsqu’un administrateur agit à la place d’un utilisateur.',
       },
       {
-        title: 'Conformité',
-        text: 'Nos pratiques sont pensées pour répondre aux exigences de confidentialité et de protection des données.',
+        title: 'Sauvegardes',
+        text: 'Des archives chiffrées de l’instance, planifiées, avec une copie déposée hors site que l’application ne peut pas effacer. Une restauration s’éprouve, elle ne se suppose pas.',
       },
     ],
     dossier: {
       title: 'Besoin d’aller plus loin ?',
-      text: 'Nous mettons à disposition un dossier sécurité complet pour vos équipes DSI et RSSI.',
-      cta: 'Demander le dossier sécurité complet',
+      text: 'Nous remettons à vos équipes DSI et RSSI un dossier complet : matrice des habilitations, architecture, procédure de restauration.',
+      cta: 'Demander le dossier sécurité',
     },
   },
 
@@ -635,59 +733,56 @@ export const fr = {
   pricing: {
     hero: {
       eyebrow: 'Tarifs',
-      title: 'Une offre adaptée à votre taille et à vos besoins',
+      title: 'Une licence annuelle, calculée sur votre périmètre réel',
       subtitle:
-        'Pas de prix standard : chaque projet est différent. Nous construisons une offre à votre mesure, à partir de trois paliers.',
+        'Deux mesures fondent le chiffrage : les utilisateurs actifs et les processus en service. Nous l’établissons avec vous, à partir de votre situation.',
     },
     pilot: {
-      badge: 'Recommandé pour démarrer',
-      title: 'Démarrez avec une licence pilote sur 12 mois',
-      text: 'Une mise en route rapide sur un périmètre ciblé, pour mesurer les bénéfices concrets avant d’étendre. Accompagnement inclus.',
-      cta: 'Demander un devis personnalisé',
+      badge: 'Pour commencer',
+      title: 'Une licence pilote de 12 mois',
+      text: 'Un périmètre ciblé — un ou deux processus, une équipe — pour mesurer les résultats sur vos propres dossiers avant d’étendre. Mise en route et paramétrage accompagnés.',
+      cta: 'Demander un devis pilote',
     },
-    tiersLabel: 'Le bon niveau pour chaque étape de votre projet',
-    popularBadge: 'Le plus choisi',
-    onQuote: 'Sur devis',
-    onQuoteSub: 'tarif adapté à votre périmètre',
-    ctaNote: 'Réponse sous 24–48h · Sans engagement',
-    allTiersNote: 'Tous les paliers incluent l’accès au catalogue de 70+ processus prêts à l’emploi.',
+    tiersLabel: 'Trois périmètres types',
+    quoteLine: 'Chiffrage sur devis, à partir de votre périmètre · réponse sous 24 à 48 h',
+    ctaNote: 'Sans engagement',
+    allTiersNote: 'Tous les périmètres donnent accès au catalogue de plus de 70 processus prêts à l’emploi.',
     tiers: [
       {
-        name: 'Starter',
-        tagline: 'Pour démarrer sur un premier processus',
+        name: 'Démarrage',
+        tagline: 'Une équipe, un premier processus',
         features: [
-          'Périmètre ciblé sur un besoin prioritaire',
-          'Processus prêts à l’emploi du catalogue',
-          'Connexion à vos outils essentiels',
-          'Mise en route accompagnée',
+          'Un ou deux processus du catalogue, ajustés à votre organisation',
+          'Hébergé chez nous',
+          'Écrans, rôles et validations paramétrés avec vous',
+          'Formation des administrateurs de processus',
         ],
         cta: 'Demander un devis',
       },
       {
-        name: 'Business',
-        tagline: 'Pour automatiser plusieurs processus',
-        highlighted: true,
+        name: 'Organisation',
+        tagline: 'Plusieurs directions, plusieurs processus',
         features: [
-          'Plusieurs processus et services',
-          'Lecture automatique de documents',
-          'Connexions étendues à vos systèmes',
-          'Suivi et traçabilité avancés',
+          'Processus du catalogue et processus sur mesure',
+          'Connexion à vos systèmes existants (REST, SOAP)',
+          'Lecture des documents et éditique',
+          'Tableaux de bord et extractions',
         ],
         cta: 'Demander un devis',
       },
       {
-        name: 'Enterprise',
-        tagline: 'Pour un déploiement à grande échelle',
+        name: 'Groupe',
+        tagline: 'Filiales, grands volumes ou installation sur vos serveurs',
         features: [
-          'Périmètre sur mesure, multi-entités',
-          'Processus spécifiques développés avec vous',
-          'Intégrations avancées à votre SI',
-          'Accompagnement et support dédiés',
+          'Hébergé chez nous, ou installé sur vos serveurs sans accès de l’éditeur',
+          'Plusieurs entités et filiales',
+          'Connexion à votre annuaire (SSO, SCIM)',
+          'Accompagnement dédié',
         ],
         cta: 'Discutons de votre projet',
       },
     ],
-    note: 'Les tarifs sont établis selon votre périmètre et la valeur apportée. Contactez-nous pour un devis personnalisé.',
+    note: 'Chaque proposition précise le nombre d’utilisateurs actifs et de processus couverts, ainsi que le mode de déploiement retenu.',
   },
 
   contact: {
@@ -766,7 +861,7 @@ export const fr = {
   },
 
   footer: {
-    tagline: 'Connectez vos logiciels. Automatisez vos processus.',
+    tagline: 'Vos processus métier, sous contrôle de bout en bout.',
     product: 'Produit',
     company: 'Ressources',
     legal: 'Légal',

@@ -3,9 +3,9 @@ import type { Translation } from './fr';
 export const en: Translation = {
   meta: {
     home: {
-      title: 'bxFlow — Model your business processes, they run themselves',
+      title: 'bxFlow — Your business processes, under control end to end',
       description:
-        'Business process engine: draw the steps, the roles and the approvals, and bxFlow moves every case forward. More than 70 processes ready to run.',
+        'Business process engine for banking, insurance and enterprises: KYC, AML, claims, purchasing. More than 70 ready-to-use processes, hosted or installed on your servers.',
     },
     product: {
       title: 'Product — bxFlow | Business process engine (BPMN)',
@@ -13,9 +13,9 @@ export const en: Translation = {
         'Process editor, roles and approvals, screens per step, deadlines and reminders. Your existing software is queried along the way, when a step needs it.',
     },
     useCases: {
-      title: 'Use cases — bxFlow | SMEs, accounting firms, microfinance',
+      title: 'Use cases — bxFlow | Banking, insurance, microfinance, enterprises',
       description:
-        'See how bxFlow saves time and makes processes more reliable for SMEs, accounting firms and microfinance institutions.',
+        'How bxFlow serves banking, insurance, microfinance and enterprises: delivered processes, traceable decisions, installation on your own servers.',
     },
     catalog: {
       title: 'Process catalogue — bxFlow | 70+ ready-to-use processes',
@@ -95,86 +95,129 @@ export const en: Translation = {
   home: {
     hero: {
       eyebrow: 'Business process engine',
-      title: 'Map your business processes, then let them run themselves.',
+      title: 'Your business processes, under control end to end.',
       subtitle:
-        'Leave requests, expense reports, client onboarding, invoice approval: you draw the flow — the steps, the roles, the approvals, the rules — and bxFlow moves every case forward, to the right person at the right time.',
+        'Client onboarding, suspicious activity reports, insurance claims, purchasing: every case follows its steps, roles and approvals, with a history that stands as evidence. More than 70 ready-to-use processes, hosted by us or installed on your own servers.',
       ctaPrimary: 'Request a demo',
       ctaSecondary: 'See available processes',
       trust: 'More than 70 processes ready to run today.',
+      proofs: [
+        'Installable on your servers, with no vendor access at all',
+        'AML processes calibrated for WAEMU, CEMAC and Morocco',
+        'Segregation of duties and an evidential history',
+      ],
+      shotAlt:
+        'bxFlow screen: a client onboarding case at compliance review, with the client record, the time left and the available actions.',
+      // Le suivi animé posé sur la capture du hero. Ce sont les étapes RÉELLES
+      // du dossier affiché (CONF-0002, entrée en relation), avec leurs noms exacts :
+      // une animation qui raconterait un autre processus que l'écran montré
+      // se remarquerait aussitôt.
+      live: {
+        label: 'Case in progress',
+        reference: 'CONF-0002',
+        steps: ['Document collection', 'Document check', 'Screening & scoring', 'Compliance review', 'Relationship opened'],
+        transitions: ['Submit the file', 'Approve', 'Approve', 'Approve'],
+        created: 'Case created',
+      },
     },
     how: {
       eyebrow: 'How it works',
-      title: 'From the map of your process to its execution, in 4 steps',
+      title: 'From the drawing of your process to its execution, in 4 steps',
       steps: [
         {
           title: 'You draw the flow',
-          text: 'The steps, who acts at each one, what triggers the move to the next. On screen, by dragging blocks — not a line of code.',
+          text: 'The steps, who acts at each one, what moves the case forward. On screen, by dragging blocks — not a line of code.',
         },
         {
           title: 'A request opens a case',
-          text: 'A form, an email or another system starts the process. The case lands on the first step, with its own reference.',
+          text: 'A form, an email or another system starts the process. The case enters the first step, with its reference.',
         },
         {
-          title: 'Every step moves on its own',
-          text: 'The case reaches the right person, waits for their approval, chases when it is late, and closes when everything is done.',
+          title: 'Each step reaches the right person',
+          text: 'The case lands with whoever has to decide, waits for their approval, sends reminders when late, and closes once everything is done.',
         },
         {
-          title: 'Your existing software follows along',
-          text: 'When a step needs a piece of information, or must write one elsewhere, bxFlow queries your existing systems — even legacy ones.',
+          title: 'Your systems keep pace',
+          text: 'When a step needs information or has to write it elsewhere, bxFlow queries your existing systems — even older ones.',
         },
       ],
     },
     benefits: {
       eyebrow: 'Concrete benefits',
-      title: 'What you gain, right away',
+      title: 'What you gain',
       items: [
         {
-          title: 'Time reclaimed',
-          text: 'Repetitive tasks run on their own. Your teams focus on what really matters.',
+          title: 'Decisions that hold',
+          text: 'Every approval carries its author, its date and its reasoning. In front of an auditor, the case speaks for itself.',
+        },
+        {
+          title: 'Time back',
+          text: 'Cases reach the right person on their own and flag themselves when they stall. No more chasing by hand.',
         },
         {
           title: 'Fewer errors',
-          text: 'No more manual re-keying: information stays accurate from end to end.',
+          text: 'Information is entered once, checked on screen, and passed to your systems without re-keying.',
         },
         {
-          title: 'Full traceability',
-          text: 'Every step is recorded. You know who did what, when, and where each file stands.',
-        },
-        {
-          title: 'Your rules, yours to change',
-          text: 'A step to add, an approver to change: your business teams do it themselves, with no development and no waiting.',
+          title: 'Your rules, adjustable',
+          text: 'A step to add, an approver to change: your business teams do it themselves, without development or waiting.',
         },
       ],
     },
-    // Aperçu des capacités. Le contenu vient de `product.capabilities`,
-    // seuls les intitulés de section vivent ici — deux listes finiraient
-    // par diverger, et c'est l'accueil qui resterait en retard.
     capabilities: {
       eyebrow: 'Everything bxFlow does',
-      title: 'The full picture, before the details',
+      title: 'A complete overview, before the detail',
       subtitle:
-        'From mapping a process to generating your letters, by way of bulk handling and business reference data.',
-      cta: 'See every capability in detail',
+        'From modelling a process to generating your letters, through bulk processing and business reference data.',
+      cta: 'See each capability in detail',
     },
     catalog: {
       eyebrow: 'Process catalogue',
-      title: 'More than 70 processes ready to run today',
+      title: 'You do not start from a blank page',
       subtitle:
-        'No need to build everything from scratch. bxFlow ships with a library of ready-made business processes — and it keeps growing.',
+        'More than 70 processes delivered with their steps, roles, screens and approvals: client onboarding, suspicious activity reports, insurance claims, purchasing, leave. You adjust them to your organisation instead of building them.',
       cardCta: 'See all processes',
-      missingTitle: 'Don’t see your process?',
-      missingText:
-        'The library grows every month, and we add your specific processes. Let’s talk.',
+      missingTitle: 'Your process is not listed?',
+      missingText: 'We add it to the catalogue with you, starting from your current workflow.',
       missingCta: 'Let’s talk',
     },
+    shots: {
+      eyebrow: 'The product, as it is',
+      title: 'Not a mock-up: the screens your teams will use',
+      subtitle:
+        'Captured from the application on demonstration cases. People, clients and amounts are fictitious; the rest is the product.',
+      items: [
+        {
+          title: 'The process, drawn',
+          text: 'The suspicious activity report as delivered: alert, compliance review, decision, filing with the financial intelligence unit.',
+          alt: 'bxFlow process designer showing the suspicious activity report workflow end to end.',
+        },
+        {
+          title: 'A claim, complete',
+          text: 'A warehouse fire at cover analysis: policy, insured party, complexity factors, expert report attached — and a second expert opinion among the available actions.',
+          alt: 'Fire claim case in bxFlow at the cover analysis step.',
+        },
+        {
+          title: 'Who did what, and when',
+          text: 'A case history: four people, four commented decisions. Nobody approves their own work.',
+          alt: 'History of a bxFlow case showing successive transitions, their authors and their comments.',
+        },
+      ],
+    },
+    deploy: {
+      eyebrow: 'Deployment',
+      title: 'Hosted by us, or installed on your servers',
+      text: 'The same software either way. On your servers, bxFlow runs with no connection back to the vendor, and no vendor account exists on your instance.',
+      cta: 'See the end-to-end deployment',
+    },
     sectors: {
-      eyebrow: 'Who it’s for',
-      title: 'Built for organisations that want to move forward',
-      cta: 'See all use cases',
+      eyebrow: 'Who it is for',
+      title: 'Built for cases that have to stand up to an audit',
+      cta: 'See use cases',
     },
     finalCta: {
-      title: 'Let’s see what bxFlow can automate for you',
-      subtitle: 'A short demo, focused on your processes. No commitment.',
+      title: 'Let’s see what bxFlow can run for you',
+      subtitle: 'A short demonstration focused on your processes. No commitment.',
       cta: 'Request a demo',
     },
   },
@@ -274,69 +317,118 @@ export const en: Translation = {
     },
   },
 
+  screens: {
+    eyebrow: 'In pictures',
+    title: 'The product, screen by screen',
+    subtitle:
+      'Captured from the application on demonstration cases. People, clients and amounts are fictitious.',
+    items: [
+      {
+        title: 'Client onboarding, drawn',
+        text: 'From file submission to opening the relationship, with send-back for correction and reasoned rejection.',
+        alt: 'bxFlow process designer showing the client onboarding workflow.',
+      },
+      {
+        title: 'Guided data entry',
+        text: 'Closed lists instead of free text: every case can be sorted and compared, and required fields are checked before submission.',
+        alt: 'Insurance claim form in bxFlow, with a multiple-choice list open.',
+      },
+      {
+        title: 'A case that queries your systems',
+        text: 'When the case opens, the country record is read from the external service using the ISO code entered: nothing is copied by hand.',
+        alt: 'Client onboarding case in bxFlow: country record loaded from a SOAP service when the case opens.',
+      },
+      {
+        title: 'An existing system, queried',
+        text: 'A real SOAP service called from bxFlow: the XML response comes back as JSON, ready to fill a case’s fields.',
+        alt: 'SOAP connector test in bxFlow: FullCountryInfo call for Senegal, response shown as JSON.',
+      },
+      {
+        title: 'Shared reference data',
+        text: 'Clients, suppliers, branches: records shared by every process, entered by hand, imported from a CSV file or kept current by a connector.',
+        alt: 'Clients reference data in bxFlow: records with KYC reference, segment and residence zone.',
+      },
+      {
+        title: 'Live oversight',
+        text: 'More than 20,000 card transaction disputes, broken down by status and channel.',
+        alt: 'bxFlow dashboard of card transaction disputes.',
+      },
+      {
+        title: 'The audit log',
+        text: 'Every action, its author and its date — filterable and exportable for an audit.',
+        alt: 'bxFlow audit log filtered on compliance cases.',
+      },
+    ],
+  },
+
   useCases: {
     hero: {
       eyebrow: 'Use cases',
-      title: 'Concrete benefits, sector by sector',
+      title: 'From regulated processes to everyday requests',
       subtitle:
-        'bxFlow adapts to your business. Here’s how it changes daily life in our priority sectors.',
+        'bxFlow is designed first for financial institutions, where every case has to stand up to an audit. The same rigour then serves any organisation.',
     },
     pattern: {
       problem: 'The problem',
       solution: 'With bxFlow',
       benefit: 'The benefit',
+      examples: 'Delivered processes',
     },
     sectors: {
-      pme: {
-        name: 'SMEs',
+      banque: {
+        name: 'Banking',
         problem:
-          'Several software tools that don’t communicate, repetitive admin tasks and information re-keyed several times.',
+          'AML obligations that leave no room for approximation, four-eyes approvals, and a core banking system nobody replaces.',
         solution:
-          'We link your tools and automate your internal procedures (leave, expenses, onboarding) with ready-to-use processes.',
+          'Compliance processes are delivered, all the way to filing with the financial intelligence unit, and bxFlow queries your core banking system along the way, SOAP included.',
         benefit:
-          'Your teams save hours every week and stop chasing information.',
+          'Every decision is traced — who, when, on what basis — and the installation can stay entirely on your servers.',
+        examples: ['Client onboarding (KYC)', 'Suspicious transaction report', 'Periodic KYC review', 'Card transaction dispute'],
       },
-      accounting: {
-        name: 'Accounting firms',
+      assurance: {
+        name: 'Insurance',
         problem:
-          'Documents arriving by email in bulk, time-consuming manual entry and a risk of error on client files.',
+          'Complex claims passing through several hands — handler, expert, underwriter, accounting — against a deadline.',
         solution:
-          'Incoming documents are read automatically, the information extracted and the client file opened with no re-keying.',
+          'The claim moves from notification to settlement, second expert opinion included; cover, deductible and recourse are recorded in the case.',
         benefit:
-          'Less data entry, files handled faster and errors avoided down the line.',
+          'A complete, dated file for every claim, available to internal audit and to the supervisor alike.',
+        examples: ['Complex claims handling', 'Broker / intermediary onboarding', 'High-risk client approval (PEP)'],
       },
       microfinance: {
         name: 'Microfinance',
         problem:
-          'Many requests, approval steps to follow and legacy systems that are hard to evolve.',
+          'Many requests, approvals to respect, and older systems that are hard to change.',
         solution:
-          'Each request triggers a clear process, with the right approvals, while relying on your existing systems.',
+          'Each request follows a clear path with its approvals and deadlines, building on your existing systems rather than replacing them.',
         benefit:
-          'Faster, more reliable handling of requests, with full traceability for compliance.',
+          'Requests handled faster, with a complete history ready for the supervisor.',
+        examples: ['Exceptional credit approval', 'Client onboarding (KYC)', 'Customer complaint'],
       },
-      aspirational: {
-        name: 'Banking & insurance',
+      entreprise: {
+        name: 'Enterprises',
         problem:
-          'Regulated processes, many systems in place and a strong requirement for traceability.',
+          'Leave, purchasing, expenses, onboarding: approval chains running through emails and spreadsheets.',
         solution:
-          'bxFlow orchestrates flows between your systems and hardens every step, with a full history.',
+          'Each request becomes a process with its approvers, deadlines and reminders, and your existing systems are queried when a step needs them.',
         benefit:
-          'A solid base to digitalise demanding processes — let’s talk to assess your context.',
+          'Hours saved every week, and no request lost in an inbox again.',
+        examples: ['Purchase request', 'Expense report', 'Employee onboarding', 'Leave request'],
       },
     },
     cta: {
-      title: 'Your sector isn’t listed?',
+      title: 'Your sector is not listed?',
       subtitle:
-        'bxFlow adapts to most organisations juggling several software tools. Let’s look at your case.',
+        'If your cases pass through several hands and must leave a trace, bxFlow applies. Let’s look at yours.',
     },
   },
 
   catalog: {
     hero: {
       eyebrow: 'Process catalogue',
-      title: 'More than 70 processes ready to run',
+      title: 'You do not start from a blank page',
       subtitle:
-        'Each process is ready to use and customisable. The library keeps growing — and we add yours.',
+        'More than 70 processes delivered with their steps, roles and approvals. You adjust them to your organisation instead of building them, and we add the ones you are missing.',
     },
     filters: {
       all: 'All',
@@ -344,62 +436,64 @@ export const en: Translation = {
       results_one: '{{count}} process',
       results_other: '{{count}} processes',
     },
-    // Intitulé posé au-dessus des étapes, sur chaque carte du catalogue.
     stepsLabel: 'The flow',
+    stepCount: '{{n}} steps',
+    roleCount: '{{n}} roles',
+    moreSteps: '+ {{n}} more steps',
     categories: {
-      rh: 'HR',
-      finance: 'Finance',
-      client: 'Client and payments',
-      achats: 'Procurement',
-      juridique: 'Legal',
-      it: 'IT and security',
       conformite: 'Compliance and risk',
+      client: 'Banking, insurance and clients',
+      finance: 'Finance',
       operations: 'Operations',
+      achats: 'Procurement',
+      it: 'IT and security',
+      juridique: 'Legal',
+      rh: 'HR',
     },
     missing: {
-      title: 'Your process isn’t on the list?',
-      text: 'The library grows every month. Tell us your need and we’ll add it.',
+      title: 'Your process is not listed?',
+      text: 'Describe your current workflow: we add it to the catalogue with you.',
       cta: 'Suggest a process',
     },
   },
 
   security: {
     hero: {
-      eyebrow: 'Security & trust',
-      title: 'Your data, protected at every step',
+      eyebrow: 'Security',
+      title: 'What we actually do to protect your cases',
       subtitle:
-        'Security is not an option at bxFlow. Here are the key guarantees you can rely on.',
+        'No broad promises: the measures in place, verifiable in the security dossier we hand to your CISO.',
     },
     pillars: [
       {
-        title: 'Data encryption',
-        text: 'Your data is encrypted, in transit and at rest, to stay protected at all times.',
+        title: 'Encryption',
+        text: 'The credentials used to reach your systems are encrypted with AES-256-GCM, as are the attachments stored by the application. Traffic is encrypted in transit.',
       },
       {
-        title: 'Isolation between clients',
-        text: 'Each client has a strictly separated space. Your data is never mixed with anyone else’s.',
+        title: 'Separation between clients, tested on every release',
+        text: 'An automated test tries, for each family of data, to reach another client’s resources. A family left uncovered blocks the release.',
       },
       {
-        title: 'Controlled hosting',
-        text: 'A managed hosting setup, with regular backups and continuously monitored availability.',
+        title: 'Permissions by action',
+        text: 'Roles specific to each process and rights granted action by action: create, approve, export, delete. An unticked right is a removed right.',
       },
       {
-        title: 'Access control',
-        text: 'Each person only accesses what concerns them, based on their role. Access is logged.',
+        title: 'Sign-in',
+        text: 'Single sign-on via SAML or OpenID Connect, account provisioning from your directory (SCIM), and a second factor that can be enforced organisation-wide.',
       },
       {
-        title: 'Full traceability',
-        text: 'Every action is logged. You get a clear history, useful for your audits and compliance.',
+        title: 'Traceability',
+        text: 'Every action is logged with its author and date, including when an administrator acts on behalf of a user.',
       },
       {
-        title: 'Compliance',
-        text: 'Our practices are designed to meet confidentiality and data protection requirements.',
+        title: 'Backups',
+        text: 'Scheduled, encrypted instance archives, with an off-site copy the application cannot delete. A restore gets tested, not assumed.',
       },
     ],
     dossier: {
       title: 'Need to go further?',
-      text: 'We provide a full security dossier for your IT and security teams.',
-      cta: 'Request the full security dossier',
+      text: 'We hand your IT and security teams a complete dossier: authorisation matrix, architecture, restore procedure.',
+      cta: 'Request the security dossier',
     },
   },
 
@@ -626,59 +720,56 @@ export const en: Translation = {
   pricing: {
     hero: {
       eyebrow: 'Pricing',
-      title: 'An offer matched to your size and needs',
+      title: 'An annual licence, sized to your actual scope',
       subtitle:
-        'No standard price: every project is different. We build an offer tailored to you, based on three tiers.',
+        'Two measures drive the quote: active users and processes in service. We work it out with you, from your situation.',
     },
     pilot: {
-      badge: 'Recommended to start',
-      title: 'Start with a 12-month pilot licence',
-      text: 'A quick start on a focused scope, to measure concrete benefits before scaling up. Support included.',
-      cta: 'Request a custom quote',
+      badge: 'To get started',
+      title: 'A 12-month pilot licence',
+      text: 'A focused scope — one or two processes, one team — to measure results on your own cases before scaling. Onboarding and configuration supported.',
+      cta: 'Request a pilot quote',
     },
-    tiersLabel: 'The right level for every stage of your project',
-    popularBadge: 'Most chosen',
-    onQuote: 'On request',
-    onQuoteSub: 'priced to your scope',
-    ctaNote: 'Reply within 24–48h · No commitment',
-    allTiersNote: 'All tiers include access to the catalogue of 70+ ready-to-use processes.',
+    tiersLabel: 'Three typical scopes',
+    quoteLine: 'Quote-based, from your scope · reply within 24 to 48 hours',
+    ctaNote: 'No commitment',
+    allTiersNote: 'Every scope includes the catalogue of more than 70 ready-to-use processes.',
     tiers: [
       {
         name: 'Starter',
-        tagline: 'To start with a first process',
+        tagline: 'One team, a first process',
         features: [
-          'Scope focused on one priority need',
-          'Ready-to-use processes from the catalogue',
-          'Connection to your essential tools',
-          'Guided setup',
+          'One or two catalogue processes, adjusted to your organisation',
+          'Hosted by us',
+          'Screens, roles and approvals configured with you',
+          'Training for process administrators',
         ],
         cta: 'Request a quote',
       },
       {
-        name: 'Business',
-        tagline: 'To automate several processes',
-        highlighted: true,
+        name: 'Organisation',
+        tagline: 'Several departments, several processes',
         features: [
-          'Several processes and departments',
-          'Automated document reading',
-          'Extended connections to your systems',
-          'Advanced tracking and traceability',
+          'Catalogue processes and tailored processes',
+          'Connection to your existing systems (REST, SOAP)',
+          'Document reading and document generation',
+          'Dashboards and exports',
         ],
         cta: 'Request a quote',
       },
       {
-        name: 'Enterprise',
-        tagline: 'For a large-scale rollout',
+        name: 'Group',
+        tagline: 'Subsidiaries, large volumes or installation on your servers',
         features: [
-          'Tailored, multi-entity scope',
-          'Specific processes built with you',
-          'Advanced integrations with your IT',
-          'Dedicated support and guidance',
+          'Hosted by us, or installed on your servers with no vendor access',
+          'Several entities and subsidiaries',
+          'Connection to your directory (SSO, SCIM)',
+          'Dedicated support',
         ],
-        cta: 'Let’s talk about your project',
+        cta: 'Let’s discuss your project',
       },
     ],
-    note: 'Pricing is set according to your scope and the value delivered. Contact us for a custom quote.',
+    note: 'Each proposal states the number of active users and processes covered, and the deployment mode chosen.',
   },
 
   contact: {
@@ -755,7 +846,7 @@ export const en: Translation = {
   },
 
   footer: {
-    tagline: 'Connect your software. Automate your processes.',
+    tagline: 'Your business processes, under control end to end.',
     product: 'Product',
     company: 'Resources',
     legal: 'Legal',

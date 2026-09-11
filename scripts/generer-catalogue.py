@@ -87,6 +87,7 @@ for f in sorted(PORTEFEUILLE.glob("*.bxflow")):
         "description": t.get("description") or "",
         "categorie": t.get("category") or "",
         "etapes": [e.get("name", "") for e in d.get("steps", [])],
+        "roles": len(d.get("roles", [])),
     })
 manquants = []
 entrees = []
@@ -115,7 +116,19 @@ for rang, l in enumerate(donnees, start=1):
         "nom_fr": l["nom"], "nom_en": nom_en,
         "desc_fr": desc_fr, "desc_en": desc_en,
         "etapes_fr": etapes_fr, "etapes_en": etapes_en,
+        # Le VRAI nombre d'étapes et de rôles : la carte n'en montre que trois,
+        # et sans ce total, soixante et onze processus paraissaient faire trois
+        # étapes chacun — une bibliothèque qui semblait mince alors qu'elle ne
+        # l'est pas.
+        "nb_etapes": len([e for e in l["etapes"] if e not in TERMINALES]),
+        "nb_roles": l["roles"],
+        "rang": rang,
     })
+
+# Conformité et banque/assurance en tête : ce sont les processus que personne
+# d'autre ne livre prêts à l'emploi, ils ne doivent pas arriver après les congés.
+ORDRE = ["conformite", "client", "finance", "operations", "achats", "it", "juridique", "rh"]
+entrees.sort(key=lambda e: (ORDRE.index(e["categorie"]), e["rang"]))
 
 if manquants:
     raise SystemExit("traductions manquantes : %s" % manquants)
@@ -142,14 +155,14 @@ lignes = ["""import type { Lang } from '@/i18n';
  */
 
 export const PROCESS_CATEGORIES = [
-  'rh',
-  'finance',
-  'client',
-  'achats',
-  'juridique',
-  'it',
   'conformite',
+  'client',
+  'finance',
   'operations',
+  'achats',
+  'it',
+  'juridique',
+  'rh',
 ] as const;
 
 export type ProcessCategory = (typeof PROCESS_CATEGORIES)[number];
@@ -170,6 +183,10 @@ export interface Process {
    * processus en a, elles n'apprennent rien et mangeraient la place.
    */
   steps: Record<Lang, string[]>;
+  /** Nombre réel d'étapes du déroulé, hors étapes terminales. */
+  stepCount: number;
+  /** Nombre de rôles qui interviennent dans le processus. */
+  roleCount: number;
   /** Nom d'icône (voir ProcessIcon). */
   icon: ProcessIconName;
   /** Mis en avant sur l'aperçu de l'accueil. */
@@ -215,6 +232,8 @@ for e in entrees:
     lignes.append("      fr: [%s]," % ", ".join("'%s'" % echapper(x) for x in e["etapes_fr"]))
     lignes.append("      en: [%s]," % ", ".join("'%s'" % echapper(x) for x in e["etapes_en"]))
     lignes.append("    },")
+    lignes.append("    stepCount: %d," % e["nb_etapes"])
+    lignes.append("    roleCount: %d," % e["nb_roles"])
     lignes.append("  },")
 
 lignes.append("];")

@@ -39,9 +39,16 @@ export function Footer() {
 
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wider text-white/50">
-            {t('footer.legal')}
+            {t('footer.company')}
           </h3>
           <ul className="mt-4 space-y-3 text-sm">
+            {/* La documentation développeur quitte le menu principal : un
+                décideur n'y cherche rien, et elle concurrençait les Tarifs. */}
+            <li>
+              <Link to={path('documentation')} className="text-white/70 transition-colors hover:text-teal">
+                {t('nav.documentation')}
+              </Link>
+            </li>
             <li>
               <Link to={path('legalNotice')} className="text-white/70 transition-colors hover:text-teal">
                 {t('footer.legalNotice')}

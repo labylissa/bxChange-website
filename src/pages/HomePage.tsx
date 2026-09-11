@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
 import { Section, SectionHeading, CtaBand } from '@/components/ui';
 import { Icons, ProcessIcon } from '@/components/Icon';
-import { WorkflowMini } from '@/components/WorkflowAnimation';
+import { Capture } from '@/components/Capture';
+import { SuiviDossier } from '@/components/WorkflowAnimation';
 import { ProcessCard } from '@/components/ProcessCard';
 import { Reveal } from '@/components/Reveal';
 import { useContent } from '@/hooks/useContent';
@@ -21,53 +22,27 @@ const CAP_ICONS: ProcessIconName[] = [
   'receipt', 'chart', 'steps', 'folder', 'file-check', 'lifebuoy',
 ];
 
+/**
+ * Le visuel du hero : un écran réel de l'application, pas un schéma.
+ *
+ * Ce bloc montrait une animation de processus générique. Elle disait « il y a
+ * des étapes » ; elle ne disait pas « ce logiciel existe ». Pour un acheteur de
+ * banque, la seconde question vient avant la première.
+ */
 function HeroVisual() {
   const c = useContent();
-  const { lang } = useLang();
-  const items = getFeaturedProcesses().slice(0, 2);
+  // L'écran réel porte la preuve, la bande animée porte le mouvement. Le
+  // flottement et le halo reprennent ceux de l'ancien hero ; le halo reste
+  // réservé au bureau, où il ne fait pas déborder la page.
   return (
     <div className="relative animate-float-slow motion-reduce:animate-none">
-      <div className="absolute -inset-8 rounded-[3rem] blur-3xl animate-pulse-soft motion-reduce:animate-none" style={{ background: 'radial-gradient(circle, rgba(201,164,92,0.18), transparent 68%)' }} aria-hidden />
-      <div className="relative rounded-3xl border border-white/70 bg-white/70 p-5 shadow-[0_24px_70px_-20px_rgba(44,46,53,0.28)] ring-1 ring-gold/15 backdrop-blur-xl">
-        <div className="flex items-center gap-2 border-b border-ink-100 pb-3">
-          <span className="h-2.5 w-2.5 rounded-full bg-teal" />
-          <span className="h-2.5 w-2.5 rounded-full bg-mint" />
-          <span className="h-2.5 w-2.5 rounded-full bg-gold" />
-          <span className="ml-2 text-xs font-medium text-ink-400">bxFlow</span>
-        </div>
-
-        {/* Un dossier qui traverse un processus, étapes et transitions nommées.
-
-            Ce bloc montrait « Vos logiciels → bxFlow → Automatisé » : la
-            définition d'une passerelle, pas d'un moteur de processus. C'était
-            le premier visuel de la page d'accueil, donc la première idée que
-            le visiteur se faisait du produit — et c'était la mauvaise. */}
-        <div className="pt-5">
-          <WorkflowMini />
-        </div>
-
-        <div className="mt-5 grid gap-2.5">
-          {items.map((p) => (
-            <div
-              key={p.id}
-              className="flex items-center gap-3 rounded-xl border border-ink-100 bg-ink-50 p-3 transition-colors hover:border-teal/40"
-            >
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-teal/10 text-teal-500">
-                <ProcessIcon name={p.icon} className="h-5 w-5" />
-              </span>
-              <p className="truncate text-sm font-semibold text-navy-900">{p.name[lang]}</p>
-              <span className="ml-auto rounded-full bg-mint/10 px-2 py-0.5 text-[10px] font-semibold text-mint">
-                {lang === 'fr' ? 'Prêt' : 'Ready'}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-4 flex items-center justify-between rounded-xl bg-teal/5 px-4 py-3">
-          <span className="text-sm font-medium text-navy-900">{c.home.hero.trust}</span>
-          <Icons.check className="h-5 w-5 shrink-0 text-teal-500" />
-        </div>
-      </div>
+      <div
+        className="pointer-events-none absolute -inset-6 hidden animate-pulse-soft rounded-[2.5rem] blur-3xl motion-reduce:animate-none lg:block"
+        style={{ background: 'radial-gradient(circle, rgba(201,164,92,0.16), transparent 70%)' }}
+        aria-hidden
+      />
+      <Capture id="dossier-kyc" alt={c.home.hero.shotAlt} priorite className="relative" />
+      <SuiviDossier className="relative z-10 mx-auto -mt-10 w-[94%] sm:-mt-14 sm:w-[86%]" />
     </div>
   );
 }
@@ -102,7 +77,14 @@ export function HomePage() {
                 {c.home.hero.ctaSecondary}
               </Link>
             </div>
-            <p className="mt-6 text-sm text-ink-400">{c.home.hero.trust}</p>
+            <ul className="mt-7 space-y-2.5">
+              {c.home.hero.proofs.map((preuve) => (
+                <li key={preuve} className="flex items-start gap-2.5 text-sm text-ink-600">
+                  <Icons.check className="mt-0.5 h-4 w-4 shrink-0 text-gold-600" strokeWidth={2.5} />
+                  <span>{preuve}</span>
+                </li>
+              ))}
+            </ul>
           </div>
           {/* La carte occupe désormais la colonne la plus large et s'y centre.
               Elle était contrainte à une demi-largeur avec un décalage à
@@ -159,6 +141,37 @@ export function HomePage() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </Section>
+
+      {/* LE PRODUIT, TEL QU'IL EST
+
+          Des captures réelles, prises sur des dossiers de démonstration. Un site
+          qui décrit douze capacités sans montrer un écran fait naître la question
+          qu'il voudrait éviter : est-ce que ça existe ? */}
+      <Section className="bg-ink-50/60">
+        <Reveal>
+          <SectionHeading
+            eyebrow={c.home.shots.eyebrow}
+            title={c.home.shots.title}
+            subtitle={c.home.shots.subtitle}
+          />
+        </Reveal>
+        <div className="mt-12 grid gap-10 lg:grid-cols-3">
+          {([
+            ['concepteur-dos', 'lg:col-span-3'],
+            ['dossier-sinistre', 'lg:col-span-2'],
+            ['historique-kyc', ''],
+          ] as const).map(([id, place], i) => {
+            const item = c.home.shots.items[i];
+            return (
+              <Reveal key={id} delay={i * 100} className={place}>
+                <Capture id={id} alt={item.alt} className={id === 'historique-kyc' ? 'mx-auto max-w-sm' : ''} />
+                <h3 className="mt-4 text-base font-semibold text-navy-900">{item.title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-ink-500">{item.text}</p>
+              </Reveal>
+            );
+          })}
         </div>
       </Section>
 
@@ -264,16 +277,31 @@ export function HomePage() {
         </div>
       </Section>
 
+      {/* DÉPLOIEMENT */}
+      <Section>
+        <div className="grid items-center gap-8 rounded-3xl bg-navy-900 p-8 text-white sm:p-12 lg:grid-cols-[1fr_auto]">
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{c.home.deploy.eyebrow}</span>
+            <h2 className="mt-3 text-2xl font-bold sm:text-3xl">{c.home.deploy.title}</h2>
+            <p className="mt-3 max-w-2xl leading-relaxed text-white/70">{c.home.deploy.text}</p>
+          </div>
+          <Link to={path('deployment')} className="btn-primary shrink-0">
+            {c.home.deploy.cta}
+            <Icons.arrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </Section>
+
       {/* SECTEURS */}
       <Section className="relative overflow-hidden bg-gradient-to-b from-[#F8F4EC] to-ink-50">
         <div className="pointer-events-none absolute -right-24 top-1/2 h-72 w-72 -translate-y-1/2 animate-pulse-soft rounded-full bg-gold/10 blur-3xl motion-reduce:animate-none" />
         <Reveal>
           <SectionHeading eyebrow={c.home.sectors.eyebrow} title={c.home.sectors.title} />
         </Reveal>
-        <div className="relative mt-14 grid gap-6 md:grid-cols-3">
-          {(['pme', 'accounting', 'microfinance'] as const).map((key, i) => {
+        <div className="relative mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {(['banque', 'assurance', 'microfinance', 'entreprise'] as const).map((key, i) => {
             const sector = c.useCases.sectors[key];
-            const icons: ProcessIconName[] = ['building', 'file-check', 'wallet'];
+            const icons: ProcessIconName[] = ['shield', 'file-check', 'wallet', 'building'];
             return (
               <Reveal key={key} delay={i * 120}>
                 <div className="group h-full rounded-2xl border border-ink-100 bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-card-hover">
