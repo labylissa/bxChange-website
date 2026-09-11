@@ -4,11 +4,22 @@ import { SITE_URL, CONTACT_EMAIL } from '@/lib/site';
 /**
  * Contenu des pages légales (Mentions légales & Politique de confidentialité).
  *
- * Source : dossier local `mentions-legales/` (non versionné). Les segments entre
- * crochets `[…]` sont des CHAMPS À COMPLÉTER avec les informations réelles de la
- * société ; ils sont mis en évidence à l'affichage. Une relecture juridique est
- * recommandée avant publication (plusieurs juridictions : UE, Maroc, Sénégal,
- * Côte d'Ivoire).
+ * Règle de rédaction : ne rien inventer, et ne rien laisser en blanc.
+ *
+ * Ces pages portaient des champs entre crochets, surlignés à l'affichage. Un
+ * blanc dit au lecteur que la page n'est pas finie — et ces pages-là sont
+ * précisément celles qu'un service achats consulte. Une donnée inventée serait
+ * pire : elle est vérifiable en une requête au registre du commerce.
+ *
+ * Entre les deux il y a la vérité : la société est en cours d'immatriculation,
+ * la page le dit, et s'engage à publier les mentions dès qu'elles existent.
+ * Tout ce qui peut être écrit aujourd'hui l'est complètement — hébergeur,
+ * sous-traitants réels, absence de traceur, droits des personnes.
+ *
+ * À FAIRE à l'immatriculation : renseigner la section « Éditeur du site » et
+ * retirer la note qui l'accompagne. Une relecture juridique reste recommandée
+ * avant d'adresser ces pages à un client (plusieurs juridictions : UE, Maroc,
+ * Sénégal, Côte d'Ivoire).
  */
 
 export type LegalBlock =
@@ -37,26 +48,24 @@ export interface LegalDoc {
 const legalNoticeFr: LegalDoc = {
   title: 'Mentions légales',
   intro:
-    'Informations légales relatives au site bxFlow. Les champs entre crochets seront complétés avec les informations officielles de la société.',
+    'Informations légales relatives au site bxFlow, édité par bxGroup.',
   updatedLabel: 'Dernière mise à jour',
-  updated: '1 juillet 2026',
+  updated: '11 septembre 2026',
   sections: [
     {
       title: '1. Éditeur du site',
       blocks: [
-        { p: `Le site accessible à l’adresse ${SITE_URL} (ci-après « le Site ») est édité par :` },
+        { p: `Le site accessible à l’adresse ${SITE_URL} (ci-après « le Site ») est édité par bxGroup, éditeur du logiciel bxFlow.` },
         {
           ul: [
-            'Raison sociale / Nom commercial : bxFlow',
-            'Forme juridique : [À COMPLÉTER — SAS, SARL, auto-entreprise, etc.]',
-            'Capital social : [À COMPLÉTER, si applicable]',
-            'Siège social : [Adresse complète]',
-            'Numéro d’immatriculation : [RCS / SIREN-SIRET, ou registre équivalent selon le pays]',
-            'Numéro de TVA intracommunautaire : [Si applicable]',
-            'Directeur de la publication : [Nom du responsable]',
+            'Éditeur : bxGroup',
+            'Produit présenté : bxFlow',
             `Contact : ${CONTACT_EMAIL}`,
-            'Téléphone : [Optionnel]',
+            `Adresse du Site : ${SITE_URL}`,
           ],
+        },
+        {
+          note: `bxGroup est en cours d’immatriculation. Les mentions d’identification légale — forme juridique, siège social, numéro d’immatriculation et directeur de la publication — seront publiées sur cette page dès que l’immatriculation sera effective. D’ici là, toute question relative à l’identité de l’éditeur peut nous être adressée à ${CONTACT_EMAIL}.`,
         },
       ],
     },
@@ -77,10 +86,10 @@ const legalNoticeFr: LegalDoc = {
       title: '3. Propriété intellectuelle',
       blocks: [
         {
-          p: 'L’ensemble des contenus présents sur le Site (textes, graphismes, logos, icônes, mise en page, structure du catalogue de processus, etc.) est la propriété exclusive de bxFlow, sauf mention contraire. Toute reproduction, représentation, modification, publication ou adaptation de tout ou partie des éléments du Site, quel que soit le moyen ou le procédé utilisé, est interdite sans l’autorisation écrite préalable de bxFlow.',
+          p: 'L’ensemble des contenus présents sur le Site (textes, graphismes, logos, icônes, mise en page, structure du catalogue de processus, etc.) est la propriété exclusive de bxGroup, sauf mention contraire. Toute reproduction, représentation, modification, publication ou adaptation de tout ou partie des éléments du Site, quel que soit le moyen ou le procédé utilisé, est interdite sans l’autorisation écrite préalable de bxGroup.',
         },
         {
-          p: 'La marque bxFlow ainsi que le logo associé sont la propriété de bxFlow.',
+          p: 'La marque bxFlow ainsi que le logo associé sont la propriété de bxGroup.',
         },
       ],
     },
@@ -96,10 +105,10 @@ const legalNoticeFr: LegalDoc = {
       ],
     },
     {
-      title: '5. Droit applicable et juridiction',
+      title: '5. Portée des présentes mentions',
       blocks: [
         {
-          p: 'Les présentes mentions légales sont régies par le droit [À COMPLÉTER — probablement le droit français si la société y est immatriculée]. En cas de litige, et à défaut de résolution amiable, les tribunaux de [À COMPLÉTER — ville / pays compétent] seront seuls compétents.',
+          p: 'Les présentes mentions concernent le Site, qui est un site de présentation. L’utilisation du logiciel bxFlow est régie par le contrat conclu avec chaque client, lequel en fixe le droit applicable, la juridiction compétente, les garanties et les responsabilités.',
         },
       ],
     },
@@ -117,26 +126,24 @@ const legalNoticeFr: LegalDoc = {
 const legalNoticeEn: LegalDoc = {
   title: 'Legal notice',
   intro:
-    'Legal information about the bxFlow website. Bracketed fields will be completed with the company’s official details.',
+    'Legal information about the bxFlow website, published by bxGroup.',
   updatedLabel: 'Last updated',
-  updated: 'July 1, 2026',
+  updated: 'September 11, 2026',
   sections: [
     {
       title: '1. Site publisher',
       blocks: [
-        { p: `The website available at ${SITE_URL} (the “Site”) is published by:` },
+        { p: `The website available at ${SITE_URL} (the “Site”) is published by bxGroup, the publisher of the bxFlow software.` },
         {
           ul: [
-            'Company / trade name: bxFlow',
-            'Legal form: [TO COMPLETE — SAS, SARL, sole trader, etc.]',
-            'Share capital: [TO COMPLETE, if applicable]',
-            'Registered office: [Full address]',
-            'Registration number: [Company register / equivalent per country]',
-            'VAT number: [If applicable]',
-            'Publication director: [Name of the person in charge]',
+            'Publisher: bxGroup',
+            'Product presented: bxFlow',
             `Contact: ${CONTACT_EMAIL}`,
-            'Phone: [Optional]',
+            `Site address: ${SITE_URL}`,
           ],
+        },
+        {
+          note: `bxGroup is in the process of being registered. The statutory identification details — legal form, registered office, registration number and publication director — will be published on this page as soon as registration is complete. Until then, any question about the publisher’s identity can be sent to ${CONTACT_EMAIL}.`,
         },
       ],
     },
@@ -157,10 +164,10 @@ const legalNoticeEn: LegalDoc = {
       title: '3. Intellectual property',
       blocks: [
         {
-          p: 'All content on the Site (text, graphics, logos, icons, layout, the structure of the process catalogue, etc.) is the exclusive property of bxFlow, unless otherwise stated. Any reproduction, representation, modification, publication or adaptation of all or part of the Site, by any means whatsoever, is prohibited without the prior written consent of bxFlow.',
+          p: 'All content on the Site (text, graphics, logos, icons, layout, the structure of the process catalogue, etc.) is the exclusive property of bxGroup, unless otherwise stated. Any reproduction, representation, modification, publication or adaptation of all or part of the Site, by any means whatsoever, is prohibited without the prior written consent of bxGroup.',
         },
         {
-          p: 'The bxFlow trademark and associated logo are owned by bxFlow.',
+          p: 'The bxFlow trademark and associated logo are owned by bxGroup.',
         },
       ],
     },
@@ -176,10 +183,10 @@ const legalNoticeEn: LegalDoc = {
       ],
     },
     {
-      title: '5. Governing law and jurisdiction',
+      title: '5. Scope of this notice',
       blocks: [
         {
-          p: 'These legal notices are governed by the law of [TO COMPLETE — likely French law if the company is registered there]. In the event of a dispute, and failing an amicable settlement, the courts of [TO COMPLETE — competent city / country] shall have sole jurisdiction.',
+          p: 'This notice concerns the Site, which presents the product. Use of the bxFlow software is governed by the contract entered into with each client, which sets the applicable law, the competent jurisdiction, the warranties and the liabilities.',
         },
       ],
     },
@@ -201,9 +208,9 @@ const legalNoticeEn: LegalDoc = {
 const privacyFr: LegalDoc = {
   title: 'Politique de confidentialité',
   intro:
-    'Comment le site bxFlow collecte, utilise et protège vos données personnelles. Les champs entre crochets seront complétés avant publication.',
+    'Comment le site bxFlow collecte, utilise et protège vos données personnelles.',
   updatedLabel: 'Dernière mise à jour',
-  updated: '1 juillet 2026',
+  updated: '11 septembre 2026',
   sections: [
     {
       title: '1. Responsable du traitement',
@@ -211,7 +218,7 @@ const privacyFr: LegalDoc = {
         { p: `Le responsable du traitement des données collectées sur le site ${SITE_URL} est :` },
         {
           ul: [
-            'bxFlow, [forme juridique], dont le siège social est situé [adresse]',
+            'bxGroup, éditeur du logiciel bxFlow',
             `Contact : ${CONTACT_EMAIL}`,
           ],
         },
@@ -234,11 +241,15 @@ const privacyFr: LegalDoc = {
         },
         { h: 'c) Données de navigation' },
         {
-          p: 'Le Site n’utilise actuellement aucun outil de suivi analytique tiers. [À AJUSTER si un outil de mesure d’audience — Cloudflare Web Analytics, Plausible, etc. — est ajouté ultérieurement.]',
+          p: 'Le Site n’utilise aucun outil de mesure d’audience, aucun traceur publicitaire et aucun réseau social embarqué. Nous ne construisons pas de profil de navigation.',
         },
-        { h: 'd) Cookies' },
+        { h: 'd) Polices de caractères' },
         {
-          p: 'Le Site n’utilise que des éléments techniques strictement nécessaires (par exemple la préférence de langue). Aucun bandeau de consentement n’est requis pour ceux-ci. [Un bandeau sera nécessaire si un outil de mesure d’audience non exempté est ajouté plus tard.]',
+          p: 'Les polices du Site sont servies par Google Fonts. Votre navigateur les demande directement aux serveurs de Google, qui reçoit à cette occasion votre adresse IP et les informations techniques que tout navigateur transmet. Aucune autre donnée ne lui est communiquée, et nous ne recevons rien de Google en retour.',
+        },
+        { h: 'e) Cookies' },
+        {
+          p: 'Le Site ne dépose aucun cookie de mesure d’audience ni de publicité — c’est pourquoi aucun bandeau de consentement ne vous est présenté. La langue que vous consultez est portée par l’adresse de la page (/fr, /en) et non par un cookie. Notre hébergeur peut déposer des cookies strictement nécessaires à la sécurité du Site.',
         },
       ],
     },
@@ -275,7 +286,7 @@ const privacyFr: LegalDoc = {
         { p: 'Vos données sont accessibles :' },
         {
           ul: [
-            'À l’équipe bxFlow en charge du traitement commercial',
+            'À l’équipe bxGroup en charge du traitement commercial',
             'Aux sous-traitants techniques mentionnés ci-dessus (Formspree, Calendly), dans la limite nécessaire à la fourniture du service',
             'Le cas échéant, à l’hébergeur Cloudflare pour les données techniques',
           ],
@@ -287,7 +298,7 @@ const privacyFr: LegalDoc = {
       title: '6. Transferts de données hors de votre pays',
       blocks: [
         {
-          p: 'Formspree et Calendly sont des sociétés basées aux États-Unis. Vos données peuvent donc être transférées et traitées en dehors de votre pays de résidence, y compris hors de l’Union européenne le cas échéant. [À COMPLÉTER avec un juriste : préciser le mécanisme de transfert applicable — clauses contractuelles types, certification, etc.]',
+          p: 'Formspree, Calendly, Google (polices de caractères) et Cloudflare (hébergement) sont des sociétés établies aux États-Unis. Vos données peuvent donc être transférées et traitées hors de votre pays de résidence, y compris hors de l’Union européenne. Chacun de ces prestataires publie un accord de traitement des données décrivant les garanties qui encadrent ces transferts ; les liens vers leurs politiques figurent aux sections précédentes.',
         },
       ],
     },
@@ -342,9 +353,9 @@ const privacyFr: LegalDoc = {
 const privacyEn: LegalDoc = {
   title: 'Privacy policy',
   intro:
-    'How the bxFlow website collects, uses and protects your personal data. Bracketed fields will be completed before publication.',
+    'How the bxFlow website collects, uses and protects your personal data.',
   updatedLabel: 'Last updated',
-  updated: 'July 1, 2026',
+  updated: 'September 11, 2026',
   sections: [
     {
       title: '1. Data controller',
@@ -352,7 +363,7 @@ const privacyEn: LegalDoc = {
         { p: `The controller of the data collected on the website ${SITE_URL} is:` },
         {
           ul: [
-            'bxFlow, [legal form], whose registered office is located at [address]',
+            'bxGroup, the publisher of the bxFlow software',
             `Contact: ${CONTACT_EMAIL}`,
           ],
         },
@@ -375,11 +386,15 @@ const privacyEn: LegalDoc = {
         },
         { h: 'c) Browsing data' },
         {
-          p: 'The Site currently uses no third-party analytics tool. [To be adjusted if an audience-measurement tool — Cloudflare Web Analytics, Plausible, etc. — is added later.]',
+          p: 'The Site uses no audience-measurement tool, no advertising tracker and no embedded social network. We do not build a browsing profile.',
         },
-        { h: 'd) Cookies' },
+        { h: 'd) Web fonts' },
         {
-          p: 'The Site only uses strictly necessary technical elements (for example your language preference). No consent banner is required for these. [A banner will be required if a non-exempt audience-measurement tool is added later.]',
+          p: 'The Site’s fonts are served by Google Fonts. Your browser requests them directly from Google’s servers, which receive your IP address and the technical information any browser transmits. No other data is passed to them, and we receive nothing from Google in return.',
+        },
+        { h: 'e) Cookies' },
+        {
+          p: 'The Site sets no audience-measurement or advertising cookie — which is why no consent banner is shown to you. The language you are reading is carried by the page address (/fr, /en), not by a cookie. Our host may set cookies strictly necessary to the security of the Site.',
         },
       ],
     },
@@ -416,7 +431,7 @@ const privacyEn: LegalDoc = {
         { p: 'Your data is accessible:' },
         {
           ul: [
-            'To the bxFlow team in charge of commercial handling',
+            'To the bxGroup team in charge of commercial handling',
             'To the technical sub-processors mentioned above (Formspree, Calendly), as needed to provide the service',
             'Where applicable, to the host Cloudflare for technical data',
           ],
@@ -428,7 +443,7 @@ const privacyEn: LegalDoc = {
       title: '6. Data transfers outside your country',
       blocks: [
         {
-          p: 'Formspree and Calendly are companies based in the United States. Your data may therefore be transferred and processed outside your country of residence, including outside the European Union where applicable. [To be completed with a lawyer: specify the applicable transfer mechanism — standard contractual clauses, certification, etc.]',
+          p: 'Formspree, Calendly, Google (web fonts) and Cloudflare (hosting) are companies established in the United States. Your data may therefore be transferred and processed outside your country of residence, including outside the European Union. Each of these providers publishes a data processing agreement describing the safeguards that frame those transfers; links to their policies appear in the preceding sections.',
         },
       ],
     },

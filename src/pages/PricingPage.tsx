@@ -14,10 +14,14 @@ export function PricingPage() {
     <>
       <Seo page="pricing" title={c.meta.pricing.title} description={c.meta.pricing.description} />
 
+      {/* Sans le schéma animé : on arrive ici avec une question de budget,
+          pas pour voir le moteur tourner. Il repoussait la première offre
+          sous la ligne de flottaison. */}
       <PageHero
         eyebrow={c.pricing.hero.eyebrow}
         title={c.pricing.hero.title}
         subtitle={c.pricing.hero.subtitle}
+        flow={false}
       />
 
       {/* Offre pilote */}

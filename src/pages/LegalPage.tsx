@@ -1,31 +1,12 @@
-import { Fragment, type ReactNode } from 'react';
 import { Seo } from '@/components/Seo';
 import { useContent } from '@/hooks/useContent';
 import { useLang } from '@/hooks/useLang';
 import { legalNotice, privacyPolicy, type LegalBlock, type LegalDoc } from '@/content/legal';
 import type { PageKey } from '@/lib/routes';
 
-/** Met en évidence les champs `[…]` restant à compléter par la société. */
-function withPlaceholders(text: string): ReactNode {
-  const parts = text.split(/(\[[^\]]+\])/g);
-  return parts.map((part, i) =>
-    /^\[[^\]]+\]$/.test(part) ? (
-      <mark
-        key={i}
-        className="rounded bg-gold/20 px-1 text-navy-700 ring-1 ring-gold/40"
-        title="À compléter"
-      >
-        {part}
-      </mark>
-    ) : (
-      <Fragment key={i}>{part}</Fragment>
-    ),
-  );
-}
-
 function Block({ block }: { block: LegalBlock }) {
   if ('h' in block) {
-    return <h3 className="mt-6 text-base font-semibold text-navy-900">{withPlaceholders(block.h)}</h3>;
+    return <h3 className="mt-6 text-base font-semibold text-navy-900">{block.h}</h3>;
   }
   if ('ul' in block) {
     return (
@@ -33,7 +14,7 @@ function Block({ block }: { block: LegalBlock }) {
         {block.ul.map((item, i) => (
           <li key={i} className="flex gap-2.5 text-ink-600">
             <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal" />
-            <span className="leading-relaxed">{withPlaceholders(item)}</span>
+            <span className="leading-relaxed">{item}</span>
           </li>
         ))}
       </ul>
@@ -42,11 +23,11 @@ function Block({ block }: { block: LegalBlock }) {
   if ('note' in block) {
     return (
       <p className="mt-4 rounded-lg border-l-2 border-gold/60 bg-gold/[0.06] px-4 py-3 text-sm leading-relaxed text-ink-600">
-        {withPlaceholders(block.note)}
+        {block.note}
       </p>
     );
   }
-  return <p className="mt-3 leading-relaxed text-ink-600">{withPlaceholders(block.p)}</p>;
+  return <p className="mt-3 leading-relaxed text-ink-600">{block.p}</p>;
 }
 
 function LegalDocument({ doc, page, title, description }: {
@@ -64,9 +45,9 @@ function LegalDocument({ doc, page, title, description }: {
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-teal/40 to-transparent" />
         <div className="container-page relative max-w-3xl py-14 lg:py-16">
           <h1 className="text-3xl font-bold text-navy-900 sm:text-4xl">{doc.title}</h1>
-          <p className="mt-4 text-ink-500">{withPlaceholders(doc.intro)}</p>
+          <p className="mt-4 text-ink-500">{doc.intro}</p>
           <p className="mt-4 text-sm text-ink-400">
-            {doc.updatedLabel} : {withPlaceholders(doc.updated)}
+            {doc.updatedLabel} : {doc.updated}
           </p>
         </div>
       </section>
