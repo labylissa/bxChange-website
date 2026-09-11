@@ -240,7 +240,7 @@ const SECTIONS: DocSection[] = [
             [
               <strong>Post-fonctions</strong>,
               'Onglet « Post-fonctions » d’une transition',
-              <><C>before_transition</C>, <C>after_transition</C></>,
+              'Franchissement d’une transition',
               'Les effets de bord une fois la transition franchie : assignation, MAJ, connecteurs, e-mails.',
             ],
           ]}
@@ -274,20 +274,21 @@ const SECTIONS: DocSection[] = [
         <Note>
           <strong>Champs « Objet métier » pré-résolus.</strong> Pour un champ lié à un objet métier,{' '}
           <C>getValue('vehicule')</C> renvoie <strong>l’objet complet</strong> (pas l’UUID) — vous
-          pouvez lire <C>getValue('vehicule').marque</C> directement. À l’écriture, la valeur est
-          renormalisée en UUID pour le backend automatiquement.
+          pouvez lire <C>getValue('vehicule').marque</C> directement. À l’écriture, vous pouvez
+          passer indifféremment l’objet ou son identifiant.
         </Note>
 
         <H3>Gestion des erreurs (par contexte)</H3>
         <ul className="list-disc space-y-1.5 pl-5 text-ink-600">
           <li>
-            <strong>Comportements</strong> — une exception est tracée dans la console de debug du
-            moteur (<C>log</C>) sans casser le formulaire ; le reste de l’UI continue de fonctionner.
+            <strong>Comportements</strong> — une erreur dans un script n’interrompt pas le
+            formulaire : le reste de l’écran continue de fonctionner. Pour la mise au point, utilisez{' '}
+            <C>log</C> et le mode Test de l’éditeur.
           </li>
           <li>
-            <strong>Conditions</strong> — en cas d’erreur, le bouton reste <strong>visible</strong>{' '}
-            (<em>fail open</em>). Ne jamais s’appuyer sur une condition pour un contrôle de sécurité :
-            le franchissement réel reste gardé côté serveur.
+            <strong>Conditions</strong> — en cas d’erreur, le bouton reste affiché : testez vos
+            conditions. Une condition règle l’<strong>affichage</strong> d’un bouton, pas un droit —
+            pour réserver une transition à certains profils, utilisez le rôle requis sur la transition.
           </li>
           <li>
             <strong>Post-fonctions</strong> — <strong>best-effort</strong> : une erreur sur une action
@@ -303,43 +304,35 @@ const SECTIONS: DocSection[] = [
     id: 'sandbox',
     label: 'Environnement d’exécution',
     terms:
-      'sandbox sécurité async await fetch window document eval function csp réseau require dépendance npm globals interdits',
+      'environnement exécution async await réseau require dépendance disponible droits utilisateur',
     body: (
       <>
         <p className="text-ink-500">
-          Les scripts sont compilés en fonctions asynchrones (vous pouvez donc utiliser <C>await</C>)
-          et exécutés avec un préambule de durcissement. Voici précisément ce qui est disponible et ce
-          qui ne l’est pas.
+          Vos scripts s’exécutent comme des fonctions asynchrones : vous pouvez utiliser{' '}
+          <C>await</C> directement. Voici ce dont ils disposent.
         </p>
 
         <H3>Ce qui est disponible</H3>
         <ul className="list-disc space-y-1.5 pl-5 text-ink-600">
           <li>Les <strong>fonctions injectées</strong> du contexte (voir chaque section).</li>
-          <li>La <strong>bibliothèque <C>lib</C></strong> et <C>require('lib')</C>.</li>
+          <li>La <strong>bibliothèque <C>lib</C></strong>.</li>
           <li>
             Les objets standard du langage : <C>JSON</C>, <C>Math</C>, <C>Number</C>, <C>String</C>,{' '}
             <C>Array</C>, <C>Object</C>, <C>Date</C>, les littéraux de gabarit, <C>await</C>…
           </li>
         </ul>
 
-        <H3>Ce qui est neutralisé</H3>
-        <ul className="list-disc space-y-1.5 pl-5 text-ink-600">
-          <li>
-            Accès réseau direct, DOM et timers : <C>window</C>, <C>document</C>, <C>location</C>,{' '}
-            <C>fetch</C>, <C>XMLHttpRequest</C>, <C>WebSocket</C>, <C>localStorage</C>,{' '}
-            <C>sessionStorage</C>, <C>setTimeout</C>, <C>setInterval</C>… sont à <C>undefined</C>.
-          </li>
-          <li>
-            <C>Function</C> et <C>eval</C> sont désactivés ; les motifs d’évasion (<C>.constructor</C>,{' '}
-            <C>__proto__</C>, <C>.prototype</C>) sont rejetés avant exécution.
-          </li>
-        </ul>
+        <H3>Ce qui ne l’est pas</H3>
+        <p className="text-ink-600">
+          Un script n’a accès ni au réseau, ni à la page, ni au stockage du navigateur, et ne peut pas
+          programmer d’exécution différée. Il n’importe aucune dépendance externe.
+        </p>
 
-        <Note tone="warn">
-          Le <strong>seul moyen d’appeler l’extérieur</strong> est de passer par les helpers injectés
-          (<C>callConnector</C>, <C>getIssuesByTemplate</C>, <C>updateIssue</C>…), qui tapent l’API
-          bxFlow <strong>authentifiée</strong> avec vos droits. Aucune dépendance externe : tout est
-          code maison, on n’importe jamais depuis une URL.
+        <Note>
+          Pour interroger un système ou un autre dossier, passez par les fonctions injectées (
+          <C>callConnector</C>, <C>getIssuesByTemplate</C>, <C>updateIssue</C>…). Elles s’exécutent
+          avec <strong>les droits de l’utilisateur connecté</strong> : une action qu’il n’est pas
+          autorisé à faire dans l’interface lui sera également refusée depuis un script.
         </Note>
       </>
     ),
@@ -665,23 +658,13 @@ setMessage('client', clients.length + ' client(s) trouvé(s)')`}</Pre>
             <p><em>async</em> — Met à jour (remplacement complet des attributs) ou crée une instance.</p>
           </Method>
         </div>
-        <Note tone="warn">
-          <strong>Deux pièges propres aux comportements, à connaître avant d’écrire.</strong>
-          <br />
-          <strong>1. L’identifiant du type.</strong> <C>getBoInstance</C>, <C>updateBoInstance</C> et{' '}
-          <C>createBoInstance</C> attendent ici l’<strong>UUID</strong> du type, alors que{' '}
-          <C>searchBoInstances</C> attend son <strong>nom</strong> — et que les mêmes fonctions
-          acceptent le nom dans une post-fonction. L’autocomplétion de l’éditeur annonce{' '}
-          <C>typeName</C> partout : elle se trompe pour les comportements. Passer un nom ici renvoie{' '}
-          <C>null</C>, sans erreur.
-          <br />
-          <strong>2. Les échecs sont muets.</strong> Une écriture refusée faute de droit{' '}
-          <C>wf.bo_create</C> renvoie <C>null</C> et n’écrit qu’une ligne dans la console du
-          comportement. <strong>Testez la valeur de retour</strong> plutôt que de supposer la
-          réussite. En post-fonction, la même erreur remonte dans un bandeau visible.
-          <br />
-          <C>patchBoInstance</C> n’existe <strong>pas</strong> dans ce contexte : pour ne modifier
-          qu’une partie d’une fiche, passez par une post-fonction.
+        <Note>
+          Dans un comportement, <C>getBoInstance</C>, <C>updateBoInstance</C> et{' '}
+          <C>createBoInstance</C> prennent l’<strong>identifiant</strong> du type d’objet ;{' '}
+          <C>searchBoInstances</C> prend son <strong>nom</strong>. Ces fonctions renvoient{' '}
+          <C>null</C> lorsque l’opération n’aboutit pas (fiche introuvable, droits insuffisants) :{' '}
+          <strong>testez la valeur de retour</strong>. Pour ne modifier qu’une partie d’une fiche,
+          utilisez <C>patchBoInstance</C> depuis une post-fonction.
         </Note>
 
         <H3>Connecteurs &amp; utilitaires</H3>
@@ -702,7 +685,7 @@ setMessage('client', clients.length + ' client(s) trouvé(s)')`}</Pre>
 if (me) await updateUserAttribute(me.id, 'derniere_action', lib.today())`}</Pre>
           </Method>
           <Method name="log(...args)" returns="void">
-            <p>Trace dans la console de debug du moteur. N’a aucun effet en production visible par l’utilisateur — utile pendant la mise au point.</p>
+            <p>Écrit un message dans le journal d’exécution, consultable depuis le mode Test de l’éditeur. Sans effet visible pour l’utilisateur — utile pendant la mise au point.</p>
           </Method>
           <Method name="require(name)" returns="unknown">
             <p>Import sécurisé. <C>require('lib')</C> est toujours disponible ; les autres modules doivent être activés sur le processus (voir <a href="#require" className="text-gold-600 underline">require() &amp; catalogue</a>).</p>
@@ -728,7 +711,7 @@ else { clearError('date_fin'); setValue('nombre_jours', nb ?? 0) }`}</Pre>
     id: 'conditions',
     label: 'Conditions — API',
     terms:
-      'conditions condition_script return false visible masqué fail open lecture seule getValue getCurrentUser getAssignee déclaratif backend field_condition connector_result opérateurs is_set eq ne gt gte lt lte contains in eq_current_user système',
+      'conditions condition_script return false visible masqué lecture seule getValue getCurrentUser getAssignee déclaratif field_condition connector_result opérateurs is_set eq ne gt gte lt lte contains in eq_current_user système',
     body: (
       <>
         <p className="text-ink-500">
@@ -743,7 +726,7 @@ else { clearError('date_fin'); setValue('nombre_jours', nb ?? 0) }`}</Pre>
           rows={[
             [<><C>return false</C></>, 'Bouton masqué.'],
             [<><C>return true</C> / <C>undefined</C> / autre valeur</>, 'Bouton visible.'],
-            ['lève une erreur', <>Bouton <strong>visible</strong> (fail open).</>],
+            ['lève une erreur', <>Bouton <strong>visible</strong> — testez vos conditions.</>],
             ['est vide', 'Bouton visible.'],
           ]}
         />
@@ -761,11 +744,12 @@ const solde = Number(getValue('montant_restant') || 0)
 const me = getCurrentUser()
 return solde === 0 && !!me && me.wf_role_names.includes('Gestionnaire')`}</Pre>
 
-        <H3>Conditions déclaratives (côté serveur)</H3>
+        <H3>Conditions déclaratives</H3>
         <p className="text-ink-600">
           Indépendamment du script (qui gère la <strong>visibilité</strong>), une transition peut porter
           une condition <strong>déclarative</strong> qui garde le <strong>franchissement réel</strong> :
-          si elle n’est pas satisfaite, le serveur refuse la transition. C’est le vrai garde-fou.
+          si elle n’est pas satisfaite, la transition est refusée, quel que soit l’affichage du bouton.
+          C’est elle qu’il faut utiliser pour une règle qui doit tenir.
         </p>
         <Table
           head={['Élément', 'Valeurs']}
@@ -777,7 +761,7 @@ return solde === 0 && !!me && me.wf_role_names.includes('Gestionnaire')`}</Pre>
             ],
             [
               'Contexte évaluable',
-              <>Les champs <C>fields_data</C> et <C>connector_data</C>, plus les champs système préfixés <C>$</C> : <C>$assigned_to</C>, <C>$priority</C>, <C>$status</C>, <C>$created_by</C>, <C>$current_user</C>.</>,
+              <>Les champs du dossier et les données issues d’un connecteur, plus les champs système préfixés <C>$</C> : <C>$assigned_to</C>, <C>$priority</C>, <C>$status</C>, <C>$created_by</C>, <C>$current_user</C>.</>,
             ],
           ]}
         />
@@ -795,7 +779,7 @@ return solde === 0 && !!me && me.wf_role_names.includes('Gestionnaire')`}</Pre>
     id: 'postfn',
     label: 'Post-fonctions — API',
     terms:
-      'post-fonctions setField setAssignee setAssigneeByRole before_transition after_transition persistance mode test addComment sendEmail updateIssue objets métier référentiel patchBoInstance updateBoInstance createBoInstance getBoInstance nom de type partiel',
+      'post-fonctions setField setAssignee setAssigneeByRole after_transition franchissement persistance mode test addComment sendEmail updateIssue objets métier référentiel patchBoInstance updateBoInstance createBoInstance getBoInstance nom de type partiel',
     body: (
       <>
         <p className="text-ink-500">
@@ -804,12 +788,9 @@ return solde === 0 && !!me && me.wf_role_names.includes('Gestionnaire')`}</Pre>
           l’assignation appliquée.
         </p>
 
-        <Note tone="warn">
-          <strong>À connaître sur le runtime actuel :</strong> après confirmation, <strong>toutes les
-          post-fonctions actives</strong> de la transition s’exécutent <strong>après</strong> le
-          franchissement (le filtrage se fait sur l’état « actif », pas sur <C>before</C>/<C>after</C>).
-          Le champ before/after existe et est éditable, mais <C>before_transition</C> s’exécute aussi
-          après le franchissement dans l’implémentation courante — écrivez vos scripts en conséquence.
+        <Note>
+          Les post-fonctions s’exécutent <strong>une fois la transition franchie</strong> : le
+          dossier est déjà à sa nouvelle étape, et <C>getCurrentIssue</C> le reflète.
         </Note>
 
         <H3>Différences avec les comportements</H3>
@@ -825,7 +806,7 @@ return solde === 0 && !!me && me.wf_role_names.includes('Gestionnaire')`}</Pre>
             <p>Modifie un champ du dossier ; la valeur est persistée après l’exécution de la post-fonction.</p>
           </Method>
           <Method name="setAssignee(userId | {id}) · setAssigneeByRole(slugOrName)" returns="void">
-            <p>Assigne à un utilisateur (UUID validé) ou à un rôle workflow (toast d’erreur si le rôle est introuvable).</p>
+            <p>Assigne à un utilisateur (par son identifiant) ou à un rôle workflow (message d’erreur si le rôle est introuvable).</p>
           </Method>
           <Method name="getValue · getCurrentIssue · getIssueByKey · getIssuesByTemplate · updateIssue" returns="—">
             <p>Lecture des champs (BO pré-résolus) et accès inter-dossiers, identiques aux comportements. <C>getCurrentIssue</C> reflète l’état <strong>après</strong> transition.</p>
@@ -864,7 +845,7 @@ await patchBoInstance('Client', getValue('bo_client'), {
         </div>
 
         <Note>
-          Le <strong>mode Test</strong> de l’éditeur (bouton ▶) exécute le script avec des stubs — il
+          Le <strong>mode Test</strong> de l’éditeur (bouton ▶) exécute le script avec des fonctions simulées — il
           expose le même jeu de fonctions <strong>sans effet réel</strong>, pour valider la logique
           avant de l’activer.
         </Note>
@@ -935,8 +916,8 @@ if (siren.length === 9) {
 return factures.length === 0   // false → bouton masqué`}</Pre>
           </Recipe>
 
-          <Recipe tag="Post-fonction · before_transition" title="Escalade d’assignation selon le montant" goal="Router vers le bon rôle en fonction d’un seuil.">
-            <Pre label="Post-fonction · before_transition">{`const montant = Number(getValue('montant') || 0)
+          <Recipe tag="Post-fonction · after_transition" title="Escalade d’assignation selon le montant" goal="Router vers le bon rôle en fonction d’un seuil.">
+            <Pre label="Post-fonction · after_transition">{`const montant = Number(getValue('montant') || 0)
 setAssigneeByRole(montant > 5000 ? 'direction' : 'manager')
 await addComment('Demande de ' + lib.currency(montant) + ' routée automatiquement.')`}</Pre>
           </Recipe>
@@ -1069,7 +1050,7 @@ if (me) await updateUserAttribute(me.id, 'derniere_prise_en_charge', lib.today()
           <li><C>require('lib')</C> — la bibliothèque maison, <strong>toujours disponible</strong>, sans activation.</li>
           <li><strong>Catalogue optionnel</strong> — modules maison spécifiques, <strong>activables par processus</strong>. Un <C>require('x')</C> non activé lève une erreur explicite.</li>
         </ol>
-        <Note>État actuel : le catalogue est vide — seul <C>require('lib')</C> est exploitable aujourd’hui. L’ajout d’un module se fait par l’équipe plateforme (code pur, sans dépendance, bundlé au build).</Note>
+        <Note>Les modules activables sont proposés dans les paramètres du processus, rubrique « catalogue des librairies ». <C>require('lib')</C> n’y figure pas : il est toujours disponible.</Note>
       </>
     ),
   },
@@ -1103,7 +1084,7 @@ if (me) await updateUserAttribute(me.id, 'derniere_prise_en_charge', lib.today()
               [<>BO : <C>searchBoInstances/getBoInstance</C></>, y, y, y],
               [<>BO : <C>setBoField/updateBoInstance/createBoInstance</C></>, y, n, y],
               [<>BO : <C>patchBoInstance</C> (partiel)</>, n, n, y],
-              [<>BO : 1er argument</>, <>UUID du type<sup>*</sup></>, <>nom du type</>, <>nom du type</>],
+              [<>BO : 1er argument</>, <>identifiant du type</>, <>nom du type</>, <>nom du type</>],
               [<>Grille : <C>disable/enableGridColumn</C> · <C>disable/enableGridCell</C></>, y, n, n],
               [<C>setMemberAttributes/updateUserAttribute</C>, y, n, y],
               [<C>require('lib')</C>, y, n, n],
@@ -1111,12 +1092,6 @@ if (me) await updateUserAttribute(me.id, 'derniere_prise_en_charge', lib.today()
             ];
           })()}
         />
-        <p className="mt-3 text-xs text-ink-400">
-          <sup>*</sup> Divergence du moteur, pas un choix de conception : dans un comportement,{' '}
-          <C>getBoInstance</C> et consorts n’acceptent que l’UUID du type, alors que{' '}
-          <C>searchBoInstances</C> y accepte le nom. Voir l’avertissement de la section{' '}
-          <a href="#behaviours" className="text-gold-600 underline">Comportements</a>.
-        </p>
       </>
     ),
   },
