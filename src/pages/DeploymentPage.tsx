@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
 import { Section, PageHero, SectionHeading } from '@/components/ui';
 import { Reveal } from '@/components/Reveal';
+import { SchemaOnPremise, SchemaHeberge } from '@/components/InfraDiagram';
 import { Icons, ProcessIcon } from '@/components/Icon';
 import { useContent } from '@/hooks/useContent';
 import { useLang } from '@/hooks/useLang';
@@ -113,7 +114,14 @@ export function DeploymentPage() {
           subtitle={d.onprem.lead}
         />
 
-        <ol className="mt-10 space-y-5">
+        <div className="mt-10 rounded-2xl border border-ink-100 bg-white p-5 shadow-card sm:p-7">
+          <h3 className="text-base font-bold text-navy-900">{d.diagrams.onprem.title}</h3>
+          <div className="mt-5">
+            <SchemaOnPremise />
+          </div>
+        </div>
+
+        <ol className="mt-6 space-y-5">
           {d.onprem.steps.map((s, i) => (
             <Reveal key={s.title} delay={Math.min(i, 4) * 60} from="up">
               <li className="relative rounded-2xl border border-ink-100 bg-white p-5 shadow-card sm:p-6">
@@ -178,7 +186,14 @@ export function DeploymentPage() {
           title={d.saas.title}
           subtitle={d.saas.lead}
         />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 rounded-2xl border border-ink-100 bg-white p-5 shadow-card sm:p-7">
+          <h3 className="text-base font-bold text-navy-900">{d.diagrams.saas.title}</h3>
+          <div className="mt-5">
+            <SchemaHeberge />
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {d.saas.points.map((p, i) => (
             <Reveal key={p.title} delay={(i % 3) * 100} from="up">
               <div className="card h-full">

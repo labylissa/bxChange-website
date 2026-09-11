@@ -42,16 +42,48 @@ export const ALL_PAGES: PageKey[] = [
   'privacy',
 ];
 
-/** Pages affichées dans la navigation principale (hors accueil / CTA contact). */
-export const NAV_PAGES: PageKey[] = [
-  'product',
-  'useCases',
-  'catalog',
-  'security',
-  'deployment',
-  'pricing',
-  'documentation',
+/**
+ * La navigation principale : des pages, et des groupes déroulants.
+ *
+ * Sept entrées de premier niveau tenaient mal dans la barre et se lisaient
+ * comme une liste à parcourir plutôt qu'un chemin à suivre. « Sécurité » et
+ * « Déploiement » répondent à la même question — peut-on vous faire confiance,
+ * et comment cela se passe-t-il concrètement — donc elles se rangent ensemble
+ * plutôt que de concourir l'une contre l'autre.
+ *
+ * Chaque entrée de groupe porte sa propre description : un libellé de menu seul
+ * (« Déploiement ») ne dit pas s'il s'agit d'installer chez soi ou d'un
+ * calendrier de livraison.
+ */
+export type NavEntry =
+  | { kind: 'page'; page: PageKey }
+  | { kind: 'group'; labelKey: string; items: { page: PageKey; descKey: string }[] };
+
+export const NAV_ENTRIES: NavEntry[] = [
+  { kind: 'page', page: 'product' },
+  { kind: 'page', page: 'useCases' },
+  { kind: 'page', page: 'catalog' },
+  {
+    kind: 'group',
+    labelKey: 'nav.trust',
+    items: [
+      { page: 'security', descKey: 'nav.securityDesc' },
+      { page: 'deployment', descKey: 'nav.deploymentDesc' },
+    ],
+  },
+  { kind: 'page', page: 'pricing' },
+  { kind: 'page', page: 'documentation' },
 ];
+
+/**
+ * Les mêmes pages, à plat — pour le pied de page, qui n'a pas de déroulant.
+ *
+ * DÉRIVÉE, jamais recopiée : une page ajoutée au menu et oubliée ici
+ * disparaîtrait du pied de page sans que rien ne le signale.
+ */
+export const NAV_PAGES: PageKey[] = NAV_ENTRIES.flatMap((e) =>
+  e.kind === 'page' ? [e.page] : e.items.map((i) => i.page),
+);
 
 /**
  * Libellé de navigation de chaque page.
