@@ -23,9 +23,11 @@ export function Footer() {
             target="_blank"
             rel="noreferrer noopener"
             aria-label={t('footer.linkedinAria')}
-            className="mt-5 inline-flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-teal"
+            className="group mt-5 inline-flex items-center gap-2.5 text-sm text-white/70 transition-colors hover:text-white"
           >
-            <Icons.linkedin className="h-5 w-5" />
+            <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-linkedin transition-colors group-hover:bg-linkedin-400">
+              <Icons.linkedinGlyphe className="h-4 w-4 text-white" />
+            </span>
             {t('footer.followUs')}
           </a>
         </div>

@@ -29,6 +29,13 @@ export default {
           DEFAULT: '#C9A45C',
           600: '#A8874A',
         },
+        // Bleu officiel LinkedIn : il n'appartient pas à notre palette, il
+        // appartient à la marque qu'il désigne — c'est ce qui le rend
+        // reconnaissable au premier coup d'œil.
+        linkedin: {
+          DEFAULT: '#0A66C2',
+          400: '#378FE9',
+        },
         ink: {
           // Neutres pierre, chauds
           50: '#FAF9F7',

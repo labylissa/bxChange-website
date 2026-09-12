@@ -57,6 +57,12 @@ export const Icons = {
       <P d="M8 10v6M8 7v.01M12 16v-3.5a2 2 0 0 1 4 0V16M12 12v4" />
     </svg>
   ),
+  /** Sigle « in » plein, à poser sur une pastille — voir le pied de page. */
+  linkedinGlyphe: ({ className = 'h-5 w-5' }: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M6.94 8.5H3.56V20.5h3.38V8.5ZM5.25 3.5a1.96 1.96 0 1 0 0 3.91 1.96 1.96 0 0 0 0-3.91ZM20.5 13.9c0-3.4-1.82-4.98-4.24-4.98-1.96 0-2.83 1.08-3.32 1.83V8.5H9.56c.04.95 0 12 0 12h3.38v-6.7c0-.3.02-.6.11-.82.24-.6.79-1.22 1.72-1.22 1.21 0 1.7.92 1.7 2.28v6.46h3.38v-6.6Z" />
+    </svg>
+  ),
   mail: ({ className = 'h-5 w-5', strokeWidth = 2 }: IconProps) => (
     <svg {...base(className, strokeWidth)}>
       <rect x="3" y="5" width="18" height="14" rx="2" />
