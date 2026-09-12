@@ -853,6 +853,7 @@ export const en: Translation = {
     legalNotice: 'Legal notice',
     privacy: 'Privacy',
     followUs: 'Follow us',
+    linkedinAria: 'bxGroup Horizon on LinkedIn',
     // L'éditeur, nommé une fois et discrètement. bxFlow reste le sujet
     // de ce site ; le groupe apparaît là où l'on cherche qui est derrière.
     editeur: 'A bxGroup product',

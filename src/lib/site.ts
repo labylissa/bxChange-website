@@ -32,3 +32,14 @@ export const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID ?? '';
  * de rendez-vous. Tant qu'il est vide, la page /demo affiche un repli (lien contact).
  */
 export const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL ?? '';
+
+/**
+ * Page LinkedIn de l'éditeur.
+ *
+ * « bxgroup » étant déjà pris, la page s'appelle « bxGroup Horizon » : son
+ * adresse publique est donc /company/bxgroup-horizon. Ne jamais publier
+ * l'adresse d'administration (/company/<identifiant>/admin/dashboard) —
+ * elle n'est visible que de l'administrateur et renvoie tout visiteur vers
+ * un écran de connexion.
+ */
+export const LINKEDIN_URL = 'https://www.linkedin.com/company/bxgroup-horizon';

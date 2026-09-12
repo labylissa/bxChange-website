@@ -868,6 +868,7 @@ export const fr = {
     legalNotice: 'Mentions légales',
     privacy: 'Confidentialité',
     followUs: 'Suivez-nous',
+    linkedinAria: 'bxGroup Horizon sur LinkedIn',
     // L'éditeur, nommé une fois et discrètement. bxFlow reste le sujet
     // de ce site ; le groupe apparaît là où l'on cherche qui est derrière.
     editeur: 'Un produit bxGroup',

@@ -4,7 +4,7 @@ import { Logo } from './Logo';
 import { Icons } from './Icon';
 import { useLang } from '@/hooks/useLang';
 import { NAV_PAGES, PAGE_LABEL_KEY } from '@/lib/routes';
-import { CONTACT_EMAIL } from '@/lib/site';
+import { CONTACT_EMAIL, LINKEDIN_URL } from '@/lib/site';
 export function Footer() {
   const { t } = useTranslation();
   const { path } = useLang();
@@ -16,10 +16,18 @@ export function Footer() {
         <div className="lg:col-span-1">
           <Logo variant="light" />
           <p className="mt-4 max-w-xs text-sm text-white/60">{t('footer.tagline')}</p>
-          {/* Lien LinkedIn retiré : la page n'existe pas encore, et il menait à
-              l'accueil de LinkedIn. Un lien qui ne mène pas où il annonce coûte
-              plus que son absence — il se clique une fois, et la confiance avec.
-              À rétablir avec l'URL réelle. */}
+          {/* Rétabli avec l'adresse publique vérifiée : la page existe désormais
+              sous « bxGroup Horizon », « bxgroup » étant déjà pris sur LinkedIn. */}
+          <a
+            href={LINKEDIN_URL}
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label={t('footer.linkedinAria')}
+            className="mt-5 inline-flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-teal"
+          >
+            <Icons.linkedin className="h-5 w-5" />
+            {t('footer.followUs')}
+          </a>
         </div>
 
         <div>
