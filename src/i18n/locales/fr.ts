@@ -23,7 +23,7 @@ export const fr = {
     team: {
       title: 'L’équipe — bxFlow | Qui construit le produit',
       description:
-        'Architecture logicielle, modélisation de processus, développement et conduite de projet : les cinq personnes qui construisent bxFlow, et leurs parcours.',
+        'Architecture logicielle, modélisation de processus, développement et conduite de projet : les personnes qui construisent bxFlow, et leurs parcours.',
     },
     security: {
       title: 'Sécurité — bxFlow | Chiffrement, isolation, conformité',
@@ -390,12 +390,12 @@ export const fr = {
       eyebrow: 'L’équipe',
       title: 'Qui construit bxFlow',
       subtitle:
-        'Cinq personnes : architecture logicielle, modélisation de processus métier, développement et conduite de projet. Nous avons passé assez de temps dans des banques et des assurances pour savoir par où un dossier se perd.',
+        'Architecture logicielle, modélisation de processus métier, développement et conduite de projet. Nous avons passé assez de temps dans des banques et des assurances pour savoir par où un dossier se perd.',
     },
     membres: {
       boly: {
         role: 'Fondateur, architecte logiciel',
-        bio: 'Expert des moteurs de processus métier. Il porte la vision produit et les choix technologiques de bxFlow.',
+        bio: 'Développeur full stack de formation, architecte aujourd’hui : plus de 8 ans de développement logiciel et 5 ans de conception de workflows. Il porte la vision produit et les choix technologiques de bxFlow.',
       },
       farba: {
         role: 'Expert workflow & transformation digitale',
@@ -416,7 +416,7 @@ export const fr = {
     },
     taille: {
       title: 'Une petite équipe, et ce que cela implique',
-      text: 'Nous sommes cinq, et nous le disons. C’est pourquoi votre installation ne dépend pas de nous : sur vos serveurs, bxFlow fonctionne sans aucune connexion vers l’éditeur, vos clés de chiffrement restent chez vous, et aucun compte éditeur n’existe sur votre instance. Vos processus s’exportent dans un fichier et se réimportent ailleurs — y compris sans nous.',
+      text: 'Nous sommes une petite équipe, et nous le disons. C’est pourquoi votre installation ne dépend pas de nous : sur vos serveurs, bxFlow fonctionne sans aucune connexion vers l’éditeur, vos clés de chiffrement restent chez vous, et aucun compte éditeur n’existe sur votre instance. Vos processus s’exportent dans un fichier et se réimportent ailleurs — y compris sans nous.',
       cta: 'Voir la procédure de déploiement',
     },
   },
