@@ -31,9 +31,9 @@ export const fr = {
         'Comment bxFlow s’installe : hébergé chez nous, ou sur vos serveurs derrière votre pare-feu. Prérequis, étapes, recette, sauvegardes, mises à jour.',
     },
     pricing: {
-      title: 'Tarifs — bxFlow | Licence pilote et paliers sur mesure',
+      title: 'Tarifs — bxFlow | Six mois sans facture, puis paliers sur mesure',
       description:
-        'Trois paliers adaptés à votre taille et à vos besoins. Démarrez avec une licence pilote sur 12 mois. Demandez un devis personnalisé.',
+        'Trois paliers adaptés à votre taille et à vos besoins. Commencez par six mois sans facture. Demandez un devis personnalisé.',
     },
     contact: {
       title: 'Contact & démo — bxFlow',
@@ -744,8 +744,8 @@ export const fr = {
     },
     pilot: {
       badge: 'Pour commencer',
-      title: 'Une licence pilote de 12 mois',
-      text: 'Un périmètre ciblé — un ou deux processus, une équipe — pour mesurer les résultats sur vos propres dossiers avant d’étendre. Mise en route et paramétrage accompagnés.',
+      title: 'Six mois sans facture',
+      text: 'Un périmètre ciblé — un ou deux processus, une équipe — pour mesurer les résultats sur vos propres dossiers avant d’étendre. Hébergé chez nous ou installé sur vos serveurs, mise en route et paramétrage accompagnés. Au terme des six mois, l’abonnement démarre au tarif convenu, sauf résiliation de votre part.',
       cta: 'Demander un devis pilote',
     },
     tiersLabel: 'Trois périmètres types',

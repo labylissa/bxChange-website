@@ -35,7 +35,7 @@ export const en: Translation = {
     pricing: {
       title: 'Pricing — bxFlow | Pilot licence and tailored tiers',
       description:
-        'Three tiers matched to your size and needs. Start with a 12-month pilot licence. Request a custom quote.',
+        'Three tiers matched to your size and needs. Start with six months free of charge. Request a custom quote.',
     },
     contact: {
       title: 'Contact & demo — bxFlow',
@@ -731,8 +731,8 @@ export const en: Translation = {
     },
     pilot: {
       badge: 'To get started',
-      title: 'A 12-month pilot licence',
-      text: 'A focused scope — one or two processes, one team — to measure results on your own cases before scaling. Onboarding and configuration supported.',
+      title: 'Six months, no invoice',
+      text: 'A focused scope — one or two processes, one team — to measure results on your own cases before scaling. Hosted by us or installed on your servers, with onboarding and configuration supported. After six months the subscription starts at the agreed rate, unless you cancel.',
       cta: 'Request a pilot quote',
     },
     tiersLabel: 'Three typical scopes',
