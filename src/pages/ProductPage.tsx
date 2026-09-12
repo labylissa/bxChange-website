@@ -178,6 +178,24 @@ export function ProductPage() {
         </div>
       </Section>
 
+      {/* La brochure : un décideur l'emporte en réunion, là où le site ne le suit pas. */}
+      <Section>
+        <div className="mx-auto flex max-w-3xl flex-col items-start gap-5 rounded-2xl border border-gold/30 bg-gold/5 p-8 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="text-xl font-bold text-navy-900">{c.product.brochure.title}</h2>
+            <p className="mt-2 leading-relaxed text-ink-500">{c.product.brochure.text}</p>
+          </div>
+          <a
+            href="/brochure-bxflow.pdf"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="btn-primary shrink-0"
+          >
+            {c.product.brochure.cta}
+          </a>
+        </div>
+      </Section>
+
       <CtaBand title={c.product.cta.title} subtitle={c.product.cta.subtitle} />
     </>
   );

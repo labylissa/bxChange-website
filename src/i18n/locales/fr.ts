@@ -319,6 +319,11 @@ export const fr = {
       caption:
         'Au centre, votre processus : le déroulé que vous avez dessiné. Vos logiciels existants ne disparaissent pas — ils sont interrogés en chemin, à l’étape qui en a besoin.',
     },
+    brochure: {
+      title: 'La brochure, à emporter',
+      text: 'Huit pages : le positionnement, le fonctionnement, les écrans réels, la sécurité et le déploiement, et le catalogue de processus. PDF, 1,8 Mo.',
+      cta: 'Télécharger la brochure',
+    },
     note: {
       title: 'Un mot sur la lecture des documents',
       text: 'bxFlow lit les documents joints à un dossier et propose de pré-remplir les champs qu’il sait reconnaître. C’est une aide à la saisie, pas une compréhension du document : la qualité dépend de la lisibilité de la pièce, et la validation vous revient toujours. Nous préférons l’annoncer ainsi plutôt que de vous laisser le découvrir en démonstration.',
@@ -867,6 +872,7 @@ export const fr = {
     legal: 'Légal',
     legalNotice: 'Mentions légales',
     privacy: 'Confidentialité',
+    brochure: 'Brochure (PDF)',
     followUs: 'Suivez-nous',
     linkedinAria: 'bxGroup Horizon sur LinkedIn',
     // L'éditeur, nommé une fois et discrètement. bxFlow reste le sujet

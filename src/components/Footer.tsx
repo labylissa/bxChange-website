@@ -60,6 +60,18 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              {/* Un fichier, pas une page : lien natif, nouvel onglet, et le format
+                  annoncé — un PDF qui s'ouvre sans prévenir agace. */}
+              <a
+                href="/brochure-bxflow.pdf"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-white/70 transition-colors hover:text-teal"
+              >
+                {t('footer.brochure')}
+              </a>
+            </li>
+            <li>
               <Link to={path('legalNotice')} className="text-white/70 transition-colors hover:text-teal">
                 {t('footer.legalNotice')}
               </Link>

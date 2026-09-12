@@ -307,6 +307,11 @@ export const en: Translation = {
       caption:
         'At the centre sits your process: the flow you drew. Your existing software does not go away — it is queried along the way, at the step that needs it.',
     },
+    brochure: {
+      title: 'The brochure, to take with you',
+      text: 'Eight pages: positioning, how it works, real screens, security and deployment, and the process catalogue. PDF, 1.8 MB — in French.',
+      cta: 'Download the brochure',
+    },
     note: {
       title: 'A word on automated reading',
       text: 'bxFlow reads a wide range of documents to pre-fill your files. The goal is never to replace your judgement, but to spare you repetitive entry and oversights. You always keep control of the final validation.',
@@ -852,6 +857,7 @@ export const en: Translation = {
     legal: 'Legal',
     legalNotice: 'Legal notice',
     privacy: 'Privacy',
+    brochure: 'Brochure (PDF, French)',
     followUs: 'Follow us',
     linkedinAria: 'bxGroup Horizon on LinkedIn',
     // L'éditeur, nommé une fois et discrètement. bxFlow reste le sujet
