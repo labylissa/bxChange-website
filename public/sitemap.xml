@@ -86,6 +86,20 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://bxgroup.io/fr/equipe</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/equipe"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/equipe"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxgroup.io/en/equipe</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/equipe"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/equipe"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://bxgroup.io/fr/tarifs</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/tarifs"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/tarifs"/>

@@ -194,8 +194,16 @@ export function DemoPage() {
     <>
       <Seo page="demo" title={c.meta.demo.title} description={c.meta.demo.description} />
 
-      {/* HERO compact — laisse voir le widget juste en dessous */}
-      <PageHero eyebrow={c.demo.hero.eyebrow} title={c.demo.hero.title} subtitle={c.demo.hero.subtitle}>
+      {/* HERO compact — laisse voir le widget juste en dessous. Sans le
+          schéma animé : sur cette page le visiteur vient prendre rendez-vous,
+          et tout ce qui repousse le calendrier vers le bas lui coûte un
+          défilement de plus avant le seul geste qu'on lui demande. */}
+      <PageHero
+        eyebrow={c.demo.hero.eyebrow}
+        title={c.demo.hero.title}
+        subtitle={c.demo.hero.subtitle}
+        flow={false}
+      >
         <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
           {meta.map((m, i) => (
             <span key={i} className="inline-flex items-center gap-2 text-ink-600">

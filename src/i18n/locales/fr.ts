@@ -20,6 +20,11 @@ export const fr = {
       description:
         'Plus de 70 processus métier livrés avec leurs étapes, leurs rôles et leurs validations : congés, notes de frais, onboarding, ouverture de dossier client, revue KYC.',
     },
+    team: {
+      title: 'L’équipe — bxFlow | Qui construit le produit',
+      description:
+        'Architecture logicielle, modélisation de processus, développement et conduite de projet : les cinq personnes qui construisent bxFlow, et leurs parcours.',
+    },
     security: {
       title: 'Sécurité — bxFlow | Chiffrement, isolation, conformité',
       description:
@@ -69,6 +74,8 @@ export const fr = {
     pricing: 'Tarifs',
     deployment: 'Déploiement',
     trust: 'Confiance',
+    team: 'L’équipe',
+    teamDesc: 'Qui construit bxFlow, et avec quel parcours.',
     securityDesc: 'Chiffrement, isolation entre clients, traçabilité des accès.',
     deploymentDesc: 'Sur vos serveurs ou hébergé chez nous — la procédure de bout en bout.',
     contact: 'Contact',
@@ -219,7 +226,7 @@ export const fr = {
     finalCta: {
       title: 'Voyons ce que bxFlow peut automatiser chez vous',
       subtitle:
-        'Une démonstration courte, centrée sur vos processus. Sans engagement.',
+        'Une heure, centrée sur vos processus. Sans engagement.',
       cta: 'Demander une démo',
     },
   },
@@ -376,6 +383,42 @@ export const fr = {
         alt: 'Journal d’audit de bxFlow filtré sur des dossiers de conformité.',
       },
     ],
+  },
+
+  team: {
+    hero: {
+      eyebrow: 'L’équipe',
+      title: 'Qui construit bxFlow',
+      subtitle:
+        'Cinq personnes : architecture logicielle, modélisation de processus métier, développement et conduite de projet. Nous avons passé assez de temps dans des banques et des assurances pour savoir par où un dossier se perd.',
+    },
+    membres: {
+      boly: {
+        role: 'Fondateur, architecte logiciel',
+        bio: 'Expert des moteurs de processus métier. Il porte la vision produit et les choix technologiques de bxFlow.',
+      },
+      farba: {
+        role: 'Expert workflow & transformation digitale',
+        bio: 'Il accompagne la modélisation et l’optimisation des processus métier chez nos clients.',
+      },
+      guy: {
+        role: 'Développeur Java senior',
+        bio: 'Spécialiste des solutions BPM et de la plateforme Camunda.',
+      },
+      abdourahmane: {
+        role: 'Développeur full stack',
+        bio: 'Il développe et fait évoluer les solutions bxGroup, du moteur aux écrans.',
+      },
+      malak: {
+        role: 'Chef de projet senior',
+        bio: 'Spécialiste AMOA et des processus bancaires. Elle accompagne les organisations dans la définition, l’analyse et l’amélioration de leurs processus métier.',
+      },
+    },
+    taille: {
+      title: 'Une petite équipe, et ce que cela implique',
+      text: 'Nous sommes cinq, et nous le disons. C’est pourquoi votre installation ne dépend pas de nous : sur vos serveurs, bxFlow fonctionne sans aucune connexion vers l’éditeur, vos clés de chiffrement restent chez vous, et aucun compte éditeur n’existe sur votre instance. Vos processus s’exportent dans un fichier et se réimportent ailleurs — y compris sans nous.',
+      cta: 'Voir la procédure de déploiement',
+    },
   },
 
   useCases: {
@@ -836,7 +879,7 @@ export const fr = {
       eyebrow: 'Planifier une démo',
       title: 'Réservez votre démonstration en quelques clics',
       subtitle:
-        'Choisissez le créneau qui vous arrange. La démonstration est en ligne, courte et centrée sur vos processus — sans engagement.',
+        'Choisissez le créneau qui vous arrange. La démonstration dure une heure, se tient en ligne et porte sur vos processus — sans engagement.',
       ctaScroll: 'Choisir mon créneau',
       ctaInline: 'Voir le calendrier',
     },
@@ -845,7 +888,7 @@ export const fr = {
       'Des réponses concrètes à vos questions, en direct',
       'Une estimation claire de ce que bxFlow peut automatiser chez vous',
     ],
-    duration: '30 minutes',
+    duration: '1 heure',
     durationLabel: 'Durée',
     online: 'En ligne',
     onlineLabel: 'Format',

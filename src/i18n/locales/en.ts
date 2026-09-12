@@ -22,6 +22,11 @@ export const en: Translation = {
       description:
         'More than 70 business processes ready to run: leave requests, expense reports, onboarding, client file opening. The library keeps growing.',
     },
+    team: {
+      title: 'The team — bxFlow | Who builds the product',
+      description:
+        'Software architecture, business process modelling, development and project management: the five people who build bxFlow, and their backgrounds.',
+    },
     security: {
       title: 'Security — bxFlow | Encryption, isolation, compliance',
       description:
@@ -71,6 +76,8 @@ export const en: Translation = {
     pricing: 'Pricing',
     deployment: 'Deployment',
     trust: 'Trust',
+    team: 'The team',
+    teamDesc: 'Who builds bxFlow, and with what background.',
     securityDesc: 'Encryption, separation between clients, access audit trail.',
     deploymentDesc: 'On your servers or hosted by us — the end-to-end procedure.',
     contact: 'Contact',
@@ -217,7 +224,7 @@ export const en: Translation = {
     },
     finalCta: {
       title: 'Let’s see what bxFlow can run for you',
-      subtitle: 'A short demonstration focused on your processes. No commitment.',
+      subtitle: 'One hour, focused on your processes. No commitment.',
       cta: 'Request a demo',
     },
   },
@@ -364,6 +371,42 @@ export const en: Translation = {
         alt: 'bxFlow audit log filtered on compliance cases.',
       },
     ],
+  },
+
+  team: {
+    hero: {
+      eyebrow: 'The team',
+      title: 'Who builds bxFlow',
+      subtitle:
+        'Five people: software architecture, business process modelling, development and project management. We have spent enough time inside banks and insurers to know where a case gets lost.',
+    },
+    membres: {
+      boly: {
+        role: 'Founder, software architect',
+        bio: 'Business process engine specialist. He drives the product vision and the technology choices behind bxFlow.',
+      },
+      farba: {
+        role: 'Workflow & digital transformation expert',
+        bio: 'He supports the modelling and optimisation of business processes at our clients.',
+      },
+      guy: {
+        role: 'Senior Java developer',
+        bio: 'Specialist in BPM solutions and the Camunda platform.',
+      },
+      abdourahmane: {
+        role: 'Full stack developer',
+        bio: 'He builds and evolves the bxGroup solutions, from the engine to the screens.',
+      },
+      malak: {
+        role: 'Senior project manager',
+        bio: 'Business analysis and banking process specialist. She supports organisations in defining, analysing and improving their business processes.',
+      },
+    },
+    taille: {
+      title: 'A small team, and what that means for you',
+      text: 'There are five of us, and we say so. That is exactly why your installation does not depend on us: on your servers, bxFlow runs with no connection back to the vendor, your encryption keys stay with you, and no vendor account exists on your instance. Your processes export to a file and import elsewhere — including without us.',
+      cta: 'See the deployment procedure',
+    },
   },
 
   useCases: {
@@ -821,7 +864,7 @@ export const en: Translation = {
       eyebrow: 'Book a demo',
       title: 'Book your demo in a few clicks',
       subtitle:
-        'Pick the slot that suits you. The demo is online, short and focused on your processes — no commitment.',
+        'Pick the slot that suits you. The demo runs for one hour, online, and covers your processes — no commitment.',
       ctaScroll: 'Pick my slot',
       ctaInline: 'See the calendar',
     },
@@ -830,7 +873,7 @@ export const en: Translation = {
       'Concrete answers to your questions, live',
       'A clear estimate of what bxFlow can automate for you',
     ],
-    duration: '30 minutes',
+    duration: '1 hour',
     durationLabel: 'Duration',
     online: 'Online',
     onlineLabel: 'Format',

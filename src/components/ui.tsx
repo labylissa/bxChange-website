@@ -78,10 +78,12 @@ export function PageHero({
           {subtitle && <p className="mt-6 text-lg text-ink-500">{subtitle}</p>}
           {children}
         </div>
-        {/* Le schéma animé sur TOUS les heros de page, et non sur la seule page
-            Produit : c'est ce que le produit fait, et un visiteur qui arrive par
-            le catalogue ou la sécurité doit le comprendre aussi vite que celui
-            qui arrive par le produit. */}
+        {/* Le schéma animé n'est plus sur tous les heros : il l'a été, et le
+            commentaire l'affirmait encore alors que six pages sur neuf le
+            désactivaient déjà. Il reste là où le visiteur DÉCOUVRE le produit
+            (catalogue, cas d'usage, contact) ; il est retiré partout où il
+            repousse vers le bas ce qu'on est venu chercher — le calendrier de
+            la page démo, le tarif, les fiches de l'équipe. */}
         {flow !== false && (
           <div className="mt-10 rounded-2xl border border-ink-100 bg-ink-50/60 p-6 lg:p-8">
             <WorkflowAnimation />
