@@ -390,7 +390,7 @@ export const en: Translation = {
         bio: 'He supports the modelling and optimisation of business processes at our clients.',
       },
       guy: {
-        role: 'Senior Java developer',
+        role: 'IT business analyst / BPM-BPMN expert',
         bio: 'Specialist in BPM solutions and the Camunda platform.',
       },
       abdourahmane: {

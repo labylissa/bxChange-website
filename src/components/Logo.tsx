@@ -38,22 +38,19 @@ export function SyncMark({ className = '' }: { className?: string }) {
 }
 
 /**
- * Le logo bxFlow, dans sa forme livrée avec le produit.
+ * Le logo bxFlow — une seule composition, deux fonds.
  *
- * Le site portait encore l'ancienne marque — un carré « bx » surmontant le mot
- * « Change ». Le produit s'appelle bxFlow et dispose de son logotype : un
- * motif de flux doré, « bx » en encre marine, « Flow » en doré.
+ * L'en-tête portait le logotype en image (`logo-bxflow.png`, motif doré + mot
+ * en encre) et le pied de page un montage tuile + mot. Deux dessins pour une
+ * seule marque : selon la page qu'il regardait, le visiteur ne voyait pas le
+ * même logo. C'est la tuile et le mot qui font foi — c'est aussi ce que porte
+ * le produit lui-même, en haut de son menu.
  *
- * ## Deux fonds, deux traitements — et pourquoi pas une seule image
- *
- * Le logotype porte du marine sur fond transparent. Sur le pied de page, qui
- * est marine, le « bx » disparaîtrait purement et simplement. Sur fond sombre
- * on assemble donc la tuile (qui apporte son propre fond) et le mot en texte,
- * aux couleurs de la marque.
- *
- * Ce n'est pas la solution idéale : un export clair du logotype — « bx » en
- * blanc — serait plus fidèle et remplacerait ce montage par une simple image.
- * À demander au moment où la charte sera figée.
+ * Reste la contrainte qui avait produit ces deux versions : le « bx » est en
+ * encre, il disparaîtrait sur le pied de page marine. Le mot est donc écrit en
+ * texte plutôt que posé en image, et seule sa couleur change — « Flow » garde
+ * son doré sur les deux fonds. Un export clair du logotype remplacerait ce
+ * montage par une image unique, le jour où la charte sera figée.
  */
 export function Logo({ variant = 'dark', className = '', markOnly = false }: LogoProps) {
   if (markOnly) {
@@ -68,32 +65,20 @@ export function Logo({ variant = 'dark', className = '', markOnly = false }: Log
     );
   }
 
-  // Fond sombre : la tuile porte son propre marine, le mot est écrit.
-  if (variant === 'light') {
-    return (
-      <span className={`inline-flex items-center gap-2.5 ${className}`}>
-        <img
-          src="/icone-bxflow.png"
-          alt=""
-          aria-hidden="true"
-          className="h-9 w-9 rounded-lg"
-          width={512}
-          height={512}
-        />
-        <span className="text-xl font-bold tracking-tight text-white">
-          bx<span className="text-gold">Flow</span>
-        </span>
-      </span>
-    );
-  }
-
   return (
-    <img
-      src="/logo-bxflow.png"
-      alt="bxFlow"
-      className={className || 'h-10 w-auto'}
-      width={1000}
-      height={250}
-    />
+    <span className={`inline-flex items-center gap-2.5 ${className}`}>
+      <img
+        src="/icone-bxflow.png"
+        alt=""
+        aria-hidden="true"
+        className="h-9 w-9 shrink-0 rounded-lg"
+        width={512}
+        height={512}
+      />
+      <span className="text-xl font-bold tracking-tight">
+        <span className={variant === 'light' ? 'text-white' : 'text-navy-900'}>bx</span>
+        <span className="text-gold">Flow</span>
+      </span>
+    </span>
   );
 }

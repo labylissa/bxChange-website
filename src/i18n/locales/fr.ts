@@ -402,7 +402,7 @@ export const fr = {
         bio: 'Il accompagne la modélisation et l’optimisation des processus métier chez nos clients.',
       },
       guy: {
-        role: 'Développeur Java senior',
+        role: 'Business Analyst IT / Expert BPM-BPMN',
         bio: 'Spécialiste des solutions BPM et de la plateforme Camunda.',
       },
       abdourahmane: {

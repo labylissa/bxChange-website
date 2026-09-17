@@ -285,7 +285,7 @@ export function HomePage() {
             <h2 className="mt-3 text-2xl font-bold sm:text-3xl">{c.home.deploy.title}</h2>
             <p className="mt-3 max-w-2xl leading-relaxed text-white/70">{c.home.deploy.text}</p>
           </div>
-          <Link to={path('deployment')} className="btn-primary shrink-0">
+          <Link to={path('deployment')} className="btn-inverse shrink-0">
             {c.home.deploy.cta}
             <Icons.arrowRight className="h-4 w-4" />
           </Link>

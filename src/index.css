@@ -33,8 +33,19 @@
     @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2;
   }
 
+  /* L'action principale est la plus foncée de la page : sur notre blanc chaud,
+     un aplat d'encre se voit avant tout le reste. Le doré était un aplat clair
+     portant un texte presque noir — deux tons voisins, donc un bouton qu'on
+     lisait de près. Le doré reste la marque : il revient au survol. */
   .btn-primary {
-    @apply btn bg-gold text-navy-900 hover:bg-gold-600 hover:text-white hover:shadow-card-hover;
+    @apply btn bg-navy-900 text-white hover:bg-gold hover:text-navy-900 hover:shadow-card-hover;
+  }
+
+  /* Le même bouton sur fond sombre (pied de page, encarts encre) : l'encre y
+     disparaîtrait. On inverse, et le survol reste doré — une seule interaction
+     pour toute l'action principale du site. */
+  .btn-inverse {
+    @apply btn bg-white text-navy-900 hover:bg-gold hover:text-navy-900 hover:shadow-card-hover;
   }
 
   .btn-secondary {

@@ -144,7 +144,7 @@ export function Header() {
             bxFlow porte son propre doré : posé sur du doré, le mot « Flow »
             aurait disparu. */}
         <Link to={path('home')} aria-label="bxFlow" className="shrink-0">
-          <Logo className="h-10 w-auto" />
+          <Logo />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Principale">
