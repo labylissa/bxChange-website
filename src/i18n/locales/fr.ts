@@ -413,7 +413,7 @@ export const fr = {
       },
       guy: {
         role: 'Business Analyst IT / Expert BPM-BPMN',
-        bio: 'Spécialiste des solutions BPM et de la plateforme Camunda.',
+        bio: 'Il traduit un processus métier en modèle BPMN exécutable et suit sa mise en œuvre jusqu’à la recette. Développeur Java, expert Jira : il conçoit les circuits de validation et les statuts avec ceux qui les utiliseront.',
       },
       abdourahmane: {
         role: 'Développeur full stack',

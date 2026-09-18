@@ -401,7 +401,7 @@ export const en: Translation = {
       },
       guy: {
         role: 'IT business analyst / BPM-BPMN expert',
-        bio: 'Specialist in BPM solutions and the Camunda platform.',
+        bio: 'He turns a business process into an executable BPMN model and follows it through to acceptance testing. A Java developer and Jira expert, he designs approval paths and statuses with the people who will use them.',
       },
       abdourahmane: {
         role: 'Full stack developer',
