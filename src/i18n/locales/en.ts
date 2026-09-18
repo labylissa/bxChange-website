@@ -397,6 +397,10 @@ export const en: Translation = {
         role: 'Full stack developer',
         bio: 'He builds and evolves the bxGroup solutions, from the engine to the screens.',
       },
+      amadou: {
+        role: 'DevOps engineer',
+        bio: 'He handles the deployment, monitoring and reliability of bxFlow instances.',
+      },
       malak: {
         role: 'Senior project manager',
         bio: 'Business analysis and banking process specialist. She supports organisations in defining, analysing and improving their business processes.',

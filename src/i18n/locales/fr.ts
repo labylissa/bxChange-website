@@ -409,6 +409,10 @@ export const fr = {
         role: 'Développeur full stack',
         bio: 'Il développe et fait évoluer les solutions bxGroup, du moteur aux écrans.',
       },
+      amadou: {
+        role: 'Ingénieur DevOps',
+        bio: 'Il prend en charge le déploiement, la supervision et la fiabilité des instances bxFlow.',
+      },
       malak: {
         role: 'Chef de projet senior',
         bio: 'Spécialiste AMOA et des processus bancaires. Elle accompagne les organisations dans la définition, l’analyse et l’amélioration de leurs processus métier.',

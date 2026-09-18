@@ -18,7 +18,7 @@
  * fait échouer la compilation si une fiche manque dans les traductions, plutôt
  * que d'afficher une carte sans rôle ni parcours.
  */
-export type MembreId = 'boly' | 'farba' | 'guy' | 'abdourahmane' | 'malak';
+export type MembreId = 'boly' | 'farba' | 'guy' | 'abdourahmane' | 'malak' | 'amadou';
 
 export interface Membre {
   id: MembreId;
@@ -30,8 +30,11 @@ export interface Membre {
 
 export const EQUIPE: Membre[] = [
   { id: 'boly', nom: 'Boly Sene', initiales: 'BS', photo: '/equipe/boly.webp' },
-  { id: 'farba', nom: 'El Hadj Farba Toure', initiales: 'FT', photo: '/equipe/farba.webp' },
+  // Retiré de la page en attendant — la fiche et ses textes restent en place,
+  // il suffit de décommenter cette ligne pour le réafficher.
+  // { id: 'farba', nom: 'El Hadj Farba Toure', initiales: 'FT', photo: '/equipe/farba.webp' },
   { id: 'guy', nom: 'Guy Essala', initiales: 'GE', photo: '/equipe/guy.webp' },
   { id: 'abdourahmane', nom: 'Abdourahmane Sow', initiales: 'AS', photo: '/equipe/abdourahmane.webp' },
   { id: 'malak', nom: 'Malak Mouaky', initiales: 'MM' },
+  { id: 'amadou', nom: 'Amadou Nael', initiales: 'AN' },
 ];
