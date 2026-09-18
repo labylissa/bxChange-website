@@ -206,8 +206,8 @@ export const en: Translation = {
         },
         {
           title: 'Who did what, and when',
-          text: 'A case history: four people, four commented decisions. Nobody approves their own work.',
-          alt: 'History of a bxFlow case showing successive transitions, their authors and their comments.',
+          text: 'The history of that same case: every step change dated, signed and explained — down to the field edited between two decisions. Nobody approves their own work.',
+          alt: 'History of the fire claim case in bxFlow, showing successive transitions, their authors and their comments.',
         },
       ],
     },
@@ -333,42 +333,52 @@ export const en: Translation = {
     eyebrow: 'In pictures',
     title: 'The product, screen by screen',
     subtitle:
-      'Captured from the application on demonstration cases. People, clients and amounts are fictitious.',
+      'Captured from the application on demonstration cases. The day-to-day screens first, the configuration ones after. People, clients and amounts are fictitious.',
+    groupes: {
+      metier: {
+        title: 'What your teams see',
+        text: 'No technical skill required: open a case, fill it in, move it along, follow it. That is everything a case handler needs to know in order to work.',
+      },
+      configuration: {
+        title: 'What the person who configures it sees',
+        text: 'The process, the links to your existing systems and the shared reference data are all set up inside the application, without writing a line of code. These screens open only to the people entitled to them: an organisation with no technical team never has to visit them.',
+      },
+    },
     items: [
       {
-        title: 'Client onboarding, drawn',
-        text: 'From file submission to opening the relationship, with send-back for correction and reasoned rejection.',
-        alt: 'bxFlow process designer showing the client onboarding workflow.',
-      },
-      {
         title: 'Guided data entry',
-        text: 'Closed lists instead of free text: every case can be sorted and compared, and required fields are checked before submission.',
-        alt: 'Insurance claim form in bxFlow, with a multiple-choice list open.',
+        text: 'Closed lists rather than free text: the client is picked from the shared reference data, every case can be sorted and compared, and required fields are checked before submission.',
+        alt: 'Form for creating an onboarding case in bxFlow, with a multiple-choice list open.',
       },
       {
         title: 'A case that queries your systems',
-        text: 'When the case opens, the country record is read from the external service using the ISO code entered: nothing is copied by hand.',
-        alt: 'Client onboarding case in bxFlow: country record loaded from a SOAP service when the case opens.',
-      },
-      {
-        title: 'An existing system, queried',
-        text: 'A real SOAP service called from bxFlow: the XML response comes back as JSON, ready to fill a case’s fields.',
-        alt: 'SOAP connector test in bxFlow: FullCountryInfo call for Senegal, response shown as JSON.',
-      },
-      {
-        title: 'Shared reference data',
-        text: 'Clients, suppliers, branches: records shared by every process, entered by hand, imported from a CSV file or kept current by a connector.',
-        alt: 'Clients reference data in bxFlow: records with KYC reference, segment and residence zone.',
+        text: 'When the case opens, the country record is read from the external service using the ISO code entered: nothing is retyped by hand.',
+        alt: 'Onboarding case in bxFlow: country record loaded from a SOAP service on opening.',
       },
       {
         title: 'Live oversight',
-        text: 'More than 20,000 card transaction disputes, broken down by status and channel.',
+        text: 'Over 20,000 card transaction disputes, broken down by status and by channel.',
         alt: 'bxFlow dashboard of card transaction disputes.',
       },
       {
         title: 'The audit log',
-        text: 'Every action, its author and its date — filterable and exportable for an audit.',
+        text: 'Every action, its author and its date, filterable and exportable for an inspection.',
         alt: 'bxFlow audit log filtered on compliance cases.',
+      },
+      {
+        title: 'Onboarding, drawn',
+        text: 'From the submitted file to the opened relationship, with return for correction and reasoned rejection — the very path the screens above follow.',
+        alt: 'bxFlow process designer showing the onboarding workflow.',
+      },
+      {
+        title: 'An existing system, queried',
+        text: 'A real SOAP service called from bxFlow: the XML response comes back as JSON, ready to fill in the fields of a case.',
+        alt: 'Testing a SOAP connector in bxFlow: FullCountryInfo call on Senegal, response shown as JSON.',
+      },
+      {
+        title: 'Shared reference data',
+        text: 'Clients, suppliers, branches: records shared by every process, typed in by hand, imported from a CSV file or kept up to date by a connector.',
+        alt: 'Clients reference data in bxFlow: records with KYC reference, segment and residence zone.',
       },
     ],
   },

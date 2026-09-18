@@ -161,12 +161,12 @@ export function HomePage() {
           {([
             ['concepteur-dos', 'lg:col-span-3'],
             ['dossier-sinistre', 'lg:col-span-2'],
-            ['historique-kyc', ''],
+            ['historique-sinistre', ''],
           ] as const).map(([id, place], i) => {
             const item = c.home.shots.items[i];
             return (
               <Reveal key={id} delay={i * 100} className={place}>
-                <Capture id={id} alt={item.alt} className={id === 'historique-kyc' ? 'mx-auto max-w-sm' : ''} />
+                <Capture id={id} alt={item.alt} className={id === 'historique-sinistre' ? 'mx-auto max-w-sm' : ''} />
                 <h3 className="mt-4 text-base font-semibold text-navy-900">{item.title}</h3>
                 <p className="mt-1 text-sm leading-relaxed text-ink-500">{item.text}</p>
               </Reveal>

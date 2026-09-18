@@ -207,8 +207,8 @@ export const fr = {
         },
         {
           title: 'Qui a fait quoi, et quand',
-          text: 'L’historique d’un dossier : quatre intervenants, quatre décisions commentées. Personne ne valide son propre travail.',
-          alt: 'Historique d’un dossier bxFlow montrant les transitions successives, leurs auteurs et leurs commentaires.',
+          text: 'L’historique du même dossier : chaque passage d’étape est daté, signé et motivé — jusqu’au champ modifié entre deux décisions. Personne ne valide son propre travail.',
+          alt: 'Historique du dossier de sinistre incendie dans bxFlow : transitions successives, leurs auteurs et leurs commentaires.',
         },
       ],
     },
@@ -345,32 +345,27 @@ export const fr = {
     eyebrow: 'En images',
     title: 'Le produit, écran par écran',
     subtitle:
-      'Captures de l’application sur des dossiers de démonstration. Personnes, clients et montants sont fictifs.',
+      'Captures de l’application sur des dossiers de démonstration. D’abord les écrans du quotidien, ensuite ceux du paramétrage. Personnes, clients et montants sont fictifs.',
+    groupes: {
+      metier: {
+        title: 'Ce que voient vos équipes',
+        text: 'Aucune compétence technique : on ouvre un dossier, on le remplit, on le fait avancer, on le suit. C’est la totalité de ce qu’un gestionnaire a besoin de connaître pour travailler.',
+      },
+      configuration: {
+        title: 'Ce que voit celui qui paramètre',
+        text: 'Le processus, les connexions aux systèmes existants et les référentiels partagés se règlent dans l’application, sans écrire une ligne de code. Ces écrans ne s’ouvrent qu’aux personnes qui en ont le droit : une organisation qui n’a pas d’équipe technique n’a jamais à les visiter.',
+      },
+    },
     items: [
       {
-        title: 'L’entrée en relation, dessinée',
-        text: 'Du dépôt du dossier à l’ouverture de la relation, avec renvoi pour correction et rejet motivé.',
-        alt: 'Concepteur de processus de bxFlow affichant le circuit d’entrée en relation.',
-      },
-      {
         title: 'Une saisie guidée',
-        text: 'Des listes fermées plutôt que de la saisie libre : chaque dossier se classe et se compare, et les champs obligatoires sont vérifiés avant l’envoi.',
-        alt: 'Formulaire de déclaration de sinistre dans bxFlow, liste à choix multiples ouverte.',
+        text: 'Des listes fermées plutôt que de la saisie libre : le client est choisi dans le référentiel partagé, chaque dossier se classe et se compare, et les champs obligatoires sont vérifiés avant l’envoi.',
+        alt: 'Formulaire de création d’un dossier d’entrée en relation dans bxFlow, liste à choix multiples ouverte.',
       },
       {
         title: 'Un dossier qui interroge vos systèmes',
         text: 'À l’ouverture du dossier, la fiche pays est lue dans le service externe à partir du code ISO saisi : rien n’est recopié à la main.',
         alt: 'Dossier d’entrée en relation dans bxFlow : fiche pays chargée depuis un service SOAP à l’ouverture.',
-      },
-      {
-        title: 'Un système existant, interrogé',
-        text: 'Un vrai service SOAP appelé depuis bxFlow : la réponse XML revient en JSON, prête à remplir les champs d’un dossier.',
-        alt: 'Test d’un connecteur SOAP dans bxFlow : appel FullCountryInfo sur le Sénégal, réponse affichée en JSON.',
-      },
-      {
-        title: 'Des référentiels partagés',
-        text: 'Clients, fournisseurs, agences : des fiches communes à tous les process, saisies à la main, importées depuis un fichier CSV ou tenues à jour par un connecteur.',
-        alt: 'Référentiel Clients dans bxFlow : fiches avec référence KYC, segment et zone de résidence.',
       },
       {
         title: 'Le pilotage en direct',
@@ -381,6 +376,21 @@ export const fr = {
         title: 'Le journal d’audit',
         text: 'Chaque action, son auteur et sa date, filtrable et exportable pour un contrôle.',
         alt: 'Journal d’audit de bxFlow filtré sur des dossiers de conformité.',
+      },
+      {
+        title: 'L’entrée en relation, dessinée',
+        text: 'Du dépôt du dossier à l’ouverture de la relation, avec renvoi pour correction et rejet motivé — le circuit que suivent les écrans ci-dessus.',
+        alt: 'Concepteur de processus de bxFlow affichant le circuit d’entrée en relation.',
+      },
+      {
+        title: 'Un système existant, interrogé',
+        text: 'Un vrai service SOAP appelé depuis bxFlow : la réponse XML revient en JSON, prête à remplir les champs d’un dossier.',
+        alt: 'Test d’un connecteur SOAP dans bxFlow : appel FullCountryInfo sur le Sénégal, réponse affichée en JSON.',
+      },
+      {
+        title: 'Des référentiels partagés',
+        text: 'Clients, fournisseurs, agences : des fiches communes à tous les process, saisies à la main, importées depuis un fichier CSV ou tenues à jour par un connecteur.',
+        alt: 'Référentiel Clients dans bxFlow : fiches avec référence KYC, segment et zone de résidence.',
       },
     ],
   },

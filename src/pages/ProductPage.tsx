@@ -83,12 +83,18 @@ function FlowDiagram() {
   );
 }
 
-// Dans l'ordre des textes de `screens.items`.
-const GALERIE: CaptureId[] = [
-  'concepteur-kyc',
-  'formulaire-sinistre', 'dossier-kyc-pays',
-  'connecteur-soap', 'referentiel-clients',
-  'tableau-de-bord', 'audit',
+/* La galerie est coupée en deux, parce que deux publics la lisent : une
+   direction métier veut savoir ce que ses agents auront sous les yeux, une
+   direction informatique veut voir ce qui se paramètre. Mélangées, les deux
+   séries se répondaient mal — un concepteur de processus au milieu d'écrans
+   de saisie fait croire qu'il faut savoir le manier pour se servir du produit.
+
+   Les captures d'un même groupe portent sur LE MÊME processus (l'entrée en
+   relation) : une saisie de sinistre suivie d'un dossier KYC donnait à lire
+   deux histoires sans lien. Les textes de `screens.items` suivent cet ordre. */
+const GROUPES: { cle: 'metier' | 'configuration'; captures: CaptureId[] }[] = [
+  { cle: 'metier', captures: ['formulaire-kyc', 'dossier-kyc-pays', 'tableau-de-bord', 'audit'] },
+  { cle: 'configuration', captures: ['concepteur-kyc', 'connecteur-soap', 'referentiel-clients'] },
 ];
 
 export function ProductPage() {
@@ -139,22 +145,36 @@ export function ProductPage() {
             subtitle={c.screens.subtitle}
           />
         </Reveal>
-        <div className="mt-12 grid items-start gap-x-8 gap-y-12 md:grid-cols-2">
-          {GALERIE.map((id, i) => {
-            const item = c.screens.items[i];
-            return (
-              <Reveal key={id} delay={(i % 2) * 100} from="up" className={id === 'concepteur-kyc' ? 'md:col-span-2' : ''}>
-                <Capture
-                  id={id}
-                  alt={item.alt}
-                  className={id === 'formulaire-sinistre' ? 'mx-auto max-w-md' : ''}
-                />
-                <h3 className="mt-4 text-base font-semibold text-navy-900">{item.title}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-ink-500">{item.text}</p>
+        {GROUPES.map((groupe, g) => {
+          const debut = GROUPES.slice(0, g).reduce((n, x) => n + x.captures.length, 0);
+          const entete = c.screens.groupes[groupe.cle];
+          return (
+            <div key={groupe.cle} className={g === 0 ? 'mt-12' : 'mt-20'}>
+              <Reveal>
+                <div className="border-l-2 border-gold/60 pl-5">
+                  <h3 className="text-xl font-semibold text-navy-900">{entete.title}</h3>
+                  <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-500">{entete.text}</p>
+                </div>
               </Reveal>
-            );
-          })}
-        </div>
+              <div className="mt-8 grid items-start gap-x-8 gap-y-12 md:grid-cols-2">
+                {groupe.captures.map((id, i) => {
+                  const item = c.screens.items[debut + i];
+                  return (
+                    <Reveal key={id} delay={(i % 2) * 100} from="up" className={id === 'concepteur-kyc' ? 'md:col-span-2' : ''}>
+                      <Capture
+                        id={id}
+                        alt={item.alt}
+                        className={id === 'formulaire-kyc' ? 'mx-auto max-w-md' : ''}
+                      />
+                      <h3 className="mt-4 text-base font-semibold text-navy-900">{item.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-ink-500">{item.text}</p>
+                    </Reveal>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
       </Section>
 
       <Section className="bg-ink-50">
