@@ -23,22 +23,20 @@ import type { Lang } from '@/i18n';
  * Une étape n'est pas une activité BPMN : c'est un STATUT. Le dossier y
  * séjourne, le délai y court, on en sort par une transition nommée. La
  * convention est donc celle des machines à états — le statut se nomme par un
- * nom ou une nominalisation qui dit dans quel état est le dossier
+ * nom ou une nominalisation disant dans quel état est le dossier
  * (« Réception de la facture », « En attente d'approbation »), la transition
  * par un verbe à l'infinitif (« Valider », « Rejeter »).
  *
- * D'où l'erreur à ne pas refaire : nommer une étape au participe passé
- * (« Invoice received », « Report raised ») la fait lire comme l'ÉVÉNEMENT qui
- * l'ouvre, pas comme l'état où se trouve le dossier — trente-trois libellés
- * anglais étaient dans ce cas, alors que leurs équivalents français ne
- * l'étaient pas : le même processus se lisait en états d'un côté, en
- * événements de l'autre. Le participe passé reste juste pour une étape
- * TERMINALE (« Sinistre réglé »), qui décrit bien un état définitif.
+ * D'où l'erreur à ne pas refaire dans `catalogue_en.py` : nommer une étape au
+ * participe passé (« Invoice received », « Report raised ») la fait lire comme
+ * l'ÉVÉNEMENT qui l'ouvre, pas comme l'état où se trouve le dossier — trente
+ * libellés anglais étaient dans ce cas alors que leurs équivalents français ne
+ * l'étaient pas, si bien que le même processus se lisait en états d'un côté et
+ * en événements de l'autre. Le participe passé reste juste pour une étape
+ * TERMINALE, qui décrit bien un état définitif — mais celles-là ne sont pas
+ * affichées.
  *
- * Les étapes terminales ne sont pas listées ici. Le filtre porte sur le TYPE
- * de l'étape, jamais sur son nom : écarter « Rejeté » et « Annulé » par leur
- * libellé laissait passer « Approuvée », terminale des congés, affichée comme
- * une étape du déroulé et comptée dans `stepCount`.
+ * Les étapes terminales sont écartées par leur TYPE, jamais par leur nom.
  */
 
 export const PROCESS_CATEGORIES = [
@@ -115,7 +113,7 @@ export const processes: Process[] = [
       fr: ['Planification', 'Réalisation', 'Validation rapport'],
       en: ['Planning', 'Fieldwork', 'Report approval'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -131,7 +129,7 @@ export const processes: Process[] = [
       fr: ['Signalement', 'Analyse conformité', 'Décision de déclaration'],
       en: ['Report drafting', 'Compliance analysis', 'Filing decision'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -148,7 +146,7 @@ export const processes: Process[] = [
       fr: ['Collecte du dossier', 'Vérification des pièces', 'Criblage & scoring'],
       en: ['File collection', 'Document verification', 'Screening and scoring'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -164,7 +162,7 @@ export const processes: Process[] = [
       fr: ['Planification de la revue', 'Collecte auprès du client', 'Analyse & réévaluation'],
       en: ['Review planning', 'Collection from the client', 'Analysis and re-rating'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -180,7 +178,7 @@ export const processes: Process[] = [
       fr: ['Signalement', 'Analyse conformité', 'Validation direction'],
       en: ['Case referral', 'Compliance analysis', 'Executive approval'],
     },
-    stepCount: 4,
+    stepCount: 3,
     roleCount: 1,
   },
   {
@@ -196,7 +194,7 @@ export const processes: Process[] = [
       fr: ['Déclaration', 'Avis du manager', 'Analyse du déontologue'],
       en: ['Disclosure', 'Manager opinion', 'Ethics officer review'],
     },
-    stepCount: 4,
+    stepCount: 3,
     roleCount: 1,
   },
   {
@@ -212,7 +210,7 @@ export const processes: Process[] = [
       fr: ['Déclaration', 'Contrôle du seuil', 'Décision du déontologue'],
       en: ['Disclosure', 'Threshold check', 'Ethics officer decision'],
     },
-    stepCount: 4,
+    stepCount: 3,
     roleCount: 1,
   },
   {
@@ -228,7 +226,7 @@ export const processes: Process[] = [
       fr: ['Cadrage', 'Avis risques', 'Avis conformité & juridique'],
       en: ['Scoping', 'Risk opinion', 'Compliance and legal opinion'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 2,
   },
   {
@@ -244,7 +242,7 @@ export const processes: Process[] = [
       fr: ['Veille', 'Analyse d\'impact', 'Plan de mise en conformité'],
       en: ['Watch', 'Impact analysis', 'Compliance plan'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -260,7 +258,7 @@ export const processes: Process[] = [
       fr: ['Déclaration', 'Qualification & chiffrage', 'Analyse & plan d\'action'],
       en: ['Incident reporting', 'Assessment and costing', 'Analysis and action plan'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -276,7 +274,7 @@ export const processes: Process[] = [
       fr: ['Lancement de la campagne', 'Auto-évaluation par l\'entité', 'Challenge risques'],
       en: ['Campaign launch', 'Self-assessment by the entity', 'Risk challenge'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -292,7 +290,7 @@ export const processes: Process[] = [
       fr: ['Planification', 'Exécution du contrôle', 'Supervision risques'],
       en: ['Planning', 'Control execution', 'Risk supervision'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -308,7 +306,7 @@ export const processes: Process[] = [
       fr: ['Enregistrement', 'Plan d\'action', 'Mise en œuvre'],
       en: ['Recording', 'Action plan', 'Implementation'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -357,7 +355,7 @@ export const processes: Process[] = [
       fr: ['Demande', 'Analyse risques', 'Décision du comité'],
       en: ['Request', 'Risk analysis', 'Committee decision'],
     },
-    stepCount: 4,
+    stepCount: 3,
     roleCount: 1,
   },
   {
@@ -373,7 +371,7 @@ export const processes: Process[] = [
       fr: ['Montage du dossier', 'Analyse du risque de crédit', 'Comité de crédit'],
       en: ['File preparation', 'Credit risk analysis', 'Credit committee'],
     },
-    stepCount: 4,
+    stepCount: 3,
     roleCount: 1,
   },
   {
@@ -389,7 +387,7 @@ export const processes: Process[] = [
       fr: ['Demande', 'Contrôle des incompatibilités', 'Validation direction'],
       en: ['Request', 'Incompatibility check', 'Executive approval'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -405,7 +403,7 @@ export const processes: Process[] = [
       fr: ['Déclaration du sinistre', 'Expertise', 'Analyse de la garantie'],
       en: ['Claim reporting', 'Assessment', 'Cover analysis'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -421,7 +419,7 @@ export const processes: Process[] = [
       fr: ['Demande', 'Avis technique', 'Décision direction'],
       en: ['Request', 'Technical opinion', 'Executive decision'],
     },
-    stepCount: 4,
+    stepCount: 3,
     roleCount: 1,
   },
   {
@@ -437,7 +435,7 @@ export const processes: Process[] = [
       fr: ['Dossier de candidature', 'Vérification de l\'agrément', 'Contrôle conformité'],
       en: ['Application', 'Licence verification', 'Compliance check'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -454,7 +452,7 @@ export const processes: Process[] = [
       fr: ['Dépôt du dossier', 'Instruction du dossier', 'Contrôle conformité'],
       en: ['Application filing', 'Application review', 'Compliance check'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -470,7 +468,7 @@ export const processes: Process[] = [
       fr: ['Demande d\'installation', 'Préparation du matériel', 'Installation sur site'],
       en: ['Installation request', 'Equipment preparation', 'On-site installation'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -486,7 +484,7 @@ export const processes: Process[] = [
       fr: ['Réception de la contestation', 'Analyse de la contestation', 'Instruction auprès du réseau'],
       en: ['Dispute intake', 'Dispute analysis', 'Scheme investigation'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -502,7 +500,7 @@ export const processes: Process[] = [
       fr: ['Notification du réseau', 'Qualification du chargeback', 'Collecte des preuves commerçant'],
       en: ['Scheme notification', 'Chargeback assessment', 'Merchant evidence collection'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -518,7 +516,7 @@ export const processes: Process[] = [
       fr: ['Expression du besoin', 'Étude du site', 'Validation de l\'investissement'],
       en: ['Need definition', 'Site survey', 'Investment approval'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -535,7 +533,7 @@ export const processes: Process[] = [
       fr: ['Nouvelle note', 'Vérification comptable', 'Approbation direction'],
       en: ['New report', 'Accounting check', 'Management approval'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -551,7 +549,7 @@ export const processes: Process[] = [
       fr: ['Demande d\'engagement', 'Contrôle budgétaire', 'Validation par délégation'],
       en: ['Commitment request', 'Budget check', 'Approval by delegation'],
     },
-    stepCount: 4,
+    stepCount: 3,
     roleCount: 1,
   },
   {
@@ -568,7 +566,7 @@ export const processes: Process[] = [
       fr: ['Réception de la facture', 'Attestation du service fait', 'Contrôle comptable'],
       en: ['Invoice intake', 'Service confirmation', 'Accounting check'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -584,7 +582,7 @@ export const processes: Process[] = [
       fr: ['Demande', 'Contre-appel & vérification', 'Double validation'],
       en: ['Request', 'Call-back and verification', 'Dual approval'],
     },
-    stepCount: 4,
+    stepCount: 3,
     roleCount: 1,
   },
   {
@@ -600,7 +598,7 @@ export const processes: Process[] = [
       fr: ['Saisie de l\'ordre', 'Contrôle de trésorerie', 'Signature'],
       en: ['Order entry', 'Treasury check', 'Signature'],
     },
-    stepCount: 4,
+    stepCount: 3,
     roleCount: 1,
   },
   {
@@ -616,7 +614,7 @@ export const processes: Process[] = [
       fr: ['Demande', 'Instruction financière', 'Arbitrage direction générale'],
       en: ['Request', 'Finance review', 'Executive arbitration'],
     },
-    stepCount: 4,
+    stepCount: 3,
     roleCount: 1,
   },
   {
@@ -632,7 +630,7 @@ export const processes: Process[] = [
       fr: ['Rédaction', 'Relecture conformité & juridique', 'Approbation direction'],
       en: ['Drafting', 'Compliance and legal review', 'Executive approval'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -648,7 +646,7 @@ export const processes: Process[] = [
       fr: ['Déclaration', 'Qualification & cellule de crise', 'Rétablissement'],
       en: ['Incident reporting', 'Assessment and crisis team', 'Service restoration'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -664,7 +662,7 @@ export const processes: Process[] = [
       fr: ['Ouverture du dossier', 'Analyse de la cause racine', 'Solution définitive'],
       en: ['Case opening', 'Root cause analysis', 'Permanent fix'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -680,7 +678,7 @@ export const processes: Process[] = [
       fr: ['Demande', 'Validation hiérarchique', 'Validation sécurité'],
       en: ['Request', 'Manager approval', 'Security approval'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -696,7 +694,7 @@ export const processes: Process[] = [
       fr: ['Expression du besoin', 'Validation budgétaire', 'Vérification du stock'],
       en: ['Need definition', 'Budget approval', 'Stock check'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -712,7 +710,7 @@ export const processes: Process[] = [
       fr: ['Demande de réservation', 'Vérification de disponibilité', 'Préparation de la salle'],
       en: ['Booking request', 'Availability check', 'Room preparation'],
     },
-    stepCount: 4,
+    stepCount: 3,
     roleCount: 0,
   },
   {
@@ -728,7 +726,7 @@ export const processes: Process[] = [
       fr: ['Demande de mission', 'Validation du déplacement', 'Affectation du véhicule'],
       en: ['Assignment request', 'Travel approval', 'Vehicle allocation'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -744,7 +742,7 @@ export const processes: Process[] = [
       fr: ['Signalement', 'Diagnostic', 'Validation des travaux'],
       en: ['Issue reporting', 'Diagnosis', 'Works approval'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -760,7 +758,7 @@ export const processes: Process[] = [
       fr: ['Nouvelle demande', 'Validation N+1', 'Validation N+2 (montant élevé)'],
       en: ['New request', 'Line manager approval', 'Second-level approval (high amount)'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -776,7 +774,7 @@ export const processes: Process[] = [
       fr: ['Dépôt contrat', 'Analyse juridique', 'Validation financière'],
       en: ['Contract filing', 'Legal review', 'Financial approval'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -792,7 +790,7 @@ export const processes: Process[] = [
       fr: ['Demande de référencement', 'Due diligence', 'Évaluation du risque tiers'],
       en: ['Accreditation request', 'Due diligence', 'Third-party risk assessment'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -808,7 +806,7 @@ export const processes: Process[] = [
       fr: ['Lancement de l\'évaluation', 'Notation par le prescripteur', 'Revue risques'],
       en: ['Review launch', 'Rating by the requester', 'Risk review'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -824,7 +822,7 @@ export const processes: Process[] = [
       fr: ['Préparation', 'Consultation du marché', 'Analyse des offres'],
       en: ['Preparation', 'Market consultation', 'Bid analysis'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -840,7 +838,7 @@ export const processes: Process[] = [
       fr: ['Nouvelle demande', 'Validation manager', 'Validation applicative'],
       en: ['New request', 'Manager approval', 'Application owner approval'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -856,7 +854,7 @@ export const processes: Process[] = [
       fr: ['Soumission', 'Analyse IT', 'Validation applicative'],
       en: ['Submission', 'IT analysis', 'Application owner approval'],
     },
-    stepCount: 6,
+    stepCount: 5,
     roleCount: 0,
   },
   {
@@ -872,7 +870,7 @@ export const processes: Process[] = [
       fr: ['Déclaration', 'Qualification', 'Traitement & notification'],
       en: ['Incident reporting', 'Assessment', 'Handling and notification'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -888,7 +886,7 @@ export const processes: Process[] = [
       fr: ['Demande', 'Analyse RSSI', 'Acceptation du risque'],
       en: ['Request', 'CISO analysis', 'Risk acceptance'],
     },
-    stepCount: 4,
+    stepCount: 3,
     roleCount: 1,
   },
   {
@@ -904,7 +902,7 @@ export const processes: Process[] = [
       fr: ['Lancement de la campagne', 'Revue par le manager', 'Exécution des retraits'],
       en: ['Campaign launch', 'Manager review', 'Access removal'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -920,7 +918,7 @@ export const processes: Process[] = [
       fr: ['Expression du besoin', 'Cadrage & chiffrage', 'Priorisation'],
       en: ['Need definition', 'Scoping and costing', 'Prioritisation'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -936,7 +934,7 @@ export const processes: Process[] = [
       fr: ['Soumission du dossier', 'Revue technique', 'Revue de sécurité'],
       en: ['File submission', 'Technical review', 'Security review'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -952,7 +950,7 @@ export const processes: Process[] = [
       fr: ['Demande', 'Analyse RSSI', 'Activation & révocation'],
       en: ['Request', 'CISO analysis', 'Activation and revocation'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -984,7 +982,7 @@ export const processes: Process[] = [
       fr: ['Ouverture du dossier', 'Qualification juridique', 'Suivi de la procédure'],
       en: ['Case opening', 'Legal assessment', 'Proceedings monitoring'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -1000,7 +998,7 @@ export const processes: Process[] = [
       fr: ['Alerte d\'échéance', 'Bilan de la relation', 'Arbitrage'],
       en: ['Deadline alert', 'Relationship review', 'Arbitration'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -1033,7 +1031,7 @@ export const processes: Process[] = [
       fr: ['Nouvelle arrivée', 'Préparation IT', 'Accueil RH'],
       en: ['New arrival', 'IT preparation', 'HR welcome'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -1049,7 +1047,7 @@ export const processes: Process[] = [
       fr: ['Demande de formation', 'Validation manager', 'Contrôle budget RH'],
       en: ['Training request', 'Manager approval', 'HR budget check'],
     },
-    stepCount: 4,
+    stepCount: 3,
     roleCount: 0,
   },
   {
@@ -1065,7 +1063,7 @@ export const processes: Process[] = [
       fr: ['Demande de déplacement', 'Validation manager', 'Validation financière'],
       en: ['Travel request', 'Manager approval', 'Financial approval'],
     },
-    stepCount: 4,
+    stepCount: 3,
     roleCount: 0,
   },
   {
@@ -1081,7 +1079,7 @@ export const processes: Process[] = [
       fr: ['Besoin recrutement', 'Validation RH', 'Validation budget'],
       en: ['Hiring need', 'HR approval', 'Budget approval'],
     },
-    stepCount: 6,
+    stepCount: 5,
     roleCount: 0,
   },
   {
@@ -1097,7 +1095,7 @@ export const processes: Process[] = [
       fr: ['Lancement campagne', 'Entretien manager', 'Commentaire collaborateur'],
       en: ['Campaign launch', 'Manager interview', 'Employee comment'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -1113,7 +1111,7 @@ export const processes: Process[] = [
       fr: ['Lancement', 'Confirmation manager', 'Désactivation IT'],
       en: ['Launch', 'Manager confirmation', 'IT deactivation'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -1129,7 +1127,7 @@ export const processes: Process[] = [
       fr: ['Demande du manager', 'Avis RH', 'Contrôle budgétaire'],
       en: ['Manager request', 'HR opinion', 'Budget check'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -1145,7 +1143,7 @@ export const processes: Process[] = [
       fr: ['Candidature ou proposition', 'Avis du manager d\'origine', 'Avis du manager d\'accueil'],
       en: ['Application or proposal', 'Current manager opinion', 'Receiving manager opinion'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -1161,7 +1159,7 @@ export const processes: Process[] = [
       fr: ['Alerte de fin de période', 'Évaluation du manager', 'Avis RH'],
       en: ['End-of-period alert', 'Manager assessment', 'HR opinion'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -1177,7 +1175,7 @@ export const processes: Process[] = [
       fr: ['Demande d\'accueil', 'Validation sécurité', 'Mission en cours'],
       en: ['Onboarding request', 'Security approval', 'Assignment running'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 1,
   },
   {
@@ -1193,7 +1191,7 @@ export const processes: Process[] = [
       fr: ['Demande', 'Édition du document', 'Remise au collaborateur'],
       en: ['Request', 'Document issuance', 'Handed to the employee'],
     },
-    stepCount: 4,
+    stepCount: 3,
     roleCount: 0,
   },
   {
@@ -1209,7 +1207,7 @@ export const processes: Process[] = [
       fr: ['Signalement', 'Qualification juridique', 'Entretien préalable'],
       en: ['Report intake', 'Legal assessment', 'Preliminary interview'],
     },
-    stepCount: 6,
+    stepCount: 5,
     roleCount: 1,
   },
   {
@@ -1225,7 +1223,7 @@ export const processes: Process[] = [
       fr: ['Déclaration', 'Constat & lésions', 'Déclaration à l\'organisme'],
       en: ['Accident reporting', 'Findings and injuries', 'Filing with the authority'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
   {
@@ -1241,7 +1239,7 @@ export const processes: Process[] = [
       fr: ['Demande', 'Validation du besoin', 'Inscription & passage'],
       en: ['Request', 'Need approval', 'Enrolment and exam'],
     },
-    stepCount: 5,
+    stepCount: 4,
     roleCount: 0,
   },
 ];

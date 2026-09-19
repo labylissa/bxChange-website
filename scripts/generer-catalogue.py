@@ -25,10 +25,15 @@ PORTEFEUILLE = pathlib.Path(
 )
 CIBLE = pathlib.Path(__file__).parent.parent / "src" / "data" / "processes.ts"
 
-# Les étapes terminales n'apprennent rien sur le déroulé : tout processus peut
-# être rejeté ou annulé. Les afficher mangerait les trois lignes de la carte.
-TERMINALES = {"Rejeté", "Rejetée", "Annulé", "Annulée", "Refusé", "Refusée",
-              "Clôturé", "Clôturée", "Rejet"}
+# Les étapes terminales — rejeté, annulé, mais aussi « Approuvée », « Sinistre
+# réglé », « Badge remis » — n'apprennent rien sur le déroulé : tout processus
+# en a. Elles sont écartées par leur TYPE (`step_type == "end"`), jamais par
+# leur nom.
+#
+# Le filtre portait sur une liste de libellés : « Approuvée », terminale de la
+# demande de congés, y échappait donc, et s'affichait comme troisième étape du
+# déroulé ET dans le décompte. Un filtre par nom ne peut pas suivre soixante et
+# onze processus dont chacun nomme sa fin à sa façon.
 
 # Les 24 catégories du portefeuille sont trop fines pour des filtres : on
 # obtiendrait des filtres à un seul élément, que personne ne clique. Sept
@@ -86,7 +91,10 @@ for f in sorted(PORTEFEUILLE.glob("*.bxflow")):
         "nom": t.get("name", ""),
         "description": t.get("description") or "",
         "categorie": t.get("category") or "",
-        "etapes": [e.get("name", "") for e in d.get("steps", [])],
+        # (nom, type) et non le nom seul : c'est le TYPE qui dit qu'une étape
+        # est terminale, et le filtrer par son libellé laissait passer tout ce
+        # qui ne s'appelait pas « Rejeté » ou « Annulé ».
+        "etapes": [(e.get("name", ""), e.get("step_type", "")) for e in d.get("steps", [])],
         "roles": len(d.get("roles", [])),
     })
 manquants = []
@@ -106,7 +114,7 @@ for rang, l in enumerate(donnees, start=1):
     # Première proposition de la description : le reste est du détail interne
     # (« SLA 4h », « ingestion ») qui n'a pas sa place sur un site.
     desc_fr = l["description"].split(":")[0].split(".")[0].strip()
-    etapes_fr = [e for e in l["etapes"] if e not in TERMINALES][:3]
+    etapes_fr = [nom for nom, type_ in l["etapes"] if type_ != "end"][:3]
 
     entrees.append({
         "id": identifiant(l["nom"], rang),
@@ -115,12 +123,17 @@ for rang, l in enumerate(donnees, start=1):
         "vedette": rang in EN_AVANT,
         "nom_fr": l["nom"], "nom_en": nom_en,
         "desc_fr": desc_fr, "desc_en": desc_en,
-        "etapes_fr": etapes_fr, "etapes_en": etapes_en,
+        # L'anglais est écrit à la main, toujours en trois entrées ; le
+        # français est DÉRIVÉ du portefeuille et peut en compter moins quand le
+        # processus n'a que deux étapes avant sa fin. Tronquer aligne les deux
+        # colonnes par construction — sans quoi l'anglais affichait une étape
+        # terminale que le français venait d'écarter (« Approved », congés).
+        "etapes_fr": etapes_fr, "etapes_en": etapes_en[:len(etapes_fr)],
         # Le VRAI nombre d'étapes et de rôles : la carte n'en montre que trois,
         # et sans ce total, soixante et onze processus paraissaient faire trois
         # étapes chacun — une bibliothèque qui semblait mince alors qu'elle ne
         # l'est pas.
-        "nb_etapes": len([e for e in l["etapes"] if e not in TERMINALES]),
+        "nb_etapes": len([nom for nom, type_ in l["etapes"] if type_ != "end"]),
         "nb_roles": l["roles"],
         "rang": rang,
     })
@@ -152,6 +165,26 @@ lignes = ["""import type { Lang } from '@/i18n';
  *
  * Pour AJOUTER un processus : ajoutez-le au portefeuille du produit, puis
  * relancez la génération.
+ *
+ * ## Comment se nomme une étape
+ *
+ * Une étape n'est pas une activité BPMN : c'est un STATUT. Le dossier y
+ * séjourne, le délai y court, on en sort par une transition nommée. La
+ * convention est donc celle des machines à états — le statut se nomme par un
+ * nom ou une nominalisation disant dans quel état est le dossier
+ * (« Réception de la facture », « En attente d'approbation »), la transition
+ * par un verbe à l'infinitif (« Valider », « Rejeter »).
+ *
+ * D'où l'erreur à ne pas refaire dans `catalogue_en.py` : nommer une étape au
+ * participe passé (« Invoice received », « Report raised ») la fait lire comme
+ * l'ÉVÉNEMENT qui l'ouvre, pas comme l'état où se trouve le dossier — trente
+ * libellés anglais étaient dans ce cas alors que leurs équivalents français ne
+ * l'étaient pas, si bien que le même processus se lisait en états d'un côté et
+ * en événements de l'autre. Le participe passé reste juste pour une étape
+ * TERMINALE, qui décrit bien un état définitif — mais celles-là ne sont pas
+ * affichées.
+ *
+ * Les étapes terminales sont écartées par leur TYPE, jamais par leur nom.
  */
 
 export const PROCESS_CATEGORIES = [
