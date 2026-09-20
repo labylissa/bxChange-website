@@ -13,10 +13,50 @@ import io
 import json
 import os
 import pathlib
+import re
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from catalogue_en import EN  # noqa: E402
+
+RACINE_SITE = pathlib.Path(__file__).parent.parent
+
+
+def lire_langs() -> list[str]:
+    """Les langues du site, LUES dans `src/i18n/index.ts`.
+
+    Recopier la liste ici la ferait diverger : `Process.name` est un
+    `Record<Lang, string>`, donc une langue ajoutee au site sans son entree ici
+    ne compile plus — l'erreur est franche, mais elle arrive apres coup. Lire la
+    source fait que le generateur suit le site sans qu'on y pense.
+    """
+    source = (RACINE_SITE / "src" / "i18n" / "index.ts").read_text(encoding="utf-8")
+    bloc = re.search(r"export const SUPPORTED_LANGS\s*=\s*\[([^\]]*)\]\s*as const", source)
+    if not bloc:
+        raise SystemExit(
+            "SUPPORTED_LANGS introuvable dans src/i18n/index.ts : le catalogue "
+            "ne peut pas deviner les langues du site."
+        )
+    langs = re.findall(r"'([^']+)'", bloc.group(1))
+    # Garde-fou du garde-fou : une lecture vide produirait un catalogue sans
+    # aucune langue, donc un fichier qui ne compile pas, sans dire pourquoi.
+    if not langs:
+        raise SystemExit("SUPPORTED_LANGS lu, mais aucune langue extraite.")
+    return langs
+
+
+LANGS = lire_langs()
+
+#: Les catalogues TRADUITS, par langue. Le francais n'y figure pas : il est
+#: derive du portefeuille du produit, c'est la reference.
+#:
+#: Une langue absente de cette table recoit le FRANCAIS. Decision du 20/09/2026 :
+#: le produit ne livre les 71 process qu'en francais, et d'autres sprints les
+#: traduiront ; annoncer sur le site un catalogue espagnol que le produit
+#: n'installe pas serait promettre ce qui n'existe pas. Le jour ou la traduction
+#: arrive, elle se branche ici en une ligne — `"es": ES` — et rien d'autre ne
+#: bouge.
+TRADUCTIONS = {"en": EN}
 
 PORTEFEUILLE = pathlib.Path(
     os.environ.get("BXFLOW_PORTFOLIO",
@@ -101,11 +141,12 @@ manquants = []
 entrees = []
 
 for rang, l in enumerate(donnees, start=1):
-    en = EN.get(rang)
-    if en is None:
+    # Une traduction manquante est signalee pour la langue de REFERENCE de la
+    # table (l'anglais) : c'est la seule ou l'absence est un oubli, et non la
+    # decision de laisser le francais.
+    if EN.get(rang) is None:
         manquants.append(rang)
         continue
-    nom_en, desc_en, etapes_en = en
 
     famille = FAMILLES.get(l["categorie"])
     if famille is None:
@@ -121,14 +162,26 @@ for rang, l in enumerate(donnees, start=1):
         "categorie": famille,
         "icone": ICONES[famille],
         "vedette": rang in EN_AVANT,
-        "nom_fr": l["nom"], "nom_en": nom_en,
-        "desc_fr": desc_fr, "desc_en": desc_en,
-        # L'anglais est écrit à la main, toujours en trois entrées ; le
-        # français est DÉRIVÉ du portefeuille et peut en compter moins quand le
-        # processus n'a que deux étapes avant sa fin. Tronquer aligne les deux
-        # colonnes par construction — sans quoi l'anglais affichait une étape
-        # terminale que le français venait d'écarter (« Approved », congés).
-        "etapes_fr": etapes_fr, "etapes_en": etapes_en[:len(etapes_fr)],
+        # Une entree par langue du site. Une langue sans catalogue traduit
+        # recoit le francais : c'est la decision du 20/09/2026, pas un defaut.
+        #
+        # Les etapes traduites sont ecrites a la main, toujours en trois
+        # entrees ; le francais est DERIVE du portefeuille et peut en compter
+        # moins quand le processus n'a que deux etapes avant sa fin. Tronquer
+        # aligne les colonnes par construction — sans quoi l'anglais affichait
+        # une etape terminale que le francais venait d'ecarter.
+        "noms": {
+            lg: (TRADUCTIONS[lg][rang][0] if lg in TRADUCTIONS else l["nom"])
+            for lg in LANGS
+        },
+        "descriptions": {
+            lg: (TRADUCTIONS[lg][rang][1] if lg in TRADUCTIONS else desc_fr)
+            for lg in LANGS
+        },
+        "etapes": {
+            lg: (TRADUCTIONS[lg][rang][2][:len(etapes_fr)] if lg in TRADUCTIONS else etapes_fr)
+            for lg in LANGS
+        },
         # Le VRAI nombre d'étapes et de rôles : la carte n'en montre que trois,
         # et sans ce total, soixante et onze processus paraissaient faire trois
         # étapes chacun — une bibliothèque qui semblait mince alors qu'elle ne
@@ -256,14 +309,20 @@ for e in entrees:
     lignes.append("    icon: '%s'," % e["icone"])
     if e["vedette"]:
         lignes.append("    featured: true,")
-    lignes.append("    name: { fr: '%s', en: '%s' }," % (echapper(e["nom_fr"]), echapper(e["nom_en"])))
+    # Une entree par langue du site, la traduction si elle existe, le francais
+    # sinon. Ecrire `fr` et `en` en dur laisserait la troisieme langue sans
+    # valeur, et `Record<Lang, string>` refuserait de compiler.
+    noms = ", ".join(
+        "%s: '%s'" % (lg, echapper(e["noms"][lg])) for lg in LANGS
+    )
+    lignes.append("    name: { %s }," % noms)
     lignes.append("    description: {")
-    lignes.append("      fr: '%s'," % echapper(e["desc_fr"]))
-    lignes.append("      en: '%s'," % echapper(e["desc_en"]))
+    for lg in LANGS:
+        lignes.append("      %s: '%s'," % (lg, echapper(e["descriptions"][lg])))
     lignes.append("    },")
     lignes.append("    steps: {")
-    lignes.append("      fr: [%s]," % ", ".join("'%s'" % echapper(x) for x in e["etapes_fr"]))
-    lignes.append("      en: [%s]," % ", ".join("'%s'" % echapper(x) for x in e["etapes_en"]))
+    for lg in LANGS:
+        lignes.append("      %s: [%s]," % (lg, ", ".join("'%s'" % echapper(x) for x in e["etapes"][lg])))
     lignes.append("    },")
     lignes.append("    stepCount: %d," % e["nb_etapes"])
     lignes.append("    roleCount: %d," % e["nb_roles"])

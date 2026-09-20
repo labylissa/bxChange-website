@@ -128,6 +128,7 @@ export const fr = {
     how: {
       eyebrow: 'Comment ça marche',
       title: 'Du schéma de votre processus à son exécution, en 4 temps',
+      stepLabel: 'Étape',
       steps: [
         {
           title: 'Vous dessinez le déroulé',
@@ -185,6 +186,7 @@ export const fr = {
       subtitle:
         'Plus de 70 processus livrés avec leurs étapes, leurs rôles, leurs écrans et leurs validations : entrée en relation, déclaration de soupçon, sinistres, achats, congés. Vous les ajustez à votre organisation au lieu de les construire.',
       cardCta: 'Voir tous les processus',
+      available: 'processus disponibles',
       missingTitle: 'Votre processus n’y est pas ?',
       missingText: 'Nous l’ajoutons au catalogue avec vous, à partir de votre circuit actuel.',
       missingCta: 'Parlons-en',

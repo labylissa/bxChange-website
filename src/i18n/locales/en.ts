@@ -129,6 +129,7 @@ export const en: Translation = {
     },
     how: {
       eyebrow: 'How it works',
+      stepLabel: 'Step',
       title: 'From the drawing of your process to its execution, in 4 steps',
       steps: [
         {
@@ -184,6 +185,7 @@ export const en: Translation = {
       subtitle:
         'More than 70 processes delivered with their steps, roles, screens and approvals: client onboarding, suspicious activity reports, insurance claims, purchasing, leave. You adjust them to your organisation instead of building them.',
       cardCta: 'See all processes',
+      available: 'processes available',
       missingTitle: 'Your process is not listed?',
       missingText: 'We add it to the catalogue with you, starting from your current workflow.',
       missingCta: 'Let’s talk',

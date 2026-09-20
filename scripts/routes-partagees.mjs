@@ -21,7 +21,37 @@ import { dirname, resolve } from 'node:path';
 const RACINE = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const lire = (relatif) => readFileSync(resolve(RACINE, relatif), 'utf8');
 
-export const LANGS = ['fr', 'en'];
+/**
+ * Les langues du site, LUES dans `src/i18n/index.ts` pour la même raison que
+ * les slugs et le domaine : une liste recopiée ici resterait à deux langues le
+ * jour où le site en parle trois, et la troisième n'entrerait ni dans le
+ * sitemap ni dans le prérendu. Ses pages s'afficheraient parfaitement et ne
+ * seraient jamais indexées — le défaut exact que ce fichier existe pour éviter.
+ */
+export function lireLangs() {
+  const bloc = lire('src/i18n/index.ts').match(
+    /export const SUPPORTED_LANGS\s*=\s*\[([^\]]*)\]\s*as const/,
+  );
+  if (!bloc) {
+    throw new Error(
+      'SUPPORTED_LANGS introuvable dans src/i18n/index.ts — ni le sitemap ni ' +
+        'le prérendu ne peuvent deviner les langues du site. Corriger cette ' +
+        'lecture plutôt que de recopier la liste ici.',
+    );
+  }
+  const langs = [...bloc[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
+  // Garde-fou du garde-fou : une expression qui ne lit plus rien rendrait un
+  // sitemap vide et un prérendu sans page, tous deux sans erreur.
+  if (langs.length < 1) {
+    throw new Error(
+      `SUPPORTED_LANGS lu, mais ${langs.length} langue(s) extraite(s) — ` +
+        "l'extraction ne fonctionne plus.",
+    );
+  }
+  return langs;
+}
+
+export const LANGS = lireLangs();
 
 export function lireSiteUrl() {
   const trouve = lire('src/lib/site.ts').match(

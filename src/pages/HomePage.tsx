@@ -49,7 +49,7 @@ function HeroVisual() {
 
 export function HomePage() {
   const c = useContent();
-  const { lang, path } = useLang();
+  const { path } = useLang();
   const featured = getFeaturedProcesses();
 
   return (
@@ -125,7 +125,7 @@ export function HomePage() {
                     </span>
                   </div>
                   <span className="mt-5 font-display text-sm font-bold uppercase tracking-[0.2em] text-gold-600">
-                    {lang === 'fr' ? 'Étape' : 'Step'} {String(i + 1).padStart(2, '0')}
+                    {c.home.how.stepLabel} {String(i + 1).padStart(2, '0')}
                   </span>
                   {/* Hauteur réservée pour deux lignes à partir de `lg`.
                       Sans elle, un titre qui tient sur une ligne fait remonter
@@ -272,7 +272,7 @@ export function HomePage() {
             <Icons.arrowRight className="h-4 w-4" />
           </Link>
           <p className="mt-4 text-sm text-ink-400">
-            {processes.length}+ {lang === 'fr' ? 'processus disponibles' : 'processes available'}
+            {processes.length}+ {c.home.catalog.available}
           </p>
         </div>
       </Section>
