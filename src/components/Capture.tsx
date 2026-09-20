@@ -1,5 +1,6 @@
 import type { CaptureId } from '@/data/captures';
-import { CAPTURES } from '@/data/captures';
+import { captureDansLaLangue } from '@/data/captures';
+import { useLang } from '@/hooks/useLang';
 
 /**
  * Une capture réelle de l'application, dans un cadre de fenêtre sobre.
@@ -18,7 +19,15 @@ import { CAPTURES } from '@/data/captures';
  *
  * `width` et `height` viennent de la table des captures, pas d'une valeur
  * approximative : sans elles, la page saute pendant le chargement des images,
- * et le texte qu'on lisait part hors de l'écran.
+ * et le texte qu'on lisait part hors de l'écran. Ils sont lus APRÈS la
+ * résolution de la langue, une capture reprise n'ayant presque jamais la même
+ * hauteur que l'originale.
+ *
+ * ## La langue
+ *
+ * Une capture traduite s'affiche si elle est déclarée ; sinon la version
+ * française, dans toutes les langues. Ce repli est une décision écrite dans
+ * `data/captures.ts`, pas un accident — voir son en-tête.
  */
 export function Capture({
   id,
@@ -33,7 +42,8 @@ export function Capture({
   priorite?: boolean;
   className?: string;
 }) {
-  const image = CAPTURES[id];
+  const { lang } = useLang();
+  const image = captureDansLaLangue(id, lang);
   return (
     <figure className={className}>
       <div className="overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-card-hover">
