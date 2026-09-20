@@ -14,7 +14,6 @@ import { localizedPath, type PageKey } from '@/lib/routes';
 const OG_LOCALES: Record<Lang, string> = {
   fr: 'fr_FR',
   en: 'en_US',
-  es: 'es_ES',
 };
 
 interface SeoProps {

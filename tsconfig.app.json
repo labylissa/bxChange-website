@@ -24,5 +24,12 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src"],
+  // Le catalogue espagnol est GELÉ : le site ne publie plus cette langue (voir
+  // `SUPPORTED_LANGS`), et le tenir à jour à chaque texte ajouté était
+  // précisément le coût qu'on a refusé de porter sans personne pour le relire.
+  // Il reste là où on le cherche, et l'exclusion ne masque rien : le jour où il
+  // est réimporté, TypeScript le reprend dans le programme et nomme une à une
+  // les clés apparues depuis. La dérive est constatée au rallumage.
+  "exclude": ["src/i18n/locales/es.ts"]
 }

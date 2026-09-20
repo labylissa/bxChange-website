@@ -724,5 +724,15 @@ const privacyEs: LegalDoc = {
   ],
 };
 
-export const legalNotice: Record<Lang, LegalDoc> = { fr: legalNoticeFr, en: legalNoticeEn, es: legalNoticeEs };
-export const privacyPolicy: Record<Lang, LegalDoc> = { fr: privacyFr, en: privacyEn, es: privacyEs };
+export const legalNotice: Record<Lang, LegalDoc> = { fr: legalNoticeFr, en: legalNoticeEn };
+export const privacyPolicy: Record<Lang, LegalDoc> = { fr: privacyFr, en: privacyEn };
+
+/**
+ * Les versions espagnoles, écrites et relues, que le site ne publie pas encore
+ * (voir `SUPPORTED_LANGS`). Exportées plutôt que laissées inertes : un texte
+ * juridique sans référence est ce que le prochain nettoyage supprime, et il
+ * faudrait le réécrire. La mention CEMAC / Guinée équatoriale qu'elles portent
+ * est ce qui justifiait l'espagnol dans cette zone.
+ */
+export const legalNoticeEsNonPublie = legalNoticeEs;
+export const privacyEsNonPublie = privacyEs;

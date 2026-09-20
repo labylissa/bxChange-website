@@ -1,6 +1,5 @@
 import { fr, type Translation } from '@/i18n/locales/fr';
 import { en } from '@/i18n/locales/en';
-import { es } from '@/i18n/locales/es';
 import { DEFAULT_LANG, type Lang } from '@/i18n';
 import { useLang } from './useLang';
 
@@ -14,7 +13,7 @@ import { useLang } from './useLang';
  * (ce hook sert le contenu structuré), donc sur des pages à moitié traduites
  * que rien n'aurait signalé.
  */
-const CATALOGUES: Record<Lang, Translation> = { fr, en, es };
+const CATALOGUES: Record<Lang, Translation> = { fr, en };
 
 /**
  * Renvoie l'objet de traduction complet et typé pour la langue courante (dérivée de

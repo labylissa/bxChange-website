@@ -316,6 +316,61 @@ export const en: Translation = {
       caption:
         'At the centre sits your process: the flow you drew. Your existing software does not go away — it is queried along the way, at the step that needs it.',
     },
+    natif: {
+      eyebrow: 'Included, not optional',
+      title: 'What other tools sell as add-ons',
+      subtitle:
+        'Most process platforms cover the flow itself and stop there. The moment you need a table inside a form, a value pulled from the core banking system, or a letter on your own letterhead, you buy an add-on from a marketplace. In a bank that means one more licence, one more vendor to assess under third-party risk, and code you did not choose running in an environment your security team has to defend. These building blocks are part of the product.',
+      items: [
+        {
+          title: 'Tables inside a case',
+          text: 'One row per guarantee, per beneficiary, per document expected: the agent adds and removes rows in the form, using the columns you declared. An Excel file loads straight into it, and the table comes out as a table in letters and extracts.',
+          ailleurs: '“Table field” add-on',
+        },
+        {
+          title: 'Data from another system',
+          text: 'A field that fetches its answer from your core banking system, your directory or your document store at the moment the agent needs it: a customer’s accounts, their outstanding balance, their branch. Nothing is retyped, so nothing drifts apart.',
+          ailleurs: '“External data” add-on',
+        },
+        {
+          title: 'Reference data',
+          text: 'Your customers, branches, products or suppliers live in the product, attach to cases and stay current from the source system. A changed attribute can open a case on its own: a customer moved to high risk triggers their review.',
+          ailleurs: 'Asset / inventory module',
+        },
+        {
+          title: 'Reading attachments',
+          text: 'An ID document or a supporting paper dropped into the case is read, and the recognised fields are offered for entry. The agent confirms: it assists data entry, it never decides in their place.',
+          ailleurs: 'Document recognition module',
+        },
+        {
+          title: 'Letters and documents in your house style',
+          text: 'You upload your own Word template, place tags in it, and the product fills them in: certificate, rejection letter, summary. Header, logo and styles are preserved, and a batch of cases produces a mail merge in one go.',
+          ailleurs: '“Document generation” add-on',
+        },
+        {
+          title: 'Forms that react',
+          text: 'A field that appears only when the previous answer calls for it, an amount that computes itself, a cell locked according to the role of whoever is looking. Written in an editor, executed in a sandbox.',
+          ailleurs: '“Scripting” add-on',
+        },
+        {
+          title: 'Deadlines and reminders',
+          text: 'Any step can carry its own deadline, with a reminder before it falls due and an alert when it is missed. Breaches are counted in a table — the first thing internal control asks for.',
+          ailleurs: '“SLA” add-on',
+        },
+        {
+          title: 'Bulk handling',
+          text: 'A thousand cases imported from a file, two hundred moved through the same transition, a filtered extract handed back as Excel. With a line-by-line report of what went through and what did not.',
+          ailleurs: '“Bulk import / export” add-on',
+        },
+      ],
+      note:
+        'All of this is switched on in configuration and follows the product at every release. No marketplace, no extra licence, no compatibility to re-check at each upgrade.',
+    },
+    langues: {
+      title: 'Interface languages',
+      text:
+        'The application ships in French, English and Spanish. Each user picks their own; emails and messages go out in the language of the person receiving them, never that of the person triggering them. An additional language ships without bespoke development.',
+    },
     brochure: {
       title: 'The brochure, to take with you',
       text: 'Eight pages: positioning, how it works, real screens, security and deployment, and the process catalogue. PDF, 1.8 MB — in French.',

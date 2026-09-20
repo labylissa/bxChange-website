@@ -328,6 +328,61 @@ export const fr = {
       caption:
         'Au centre, votre processus : le déroulé que vous avez dessiné. Vos logiciels existants ne disparaissent pas — ils sont interrogés en chemin, à l’étape qui en a besoin.',
     },
+    natif: {
+      eyebrow: 'Inclus, pas en option',
+      title: 'Ce que les autres outils vendent en extension',
+      subtitle:
+        'La plupart des plateformes de processus couvrent le déroulé, et s’arrêtent là. Dès qu’il faut un tableau dans un formulaire, une donnée venue du corebanking ou un courrier à votre en-tête, il faut acheter une extension sur une place de marché. Dans une banque, cela veut dire une licence de plus, un éditeur de plus à auditer au titre du risque tiers, et du code que vous n’avez pas choisi dans un environnement que votre sécurité doit défendre. Ces briques-là sont dans le produit.',
+      items: [
+        {
+          title: 'Tableaux dans un dossier',
+          text: 'Une ligne par garantie, par bénéficiaire, par pièce attendue : l’agent ajoute et retire des lignes dans le formulaire, avec les colonnes que vous avez déclarées. Un fichier Excel se verse directement dedans, et le tableau se retrouve tel quel dans les courriers et les extractions.',
+          ailleurs: 'Extension « champ tableau »',
+        },
+        {
+          title: 'Données venues d’un autre logiciel',
+          text: 'Un champ qui va chercher sa réponse dans votre corebanking, votre annuaire ou votre GED au moment où l’agent en a besoin : les comptes d’un client, son encours, son agence de rattachement. Rien n’est ressaisi, donc rien ne diverge.',
+          ailleurs: 'Extension « données externes »',
+        },
+        {
+          title: 'Référentiels métier',
+          text: 'Vos clients, agences, produits ou fournisseurs vivent dans le produit, se rattachent aux dossiers et se tiennent à jour depuis le système source. Un attribut qui change peut ouvrir un dossier tout seul : un client passé en risque élevé déclenche sa revue.',
+          ailleurs: 'Module d’inventaire',
+        },
+        {
+          title: 'Lecture des pièces jointes',
+          text: 'Une pièce d’identité ou un justificatif déposé dans le dossier est lu, et les champs reconnus sont proposés à la saisie. L’agent valide : c’est une aide à la saisie, jamais une décision prise à sa place.',
+          ailleurs: 'Module de reconnaissance de documents',
+        },
+        {
+          title: 'Courriers et documents à votre charte',
+          text: 'Vous déposez votre modèle Word, vous y placez des balises, le produit remplit : attestation, lettre de rejet, récapitulatif. En-tête, logo et styles sont préservés, et un lot de dossiers produit un publipostage en une fois.',
+          ailleurs: 'Extension « génération de documents »',
+        },
+        {
+          title: 'Formulaires qui réagissent',
+          text: 'Un champ qui n’apparaît que si la réponse précédente l’appelle, un montant qui se calcule, une cellule verrouillée selon le rôle de celui qui regarde. Écrit dans un éditeur, exécuté dans un bac à sable.',
+          ailleurs: 'Extension « scripts »',
+        },
+        {
+          title: 'Délais et relances',
+          text: 'Chaque étape peut porter son échéance, avec relance avant terme et alerte au dépassement. Les dépassements se comptent dans un tableau — c’est ce qu’un contrôle interne demande en premier.',
+          ailleurs: 'Extension « délais »',
+        },
+        {
+          title: 'Traitement en masse',
+          text: 'Mille dossiers importés depuis un fichier, deux cents avancés d’une même transition, une extraction filtrée remise en Excel. Avec le compte rendu ligne par ligne de ce qui est passé et de ce qui ne l’est pas.',
+          ailleurs: 'Extension « import / export »',
+        },
+      ],
+      note:
+        'Tout ceci s’active dans le paramétrage et suit le produit à chaque mise à jour. Pas de place de marché, pas de licence supplémentaire, pas de compatibilité à revérifier à chaque montée de version.',
+    },
+    langues: {
+      title: 'Langues de l’interface',
+      text:
+        'L’application est livrée en français, en anglais et en espagnol. Chaque utilisateur choisit la sienne ; les courriels et les messages partent dans la langue de leur destinataire, jamais dans celle de la personne qui déclenche l’envoi. Une langue supplémentaire se livre sans développement spécifique.',
+    },
     brochure: {
       title: 'La brochure, à emporter',
       text: 'Huit pages : le positionnement, le fonctionnement, les écrans réels, la sécurité et le déploiement, et le catalogue de processus. PDF, 1,8 Mo.',

@@ -17,6 +17,12 @@ const CAP_ICONS: ProcessIconName[] = [
   'receipt', 'chart', 'steps', 'folder', 'file-check', 'lifebuoy',
 ];
 
+/* Une icône par brique native, dans l'ordre du contenu : grilles, données
+   externes, référentiels, lecture de pièces, éditique, scripts, délais, masse. */
+const NATIF_ICONS: ProcessIconName[] = [
+  'clipboard', 'plug', 'folder', 'file-check', 'receipt', 'steps', 'clock', 'inbox',
+];
+
 /** Connecteur animé (point qui circule) entre deux nœuds du flux. */
 function Connector({ vertical = false }: { vertical?: boolean }) {
   if (vertical) {
@@ -177,6 +183,47 @@ export function ProductPage() {
         })}
       </Section>
 
+      {/* CE QUI EST NATIF — un acheteur qui compare des outils de processus pose
+          toujours la même question après la liste des capacités : lesquelles
+          sont vendues à part ? Y répondre avant qu'elle soit posée vaut mieux
+          que de la laisser se poser en comité d'achat, sans nous. */}
+      <Section>
+        <Reveal>
+          <SectionHeading
+            eyebrow={c.product.natif.eyebrow}
+            title={c.product.natif.title}
+            subtitle={c.product.natif.subtitle}
+            align="left"
+          />
+        </Reveal>
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          {c.product.natif.items.map((item, i) => (
+            <Reveal key={i} delay={(i % 2) * 100} from="up">
+              <div className="card h-full">
+                <div className="flex items-start justify-between gap-4">
+                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-teal/15 to-mint/10 text-teal ring-1 ring-teal/20">
+                    <ProcessIcon name={NATIF_ICONS[i] ?? 'refresh'} />
+                  </span>
+                  {/* Ce que la brique remplace ailleurs. En étiquette et non dans
+                      le texte : c'est l'information que cherche celui qui compare,
+                      et elle doit se lire sans lire le paragraphe. */}
+                  <span className="rounded-full border border-ink-200 bg-ink-50 px-3 py-1 text-right text-[11px] font-medium leading-tight text-ink-400">
+                    {item.ailleurs}
+                  </span>
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-navy-900">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-600">{item.text}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <Reveal delay={120}>
+          <p className="mx-auto mt-10 max-w-3xl rounded-2xl border border-teal/25 bg-teal/5 p-6 text-center text-sm leading-relaxed text-ink-600">
+            {c.product.natif.note}
+          </p>
+        </Reveal>
+      </Section>
+
       <Section className="bg-ink-50">
         <Reveal>
           <SectionHeading title={c.product.diagram.title} />
@@ -192,9 +239,15 @@ export function ProductPage() {
       </Section>
 
       <Section>
-        <div className="mx-auto max-w-3xl rounded-2xl border border-ink-100 bg-white p-8 shadow-card">
-          <h2 className="text-xl font-bold text-navy-900">{c.product.note.title}</h2>
-          <p className="mt-3 leading-relaxed text-ink-500">{c.product.note.text}</p>
+        <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
+          <div className="rounded-2xl border border-ink-100 bg-white p-8 shadow-card">
+            <h2 className="text-xl font-bold text-navy-900">{c.product.note.title}</h2>
+            <p className="mt-3 leading-relaxed text-ink-500">{c.product.note.text}</p>
+          </div>
+          <div className="rounded-2xl border border-ink-100 bg-white p-8 shadow-card">
+            <h2 className="text-xl font-bold text-navy-900">{c.product.langues.title}</h2>
+            <p className="mt-3 leading-relaxed text-ink-500">{c.product.langues.text}</p>
+          </div>
         </div>
       </Section>
 

@@ -2,9 +2,24 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { fr } from './locales/fr';
 import { en } from './locales/en';
-import { es } from './locales/es';
 
-export const SUPPORTED_LANGS = ['fr', 'en', 'es'] as const;
+/**
+ * Les langues DU SITE. Celles du produit sont une autre liste, et c'est la
+ * distinction qui compte : l'application parle français, anglais et espagnol —
+ * une ligne de grille d'appel d'offres, vraie sans que personne n'ait à
+ * répondre. Le site, lui, est un canal d'entrée : publier une langue, c'est
+ * promettre un interlocuteur qui la parle. Tant qu'il n'y en a pas, un prospect
+ * qui écrit en espagnol et reçoit une réponse en français emporte une plus
+ * mauvaise impression qu'un prospect venu par l'anglais.
+ *
+ * Le matériel espagnol reste dans le dépôt, prêt : `locales/es.ts`, les textes
+ * juridiques de `content/legal.ts`, et les captures sous `public/captures/es/`.
+ * Le remettre en service tient en une ligne ici — et le typage nommera alors,
+ * une à une, les clés apparues depuis : la dérive est détectée au rallumage,
+ * jamais subie en silence. Manque aussi la traduction du catalogue des process,
+ * que `generer-catalogue.py` sert en français sous `es`.
+ */
+export const SUPPORTED_LANGS = ['fr', 'en'] as const;
 export type Lang = (typeof SUPPORTED_LANGS)[number];
 export const DEFAULT_LANG: Lang = 'fr';
 
@@ -34,7 +49,6 @@ i18n.use(initReactI18next).init({
   resources: {
     fr: { translation: fr },
     en: { translation: en },
-    es: { translation: es },
   },
   lng: DEFAULT_LANG,
   fallbackLng: DEFAULT_LANG,

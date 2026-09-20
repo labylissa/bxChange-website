@@ -43,32 +43,15 @@ function DrapeauUs({ className = '' }: { className?: string }) {
   );
 }
 
-/**
- * Trois bandes — rouge, or, rouge, la médiane deux fois plus haute. Les
- * armoiries, au tiers gauche, ne sont à vingt pixels qu'une tache brune :
- * les dessiner ferait perdre la lecture immédiate que ces bandes donnent
- * seules, pour la même raison que le drapeau américain est simplifié.
- */
-function DrapeauEs({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 21 15" className={className} role="img" aria-hidden="true">
-      <rect width="21" height="15" fill="#AA151B" />
-      <rect y="3.75" width="21" height="7.5" fill="#F1BF00" />
-    </svg>
-  );
-}
-
 const DRAPEAUX: Record<Lang, (p: { className?: string }) => JSX.Element> = {
   fr: DrapeauFr,
   en: DrapeauUs,
-  es: DrapeauEs,
 };
 
 /** Le nom de chaque langue DANS sa propre langue : on cherche la sienne telle qu'on l'écrit. */
 const LIBELLES: Record<Lang, string> = {
   fr: 'Français',
   en: 'English',
-  es: 'Español',
 };
 
 /**
