@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { SUPPORTED_LANGS, type Lang } from '@/i18n';
+import { SUPPORTED_LANGS, cheminSansLangue, type Lang } from '@/i18n';
 import { useLang } from '@/hooks/useLang';
 
 /**
@@ -108,7 +108,7 @@ export function LanguageSwitcher({ variant = 'dark' }: { variant?: 'light' | 'da
   function basculer(cible: Lang) {
     setOuvert(false);
     if (cible === lang) return;
-    const reste = location.pathname.replace(/^\/(fr|en)/, '');
+    const reste = cheminSansLangue(location.pathname);
     navigate(`/${cible}${reste}${location.search}`);
   }
 

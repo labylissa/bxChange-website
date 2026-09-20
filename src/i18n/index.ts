@@ -16,6 +16,20 @@ export function isLang(value: string | undefined): value is Lang {
   return (SUPPORTED_LANGS as readonly string[]).includes(value ?? '');
 }
 
+/**
+ * L'adresse débarrassée de son préfixe de langue, s'il y en a un.
+ *
+ * Point unique. Le sélecteur de langue écrivait ce préfixe à la main
+ * (`/^\/(fr|en)/`) : une troisième langue n'y a rien fait échouer — le typage
+ * ne voit pas dans une expression régulière — et passer de l'espagnol à
+ * l'anglais menait à `/en/es`, une adresse qui ne correspond à aucune page.
+ * La liste est donc LUE, jamais recopiée.
+ */
+export function cheminSansLangue(chemin: string): string {
+  const premier = chemin.split('/')[1];
+  return isLang(premier) ? chemin.slice(premier.length + 1) : chemin;
+}
+
 i18n.use(initReactI18next).init({
   resources: {
     fr: { translation: fr },

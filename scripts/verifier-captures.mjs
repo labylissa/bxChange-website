@@ -29,6 +29,15 @@ if (!bloc) {
   );
 }
 
+/**
+ * L'ouverture d'un bloc de traduction : `es: {`.
+ *
+ * Les langues sont LUES, jamais recopiées : ce motif les nommait une à une, et
+ * une langue ajoutée aurait vu ses captures comptées comme françaises — un
+ * contrôle qui se trompe en silence, ce qu'il existe précisément pour éviter.
+ */
+const OUVERTURE_TRADUCTION = new RegExp(`\\b(${LANGS.filter((l) => l !== 'fr').join('|')})\\s*:\\s*\\{`);
+
 /** Chaque `src: '/captures/…'` du bloc, avec la langue sous laquelle il est déclaré. */
 const declarees = [];
 let langueCourante = 'fr';
@@ -36,7 +45,7 @@ for (const ligne of bloc[1].split('\n')) {
   // `traductions: { es: { src: … } }` peut tenir sur une ou plusieurs lignes ;
   // on suit la dernière langue ouverte, et toute ligne de premier niveau
   // (une entrée de capture) ramène au français.
-  const ouverture = ligne.match(/\b(es|en|it)\s*:\s*\{/);
+  const ouverture = ligne.match(OUVERTURE_TRADUCTION);
   if (ouverture) langueCourante = ouverture[1];
   else if (/^\s{2}[\w'-]+\s*:\s*\{/.test(ligne)) langueCourante = 'fr';
 

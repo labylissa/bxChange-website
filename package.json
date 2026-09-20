@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/generate-sitemap.mjs && node scripts/verifier-captures.mjs",
+    "prebuild": "node scripts/generate-sitemap.mjs && node scripts/verifier-captures.mjs && node scripts/verifier-langues.mjs",
     "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "lint": "tsc --noEmit",
     "prerender": "node scripts/prerender.mjs",
-    "captures": "node scripts/verifier-captures.mjs"
+    "captures": "node scripts/verifier-captures.mjs",
+    "langues": "node scripts/verifier-langues.mjs"
   },
   "dependencies": {
     "i18next": "^23.11.5",
