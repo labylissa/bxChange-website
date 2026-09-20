@@ -45,7 +45,14 @@ export interface CaptureDeclaree extends Image {
 }
 
 export const CAPTURES = {
-  'dossier-kyc': { src: '/captures/dossier-kyc.webp', width: 1800, height: 1125 },
+  'dossier-kyc': {
+    src: '/captures/dossier-kyc.webp', width: 1800, height: 1125,
+    // Reprise en espagnol APRÈS traduction du process de démonstration : sans
+    // elle, le cadre aurait été espagnol autour d'un dossier resté français —
+    // ~85 % du texte visible ici appartient au tenant (nom du process, étapes,
+    // onglets, libellés de champs, valeurs, boutons de transition).
+    traductions: { es: { src: '/captures/es/dossier-kyc.webp', width: 1800, height: 1125 } },
+  },
   'concepteur-dos': { src: '/captures/concepteur-dos.webp', width: 1800, height: 380 },
   'concepteur-kyc': { src: '/captures/concepteur-kyc.webp', width: 1800, height: 380 },
   'historique-kyc': { src: '/captures/historique-kyc.webp', width: 640, height: 1276 },
