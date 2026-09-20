@@ -54,8 +54,18 @@ export const CAPTURES = {
     traductions: { es: { src: '/captures/es/dossier-kyc.webp', width: 1800, height: 1125 } },
   },
   'concepteur-dos': { src: '/captures/concepteur-dos.webp', width: 1800, height: 380 },
-  'concepteur-kyc': { src: '/captures/concepteur-kyc.webp', width: 1800, height: 380 },
-  'historique-kyc': { src: '/captures/historique-kyc.webp', width: 640, height: 1276 },
+  'concepteur-kyc': {
+    src: '/captures/concepteur-kyc.webp', width: 1800, height: 380,
+    // Le schéma seul, sans le cadre de l'application : tout ce qu'on y lit —
+    // noms d'étapes, libellés de transition, délais — appartient au process.
+    traductions: { es: { src: '/captures/es/concepteur-kyc.webp', width: 2138, height: 415 } },
+  },
+  'historique-kyc': {
+    src: '/captures/historique-kyc.webp', width: 640, height: 1276,
+    // L'historique est fait de noms d'étapes et de commentaires d'agents : en
+    // français dans un cadre espagnol, il ne resterait qu'un titre traduit.
+    traductions: { es: { src: '/captures/es/historique-kyc.webp', width: 640, height: 1376 } },
+  },
   'historique-sinistre': { src: '/captures/historique-sinistre.webp', width: 640, height: 1072 },
   'tableau-de-bord': { src: '/captures/tableau-de-bord.webp', width: 1800, height: 1125 },
   audit: { src: '/captures/audit.webp', width: 1800, height: 1125 },
@@ -64,7 +74,12 @@ export const CAPTURES = {
   'formulaire-kyc': { src: '/captures/formulaire-kyc.webp', width: 1344, height: 1900 },
   'connecteur-soap': { src: '/captures/connecteur-soap.webp', width: 1800, height: 1406 },
   'dossier-kyc-pays': { src: '/captures/dossier-kyc-pays.webp', width: 1800, height: 1125 },
-  'referentiel-clients': { src: '/captures/referentiel-clients.webp', width: 1800, height: 1125 },
+  'referentiel-clients': {
+    src: '/captures/referentiel-clients.webp', width: 1800, height: 1125,
+    // Les noms d'attributs et leurs valeurs viennent du référentiel du tenant :
+    // les traduire demandait de reprendre le type d'objet métier, pas la page.
+    traductions: { es: { src: '/captures/es/referentiel-clients.webp', width: 1800, height: 1125 } },
+  },
 } as const satisfies Record<string, CaptureDeclaree>;
 
 export type CaptureId = keyof typeof CAPTURES;
