@@ -19,7 +19,13 @@ import { SITE_URL, CONTACT_EMAIL } from '@/lib/site';
  * À FAIRE à l'immatriculation : renseigner la section « Éditeur du site » et
  * retirer la note qui l'accompagne. Une relecture juridique reste recommandée
  * avant d'adresser ces pages à un client (plusieurs juridictions : UE, Maroc,
- * Sénégal, Côte d'Ivoire).
+ * Sénégal, Côte d'Ivoire, Guinée équatoriale).
+ *
+ * La version espagnole (20/09/2026) est une TRADUCTION des deux mêmes textes,
+ * pas une rédaction juridique distincte : elle n'ajoute ni ne retire aucun
+ * engagement. Elle appelle la même relecture que les deux autres — et d'autant
+ * plus que la Guinée équatoriale relève de la CEMAC, dont le cadre de
+ * protection des données n'est pas celui du RGPD.
  */
 
 export type LegalBlock =
@@ -495,5 +501,228 @@ const privacyEn: LegalDoc = {
   ],
 };
 
-export const legalNotice: Record<Lang, LegalDoc> = { fr: legalNoticeFr, en: legalNoticeEn };
-export const privacyPolicy: Record<Lang, LegalDoc> = { fr: privacyFr, en: privacyEn };
+const legalNoticeEs: LegalDoc = {
+  title: 'Aviso legal',
+  intro:
+    'Información legal relativa al sitio bxFlow, editado por bxGroup.',
+  updatedLabel: 'Última actualización',
+  updated: '11 de septiembre de 2026',
+  sections: [
+    {
+      title: '1. Titular del sitio',
+      blocks: [
+        { p: `El sitio accesible en la dirección ${SITE_URL} (en adelante, «el Sitio») está editado por bxGroup, proveedor del software bxFlow.` },
+        {
+          ul: [
+            'Editor: bxGroup',
+            'Producto presentado: bxFlow',
+            `Contacto: ${CONTACT_EMAIL}`,
+            `Dirección del Sitio: ${SITE_URL}`,
+          ],
+        },
+        {
+          note: `bxGroup se encuentra en proceso de inscripción registral. Los datos de identificación legal —forma jurídica, domicilio social, número de registro y director de la publicación— se publicarán en esta página en cuanto la inscripción sea efectiva. Hasta entonces, cualquier consulta relativa a la identidad del editor puede dirigirse a ${CONTACT_EMAIL}.`,
+        },
+      ],
+    },
+    {
+      title: '2. Alojamiento',
+      blocks: [
+        { p: 'El Sitio está alojado por:' },
+        {
+          ul: [
+            'Proveedor de alojamiento: Cloudflare, Inc.',
+            'Dirección: 101 Townsend St, San Francisco, CA 94107, Estados Unidos',
+            'Sitio web: https://www.cloudflare.com',
+          ],
+        },
+      ],
+    },
+    {
+      title: '3. Propiedad intelectual',
+      blocks: [
+        {
+          p: 'La totalidad de los contenidos presentes en el Sitio (textos, gráficos, logotipos, iconos, maquetación, estructura del catálogo de procesos, etc.) es propiedad exclusiva de bxGroup, salvo indicación en contrario. Queda prohibida toda reproducción, representación, modificación, publicación o adaptación total o parcial de los elementos del Sitio, cualquiera que sea el medio o el procedimiento utilizado, sin la autorización previa y por escrito de bxGroup.',
+        },
+        {
+          p: 'La marca bxFlow y el logotipo asociado son propiedad de bxGroup.',
+        },
+      ],
+    },
+    {
+      title: '4. Limitación de responsabilidad',
+      blocks: [
+        {
+          p: 'bxFlow se esfuerza por garantizar la exactitud y la actualización de la información difundida en el Sitio, pero no puede garantizar la exactitud, la precisión ni la exhaustividad de la información puesta a disposición. En consecuencia, bxFlow declina toda responsabilidad por cualquier imprecisión, inexactitud u omisión relativa a la información disponible en el Sitio.',
+        },
+        {
+          p: 'El Sitio puede contener enlaces a servicios de terceros (Calendly para la reserva de citas, Formspree para el formulario de contacto). bxFlow no ejerce ningún control sobre estos servicios de terceros y declina toda responsabilidad en cuanto a su contenido o sus prácticas.',
+        },
+      ],
+    },
+    {
+      title: '5. Alcance del presente aviso',
+      blocks: [
+        {
+          p: 'El presente aviso se refiere al Sitio, que es un sitio de presentación. El uso del software bxFlow se rige por el contrato celebrado con cada cliente, que fija el derecho aplicable, la jurisdicción competente, las garantías y las responsabilidades.',
+        },
+      ],
+    },
+    {
+      title: '6. Contacto',
+      blocks: [
+        {
+          p: `Para cualquier consulta relativa al presente aviso legal, puede ponerse en contacto con nosotros en la dirección: ${CONTACT_EMAIL}.`,
+        },
+      ],
+    },
+  ],
+};
+
+const privacyEs: LegalDoc = {
+  title: 'Política de privacidad',
+  intro:
+    'Cómo el sitio bxFlow recoge, utiliza y protege sus datos personales.',
+  updatedLabel: 'Última actualización',
+  updated: '11 de septiembre de 2026',
+  sections: [
+    {
+      title: '1. Responsable del tratamiento',
+      blocks: [
+        { p: `El responsable del tratamiento de los datos recogidos en el sitio ${SITE_URL} es:` },
+        {
+          ul: [
+            'bxGroup, proveedor del software bxFlow',
+            `Contacto: ${CONTACT_EMAIL}`,
+          ],
+        },
+      ],
+    },
+    {
+      title: '2. ¿Qué datos recogemos?',
+      blocks: [
+        {
+          p: 'El Sitio recoge los datos siguientes, únicamente cuando usted interactúa voluntariamente con alguno de estos elementos:',
+        },
+        { h: 'a) Formulario de contacto' },
+        { p: 'Cuando rellena el formulario de contacto (página Contacto), recogemos: nombre, dirección de correo electrónico, empresa (si procede), teléfono (si procede) y mensaje.' },
+        {
+          p: 'Estos datos se tratan mediante Formspree (formspree.io), un servicio de terceros que recibe y transmite el contenido del formulario por correo electrónico a nuestra dirección de contacto. Formspree actúa como encargado del tratamiento. Política de privacidad de Formspree: https://formspree.io/legal/privacy-policy',
+        },
+        { h: 'b) Reserva de cita / demostración' },
+        {
+          p: 'Cuando programa una demostración (página Demostración), el widget lo facilita Calendly (calendly.com). Calendly recoge directamente los datos que usted introduce (nombre, correo electrónico, horario elegido, respuestas a las posibles preguntas de cualificación). bxFlow recibe una confirmación de la cita, pero Calendly sigue siendo responsable del tratamiento técnico de la reserva. Política de privacidad de Calendly: https://calendly.com/privacy',
+        },
+        { h: 'c) Datos de navegación' },
+        {
+          p: 'El Sitio no utiliza ninguna herramienta de medición de audiencia, ningún rastreador publicitario ni ninguna red social integrada. No elaboramos ningún perfil de navegación.',
+        },
+        { h: 'd) Tipografías' },
+        {
+          p: 'Las tipografías del Sitio las sirve Google Fonts. Su navegador las solicita directamente a los servidores de Google, que recibe con ese motivo su dirección IP y la información técnica que transmite cualquier navegador. No se le comunica ningún otro dato, y nosotros no recibimos nada de Google a cambio.',
+        },
+        { h: 'e) Cookies' },
+        {
+          p: 'El Sitio no deposita ninguna cookie de medición de audiencia ni de publicidad; por eso no se le muestra ningún aviso de consentimiento. El idioma que consulta lo lleva la dirección de la página (/fr, /en, /es) y no una cookie. Nuestro proveedor de alojamiento puede depositar cookies estrictamente necesarias para la seguridad del Sitio.',
+        },
+      ],
+    },
+    {
+      title: '3. ¿Por qué recogemos estos datos?',
+      blocks: [
+        { p: 'Los datos se recogen únicamente con el fin de:' },
+        {
+          ul: [
+            'Responder a sus solicitudes de contacto o de presupuesto',
+            'Programar y confirmar citas de demostración',
+            'Garantizar el correcto funcionamiento técnico del Sitio (preferencia de idioma, etc.)',
+          ],
+        },
+        {
+          p: 'Ningún dato se utiliza con fines de reventa a terceros ni de prospección no solicitada fuera del marco de su petición.',
+        },
+      ],
+    },
+    {
+      title: '4. ¿Cuánto tiempo conservamos sus datos?',
+      blocks: [
+        {
+          ul: [
+            'Formulario de contacto: los intercambios se conservan el tiempo necesario para tramitar su solicitud, y después se archivan o se eliminan en un plazo máximo de 3 años desde el último contacto.',
+            'Citas de Calendly: se conservan según la política de retención de Calendly y los ajustes de nuestra cuenta.',
+          ],
+        },
+      ],
+    },
+    {
+      title: '5. ¿Quién tiene acceso a sus datos?',
+      blocks: [
+        { p: 'Sus datos son accesibles:' },
+        {
+          ul: [
+            'Para el equipo de bxGroup encargado de la gestión comercial',
+            'Para los encargados del tratamiento mencionados anteriormente (Formspree, Calendly), en la medida necesaria para la prestación del servicio',
+            'Si procede, para el proveedor de alojamiento Cloudflare, en lo relativo a los datos técnicos',
+          ],
+        },
+        { p: 'No vendemos ni alquilamos sus datos personales a terceros.' },
+      ],
+    },
+    {
+      title: '6. Transferencias de datos fuera de su país',
+      blocks: [
+        {
+          p: 'Formspree, Calendly, Google (tipografías) y Cloudflare (alojamiento) son empresas establecidas en Estados Unidos. Por tanto, sus datos pueden transferirse y tratarse fuera de su país de residencia, incluso fuera de la Unión Europea. Cada uno de estos proveedores publica un acuerdo de tratamiento de datos que describe las garantías que enmarcan dichas transferencias; los enlaces a sus políticas figuran en los apartados anteriores.',
+        },
+      ],
+    },
+    {
+      title: '7. Sus derechos',
+      blocks: [
+        {
+          p: 'Según su lugar de residencia, usted dispone de derechos sobre sus datos personales, que pueden incluir:',
+        },
+        {
+          ul: [
+            'Derecho de acceso a sus datos',
+            'Derecho de rectificación',
+            'Derecho de supresión',
+            'Derecho de oposición al tratamiento',
+            'Derecho a la portabilidad de sus datos',
+          ],
+        },
+        { p: `Para ejercer estos derechos, póngase en contacto con nosotros en: ${CONTACT_EMAIL}.` },
+        {
+          note: 'Para los residentes de la UE y del EEE, estos derechos derivan del RGPD. Para los residentes de Marruecos (ley 09-08), de Senegal, de Costa de Marfil o de Guinea Ecuatorial, los marcos legales locales pueden prever derechos o autoridades de control diferentes.',
+        },
+      ],
+    },
+    {
+      title: '8. Seguridad',
+      blocks: [
+        {
+          p: 'bxFlow aplica medidas técnicas y organizativas razonables para proteger sus datos frente a la pérdida, el acceso no autorizado, la divulgación o la alteración. La seguridad de este sitio de presentación es distinta de la de la plataforma bxFlow propiamente dicha.',
+        },
+      ],
+    },
+    {
+      title: '9. Modificaciones de esta política',
+      blocks: [
+        {
+          p: 'Esta política de privacidad puede actualizarse en cualquier momento. La fecha de la última actualización figura en la parte superior de esta página. Le invitamos a consultarla con regularidad.',
+        },
+      ],
+    },
+    {
+      title: '10. Contacto',
+      blocks: [
+        {
+          p: `Para cualquier consulta relativa a esta política o al ejercicio de sus derechos, póngase en contacto con nosotros en: ${CONTACT_EMAIL}.`,
+        },
+      ],
+    },
+  ],
+};
+
+export const legalNotice: Record<Lang, LegalDoc> = { fr: legalNoticeFr, en: legalNoticeEn, es: legalNoticeEs };
+export const privacyPolicy: Record<Lang, LegalDoc> = { fr: privacyFr, en: privacyEn, es: privacyEs };
