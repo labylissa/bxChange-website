@@ -47,9 +47,8 @@ const { rendre } = await import(
   pathToFileURL(resolve(RACINE, 'dist-ssr', 'entry-server.js')).href
 );
 
-for (const { chemin } of cheminsPublics()) {
-  const { html, helmet } = await rendre(chemin);
-
+/** Assemble le gabarit et le rendu d'une adresse en une page HTML complète. */
+function assembler(chemin, html, helmet) {
   if (html.length < TAILLE_MINIMALE) {
     throw new Error(`${chemin} : rendu de ${html.length} caractères — la page est vide.`);
   }
@@ -69,6 +68,13 @@ for (const { chemin } of cheminsPublics()) {
   const attributs = helmet.htmlAttributes.toString();
   if (attributs) page = page.replace(/<html[^>]*>/, `<html ${attributs}>`);
 
+  return page;
+}
+
+for (const { chemin } of cheminsPublics()) {
+  const { html, helmet } = await rendre(chemin);
+  const page = assembler(chemin, html, helmet);
+
   const dossier = join(DIST, chemin);
   mkdirSync(dossier, { recursive: true });
   writeFileSync(join(dossier, 'index.html'), page, 'utf8');
@@ -76,3 +82,14 @@ for (const { chemin } of cheminsPublics()) {
 }
 
 console.log(`prérendu : ${cheminsPublics().length} pages écrites dans dist/`);
+
+// Page 404 : une seule, en français (langue par défaut, x-default), écrite à
+// la racine de `dist/`. Cloudflare Pages la sert nativement — avec un vrai
+// statut 404 — pour toute adresse qui ne correspond à aucun fichier ET à
+// aucune règle de `_redirects`. Le chemin demandé n'a pas besoin d'exister :
+// il ne sert qu'à faire tomber le routeur sur sa route `*`, donc sur
+// `NotFoundPage`, qui porte elle-même son `noindex`.
+const { html: html404, helmet: helmet404 } = await rendre('/fr/page-inexistante-pour-le-404');
+const page404 = assembler('404', html404, helmet404);
+writeFileSync(join(DIST, '404.html'), page404, 'utf8');
+console.log(`  404                        ${(page404.length / 1024).toFixed(0)} ko`);

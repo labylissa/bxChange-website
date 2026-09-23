@@ -2,184 +2,184 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://bxgroup.io/fr</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en"/>
+    <loc>https://bxgroup.io/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/en</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en"/>
+    <loc>https://bxgroup.io/en/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/fr/produit</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/produit"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/produit"/>
+    <loc>https://bxgroup.io/fr/produit/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/produit/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/product/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/en/produit</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/produit"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/produit"/>
+    <loc>https://bxgroup.io/en/product/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/produit/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/product/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/fr/cas-usage</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/cas-usage"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/cas-usage"/>
+    <loc>https://bxgroup.io/fr/cas-usage/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/cas-usage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/use-cases/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/en/cas-usage</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/cas-usage"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/cas-usage"/>
+    <loc>https://bxgroup.io/en/use-cases/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/cas-usage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/use-cases/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/fr/catalogue</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/catalogue"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/catalogue"/>
+    <loc>https://bxgroup.io/fr/catalogue/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/catalogue/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/catalog/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/en/catalogue</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/catalogue"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/catalogue"/>
+    <loc>https://bxgroup.io/en/catalog/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/catalogue/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/catalog/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/fr/securite</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/securite"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/securite"/>
+    <loc>https://bxgroup.io/fr/securite/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/securite/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/security/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/en/securite</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/securite"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/securite"/>
+    <loc>https://bxgroup.io/en/security/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/securite/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/security/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/fr/deploiement</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/deploiement"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/deploiement"/>
+    <loc>https://bxgroup.io/fr/deploiement/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/deploiement/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/deployment/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/en/deploiement</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/deploiement"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/deploiement"/>
+    <loc>https://bxgroup.io/en/deployment/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/deploiement/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/deployment/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/fr/equipe</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/equipe"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/equipe"/>
+    <loc>https://bxgroup.io/fr/equipe/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/equipe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/team/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/en/equipe</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/equipe"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/equipe"/>
+    <loc>https://bxgroup.io/en/team/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/equipe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/team/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/fr/tarifs</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/tarifs"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/tarifs"/>
+    <loc>https://bxgroup.io/fr/tarifs/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/tarifs/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/pricing/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/en/tarifs</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/tarifs"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/tarifs"/>
+    <loc>https://bxgroup.io/en/pricing/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/tarifs/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/pricing/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/fr/contact</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/contact"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/contact"/>
+    <loc>https://bxgroup.io/fr/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/contact/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/en/contact</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/contact"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/contact"/>
+    <loc>https://bxgroup.io/en/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/contact/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/fr/demo</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/demo"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/demo"/>
+    <loc>https://bxgroup.io/fr/demo/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/demo/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/demo/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/en/demo</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/demo"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/demo"/>
+    <loc>https://bxgroup.io/en/demo/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/demo/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/demo/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/fr/documentation</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/documentation"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/documentation"/>
+    <loc>https://bxgroup.io/fr/documentation/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/documentation/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/documentation/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/en/documentation</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/documentation"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/documentation"/>
+    <loc>https://bxgroup.io/en/documentation/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/documentation/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/documentation/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/fr/mentions-legales</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/mentions-legales"/>
+    <loc>https://bxgroup.io/fr/mentions-legales/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/mentions-legales/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/legal-notice/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/en/mentions-legales</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/mentions-legales"/>
+    <loc>https://bxgroup.io/en/legal-notice/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/mentions-legales/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/legal-notice/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/fr/confidentialite</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/confidentialite"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/confidentialite"/>
+    <loc>https://bxgroup.io/fr/confidentialite/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/confidentialite/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/privacy/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bxgroup.io/en/confidentialite</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/confidentialite"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/confidentialite"/>
+    <loc>https://bxgroup.io/en/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/confidentialite/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/privacy/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

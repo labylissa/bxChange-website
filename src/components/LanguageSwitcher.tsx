@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { SUPPORTED_LANGS, cheminSansLangue, type Lang } from '@/i18n';
 import { useLang } from '@/hooks/useLang';
+import { localizedPath, pageKeyFromSlug } from '@/lib/routes';
 
 /**
  * Drapeaux dessinés en SVG, et non en emoji.
@@ -91,8 +92,14 @@ export function LanguageSwitcher({ variant = 'dark' }: { variant?: 'light' | 'da
   function basculer(cible: Lang) {
     setOuvert(false);
     if (cible === lang) return;
-    const reste = cheminSansLangue(location.pathname);
-    navigate(`/${cible}${reste}${location.search}`);
+    // Le slug n'est plus le même mot d'une langue à l'autre (`produit` →
+    // `product`) : on retrouve la PAGE depuis le slug courant, et on
+    // reconstruit l'adresse dans la langue cible — recopier le chemin en ne
+    // changeant que le préfixe, comme avant, mènerait à un slug français sous
+    // une adresse anglaise.
+    const reste = cheminSansLangue(location.pathname).replace(/^\/|\/$/g, '');
+    const page = pageKeyFromSlug(lang, reste);
+    navigate(`${localizedPath(cible, page ?? 'home')}${location.search}`);
   }
 
   const clair = variant === 'light';
