@@ -1,30 +1,90 @@
 import type { Lang } from '@/i18n';
 
+export type PageKey =
+  | 'home'
+  | 'product'
+  | 'useCases'
+  | 'catalog'
+  | 'security'
+  | 'deployment'
+  | 'team'
+  | 'pricing'
+  | 'contact'
+  | 'demo'
+  | 'documentation'
+  | 'legalNotice'
+  | 'privacy';
+
 /**
- * Slugs de pages (identiques FR/EN, préfixés par la langue : /fr/produit, /en/produit).
+ * Slugs de pages, PAR LANGUE.
+ *
+ * Une seule table servait aux deux langues (`/fr/produit`, `/en/produit`) :
+ * changer de langue ne faisait donc que remplacer le préfixe, jamais le mot
+ * lui-même — un mot français sous une adresse anglaise. `Record<Lang, ...>`
+ * force à en écrire un pour CHAQUE langue : une traduction oubliée ne compile
+ * pas, plutôt que de laisser passer un slug français de plus.
+ *
+ * `contact`, `demo` et `documentation` s'écrivent pareil dans les deux
+ * langues — ce n'est pas un oubli, juste que les mots coïncident.
  */
-export const PAGE_SLUGS = {
-  home: '',
-  product: 'produit',
-  useCases: 'cas-usage',
-  catalog: 'catalogue',
-  security: 'securite',
-  deployment: 'deploiement',
-  team: 'equipe',
-  pricing: 'tarifs',
-  contact: 'contact',
-  demo: 'demo',
-  documentation: 'documentation',
-  legalNotice: 'mentions-legales',
-  privacy: 'confidentialite',
-} as const;
+export const PAGE_SLUGS: Record<Lang, Record<PageKey, string>> = {
+  fr: {
+    home: '',
+    product: 'produit',
+    useCases: 'cas-usage',
+    catalog: 'catalogue',
+    security: 'securite',
+    deployment: 'deploiement',
+    team: 'equipe',
+    pricing: 'tarifs',
+    contact: 'contact',
+    demo: 'demo',
+    documentation: 'documentation',
+    legalNotice: 'mentions-legales',
+    privacy: 'confidentialite',
+  },
+  en: {
+    home: '',
+    product: 'product',
+    useCases: 'use-cases',
+    catalog: 'catalog',
+    security: 'security',
+    deployment: 'deployment',
+    team: 'team',
+    pricing: 'pricing',
+    contact: 'contact',
+    demo: 'demo',
+    documentation: 'documentation',
+    legalNotice: 'legal-notice',
+    privacy: 'privacy',
+  },
+};
 
-export type PageKey = keyof typeof PAGE_SLUGS;
-
-/** Construit un chemin absolu localisé, ex. localizedPath('fr', 'product') => '/fr/produit'. */
+/**
+ * Construit un chemin absolu localisé, TOUJOURS terminé par un slash
+ * (`localizedPath('fr', 'product') => '/fr/produit/'`).
+ *
+ * Sans le slash final, l'adresse déclarée (canonical, hreflang, sitemap,
+ * liens internes) n'est pas celle que le serveur sert : Cloudflare répond à
+ * `/fr/produit` par une redirection 308 vers `/fr/produit/`, et une adresse
+ * qu'on annonce soi-même ne devrait jamais rediriger.
+ */
 export function localizedPath(lang: Lang, page: PageKey): string {
-  const slug = PAGE_SLUGS[page];
-  return slug ? `/${lang}/${slug}` : `/${lang}`;
+  const slug = PAGE_SLUGS[lang][page];
+  return slug ? `/${lang}/${slug}/` : `/${lang}/`;
+}
+
+/**
+ * Retrouve la page depuis un slug DÉJÀ débarrassé de son préfixe de langue et
+ * de ses slashes (ex. `'produit'`, ou `''` pour l'accueil).
+ *
+ * Sert au sélecteur de langue : passer du français à l'anglais doit changer
+ * de MOT (`/fr/produit` → `/en/product`), pas seulement de préfixe — ce que
+ * faisait l'ancien code en recopiant le chemin tel quel.
+ */
+export function pageKeyFromSlug(lang: Lang, slug: string): PageKey | undefined {
+  const table = PAGE_SLUGS[lang];
+  return (Object.keys(table) as PageKey[]).find((key) => table[key] === slug);
 }
 
 /** Toutes les pages, pour la génération du sitemap et la navigation. */

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Navigate, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { DEFAULT_LANG, isLang } from '@/i18n';
 import { Header } from './Header';
@@ -22,7 +22,11 @@ function ScrollToTop() {
 }
 
 export function Layout() {
-  const { lang } = useParams();
+  // Dérivée de l'URL, pas d'un paramètre `:lang` — `/fr` et `/en` sont deux
+  // arbres de routes distincts (chacun avec ses propres slugs), donc il n'y a
+  // plus de paramètre `lang` à lire ; voir la même remarque dans `useLang`.
+  const { pathname } = useLocation();
+  const lang = pathname.split('/')[1];
   const { i18n, t } = useTranslation();
 
   useEffect(() => {
@@ -33,7 +37,7 @@ export function Layout() {
 
   // Langue inconnue dans l'URL → on redirige vers la langue par défaut.
   if (!isLang(lang)) {
-    return <Navigate to={`/${DEFAULT_LANG}`} replace />;
+    return <Navigate to={`/${DEFAULT_LANG}/`} replace />;
   }
 
   return (

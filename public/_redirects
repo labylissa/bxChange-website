@@ -1,9 +1,48 @@
 # La racine part vers la langue par défaut côté serveur, plutôt qu'en
-# JavaScript : un moteur de recherche suit une 302 sans rien exécuter, là où
-# une redirection côté client lui demande de rendre la page pour la découvrir.
-/                 /fr              302
+# JavaScript : un moteur de recherche suit une redirection sans rien exécuter,
+# là où une redirection côté client lui demande de rendre la page pour la
+# découvrir. 301 et non 302 : ce n'est pas un déplacement temporaire, / ne
+# servira jamais lui-même de contenu. Cible avec son slash final : /fr (sans
+# slash) existe aussi, mais Cloudflare y répond par une 308 vers /fr/ — deux
+# sauts au lieu d'un.
+/                      /fr/                 301
 
-# Repli des adresses inconnues. Cloudflare Pages sert d'abord les fichiers
-# statiques, donc les pages prérendues (/fr/produit/index.html, …) passent
-# AVANT cette règle — elle ne s'applique qu'à ce qui n'a pas été prérendu.
-/*                /index.html      200
+# Espagnol : aucune version du site n'existe. SUPPORTED_LANGS ne le liste
+# plus, mais /es répondait encore 200 (repli SPA) avec le contenu français —
+# ce n'est pas la même chose qu'une vraie redirection pour un moteur de
+# recherche, qui doit être dite explicitement que /es a déménagé vers /fr.
+/es                    /fr/                 301
+/es/*                  /fr/                 301
+
+# Anciens slugs anglais francisés → nouveaux slugs anglais (voir PAGE_SLUGS
+# dans src/lib/routes.ts, seule source de ces mots).
+#
+# Deux règles par slug : sans le slash final (jamais indexé, mais un lien
+# externe peut encore le viser), et avec (la forme que Google avait indexée
+# avant ce sprint — /en/produit/ répondait 404 sans cette seconde règle,
+# puisque seule la forme sans slash était couverte).
+/en/produit            /en/product/         301
+/en/produit/*          /en/product/         301
+/en/cas-usage          /en/use-cases/       301
+/en/cas-usage/*        /en/use-cases/       301
+/en/catalogue          /en/catalog/         301
+/en/catalogue/*        /en/catalog/         301
+/en/securite           /en/security/        301
+/en/securite/*         /en/security/        301
+/en/deploiement        /en/deployment/      301
+/en/deploiement/*      /en/deployment/      301
+/en/equipe             /en/team/            301
+/en/equipe/*           /en/team/            301
+/en/tarifs             /en/pricing/         301
+/en/tarifs/*           /en/pricing/         301
+/en/mentions-legales   /en/legal-notice/    301
+/en/mentions-legales/* /en/legal-notice/    301
+/en/confidentialite    /en/privacy/         301
+/en/confidentialite/*  /en/privacy/         301
+
+# Pas de repli catch-all ici : toutes les pages publiques sont pré-rendues en
+# fichiers statiques (scripts/prerender.mjs), donc il n'y a plus d'adresse
+# valide qui ne soit pas déjà un fichier sur le disque. Une adresse qui ne
+# correspond à AUCUNE des règles ci-dessus ni à AUCUN fichier tombe sur
+# dist/404.html, servi nativement par Cloudflare Pages avec un vrai statut
+# 404 — jamais un 200 sur le contenu de l'accueil.

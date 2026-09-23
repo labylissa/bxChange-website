@@ -36,3 +36,6 @@ doc/
 
 # Cache Python du generateur de catalogue
 scripts/__pycache__/
+
+# Configuration locale de Claude Code
+.claude/

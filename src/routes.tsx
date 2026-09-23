@@ -1,5 +1,6 @@
 import { Navigate, type RouteObject } from 'react-router-dom';
-import { DEFAULT_LANG } from './i18n';
+import { DEFAULT_LANG, SUPPORTED_LANGS, type Lang } from './i18n';
+import { PAGE_SLUGS, type PageKey } from './lib/routes';
 import { Layout } from './components/Layout';
 import { HomePage } from './pages/HomePage';
 import { ProductPage } from './pages/ProductPage';
@@ -15,6 +16,39 @@ import { DocumentationPage } from './pages/DocumentationPage';
 import { LegalNoticePage, PrivacyPage } from './pages/LegalPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
+/** L'élément de chaque page, hors accueil (qui est la route `index`). */
+const PAGE_ELEMENTS: Record<Exclude<PageKey, 'home'>, JSX.Element> = {
+  product: <ProductPage />,
+  useCases: <UseCasesPage />,
+  catalog: <CatalogPage />,
+  security: <SecurityPage />,
+  deployment: <DeploymentPage />,
+  team: <TeamPage />,
+  pricing: <PricingPage />,
+  contact: <ContactPage />,
+  demo: <DemoPage />,
+  documentation: <DocumentationPage />,
+  legalNotice: <LegalNoticePage />,
+  privacy: <PrivacyPage />,
+};
+
+/**
+ * Les routes d'UNE langue, ENGENDRÉES depuis `PAGE_SLUGS[lang]`.
+ *
+ * Le slug anglais de chaque page vient d'être traduit (`produit` → `product`,
+ * etc.) : `PAGE_SLUGS` est désormais la seule source qui les nomme, donc les
+ * routes du routeur doivent en dépendre plutôt que de recopier les mots — une
+ * table de routes écrite à la main pour l'anglais aurait pu diverger de
+ * `PAGE_SLUGS` sans que rien ne le remarque, et le lien du menu aurait pointé
+ * vers une adresse que le routeur ne sait pas servir.
+ */
+function routesDeLangue(lang: Lang): RouteObject[] {
+  return (Object.keys(PAGE_ELEMENTS) as Exclude<PageKey, 'home'>[]).map((page) => ({
+    path: PAGE_SLUGS[lang][page],
+    element: PAGE_ELEMENTS[page],
+  }));
+}
+
 /**
  * La table des routes, séparée du routeur de navigateur.
  *
@@ -27,30 +61,19 @@ import { NotFoundPage } from './pages/NotFoundPage';
 export const routes: RouteObject[] = [
   {
     path: '/',
-    element: <Navigate to={`/${DEFAULT_LANG}`} replace />,
+    element: <Navigate to={`/${DEFAULT_LANG}/`} replace />,
   },
-  {
-    path: '/:lang',
+  ...SUPPORTED_LANGS.map((lang) => ({
+    path: `/${lang}`,
     element: <Layout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: 'produit', element: <ProductPage /> },
-      { path: 'cas-usage', element: <UseCasesPage /> },
-      { path: 'catalogue', element: <CatalogPage /> },
-      { path: 'securite', element: <SecurityPage /> },
-      { path: 'deploiement', element: <DeploymentPage /> },
-      { path: 'equipe', element: <TeamPage /> },
-      { path: 'tarifs', element: <PricingPage /> },
-      { path: 'contact', element: <ContactPage /> },
-      { path: 'demo', element: <DemoPage /> },
-      { path: 'documentation', element: <DocumentationPage /> },
-      { path: 'mentions-legales', element: <LegalNoticePage /> },
-      { path: 'confidentialite', element: <PrivacyPage /> },
+      ...routesDeLangue(lang),
       { path: '*', element: <NotFoundPage /> },
     ],
-  },
+  })),
   {
     path: '*',
-    element: <Navigate to={`/${DEFAULT_LANG}`} replace />,
+    element: <Navigate to={`/${DEFAULT_LANG}/`} replace />,
   },
 ];

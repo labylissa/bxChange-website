@@ -7,22 +7,31 @@
 import { writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
-import { LANGS, lireSiteUrl, lireSlugs } from './routes-partagees.mjs';
+import { cheminsPublics, lireSiteUrl } from './routes-partagees.mjs';
 
 const RACINE = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE_URL = lireSiteUrl();
 
+// Un slug diffère désormais d'une langue à l'autre (`/fr/produit`,
+// `/en/product`) : les alternates d'une adresse ne se déduisent plus de son
+// propre slug, il faut regrouper par PAGE pour retrouver l'adresse de chaque
+// langue.
+const parPage = new Map();
+for (const c of cheminsPublics()) {
+  if (!parPage.has(c.page)) parPage.set(c.page, []);
+  parPage.get(c.page).push(c);
+}
+
 const urls = [];
-for (const slug of lireSlugs()) {
-  const adresse = (lang) => (slug ? `${SITE_URL}/${lang}/${slug}` : `${SITE_URL}/${lang}`);
-  const alternates = LANGS.map(
-    (l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${adresse(l)}"/>`,
-  ).join('\n');
-  for (const lang of LANGS) {
+for (const entrees of parPage.values()) {
+  const alternates = entrees
+    .map((e) => `    <xhtml:link rel="alternate" hreflang="${e.lang}" href="${SITE_URL}${e.chemin}"/>`)
+    .join('\n');
+  for (const e of entrees) {
     urls.push(
-      `  <url>\n    <loc>${adresse(lang)}</loc>\n${alternates}\n` +
+      `  <url>\n    <loc>${SITE_URL}${e.chemin}</loc>\n${alternates}\n` +
         `    <changefreq>monthly</changefreq>\n` +
-        `    <priority>${slug === '' ? '1.0' : '0.8'}</priority>\n  </url>`,
+        `    <priority>${e.page === 'home' ? '1.0' : '0.8'}</priority>\n  </url>`,
     );
   }
 }
