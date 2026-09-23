@@ -77,6 +77,16 @@ export function HomePage() {
                 {c.home.hero.ctaSecondary}
               </Link>
             </div>
+            {/* L'essai de six mois ne vivait que sur la page Tarifs, c'est-à-dire
+                après que le visiteur a décidé de s'y rendre. C'est pourtant ce
+                qui lève l'objection « personne ne l'utilise encore » : il se dit
+                à côté du bouton, pas deux pages plus loin. */}
+            <p className="mt-5 text-sm text-ink-500">
+              {c.home.hero.pilot}{' '}
+              <Link to={path('pricing')} className="font-semibold text-teal-500 hover:underline">
+                {c.home.hero.pilotLink}
+              </Link>
+            </p>
             <ul className="mt-7 space-y-2.5">
               {c.home.hero.proofs.map((preuve) => (
                 <li key={preuve} className="flex items-start gap-2.5 text-sm text-ink-600">
@@ -148,7 +158,14 @@ export function HomePage() {
 
           Des captures réelles, prises sur des dossiers de démonstration. Un site
           qui décrit douze capacités sans montrer un écran fait naître la question
-          qu'il voudrait éviter : est-ce que ça existe ? */}
+          qu'il voudrait éviter : est-ce que ça existe ?
+
+          Un écran par secteur, et c'est délibéré : deux des trois montraient le
+          même sinistre incendie, si bien qu'une entreprise qui ne fait ni KYC ni
+          sinistre ne voyait, sur toute la page, aucun écran qui la concerne. Le
+          troisième reste un dossier d'assurance — la note de frais prouve que le
+          produit sert le quotidien, le sinistre qu'il tient les dossiers lourds,
+          et il faut les deux. */}
       <Section className="bg-ink-50/60">
         <Reveal>
           <SectionHeading
@@ -160,7 +177,7 @@ export function HomePage() {
         <div className="mt-12 grid gap-10 lg:grid-cols-3">
           {([
             ['concepteur-dos', 'lg:col-span-3'],
-            ['dossier-sinistre', 'lg:col-span-2'],
+            ['dossier-note-de-frais', 'lg:col-span-2'],
             ['historique-sinistre', ''],
           ] as const).map(([id, place], i) => {
             const item = c.home.shots.items[i];
@@ -323,7 +340,12 @@ export function HomePage() {
         </div>
       </Section>
 
-      <CtaBand title={c.home.finalCta.title} subtitle={c.home.finalCta.subtitle} />
+      <CtaBand
+        title={c.home.finalCta.title}
+        subtitle={c.home.finalCta.subtitle}
+        note={c.home.finalCta.note}
+        secondary={{ label: c.home.finalCta.secondary, href: '/brochure-bxflow.pdf' }}
+      />
     </>
   );
 }

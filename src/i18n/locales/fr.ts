@@ -3,7 +3,7 @@ export const fr = {
     home: {
       title: 'bxFlow — Vos processus métier, sous contrôle de bout en bout',
       description:
-        'Moteur de processus métier pour la banque, l’assurance et l’entreprise : KYC, LCB-FT, sinistres, achats. Plus de 70 processus prêts à l’emploi, hébergés ou installés sur vos serveurs.',
+        'Congés, notes de frais, factures fournisseurs, entrée en relation (KYC), sinistres : chaque dossier suit ses étapes et ses validations. Plus de 70 processus prêts à l’emploi, hébergés ou installés sur vos serveurs.',
     },
     product: {
       title: 'Produit — bxFlow | Moteur de processus métier (BPMN)',
@@ -102,9 +102,11 @@ export const fr = {
       eyebrow: 'Moteur de processus métier',
       title: 'Vos processus métier, sous contrôle de bout en bout.',
       subtitle:
-        'Entrée en relation, déclaration de soupçon, sinistre, achat : chaque dossier suit ses étapes, ses rôles et ses validations, avec un historique qui fait foi. Plus de 70 processus prêts à l’emploi, hébergés chez nous ou installés sur vos serveurs.',
+        'Note de frais, facture fournisseur, entrée en relation, sinistre : chaque dossier suit ses étapes, ses rôles et ses validations, avec un historique qui fait foi. Plus de 70 processus prêts à l’emploi, hébergés chez nous ou installés sur vos serveurs.',
       ctaPrimary: 'Demander une démo',
       ctaSecondary: 'Voir les processus disponibles',
+      pilot: 'Six mois sans facture pour démarrer — un ou deux processus, une équipe.',
+      pilotLink: 'Voir les conditions',
       trust: 'Plus de 70 processus prêts à démarrer dès aujourd’hui.',
       proofs: [
         'Installable sur vos serveurs, sans aucun accès de l’éditeur',
@@ -203,14 +205,14 @@ export const fr = {
           alt: 'Concepteur de processus de bxFlow affichant le circuit de déclaration de soupçon, de bout en bout.',
         },
         {
-          title: 'Un sinistre, complet',
-          text: 'Un incendie d’entrepôt à l’analyse de la garantie : police, assuré, facteurs de complexité, rapport d’expertise joint — et la contre-expertise parmi les actions possibles.',
-          alt: 'Dossier de sinistre incendie dans bxFlow, à l’étape d’analyse de la garantie.',
+          title: 'Une note de frais, en attente de direction',
+          text: 'Un billet à 312 € passé au contrôle comptable, arrivé devant la direction : le montant, la catégorie, la date de la dépense — et le délai de 72 h qui court, avec « Valider » et « Rejeter » pour seules actions ouvertes à ce rôle.',
+          alt: 'Dossier de note de frais dans bxFlow, à l’étape d’approbation direction, avec le délai restant et les deux actions possibles.',
         },
         {
           title: 'Qui a fait quoi, et quand',
-          text: 'L’historique du même dossier : chaque passage d’étape est daté, signé et motivé — jusqu’au champ modifié entre deux décisions. Personne ne valide son propre travail.',
-          alt: 'Historique du dossier de sinistre incendie dans bxFlow : transitions successives, leurs auteurs et leurs commentaires.',
+          text: 'L’historique d’un dossier de sinistre : chaque passage d’étape est daté, signé et motivé — jusqu’au champ modifié entre deux décisions. Personne ne valide son propre travail.',
+          alt: 'Historique d’un dossier de sinistre incendie dans bxFlow : transitions successives, leurs auteurs et leurs commentaires.',
         },
       ],
     },
@@ -230,6 +232,8 @@ export const fr = {
       subtitle:
         'Une heure, centrée sur vos processus. Sans engagement.',
       cta: 'Demander une démo',
+      note: 'Et si vous allez plus loin : six mois sans facture sur un premier processus.',
+      secondary: 'Télécharger la brochure (PDF)',
     },
   },
 
@@ -543,7 +547,7 @@ export const fr = {
         solution:
           'Chaque démarche devient un processus avec ses validateurs, ses délais et ses relances, et vos logiciels existants sont interrogés quand une étape en a besoin.',
         benefit:
-          'Des heures récupérées chaque semaine, et plus aucune demande perdue dans une boîte de réception.',
+          'Chaque demande porte sa date, son validateur et son délai — on sait où elle en est sans relancer personne, et un rappel part tout seul si elle traîne.',
         examples: ['Demande d’achat', 'Note de frais', 'Onboarding collaborateur', 'Demande de congés'],
       },
     },
@@ -958,6 +962,7 @@ export const fr = {
       'Une démonstration adaptée à votre secteur et à vos besoins',
       'Des réponses concrètes à vos questions, en direct',
       'Une estimation claire de ce que bxFlow peut automatiser chez vous',
+      'Six mois sans facture si vous décidez d’aller plus loin, sur un périmètre ciblé',
     ],
     duration: '1 heure',
     durationLabel: 'Durée',

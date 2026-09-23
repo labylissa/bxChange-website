@@ -5,7 +5,7 @@ export const en: Translation = {
     home: {
       title: 'bxFlow — Your business processes, under control end to end',
       description:
-        'Business process engine for banking, insurance and enterprises: KYC, AML, claims, purchasing. More than 70 ready-to-use processes, hosted or installed on your servers.',
+        'Leave, expenses, supplier invoices, client onboarding (KYC), insurance claims: every case follows its steps and approvals. More than 70 ready-to-use processes, hosted or installed on your servers.',
     },
     product: {
       title: 'Product — bxFlow | Business process engine (BPMN)',
@@ -104,9 +104,11 @@ export const en: Translation = {
       eyebrow: 'Business process engine',
       title: 'Your business processes, under control end to end.',
       subtitle:
-        'Client onboarding, suspicious activity reports, insurance claims, purchasing: every case follows its steps, roles and approvals, with a history that stands as evidence. More than 70 ready-to-use processes, hosted by us or installed on your own servers.',
+        'Expense report, supplier invoice, client onboarding, insurance claim: every case follows its steps, roles and approvals, with a history that stands as evidence. More than 70 ready-to-use processes, hosted by us or installed on your own servers.',
       ctaPrimary: 'Request a demo',
       ctaSecondary: 'See available processes',
+      pilot: 'Six months with no invoice to get started — one or two processes, one team.',
+      pilotLink: 'See the terms',
       trust: 'More than 70 processes ready to run today.',
       proofs: [
         'Installable on your servers, with no vendor access at all',
@@ -202,14 +204,14 @@ export const en: Translation = {
           alt: 'bxFlow process designer showing the suspicious activity report workflow end to end.',
         },
         {
-          title: 'A claim, complete',
-          text: 'A warehouse fire at cover analysis: policy, insured party, complexity factors, expert report attached — and a second expert opinion among the available actions.',
-          alt: 'Fire claim case in bxFlow at the cover analysis step.',
+          title: 'An expense report, awaiting management',
+          text: 'A €312 flight cleared by accounting and now in front of management: amount, category, date of expense — and the 72-hour clock running, with “Approve” and “Reject” the only actions open to this role.',
+          alt: 'Expense report case in bxFlow at the management approval step, with the remaining time and the two available actions.',
         },
         {
           title: 'Who did what, and when',
-          text: 'The history of that same case: every step change dated, signed and explained — down to the field edited between two decisions. Nobody approves their own work.',
-          alt: 'History of the fire claim case in bxFlow, showing successive transitions, their authors and their comments.',
+          text: 'The history of a claim case: every step change dated, signed and explained — down to the field edited between two decisions. Nobody approves their own work.',
+          alt: 'History of a fire claim case in bxFlow, showing successive transitions, their authors and their comments.',
         },
       ],
     },
@@ -228,6 +230,8 @@ export const en: Translation = {
       title: 'Let’s see what bxFlow can run for you',
       subtitle: 'One hour, focused on your processes. No commitment.',
       cta: 'Request a demo',
+      note: 'And if you take it further: six months with no invoice on a first process.',
+      secondary: 'Download the brochure (PDF)',
     },
   },
 
@@ -531,7 +535,7 @@ export const en: Translation = {
         solution:
           'Each request becomes a process with its approvers, deadlines and reminders, and your existing systems are queried when a step needs them.',
         benefit:
-          'Hours saved every week, and no request lost in an inbox again.',
+          'Every request carries its date, its approver and its deadline — you know where it stands without chasing anyone, and a reminder goes out on its own if it stalls.',
         examples: ['Purchase request', 'Expense report', 'Employee onboarding', 'Leave request'],
       },
     },
@@ -943,6 +947,7 @@ export const en: Translation = {
       'A demo tailored to your sector and needs',
       'Concrete answers to your questions, live',
       'A clear estimate of what bxFlow can automate for you',
+      'Six months with no invoice if you decide to go further, on a focused scope',
     ],
     duration: '1 hour',
     durationLabel: 'Duration',

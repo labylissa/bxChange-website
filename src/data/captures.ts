@@ -62,6 +62,7 @@ export const CAPTURES = {
   'tableau-de-bord': { src: '/captures/tableau-de-bord.webp', width: 1800, height: 1125 },
   audit: { src: '/captures/audit.webp', width: 1800, height: 1125 },
   'dossier-sinistre': { src: '/captures/dossier-sinistre.webp', width: 1800, height: 1125 },
+  'dossier-note-de-frais': { src: '/captures/dossier-note-de-frais.webp', width: 1800, height: 1125 },
   'formulaire-sinistre': { src: '/captures/formulaire-sinistre.webp', width: 1344, height: 1800 },
   'formulaire-kyc': { src: '/captures/formulaire-kyc.webp', width: 1344, height: 1900 },
   'connecteur-soap': { src: '/captures/connecteur-soap.webp', width: 1800, height: 1406 },

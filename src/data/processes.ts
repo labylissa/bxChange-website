@@ -1244,6 +1244,42 @@ export const processes: Process[] = [
   },
 ];
 
+/**
+ * L'ordre des six cartes de l'accueil, DÉCLARÉ.
+ *
+ * Il suivait l'ordre du catalogue, qui est celui du portefeuille livré : les
+ * trois premières cartes étaient donc conformité et banque, et « Note de frais »
+ * comme « Demande de congés » arrivaient en quatrième et sixième position.
+ * Un visiteur ne lit pas six cartes avant de décider si le produit s'adresse à
+ * lui — il lit les deux premières.
+ *
+ * Deux processus que tout le monde reconnaît ouvrent la liste, deux dossiers
+ * réglementés la ferment : la page doit se lire dans les deux sens, et une
+ * entreprise qui ne fait ni KYC ni sinistre doit s'y retrouver sans que la
+ * banque cesse d'y voir ses propres dossiers.
+ *
+ * Un identifiant ici qui ne porte pas `featured: true` serait silencieusement
+ * ignoré — d'où la vérification, qui échoue au lieu de rendre une carte de moins.
+ */
+const ORDRE_VEDETTE = [
+  'demande-de-conges-01',
+  'note-de-frais-02',
+  'validation-de-facture-fournisseur-33',
+  'entree-en-relation-kyc-18',
+  'ticket-support-03',
+  'agrement-commercant-62',
+] as const;
+
 export function getFeaturedProcesses(): Process[] {
-  return processes.filter((p) => p.featured);
+  const vedettes = processes.filter((p) => p.featured);
+  const rang = new Map<string, number>(ORDRE_VEDETTE.map((id, i) => [id, i]));
+  const manquants = ORDRE_VEDETTE.filter((id) => !vedettes.some((p) => p.id === id));
+  if (manquants.length > 0) {
+    throw new Error(
+      `ORDRE_VEDETTE nomme des processus qui ne sont pas marqués featured : ${manquants.join(', ')}`,
+    );
+  }
+  // Un processus marqué vedette mais absent de l'ordre reste affiché, à la fin :
+  // le retirer de la page serait une conséquence invisible d'un simple oubli.
+  return vedettes.sort((a, b) => (rang.get(a.id) ?? 999) - (rang.get(b.id) ?? 999));
 }

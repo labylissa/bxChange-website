@@ -129,16 +129,30 @@ export function SectionHeading({
 }
 
 /** Bandeau d'appel à l'action, réutilisé en bas des pages. */
+/**
+ * La bande d'appel à l'action de fin de page.
+ *
+ * `secondary` et `note` sont facultatifs, et c'est une décision : le seul geste
+ * proposé était de réserver une démonstration, donc un visiteur qui n'est pas
+ * encore prêt à parler à quelqu'un n'avait rien à faire — il repartait. La
+ * seconde porte est volontairement une ressource qu'on emporte (la brochure),
+ * pas un second rendez-vous déguisé ; et `note` porte ce qui lève l'objection
+ * avant la réunion, pas après.
+ */
 export function CtaBand({
   title,
   subtitle,
   ctaLabel,
   to = 'demo',
+  note,
+  secondary,
 }: {
   title: string;
   subtitle: string;
   ctaLabel?: string;
   to?: PageKey;
+  note?: string;
+  secondary?: { label: string; href: string };
 }) {
   const { t } = useTranslation();
   const { path } = useLang();
@@ -157,7 +171,15 @@ export function CtaBand({
                 {ctaLabel ?? t('common.requestDemo')}
                 <Icons.arrowRight className="h-4 w-4" />
               </Link>
+              {/* Le format et le poids sont dits dans le libellé : un PDF qui
+                  s'ouvre sans prévenir agace — même règle qu'au pied de page. */}
+              {secondary && (
+                <a href={secondary.href} className="btn-secondary" download>
+                  {secondary.label}
+                </a>
+              )}
             </div>
+            {note && <p className="mt-5 text-sm text-ink-500">{note}</p>}
           </div>
         </div>
       </div>
