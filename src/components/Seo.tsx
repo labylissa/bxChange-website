@@ -19,13 +19,23 @@ const OG_LOCALES: Record<Lang, string> = {
 interface SeoProps {
   title: string;
   description: string;
-  page: PageKey;
+  /** Page statique : le chemin par langue vient de `localizedPath`. */
+  page?: PageKey;
+  /**
+   * Page dynamique (ex. un processus du catalogue), dont le chemin ne se
+   * déduit pas d'une `PageKey` — le slug diffère d'une langue à l'autre.
+   * Fournir le chemin déjà construit pour CHAQUE langue.
+   */
+  paths?: Record<Lang, string>;
 }
 
 /** Gère <title>, meta description, lang, canonical et hreflang par page. */
-export function Seo({ title, description, page }: SeoProps) {
+export function Seo({ title, description, page, paths }: SeoProps) {
   const { lang } = useLang();
-  const canonical = `${SITE_URL}${localizedPath(lang, page)}`;
+  const chemin = (l: Lang) => paths?.[l] ?? (page ? localizedPath(l, page) : (() => {
+    throw new Error('<Seo> : fournir `page` ou `paths`.');
+  })());
+  const canonical = `${SITE_URL}${chemin(lang)}`;
 
   return (
     <Helmet>
@@ -38,9 +48,9 @@ export function Seo({ title, description, page }: SeoProps) {
           page existe, elle s'affiche, et elle n'est indexée dans aucune autre
           langue. Rien à l'écran ne le signale. */}
       {SUPPORTED_LANGS.map((l) => (
-        <link key={l} rel="alternate" hrefLang={l} href={`${SITE_URL}${localizedPath(l, page)}`} />
+        <link key={l} rel="alternate" hrefLang={l} href={`${SITE_URL}${chemin(l)}`} />
       ))}
-      <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}${localizedPath(DEFAULT_LANG, page)}`} />
+      <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}${chemin(DEFAULT_LANG)}`} />
 
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} />

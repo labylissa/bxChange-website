@@ -15,6 +15,7 @@ import { DemoPage } from './pages/DemoPage';
 import { DocumentationPage } from './pages/DocumentationPage';
 import { LegalNoticePage, PrivacyPage } from './pages/LegalPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { ProcessPage } from './pages/ProcessPage';
 
 /** L'élément de chaque page, hors accueil (qui est la route `index`). */
 const PAGE_ELEMENTS: Record<Exclude<PageKey, 'home'>, JSX.Element> = {
@@ -69,6 +70,10 @@ export const routes: RouteObject[] = [
     children: [
       { index: true, element: <HomePage /> },
       ...routesDeLangue(lang),
+      // Page processus : sous le même slug que la page catalogue
+      // (/fr/catalogue/:slug, /en/catalog/:slug), donc dérivée de la même
+      // source plutôt que d'un mot écrit en dur ici.
+      { path: `${PAGE_SLUGS[lang].catalog}/:slug`, element: <ProcessPage /> },
       { path: '*', element: <NotFoundPage /> },
     ],
   })),

@@ -7,6 +7,7 @@ import { Icons } from '@/components/Icon';
 import { ProcessCard } from '@/components/ProcessCard';
 import { useContent } from '@/hooks/useContent';
 import { useLang } from '@/hooks/useLang';
+import { processPath } from '@/lib/routes';
 import {
   PROCESS_CATEGORIES,
   processes,
@@ -17,7 +18,7 @@ type Filter = ProcessCategory | 'all';
 
 export function CatalogPage() {
   const c = useContent();
-  const { path } = useLang();
+  const { path, lang } = useLang();
   const [filter, setFilter] = useState<Filter>('all');
 
   const filtered = useMemo(
@@ -71,7 +72,9 @@ export function CatalogPage() {
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((p, i) => (
             <Reveal key={p.id} delay={Math.min(i, 8) * 60} from="scale">
-              <ProcessCard process={p} />
+              <Link to={processPath(lang, p.slug[lang])} className="block h-full">
+                <ProcessCard process={p} />
+              </Link>
             </Reveal>
           ))}
         </div>
