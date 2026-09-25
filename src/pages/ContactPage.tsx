@@ -48,6 +48,7 @@ export function ContactPage() {
         eyebrow={c.contact.hero.eyebrow}
         title={c.contact.hero.title}
         subtitle={c.contact.hero.subtitle}
+        flow={false}
       />
 
       <Section>
