@@ -53,6 +53,26 @@ export function lireLangs() {
 
 export const LANGS = lireLangs();
 
+/**
+ * La langue par défaut du site (`x-default`), LUE dans `src/i18n/index.ts`
+ * pour la même raison que `SUPPORTED_LANGS` : le sitemap déclarait déjà les
+ * hreflang fr/en dans le HTML de chaque page (voir `Seo.tsx`) mais pas dans
+ * le sitemap lui-même — deux endroits qui doivent s'accorder et que rien ne
+ * comparait.
+ */
+export function lireDefaultLang() {
+  const trouve = lire('src/i18n/index.ts').match(/export const DEFAULT_LANG:\s*Lang\s*=\s*'([^']+)'/);
+  if (!trouve) {
+    throw new Error(
+      'DEFAULT_LANG introuvable dans src/i18n/index.ts — le sitemap ne peut ' +
+        'pas deviner quelle langue annoncer en x-default.',
+    );
+  }
+  return trouve[1];
+}
+
+export const DEFAULT_LANG = lireDefaultLang();
+
 export function lireSiteUrl() {
   const trouve = lire('src/lib/site.ts').match(
     /export const SITE_URL\s*=\s*['"]([^'"]+)['"]/,
@@ -173,7 +193,7 @@ export function cheminsPublics() {
       const slug = parSlug[lang];
       if (!slug) {
         throw new Error(
-          `Processus '${fr}' sans slug pour la langue '${lang}' — ` +
+          `Processus '${slugFr}' sans slug pour la langue '${lang}' — ` +
             'src/data/processes.ts et SUPPORTED_LANGS ont divergé.',
         );
       }

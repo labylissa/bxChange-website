@@ -27,10 +27,17 @@ interface SeoProps {
    * Fournir le chemin déjà construit pour CHAQUE langue.
    */
   paths?: Record<Lang, string>;
+  /**
+   * Données structurées propres à la page (BreadcrumbList, SoftwareApplication…),
+   * un objet JSON-LD par bloc. Le JSON-LD commun à tout le site (l'entité
+   * bxFlow elle-même) reste en dur dans `index.html`, servi à ceux qui
+   * n'exécutent pas le JavaScript — voir son commentaire pour la raison.
+   */
+  jsonLd?: Record<string, unknown>[];
 }
 
 /** Gère <title>, meta description, lang, canonical et hreflang par page. */
-export function Seo({ title, description, page, paths }: SeoProps) {
+export function Seo({ title, description, page, paths, jsonLd }: SeoProps) {
   const { lang } = useLang();
   const chemin = (l: Lang) => paths?.[l] ?? (page ? localizedPath(l, page) : (() => {
     throw new Error('<Seo> : fournir `page` ou `paths`.');
@@ -66,6 +73,13 @@ export function Seo({ title, description, page, paths }: SeoProps) {
       <meta property="og:image:height" content="630" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content={`${SITE_URL}/apercu-social.png`} />
+
+      {jsonLd?.map((bloc, i) => (
+        // eslint-disable-next-line react/no-array-index-key -- l'ordre des blocs ne change jamais pour une page donnée.
+        <script key={i} type="application/ld+json">
+          {JSON.stringify(bloc)}
+        </script>
+      ))}
     </Helmet>
   );
 }

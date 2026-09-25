@@ -7,7 +7,7 @@
 import { writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
-import { cheminsPublics, lireSiteUrl } from './routes-partagees.mjs';
+import { DEFAULT_LANG, cheminsPublics, lireSiteUrl } from './routes-partagees.mjs';
 
 const RACINE = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE_URL = lireSiteUrl();
@@ -24,8 +24,15 @@ for (const c of cheminsPublics()) {
 
 const urls = [];
 for (const entrees of parPage.values()) {
-  const alternates = entrees
-    .map((e) => `    <xhtml:link rel="alternate" hreflang="${e.lang}" href="${SITE_URL}${e.chemin}"/>`)
+  const defaut = entrees.find((e) => e.lang === DEFAULT_LANG);
+  // `x-default` manquait ici alors que le HTML de chaque page l'annonce
+  // (voir `Seo.tsx`) : les deux doivent s'accorder, sous peine de dire une
+  // chose au robot qui lit le sitemap et une autre à celui qui rend la page.
+  const alternates = [
+    ...entrees.map((e) => `    <xhtml:link rel="alternate" hreflang="${e.lang}" href="${SITE_URL}${e.chemin}"/>`),
+    defaut ? `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_URL}${defaut.chemin}"/>` : null,
+  ]
+    .filter(Boolean)
     .join('\n');
   for (const e of entrees) {
     urls.push(

@@ -7,6 +7,7 @@ import { ProcessCard } from '@/components/ProcessCard';
 import { useContent } from '@/hooks/useContent';
 import { useLang } from '@/hooks/useLang';
 import { localizedPath, processPath } from '@/lib/routes';
+import { SITE_URL } from '@/lib/site';
 import { getProcessBySlug, processes, type StepType } from '@/data/processes';
 
 const BADGE_STYLE: Record<StepType, string> = {
@@ -50,12 +51,45 @@ export function ProcessPage() {
   const metaDescription =
     chapo.length > 155 ? `${chapo.slice(0, 152).replace(/\s+\S*$/, '')}…` : chapo;
 
+  const canonical = `${SITE_URL}${processPath(lang, process.slug[lang])}`;
+
+  // BreadcrumbList (Accueil > Catalogue > Processus) et SoftwareApplication —
+  // rien d'autre : pas de FAQPage (aucune FAQ réelle n'existe pour ces
+  // pages), pas d'offers ni de note/avis (le site n'affiche ni prix ni
+  // témoignage chiffré, voir les règles éditoriales du site).
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: t('nav.home'), item: `${SITE_URL}${localizedPath(lang, 'home')}` },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: t('nav.catalog'),
+          item: `${SITE_URL}${localizedPath(lang, 'catalog')}`,
+        },
+        { '@type': 'ListItem', position: 3, name: process.name[lang], item: canonical },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: process.name[lang],
+      description: metaDescription,
+      applicationCategory: 'BusinessApplication',
+      inLanguage: lang,
+      url: canonical,
+    },
+  ];
+
   return (
     <>
       <Seo
         title={`${process.name[lang]} — bxFlow`}
         description={metaDescription}
         paths={{ fr: processPath('fr', process.slug.fr), en: processPath('en', process.slug.en) }}
+        jsonLd={jsonLd}
       />
 
       <PageHero
