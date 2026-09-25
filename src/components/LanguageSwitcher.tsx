@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { SUPPORTED_LANGS, cheminSansLangue, type Lang } from '@/i18n';
 import { useLang } from '@/hooks/useLang';
-import { localizedPath, pageKeyFromSlug } from '@/lib/routes';
+import { PAGE_SLUGS, localizedPath, pageKeyFromSlug, processPath } from '@/lib/routes';
+import { getProcessBySlug } from '@/data/processes';
 
 /**
  * Drapeaux dessinés en SVG, et non en emoji.
@@ -98,6 +99,19 @@ export function LanguageSwitcher({ variant = 'dark' }: { variant?: 'light' | 'da
     // changeant que le préfixe, comme avant, mènerait à un slug français sous
     // une adresse anglaise.
     const reste = cheminSansLangue(location.pathname).replace(/^\/|\/$/g, '');
+
+    // Un processus n'est ni une page statique ni un slug partagé entre langues
+    // (`note-de-frais` / `expense-report`) : à résoudre à part, avant le
+    // repli sur les pages statiques.
+    const prefixeCatalogue = `${PAGE_SLUGS[lang].catalog}/`;
+    if (reste.startsWith(prefixeCatalogue)) {
+      const process = getProcessBySlug(lang, reste.slice(prefixeCatalogue.length));
+      if (process) {
+        navigate(`${processPath(cible, process.slug[cible])}${location.search}`);
+        return;
+      }
+    }
+
     const page = pageKeyFromSlug(lang, reste);
     navigate(`${localizedPath(cible, page ?? 'home')}${location.search}`);
   }

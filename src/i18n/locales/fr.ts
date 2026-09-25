@@ -1001,6 +1001,35 @@ export const fr = {
     madeWith: 'Fait pour les organisations d’Afrique francophone et d’ailleurs.',
   },
 
+  // Contenu commun à toutes les pages processus (/fr/catalogue/:slug). Ce qui
+  // est propre à CHAQUE processus (nom, description, déroulé, rôles) vient de
+  // `src/data/processes.ts` ; ici, seulement ce qui ne change pas d'un
+  // processus à l'autre — d'où des phrases génériques, jamais un chiffre ou
+  // une fonctionnalité inventée pour un processus en particulier.
+  processPage: {
+    intro:
+      'Il s’installe tel quel dans bxFlow, avec ses étapes, ses rôles et ses validations — à ajuster à votre organisation plutôt qu’à construire.',
+    stepsTitle: 'Le déroulé',
+    stepTypes: { start: 'Début', standard: 'Étape', end: 'Fin' },
+    rolesTitle: 'Rôles impliqués',
+    customizable: {
+      title: 'Personnalisable sans développement',
+      text: 'Une étape à ajouter, un validateur à changer, un champ à afficher ou masquer : vos équipes métier le font elles-mêmes, dans le paramétrage — sans développement ni attente.',
+    },
+    deployment: {
+      title: 'Déploiement',
+      text: 'Hébergé chez nous ou installé sur vos serveurs, au choix — le même logiciel dans les deux cas. Interface disponible en français, en anglais et en espagnol.',
+    },
+    related: {
+      title: 'Processus liés',
+    },
+    backToCatalog: 'Retour au catalogue',
+    cta: {
+      title: 'Envie de voir ce processus dans bxFlow ?',
+      subtitle: 'Nous l’adaptons à votre organisation et vous le montrons en démonstration.',
+    },
+  },
+
   notFound: {
     title: 'Page introuvable',
     text: 'La page que vous cherchez n’existe pas ou a été déplacée.',
