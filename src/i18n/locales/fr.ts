@@ -1,5 +1,13 @@
 export const fr = {
   meta: {
+    // Description de l'ENTITÉ bxFlow elle-même (JSON-LD, voir Seo.tsx) —
+    // distincte des titres/descriptions ci-dessous, qui sont ceux de chaque
+    // PAGE. Reprise du bloc jusque-là figé en dur dans index.html : localisée
+    // ici, elle peut enfin varier avec la langue de la page.
+    org: {
+      description:
+        'Moteur de processus métier : modélisation des étapes, rôles et validations, exécution automatique des dossiers.',
+    },
     home: {
       title: 'bxFlow — Vos processus métier, sous contrôle de bout en bout',
       description:

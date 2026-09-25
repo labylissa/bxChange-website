@@ -63,20 +63,24 @@
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://bxgroup.io/apercu-social.png" />
-    <!--/tete-par-page-->
 
-    <!-- Données structurées : ce qu'un moteur retient de l'entité elle-même,
-         indépendamment de la page visitée. -->
+    <!-- Données structurées : ce qu'un moteur retient de l'entité bxFlow
+         elle-même. DANS le repère de tête, donc REMPLACÉ page par page comme
+         le reste — chaque page l'engendre dans sa propre langue via
+         `Seo.tsx` (`BXFLOW_ID`). Les valeurs ici sont celles du français, au
+         même titre que le titre et la description ci-dessus : le repli des
+         deux seuls cas où le prérendu ne s'applique pas. -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
+        "@id": "https://bxgroup.io/#bxflow",
         "name": "bxFlow",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web",
         "url": "https://bxgroup.io",
         "description": "Moteur de processus métier : modélisation des étapes, rôles et validations, exécution automatique des dossiers.",
-        "inLanguage": ["fr", "en"],
+        "inLanguage": "fr",
         "publisher": {
           "@type": "Organization",
           "name": "bxGroup",
@@ -85,6 +89,7 @@
         }
       }
     </script>
+    <!--/tete-par-page-->
   </head>
   <body>
     <div id="root"></div>

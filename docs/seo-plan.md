@@ -76,17 +76,27 @@ des décisions écartées en cours de route — pour ça, voir les commits sur
 
 ## Étape 3 — Données structurées et sitemap
 
-- **JSON-LD par page processus** (`ProcessPage.tsx`, via `Seo` `jsonLd`) :
-  - `BreadcrumbList` — Accueil > Catalogue > nom du processus.
-  - `SoftwareApplication` — `name`, `description` (= meta description),
-    `applicationCategory: "BusinessApplication"`, `inLanguage`, `url`
-    (canonique).
+- **JSON-LD global, sur TOUTE page** (`Seo.tsx`, plus en dur dans
+  `index.html`) : `SoftwareApplication` de l'entité bxFlow elle-même, avec un
+  identifiant stable `"@id": "https://bxgroup.io/#bxflow"` (exporté comme
+  `BXFLOW_ID`), `description` et `inLanguage` LOCALISÉS (`meta.org.description`
+  dans `src/i18n/locales/{fr,en}.ts`) — ce bloc était figé en dur et
+  identique sur toutes les pages avant cette correction. `index.html` garde
+  une copie (en français, avec le même `@id`) dans le repère de tête, comme
+  repli pour le serveur de dev et les deux cas où le prérendu ne s'applique
+  pas.
+- **JSON-LD par page processus** (`ProcessPage.tsx`, via `Seo` `jsonLd`), en
+  plus du bloc global ci-dessus :
+  - `BreadcrumbList` — Accueil > Catalogue/Catalog > nom du processus (le
+    libellé EN de "Catalogue" a été corrigé en "Catalog" — `nav.catalog`,
+    qui alimente aussi le menu et le pied de page).
+  - `WebPage` — `name`, `description` (description COMPLÈTE du processus,
+    sans troncature — la limite de 155 caractères ne s'applique qu'à la meta
+    description, un champ distinct), `url` (canonique), `inLanguage`,
+    `isPartOf` et `about` référençant tous deux `{"@id": BXFLOW_ID}`.
   - Volontairement absents : `FAQPage` (aucune FAQ réelle), `offers`,
     `aggregateRating`/`review` (le site n'affiche ni prix fixe ni note
     chiffrée — règle éditoriale).
-  - Le JSON-LD global (`SoftwareApplication` « bxFlow », l'entité elle-même)
-    reste en dur dans `index.html` : LinkedIn/WhatsApp/Slack ne rendent pas
-    le JavaScript, c'est la seule tête qu'ils lisent.
 - **`x-default` dans le sitemap** : `generate-sitemap.mjs` l'ajoute pour
   chaque groupe d'URLs (alignée sur `DEFAULT_LANG`, lu dans
   `src/i18n/index.ts` via `routes-partagees.mjs`), pour s'accorder avec le

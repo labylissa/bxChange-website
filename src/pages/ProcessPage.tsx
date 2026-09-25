@@ -1,6 +1,6 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Seo } from '@/components/Seo';
+import { BXFLOW_ID, Seo } from '@/components/Seo';
 import { Section, PageHero, SectionHeading, CtaBand } from '@/components/ui';
 import { ProcessIcon } from '@/components/Icon';
 import { ProcessCard } from '@/components/ProcessCard';
@@ -53,10 +53,12 @@ export function ProcessPage() {
 
   const canonical = `${SITE_URL}${processPath(lang, process.slug[lang])}`;
 
-  // BreadcrumbList (Accueil > Catalogue > Processus) et SoftwareApplication —
-  // rien d'autre : pas de FAQPage (aucune FAQ réelle n'existe pour ces
-  // pages), pas d'offers ni de note/avis (le site n'affiche ni prix ni
-  // témoignage chiffré, voir les règles éditoriales du site).
+  // BreadcrumbList (Accueil > Catalogue > Processus) et WebPage — rien
+  // d'autre : pas de FAQPage (aucune FAQ réelle n'existe pour ces pages),
+  // pas d'offers ni de note/avis (le site n'affiche ni prix ni témoignage
+  // chiffré, voir les règles éditoriales du site). La description du
+  // WebPage est la description COMPLÈTE du processus, sans troncature — la
+  // limite de 155 caractères ne vaut que pour la meta description.
   const jsonLd = [
     {
       '@context': 'https://schema.org',
@@ -74,12 +76,13 @@ export function ProcessPage() {
     },
     {
       '@context': 'https://schema.org',
-      '@type': 'SoftwareApplication',
+      '@type': 'WebPage',
       name: process.name[lang],
-      description: metaDescription,
-      applicationCategory: 'BusinessApplication',
-      inLanguage: lang,
+      description: chapo,
       url: canonical,
+      inLanguage: lang,
+      isPartOf: { '@id': BXFLOW_ID },
+      about: { '@id': BXFLOW_ID },
     },
   ];
 

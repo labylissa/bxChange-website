@@ -1,8 +1,16 @@
 import { Helmet } from 'react-helmet-async';
 import { useLang } from '@/hooks/useLang';
+import { useContent } from '@/hooks/useContent';
 import { SUPPORTED_LANGS, DEFAULT_LANG, type Lang } from '@/i18n';
 import { SITE_URL } from '@/lib/site';
 import { localizedPath, type PageKey } from '@/lib/routes';
+
+/**
+ * Identifiant stable de l'entité bxFlow en JSON-LD — une page qui en parle
+ * (`about`) ou en dépend (`isPartOf`) y renvoie par référence plutôt que de
+ * redécrire l'entité à chaque fois.
+ */
+export const BXFLOW_ID = `${SITE_URL}/#bxflow`;
 
 /**
  * La locale Open Graph de chaque langue. Typée sur `Lang` : une langue ajoutée
@@ -28,21 +36,41 @@ interface SeoProps {
    */
   paths?: Record<Lang, string>;
   /**
-   * Données structurées propres à la page (BreadcrumbList, SoftwareApplication…),
-   * un objet JSON-LD par bloc. Le JSON-LD commun à tout le site (l'entité
-   * bxFlow elle-même) reste en dur dans `index.html`, servi à ceux qui
-   * n'exécutent pas le JavaScript — voir son commentaire pour la raison.
+   * Données structurées PROPRES à la page (BreadcrumbList, WebPage…), un
+   * objet JSON-LD par bloc — en plus du bloc `SoftwareApplication` de
+   * l'entité bxFlow, commun à toutes les pages, que `Seo` engendre lui-même
+   * ci-dessous (localisé : c'était un bloc identique et figé en dur dans
+   * `index.html`, donc jamais dans la langue de la page anglaise).
    */
   jsonLd?: Record<string, unknown>[];
 }
 
-/** Gère <title>, meta description, lang, canonical et hreflang par page. */
+/** Gère <title>, meta description, lang, canonical, hreflang et JSON-LD par page. */
 export function Seo({ title, description, page, paths, jsonLd }: SeoProps) {
   const { lang } = useLang();
+  const c = useContent();
   const chemin = (l: Lang) => paths?.[l] ?? (page ? localizedPath(l, page) : (() => {
     throw new Error('<Seo> : fournir `page` ou `paths`.');
   })());
   const canonical = `${SITE_URL}${chemin(lang)}`;
+
+  const bxflow = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    '@id': BXFLOW_ID,
+    name: 'bxFlow',
+    description: c.meta.org.description,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: SITE_URL,
+    inLanguage: lang,
+    publisher: {
+      '@type': 'Organization',
+      name: 'bxGroup',
+      url: SITE_URL,
+      logo: `${SITE_URL}/icone-bxflow-512.png`,
+    },
+  };
 
   return (
     <Helmet>
@@ -74,6 +102,7 @@ export function Seo({ title, description, page, paths, jsonLd }: SeoProps) {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content={`${SITE_URL}/apercu-social.png`} />
 
+      <script type="application/ld+json">{JSON.stringify(bxflow)}</script>
       {jsonLd?.map((bloc, i) => (
         // eslint-disable-next-line react/no-array-index-key -- l'ordre des blocs ne change jamais pour une page donnée.
         <script key={i} type="application/ld+json">

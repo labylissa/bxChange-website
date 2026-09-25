@@ -2,6 +2,10 @@ import type { Translation } from './fr';
 
 export const en: Translation = {
   meta: {
+    org: {
+      description:
+        'Business process engine: modeling steps, roles and approvals, automatic case execution.',
+    },
     home: {
       title: 'bxFlow — Your business processes, under control end to end',
       description:
@@ -71,7 +75,7 @@ export const en: Translation = {
     home: 'Home',
     product: 'Product',
     useCases: 'Use cases',
-    catalog: 'Catalogue',
+    catalog: 'Catalog',
     security: 'Security',
     pricing: 'Pricing',
     deployment: 'Deployment',
