@@ -33,6 +33,8 @@ export function UseCasesPage() {
         eyebrow={c.useCases.hero.eyebrow}
         title={c.useCases.hero.title}
         subtitle={c.useCases.hero.subtitle}
+        // Schéma retiré : visuel propre à la page à définir plus tard.
+        flow={false}
       />
 
       <Section>

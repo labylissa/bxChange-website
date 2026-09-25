@@ -2,6 +2,10 @@ import type { Translation } from './fr';
 
 export const en: Translation = {
   meta: {
+    org: {
+      description:
+        'Business process engine: modeling steps, roles and approvals, automatic case execution.',
+    },
     home: {
       title: 'bxFlow — Your business processes, under control end to end',
       description:
@@ -71,7 +75,7 @@ export const en: Translation = {
     home: 'Home',
     product: 'Product',
     useCases: 'Use cases',
-    catalog: 'Catalogue',
+    catalog: 'Catalog',
     security: 'Security',
     pricing: 'Pricing',
     deployment: 'Deployment',
@@ -984,6 +988,30 @@ export const en: Translation = {
     editeur: 'A bxGroup product',
     rights: 'All rights reserved.',
     madeWith: 'Built for organisations across French-speaking Africa and beyond.',
+  },
+
+  processPage: {
+    intro:
+      'It installs as-is in bxFlow, with its steps, roles and approvals — to adjust to your organization rather than build from scratch.',
+    stepsTitle: 'The flow',
+    stepTypes: { start: 'Start', standard: 'Step', end: 'End' },
+    rolesTitle: 'Roles involved',
+    customizable: {
+      title: 'Customizable without development',
+      text: 'A step to add, an approver to change, a field to show or hide: your business teams do it themselves, in the configuration — no development, no waiting.',
+    },
+    deployment: {
+      title: 'Deployment',
+      text: 'Hosted by us or installed on your servers, your choice — the same software either way. Interface available in French, English and Spanish.',
+    },
+    related: {
+      title: 'Related processes',
+    },
+    backToCatalog: 'Back to catalog',
+    cta: {
+      title: 'Want to see this process in bxFlow?',
+      subtitle: 'We adapt it to your organization and show it to you in a demo.',
+    },
   },
 
   notFound: {

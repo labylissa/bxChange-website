@@ -53,7 +53,11 @@ function assembler(chemin, html, helmet) {
     throw new Error(`${chemin} : rendu de ${html.length} caractères — la page est vide.`);
   }
 
-  const tete = [helmet.title, helmet.meta, helmet.link]
+  // `script` porte le JSON-LD propre à la page (BreadcrumbList,
+  // SoftwareApplication...) — omis ici, il compilerait, s'afficherait
+  // normalement, et disparaîtrait silencieusement du HTML servi : seul un
+  // robot qui lit les données structurées s'en apercevrait.
+  const tete = [helmet.title, helmet.meta, helmet.link, helmet.script]
     .map((part) => part.toString())
     .filter(Boolean)
     .join('\n    ');

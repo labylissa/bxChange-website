@@ -87,6 +87,16 @@ export function pageKeyFromSlug(lang: Lang, slug: string): PageKey | undefined {
   return (Object.keys(table) as PageKey[]).find((key) => table[key] === slug);
 }
 
+/**
+ * Chemin d'une page processus, TOUJOURS terminé par un slash — même raison
+ * que `localizedPath`. Le slug d'un processus diffère lui aussi d'une langue
+ * à l'autre (`note-de-frais` / `expense-report`), donc jamais recopié tel
+ * quel entre `/fr/catalogue/...` et `/en/catalog/...`.
+ */
+export function processPath(lang: Lang, slug: string): string {
+  return `${localizedPath(lang, 'catalog')}${slug}/`;
+}
+
 /** Toutes les pages, pour la génération du sitemap et la navigation. */
 export const ALL_PAGES: PageKey[] = [
   'home',

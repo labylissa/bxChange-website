@@ -8,6 +8,7 @@ import { ProcessCard } from '@/components/ProcessCard';
 import { Reveal } from '@/components/Reveal';
 import { useContent } from '@/hooks/useContent';
 import { useLang } from '@/hooks/useLang';
+import { processPath } from '@/lib/routes';
 import { getFeaturedProcesses, processes, type ProcessIconName } from '@/data/processes';
 
 // Une icône par étape, dans l'ordre du texte : on dessine le déroulé, une
@@ -49,7 +50,7 @@ function HeroVisual() {
 
 export function HomePage() {
   const c = useContent();
-  const { path } = useLang();
+  const { path, lang } = useLang();
   const featured = getFeaturedProcesses();
 
   return (
@@ -263,7 +264,9 @@ export function HomePage() {
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((p, i) => (
             <Reveal key={p.id} delay={i * 80} from="scale">
-              <ProcessCard process={p} />
+              <Link to={processPath(lang, p.slug[lang])} className="block h-full">
+                <ProcessCard process={p} />
+              </Link>
             </Reveal>
           ))}
           {/* Carte "process manquant" */}

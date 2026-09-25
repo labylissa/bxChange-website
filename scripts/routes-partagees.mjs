@@ -53,6 +53,26 @@ export function lireLangs() {
 
 export const LANGS = lireLangs();
 
+/**
+ * La langue par défaut du site (`x-default`), LUE dans `src/i18n/index.ts`
+ * pour la même raison que `SUPPORTED_LANGS` : le sitemap déclarait déjà les
+ * hreflang fr/en dans le HTML de chaque page (voir `Seo.tsx`) mais pas dans
+ * le sitemap lui-même — deux endroits qui doivent s'accorder et que rien ne
+ * comparait.
+ */
+export function lireDefaultLang() {
+  const trouve = lire('src/i18n/index.ts').match(/export const DEFAULT_LANG:\s*Lang\s*=\s*'([^']+)'/);
+  if (!trouve) {
+    throw new Error(
+      'DEFAULT_LANG introuvable dans src/i18n/index.ts — le sitemap ne peut ' +
+        'pas deviner quelle langue annoncer en x-default.',
+    );
+  }
+  return trouve[1];
+}
+
+export const DEFAULT_LANG = lireDefaultLang();
+
 export function lireSiteUrl() {
   const trouve = lire('src/lib/site.ts').match(
     /export const SITE_URL\s*=\s*['"]([^'"]+)['"]/,
@@ -120,6 +140,33 @@ export function lirePagesParLangue() {
 }
 
 /**
+ * Le slug de chaque processus, par langue : `{ frSlug: { fr: 'note-de-frais',
+ * en: 'expense-report' }, ... }`, clé sur le slug FR — stable, contrairement
+ * au rang dans le portefeuille (voir `scripts/generer-catalogue.py`).
+ *
+ * LU dans `src/data/processes.ts`, jamais recopié : ce fichier est lui-même
+ * engendré depuis le portefeuille produit, la vraie source est à deux
+ * remontées de là. Une expression simple suffit — on ne cherche que la forme
+ * `slug: { fr: '...', en: '...' }`, présente une fois par processus.
+ */
+export function lireProcessSlugs() {
+  const source = lire('src/data/processes.ts');
+  const paires = [...source.matchAll(/slug:\s*\{\s*fr:\s*'([^']*)',\s*en:\s*'([^']*)'\s*\}/g)].map(
+    ([, slugFr, slugEn]) => ({ fr: slugFr, en: slugEn }),
+  );
+  // Garde-fou du garde-fou : une expression qui ne lit plus rien rendrait un
+  // sitemap et un prérendu sans aucune page processus, sans erreur.
+  if (paires.length < 1) {
+    throw new Error(
+      'Aucun slug de processus trouvé dans src/data/processes.ts — la forme ' +
+        "du champ `slug` a change. Corriger cette lecture plutot que de " +
+        'recopier la liste ici.',
+    );
+  }
+  return paires;
+}
+
+/**
  * Toutes les adresses publiques, langue par langue, TOUJOURS terminées par un
  * slash — voir `localizedPath` dans `src/lib/routes.ts` pour la raison : une
  * adresse déclarée sans slash n'est pas celle que Cloudflare sert.
@@ -127,7 +174,9 @@ export function lirePagesParLangue() {
  * Chaque entrée porte sa PAGE (pas seulement son slug), pour que le sitemap
  * puisse grouper les adresses d'une même page à travers les langues et
  * construire les bonnes paires d'alternates — le slug seul ne le permet plus,
- * puisqu'il diffère désormais d'une langue à l'autre.
+ * puisqu'il diffère désormais d'une langue à l'autre. Les pages processus
+ * suivent la même logique, groupées par leur slug FR (`processus:<slug-fr>`,
+ * jamais confondu avec une `PageKey` statique).
  */
 export function cheminsPublics() {
   const parLangue = lirePagesParLangue();
@@ -135,6 +184,21 @@ export function cheminsPublics() {
   for (const lang of LANGS) {
     for (const [page, slug] of Object.entries(parLangue[lang])) {
       chemins.push({ lang, page, slug, chemin: slug ? `/${lang}/${slug}/` : `/${lang}/` });
+    }
+  }
+  for (const { fr: slugFr, en: slugEn } of lireProcessSlugs()) {
+    const page = `processus:${slugFr}`;
+    const parSlug = { fr: slugFr, en: slugEn };
+    for (const lang of LANGS) {
+      const slug = parSlug[lang];
+      if (!slug) {
+        throw new Error(
+          `Processus '${slugFr}' sans slug pour la langue '${lang}' — ` +
+            'src/data/processes.ts et SUPPORTED_LANGS ont divergé.',
+        );
+      }
+      const slugCatalogue = parLangue[lang].catalog;
+      chemins.push({ lang, page, slug, chemin: `/${lang}/${slugCatalogue}/${slug}/` });
     }
   }
   return chemins;
