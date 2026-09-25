@@ -4,6 +4,14 @@ Suivi du sprint SEO du site. Ce document décrit l'état actuel, pas l'historiqu
 des décisions écartées en cours de route — pour ça, voir les commits sur
 `dev` et la branche `seo/catalogue-en`.
 
+## Statut
+
+**Étapes 0 à 3 en production** (`master`, commit `96e8d27` — fusion de `dev`).
+Les 168 pages du site (26 statiques + 142 processus) sont pré-rendues,
+redirigées et indexables ; le catalogue est engendré depuis le portefeuille
+produit ; chaque page processus porte ses données structurées. Rien de connu
+ne reste en attente côté SEO à ce stade.
+
 ## Vue d'ensemble
 
 - **Framework** : React 18 + TS + Vite, React Router 6, prérendu statique
@@ -106,6 +114,14 @@ des décisions écartées en cours de route — pour ça, voir les commits sur
   `<Seo jsonLd={...}>` compilait, s'affichait en dev, et disparaissait
   silencieusement du HTML pré-rendu. Corrigé ; voir le commentaire dans
   `prerender.mjs`.
+
+## Hors plan initial — hero
+
+Le schéma de flux décoratif de `PageHero` (`flow`, vrai par défaut) était
+affiché sur trois pages : Catalogue, Contact, Cas d'usage. Gardé uniquement
+sur Catalogue (FR et EN) ; retiré de Contact et Cas d'usage (`flow={false}`,
+titre + chapô seuls). Le visuel de l'accueil (`SuiviDossier`, dossier
+CONF-0002) est un composant distinct, non concerné.
 
 ## Vérifications
 
