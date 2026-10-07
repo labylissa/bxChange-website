@@ -1,98 +1,110 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- Icônes livrées avec le produit : le favicon SVG portait encore
-         l'ancienne marque bxChange. -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/icone-bxflow-32.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/icone-bxflow-512.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/icone-bxflow-180.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Constantes du site, valables quelle que soit la page. -->
-    <meta property="og:site_name" content="bxFlow" />
-    <meta property="og:locale:alternate" content="en_US" />
-    <meta
-      property="og:image:alt"
-      content="bxFlow — vos processus métier, sous contrôle de bout en bout"
-    />
-
-    <!-- ══ Tête propre à la page ══
-
-         Tout ce qui se trouve entre ces deux repères est REMPLACÉ page par page
-         par `scripts/prerender.mjs`, à partir des balises que `Seo.tsx` produit
-         au rendu. Les valeurs écrites ici sont donc celles de l'accueil, et
-         elles servent dans les deux seuls cas où le prérendu ne s'applique
-         pas : le serveur de développement, et une adresse inconnue servie par
-         le repli de Cloudflare.
-
-         Elles sont EN DUR pour une raison qui n'a pas changé : LinkedIn,
-         WhatsApp et Slack n'exécutent pas le JavaScript. Avant le prérendu,
-         c'était la seule tête qu'ils voyaient — et `twitter:card` promettait
-         une grande image sans qu'aucune n'existe, donc une carte vide.
-
-         NE PAS retirer les repères : le prérendu échoue s'il ne les trouve
-         plus, plutôt que d'écrire vingt-deux pages portant toutes le titre de
-         l'accueil. -->
-    <!--tete-par-page-->
-    <title>bxFlow — Vos processus métier, sous contrôle de bout en bout</title>
-    <meta
-      name="description"
-      content="Moteur de processus métier pour la banque, l’assurance et l’entreprise : KYC, LCB-FT, sinistres, achats. Plus de 70 processus prêts à l’emploi, hébergés ou installés sur vos serveurs."
-    />
-    <link rel="canonical" href="https://bxgroup.io/fr/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="fr_FR" />
-    <meta property="og:url" content="https://bxgroup.io/fr/" />
-    <meta
-      property="og:title"
-      content="bxFlow — Vos processus métier, sous contrôle de bout en bout"
-    />
-    <meta
-      property="og:description"
-      content="KYC, LCB-FT, sinistres, achats : chaque dossier suit ses étapes et ses validations, avec un historique qui fait foi. Plus de 70 processus prêts à l’emploi."
-    />
-    <meta property="og:image" content="https://bxgroup.io/apercu-social.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://bxgroup.io/apercu-social.png" />
-
-    <!-- Données structurées : ce qu'un moteur retient de l'entité bxFlow
-         elle-même. DANS le repère de tête, donc REMPLACÉ page par page comme
-         le reste — chaque page l'engendre dans sa propre langue via
-         `Seo.tsx` (`BXFLOW_ID`). Les valeurs ici sont celles du français, au
-         même titre que le titre et la description ci-dessus : le repli des
-         deux seuls cas où le prérendu ne s'applique pas. -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "@id": "https://bxgroup.io/#bxflow",
-        "name": "bxFlow",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web",
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PB2MPL26');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <!-- Icônes livrées avec le produit : le favicon SVG portait encore
+  l'ancienne marque bxChange. -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/icone-bxflow-32.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icone-bxflow-512.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icone-bxflow-180.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;500;600;700&display=swap"
+  rel="stylesheet"
+  />
+  
+  <!-- Constantes du site, valables quelle que soit la page. -->
+  <meta property="og:site_name" content="bxFlow" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta
+  property="og:image:alt"
+  content="bxFlow — vos processus métier, sous contrôle de bout en bout"
+  />
+  
+  <!-- ══ Tête propre à la page ══
+  
+  Tout ce qui se trouve entre ces deux repères est REMPLACÉ page par page
+  par `scripts/prerender.mjs`, à partir des balises que `Seo.tsx` produit
+  au rendu. Les valeurs écrites ici sont donc celles de l'accueil, et
+  elles servent dans les deux seuls cas où le prérendu ne s'applique
+  pas : le serveur de développement, et une adresse inconnue servie par
+  le repli de Cloudflare.
+  
+  Elles sont EN DUR pour une raison qui n'a pas changé : LinkedIn,
+  WhatsApp et Slack n'exécutent pas le JavaScript. Avant le prérendu,
+  c'était la seule tête qu'ils voyaient — et `twitter:card` promettait
+  une grande image sans qu'aucune n'existe, donc une carte vide.
+  
+  NE PAS retirer les repères : le prérendu échoue s'il ne les trouve
+  plus, plutôt que d'écrire vingt-deux pages portant toutes le titre de
+  l'accueil. -->
+  <!--tete-par-page-->
+  <title>bxFlow — Vos processus métier, sous contrôle de bout en bout</title>
+  <meta name="author" content="Boly SENE">
+  <meta
+  name="description"
+  content="Moteur de processus métier pour la banque, l’assurance et l’entreprise : KYC, LCB-FT, sinistres, achats. Plus de 70 processus prêts à l’emploi, hébergés ou installés sur vos serveurs."
+  />
+  <link rel="canonical" href="https://bxgroup.io/fr/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:url" content="https://bxgroup.io/fr/" />
+  <meta
+  property="og:title"
+  content="bxFlow — Vos processus métier, sous contrôle de bout en bout"
+  />
+  <meta
+  property="og:description"
+  content="KYC, LCB-FT, sinistres, achats : chaque dossier suit ses étapes et ses validations, avec un historique qui fait foi. Plus de 70 processus prêts à l’emploi."
+  />
+  <meta property="og:image" content="https://bxgroup.io/apercu-social.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://bxgroup.io/apercu-social.png" />
+  
+  <!-- Données structurées : ce qu'un moteur retient de l'entité bxFlow
+  elle-même. DANS le repère de tête, donc REMPLACÉ page par page comme
+  le reste — chaque page l'engendre dans sa propre langue via
+  `Seo.tsx` (`BXFLOW_ID`). Les valeurs ici sont celles du français, au
+  même titre que le titre et la description ci-dessus : le repli des
+  deux seuls cas où le prérendu ne s'applique pas. -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "@id": "https://bxgroup.io/#bxflow",
+      "name": "bxFlow",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "url": "https://bxgroup.io",
+      "description": "Moteur de processus métier : modélisation des étapes, rôles et validations, exécution automatique des dossiers.",
+      "inLanguage": "fr",
+      "publisher": {
+        "@type": "Organization",
+        "name": "bxGroup",
         "url": "https://bxgroup.io",
-        "description": "Moteur de processus métier : modélisation des étapes, rôles et validations, exécution automatique des dossiers.",
-        "inLanguage": "fr",
-        "publisher": {
-          "@type": "Organization",
-          "name": "bxGroup",
-          "url": "https://bxgroup.io",
-          "logo": "https://bxgroup.io/icone-bxflow-512.png"
-        }
+        "logo": "https://bxgroup.io/icone-bxflow-512.png"
       }
-    </script>
-    <!--/tete-par-page-->
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    }
+  </script>
+  <!--/tete-par-page-->
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PB2MPL26"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
 </html>
