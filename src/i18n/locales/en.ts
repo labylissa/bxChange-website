@@ -977,6 +977,8 @@ export const en: Translation = {
     tagline: 'Your business processes, under control end to end.',
     product: 'Product',
     company: 'Resources',
+    suite: 'The bxGroup suite',
+    bxreportsDesc: 'Dashboards and reporting (in French)',
     legal: 'Legal',
     legalNotice: 'Legal notice',
     privacy: 'Privacy',

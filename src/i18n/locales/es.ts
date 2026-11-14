@@ -930,6 +930,8 @@ export const es: Translation = {
     tagline: 'Sus procesos de negocio, bajo control de principio a fin.',
     product: 'Producto',
     company: 'Recursos',
+    suite: 'La gama bxGroup',
+    bxreportsDesc: 'Paneles e informes (en francés)',
     legal: 'Legal',
     legalNotice: 'Aviso legal',
     privacy: 'Privacidad',

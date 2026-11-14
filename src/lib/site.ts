@@ -43,3 +43,10 @@ export const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL ?? '';
  * un écran de connexion.
  */
 export const LINKEDIN_URL = 'https://www.linkedin.com/company/bxgroup-horizon';
+
+/**
+ * Site vitrine de bxReports, l'autre produit de la gamme bxGroup (tableaux de
+ * bord et reporting). Lien de pied de page uniquement : bxFlow reste le sujet
+ * de ce site.
+ */
+export const BXREPORTS_URL = 'https://site-bxreports.bxgroup.io';

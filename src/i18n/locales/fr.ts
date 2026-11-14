@@ -996,6 +996,8 @@ export const fr = {
     tagline: 'Vos processus métier, sous contrôle de bout en bout.',
     product: 'Produit',
     company: 'Ressources',
+    suite: 'La gamme bxGroup',
+    bxreportsDesc: 'Tableaux de bord et reporting',
     legal: 'Légal',
     legalNotice: 'Mentions légales',
     privacy: 'Confidentialité',

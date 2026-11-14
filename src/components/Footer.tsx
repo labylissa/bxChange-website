@@ -4,7 +4,7 @@ import { Logo } from './Logo';
 import { Icons } from './Icon';
 import { useLang } from '@/hooks/useLang';
 import { NAV_PAGES, PAGE_LABEL_KEY } from '@/lib/routes';
-import { CONTACT_EMAIL, LINKEDIN_URL } from '@/lib/site';
+import { BXREPORTS_URL, CONTACT_EMAIL, LINKEDIN_URL } from '@/lib/site';
 export function Footer() {
   const { t } = useTranslation();
   const { path } = useLang();
@@ -80,6 +80,21 @@ export function Footer() {
               <Link to={path('privacy')} className="text-white/70 transition-colors hover:text-teal">
                 {t('footer.privacy')}
               </Link>
+            </li>
+          </ul>
+
+          {/* L'autre produit de la gamme, en pied de page seulement : bxFlow
+              reste le sujet de ce site. Sous « Ressources » plutôt qu'en
+              cinquième colonne, qui faisait passer le bouton de démo sur deux lignes. */}
+          <h3 className="mt-8 text-sm font-semibold uppercase tracking-wider text-white/50">
+            {t('footer.suite')}
+          </h3>
+          <ul className="mt-4 space-y-3 text-sm">
+            <li>
+              <a href={BXREPORTS_URL} className="group block text-white/70 transition-colors hover:text-teal">
+                <span className="font-medium text-white group-hover:text-teal">bxReports</span>
+                <span className="mt-0.5 block text-white/60">{t('footer.bxreportsDesc')}</span>
+              </a>
             </li>
           </ul>
         </div>
