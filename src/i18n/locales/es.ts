@@ -83,7 +83,7 @@ export const es: Translation = {
     contact: 'Contacto',
     demo: 'Programar una demostración',
     documentation: 'Documentación',
-    cta: 'Programar una demostración',
+    cta: 'Solicitar una demostración',
     openMenu: 'Abrir el menú',
     closeMenu: 'Cerrar el menú',
     language: 'Idioma',

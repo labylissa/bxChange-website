@@ -71,7 +71,7 @@ function FlowDiagram() {
                 )}
               </span>
               <p className="mt-3 font-display text-lg font-bold">{n.label}</p>
-              <p className={`mt-1 text-sm ${n.tone === 'accent' ? 'text-gold-600' : 'text-ink-400'}`}>
+              <p className={`mt-1 text-sm ${n.tone === 'accent' ? 'text-gold-600' : 'text-ink-500'}`}>
                 {n.note}
               </p>
             </div>
@@ -132,7 +132,7 @@ export function ProductPage() {
                 </span>
                 <h3 className="mt-4 text-lg font-semibold text-navy-900">{item.title}</h3>
                 <p className="mt-2 text-sm font-medium leading-relaxed text-ink-600">{item.plain}</p>
-                <p className="mt-3 border-t border-ink-100 pt-3 text-xs leading-relaxed text-ink-400">
+                <p className="mt-3 border-t border-ink-100 pt-3 text-xs leading-relaxed text-ink-500">
                   {item.tech}
                 </p>
               </div>
@@ -207,7 +207,7 @@ export function ProductPage() {
                   {/* Ce que la brique remplace ailleurs. En étiquette et non dans
                       le texte : c'est l'information que cherche celui qui compare,
                       et elle doit se lire sans lire le paragraphe. */}
-                  <span className="rounded-full border border-ink-200 bg-ink-50 px-3 py-1 text-right text-[11px] font-medium leading-tight text-ink-400">
+                  <span className="rounded-full border border-ink-200 bg-ink-50 px-3 py-1 text-right text-[11px] font-medium leading-tight text-ink-500">
                     {item.ailleurs}
                   </span>
                 </div>

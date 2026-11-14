@@ -89,7 +89,7 @@ export const fr = {
     contact: 'Contact',
     demo: 'Planifier une démo',
     documentation: 'Documentation',
-    cta: 'Planifier une démo',
+    cta: 'Demander une démo',
     openMenu: 'Ouvrir le menu',
     closeMenu: 'Fermer le menu',
     language: 'Langue',

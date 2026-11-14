@@ -199,7 +199,7 @@ export function Header() {
                 </NavLink>
               ) : (
                 <div key={entree.labelKey} className="mt-2">
-                  <span className="block px-3 pb-1 text-[11px] font-semibold uppercase tracking-wide text-ink-400">
+                  <span className="block px-3 pb-1 text-[11px] font-semibold uppercase tracking-wide text-ink-500">
                     {t(entree.labelKey)}
                   </span>
                   {entree.items.map((item) => (

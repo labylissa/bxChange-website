@@ -62,7 +62,7 @@ export function CatalogPage() {
           })}
         </div>
 
-        <p className="mt-6 text-sm text-ink-400">
+        <p className="mt-6 text-sm text-ink-500">
           {filtered.length}{' '}
           {filtered.length > 1
             ? c.catalog.filters.results_other.replace('{{count}}', '').trim()

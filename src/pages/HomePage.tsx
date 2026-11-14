@@ -291,7 +291,7 @@ export function HomePage() {
             {c.home.catalog.cardCta}
             <Icons.arrowRight className="h-4 w-4" />
           </Link>
-          <p className="mt-4 text-sm text-ink-400">
+          <p className="mt-4 text-sm text-ink-500">
             {processes.length}+ {c.home.catalog.available}
           </p>
         </div>

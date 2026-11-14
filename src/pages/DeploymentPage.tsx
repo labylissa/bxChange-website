@@ -58,7 +58,7 @@ export function DeploymentPage() {
                 <h2 className="mt-4 text-xl font-bold text-navy-900">{m.title}</h2>
                 <p className="mt-2 text-base font-semibold text-ink-600">{m.lead}</p>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-500">{m.text}</p>
-                <p className="mt-4 border-t border-ink-100 pt-4 text-sm italic text-ink-400">
+                <p className="mt-4 border-t border-ink-100 pt-4 text-sm italic text-ink-500">
                   {m.forWho}
                 </p>
               </div>
@@ -89,13 +89,13 @@ export function DeploymentPage() {
             >
               <p className="text-sm font-bold text-navy-900">{question}</p>
               <div>
-                <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-ink-400">
+                <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-ink-500">
                   {d.compare.head[1]}
                 </span>
                 <p className="text-sm leading-relaxed text-ink-600">{saas}</p>
               </div>
               <div>
-                <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-ink-400">
+                <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-ink-500">
                   {d.compare.head[2]}
                 </span>
                 <p className="text-sm leading-relaxed text-ink-600">{onprem}</p>
@@ -137,7 +137,7 @@ export function DeploymentPage() {
                 <p className="mt-3 text-sm leading-relaxed text-ink-600 sm:pl-10">{s.text}</p>
                 {s.detail && (
                   <div className="mt-4 rounded-xl border-l-[3px] border-l-ink-200 bg-ink-50 px-4 py-3 sm:ml-10">
-                    <span className="block text-[11px] font-semibold uppercase tracking-wide text-ink-400">
+                    <span className="block text-[11px] font-semibold uppercase tracking-wide text-ink-500">
                       {d.onprem.detailLabel}
                     </span>
                     <p className="mt-1 text-sm leading-relaxed text-ink-500">{s.detail}</p>

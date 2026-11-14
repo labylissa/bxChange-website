@@ -123,7 +123,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-page flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/40 sm:flex-row">
+        <div className="container-page flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/60 sm:flex-row">
           {/* L'éditeur, nommé une fois. bxFlow reste le sujet du site : la
               mention se lit là où l'on cherche qui est derrière le produit,
               pas en tête de page. */}

@@ -209,7 +209,7 @@ export function DemoPage() {
             <span key={i} className="inline-flex items-center gap-2 text-ink-600">
               <Icons.check className="h-4 w-4 text-teal-500" strokeWidth={2.5} />
               <span className="font-semibold text-navy-900">{m.value}</span>
-              <span className="text-ink-400">· {m.label}</span>
+              <span className="text-ink-500">· {m.label}</span>
             </span>
           ))}
         </div>

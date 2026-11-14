@@ -46,7 +46,7 @@ function LegalDocument({ doc, page, title, description }: {
         <div className="container-page relative max-w-3xl py-14 lg:py-16">
           <h1 className="text-3xl font-bold text-navy-900 sm:text-4xl">{doc.title}</h1>
           <p className="mt-4 text-ink-500">{doc.intro}</p>
-          <p className="mt-4 text-sm text-ink-400">
+          <p className="mt-4 text-sm text-ink-500">
             {doc.updatedLabel} : {doc.updated}
           </p>
         </div>

@@ -87,7 +87,7 @@ export const en: Translation = {
     contact: 'Contact',
     demo: 'Book a demo',
     documentation: 'Documentation',
-    cta: 'Book a demo',
+    cta: 'Request a demo',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
     language: 'Language',

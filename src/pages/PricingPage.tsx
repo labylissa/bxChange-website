@@ -79,7 +79,7 @@ export function PricingPage() {
                   <Link to={path('contact')} className="btn-secondary w-full">
                     {tier.cta}
                   </Link>
-                  <p className="mt-3 text-center text-xs text-ink-400">{c.pricing.ctaNote}</p>
+                  <p className="mt-3 text-center text-xs text-ink-500">{c.pricing.ctaNote}</p>
                 </div>
               </div>
             </Reveal>
@@ -91,7 +91,7 @@ export function PricingPage() {
           <p className="text-sm font-medium text-navy-900">{c.pricing.allTiersNote}</p>
         </div>
 
-        <p className="mx-auto mt-6 max-w-2xl text-center text-sm text-ink-400">{c.pricing.note}</p>
+        <p className="mx-auto mt-6 max-w-2xl text-center text-sm text-ink-500">{c.pricing.note}</p>
       </Section>
     </>
   );

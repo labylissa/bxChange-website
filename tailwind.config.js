@@ -18,16 +18,19 @@ export default {
           // Accent principal → or
           DEFAULT: '#C9A45C',
           400: '#D9BC80',
-          500: '#A8874A',
+          // Or « texte » : #A8874A ne faisait que 3,37:1 sur blanc (seuil 4,5:1).
+          // #85692C : 5,18 blanc, 4,92 ink-50, 4,59 ink-100.
+          500: '#85692C',
         },
         mint: {
           // Accent secondaire → sauge douce (états « prêt », succès)
           DEFAULT: '#8A9A76',
           500: '#74845F',
+          600: '#647252', // texte en sauge : 5,16 blanc, 4,57 ink-100 (DEFAULT ne fait que 3,02:1)
         },
         gold: {
           DEFAULT: '#C9A45C',
-          600: '#A8874A',
+          600: '#85692C', // texte en or : même correction que teal-500
         },
         // Bleu officiel LinkedIn : il n'appartient pas à notre palette, il
         // appartient à la marque qu'il désigne — c'est ce qui le rend
@@ -43,7 +46,9 @@ export default {
           200: '#E7E3DC',
           300: '#D3CDC2',
           400: '#A39D92',
-          500: '#756F64',
+          // #756F64 tombait à 4,42:1 sur ink-100 ; #6B655B : 5,77 blanc, 5,12 ink-100.
+          // ink-400 (2,69:1) ne sert plus au texte, seulement aux traits et icônes.
+          500: '#6B655B',
           600: '#57524A',
           700: '#3D3933',
         },
