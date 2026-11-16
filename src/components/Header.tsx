@@ -24,6 +24,11 @@ function GroupeNav({ groupe }: { groupe: Groupe }) {
   const location = useLocation();
   const [ouvert, setOuvert] = useState(false);
   const conteneur = useRef<HTMLDivElement>(null);
+  // Vrai quand le panneau vient d'être ouvert par le SURVOL d'une souris.
+  // Sans lui, le clic qui suit presque toujours le survol inversait l'état et
+  // refermait aussitôt le menu : le visiteur qui cliquait sur « Confiance » le
+  // voyait apparaître puis disparaître.
+  const ouvertParSurvol = useRef(false);
 
   const actif = groupe.items.some((i) => location.pathname === path(i.page));
 
@@ -51,12 +56,33 @@ function GroupeNav({ groupe }: { groupe: Groupe }) {
     <div
       ref={conteneur}
       className="relative"
-      onMouseEnter={() => setOuvert(true)}
-      onMouseLeave={() => setOuvert(false)}
+      // Événements de POINTEUR et non de souris : un écran tactile émule
+      // `mouseenter` avant le clic, ce qui reproduisait le même défaut au doigt.
+      // Seule une vraie souris ouvre au survol ; le doigt et le clavier passent
+      // par le clic.
+      onPointerEnter={(e) => {
+        if (e.pointerType !== 'mouse') return;
+        ouvertParSurvol.current = true;
+        setOuvert(true);
+      }}
+      onPointerLeave={(e) => {
+        if (e.pointerType !== 'mouse') return;
+        ouvertParSurvol.current = false;
+        setOuvert(false);
+      }}
     >
       <button
         type="button"
-        onClick={() => setOuvert((v) => !v)}
+        onClick={() => {
+          // Premier clic après un survol : le panneau est déjà ouvert, il le
+          // reste. Les clics suivants ouvrent et ferment normalement.
+          if (ouvertParSurvol.current) {
+            ouvertParSurvol.current = false;
+            setOuvert(true);
+            return;
+          }
+          setOuvert((v) => !v);
+        }}
         aria-haspopup="menu"
         aria-expanded={ouvert}
         className={`inline-flex items-center gap-1 text-sm font-medium transition-colors ${
