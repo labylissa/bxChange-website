@@ -54,7 +54,7 @@ export function UseCasesPage() {
                     <div className="p-6">
                       <div className="grid gap-6 sm:grid-cols-3">
                         <div>
-                          <p className="text-xs font-semibold uppercase tracking-wider text-ink-400">
+                          <p className="text-xs font-semibold uppercase tracking-wider text-ink-500">
                             {c.useCases.pattern.problem}
                           </p>
                           <p className="mt-2 text-sm leading-relaxed text-ink-600">{s.problem}</p>
@@ -66,14 +66,14 @@ export function UseCasesPage() {
                           <p className="mt-2 text-sm leading-relaxed text-ink-600">{s.solution}</p>
                         </div>
                         <div>
-                          <p className="text-xs font-semibold uppercase tracking-wider text-mint">
+                          <p className="text-xs font-semibold uppercase tracking-wider text-mint-600">
                             {c.useCases.pattern.benefit}
                           </p>
                           <p className="mt-2 text-sm font-medium leading-relaxed text-navy-900">{s.benefit}</p>
                         </div>
                       </div>
                       <div className="mt-6 border-t border-ink-100 pt-4">
-                        <p className="text-xs font-semibold uppercase tracking-wider text-ink-400">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-ink-500">
                           {c.useCases.pattern.examples}
                         </p>
                         <ul className="mt-2.5 flex flex-wrap gap-2">

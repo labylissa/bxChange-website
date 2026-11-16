@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Logo } from './Logo';
@@ -24,6 +24,13 @@ function GroupeNav({ groupe }: { groupe: Groupe }) {
   const location = useLocation();
   const [ouvert, setOuvert] = useState(false);
   const conteneur = useRef<HTMLDivElement>(null);
+  // Vrai quand le panneau vient d'être ouvert par le SURVOL d'une souris.
+  // Sans lui, le clic qui suit presque toujours le survol inversait l'état et
+  // refermait aussitôt le menu : le visiteur qui cliquait sur « Confiance » le
+  // voyait apparaître puis disparaître.
+  const ouvertParSurvol = useRef(false);
+  const bouton = useRef<HTMLButtonElement>(null);
+  const idPanneau = useId();
 
   const actif = groupe.items.some((i) => location.pathname === path(i.page));
 
@@ -35,7 +42,12 @@ function GroupeNav({ groupe }: { groupe: Groupe }) {
       if (!conteneur.current?.contains(e.target as Node)) setOuvert(false);
     }
     function auClavier(e: KeyboardEvent) {
-      if (e.key === 'Escape') setOuvert(false);
+      if (e.key !== 'Escape') return;
+      // Le focus revient au bouton quand il était dans le panneau : sans cela,
+      // le lien focalisé disparaît avec le panneau et le clavier repart du
+      // haut de la page.
+      if (conteneur.current?.contains(document.activeElement)) bouton.current?.focus();
+      setOuvert(false);
     }
     document.addEventListener('mousedown', auClic);
     document.addEventListener('keydown', auClavier);
@@ -50,14 +62,41 @@ function GroupeNav({ groupe }: { groupe: Groupe }) {
   return (
     <div
       ref={conteneur}
+      // Fermé quand le focus quitte le groupe (Tab après le dernier lien) :
+      // sinon le panneau resterait ouvert par-dessus la page.
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setOuvert(false);
+      }}
       className="relative"
-      onMouseEnter={() => setOuvert(true)}
-      onMouseLeave={() => setOuvert(false)}
+      // Événements de POINTEUR et non de souris : un écran tactile émule
+      // `mouseenter` avant le clic, ce qui reproduisait le même défaut au doigt.
+      // Seule une vraie souris ouvre au survol ; le doigt et le clavier passent
+      // par le clic.
+      onPointerEnter={(e) => {
+        if (e.pointerType !== 'mouse') return;
+        ouvertParSurvol.current = true;
+        setOuvert(true);
+      }}
+      onPointerLeave={(e) => {
+        if (e.pointerType !== 'mouse') return;
+        ouvertParSurvol.current = false;
+        setOuvert(false);
+      }}
     >
       <button
+        ref={bouton}
         type="button"
-        onClick={() => setOuvert((v) => !v)}
-        aria-haspopup="menu"
+        onClick={() => {
+          // Premier clic après un survol : le panneau est déjà ouvert, il le
+          // reste. Les clics suivants ouvrent et ferment normalement.
+          if (ouvertParSurvol.current) {
+            ouvertParSurvol.current = false;
+            setOuvert(true);
+            return;
+          }
+          setOuvert((v) => !v);
+        }}
+        aria-controls={idPanneau}
         aria-expanded={ouvert}
         className={`inline-flex items-center gap-1 text-sm font-medium transition-colors ${
           actif ? 'text-teal-500' : 'text-ink-600 hover:text-navy-900'
@@ -72,14 +111,13 @@ function GroupeNav({ groupe }: { groupe: Groupe }) {
       {ouvert && (
         <div className="absolute left-1/2 top-full z-50 w-80 -translate-x-1/2 pt-3">
           <div
-            role="menu"
+            id={idPanneau}
             className="overflow-hidden rounded-xl border border-ink-100 bg-white p-1.5 shadow-card-hover"
           >
             {groupe.items.map((item) => (
               <NavLink
                 key={item.page}
                 to={path(item.page)}
-                role="menuitem"
                 className={({ isActive }) =>
                   `block rounded-lg px-3 py-2.5 transition-colors ${
                     isActive ? 'bg-teal/10' : 'hover:bg-ink-50'
@@ -199,7 +237,7 @@ export function Header() {
                 </NavLink>
               ) : (
                 <div key={entree.labelKey} className="mt-2">
-                  <span className="block px-3 pb-1 text-[11px] font-semibold uppercase tracking-wide text-ink-400">
+                  <span className="block px-3 pb-1 text-[11px] font-semibold uppercase tracking-wide text-ink-500">
                     {t(entree.labelKey)}
                   </span>
                   {entree.items.map((item) => (

@@ -88,7 +88,7 @@ function Pre({ children, label }: { children: ReactNode; label?: string }) {
   return (
     <div className="my-4 overflow-hidden rounded-xl border border-ink-100 shadow-card">
       <div className="flex items-center justify-between gap-3 border-b border-ink-100 bg-ink-50 py-1.5 pl-3.5 pr-1.5">
-        <span className="truncate text-[11px] font-semibold uppercase tracking-wide text-ink-400">
+        <span className="truncate text-[11px] font-semibold uppercase tracking-wide text-ink-500">
           {label ?? 'JavaScript'}
         </span>
         <button
@@ -97,7 +97,7 @@ function Pre({ children, label }: { children: ReactNode; label?: string }) {
           aria-label={copied ? 'Code copié' : 'Copier le code'}
           className={`inline-flex shrink-0 items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold transition-colors ${
             copied
-              ? 'border-mint/50 bg-mint/10 text-mint'
+              ? 'border-mint/50 bg-mint/10 text-mint-600'
               : 'border-ink-200 bg-white text-ink-500 hover:border-gold hover:bg-gold/5 hover:text-gold-600'
           }`}
         >
@@ -141,7 +141,7 @@ function Method({ name, returns, children }: { name: ReactNode; returns?: string
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <code className="rounded-md bg-ink-100 px-2.5 py-1 font-mono text-sm font-semibold text-navy-900">{name}</code>
         {returns && (
-          <span className="text-xs text-ink-400">
+          <span className="text-xs text-ink-500">
             → <span className="font-mono text-gold-600">{returns}</span>
           </span>
         )}
@@ -155,7 +155,7 @@ function Method({ name, returns, children }: { name: ReactNode; returns?: string
 function Params({ rows }: { rows: [ReactNode, ReactNode, ReactNode][] }) {
   return (
     <div className="my-2.5 overflow-hidden rounded-lg border border-ink-100 text-xs">
-      <div className="grid grid-cols-[1fr] gap-0.5 border-b border-ink-100 bg-ink-50 px-3 py-1.5 font-bold uppercase tracking-wide text-ink-400 sm:grid-cols-[10rem_7rem_1fr] sm:gap-3">
+      <div className="grid grid-cols-[1fr] gap-0.5 border-b border-ink-100 bg-ink-50 px-3 py-1.5 font-bold uppercase tracking-wide text-ink-500 sm:grid-cols-[10rem_7rem_1fr] sm:gap-3">
         <span>Paramètre</span>
         <span className="hidden sm:block">Type</span>
         <span className="hidden sm:block">Rôle</span>
@@ -163,7 +163,7 @@ function Params({ rows }: { rows: [ReactNode, ReactNode, ReactNode][] }) {
       {rows.map((r, i) => (
         <div key={i} className="grid grid-cols-[1fr] gap-0.5 border-b border-ink-100 px-3 py-2 last:border-b-0 sm:grid-cols-[10rem_7rem_1fr] sm:gap-3">
           <code className="font-mono font-semibold text-gold-600">{r[0]}</code>
-          <span className="font-mono text-ink-400">{r[1]}</span>
+          <span className="font-mono text-ink-500">{r[1]}</span>
           <span className="text-ink-600">{r[2]}</span>
         </div>
       ))}
@@ -454,7 +454,7 @@ lib.businessDays('2026-07-04', '2026-07-06')  // → 1 (sam+dim exclus, lun incl
           </Method>
         </div>
 
-        <H3>Format &amp; nombres <span className="text-sm font-normal text-ink-400">(locale par défaut fr-FR)</span></H3>
+        <H3>Format &amp; nombres <span className="text-sm font-normal text-ink-500">(locale par défaut fr-FR)</span></H3>
         <div className="mt-4 flex flex-col gap-1">
           <Method name="currency(n, code?, locale?)" returns="string">
             <p>Formate un montant en devise. <C>code</C> par défaut <C>'EUR'</C>. <C>lib.currency(1234.5)</C> → <C>1 234,50 €</C>.</p>
@@ -549,7 +549,7 @@ lib.businessDays('2026-07-04', '2026-07-06')  // → 1 (sam+dim exclus, lun incl
           </Method>
         </div>
 
-        <H3>Boutons de transition <span className="text-sm font-normal text-ink-400">(contexte on_case_load)</span></H3>
+        <H3>Boutons de transition <span className="text-sm font-normal text-ink-500">(contexte on_case_load)</span></H3>
         <div className="mt-4 flex flex-col gap-1">
           <Method name="showTransition(nameOrId) · hideTransition(nameOrId)" returns="void">
             <p>Affiche / masque un bouton de transition, par <strong>nom</strong> ou par <strong>ID</strong>. N’a de sens que dans <C>on_case_load</C>. Pour une règle purement déclarative, préférez une <strong>condition de transition</strong> (section suivante).</p>
@@ -1144,7 +1144,7 @@ export function DocumentationPage() {
       <section className="pt-8">
         <div className="container-page">
           <div className="relative">
-            <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-400">
+            <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-500">
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2}>
                 <circle cx="11" cy="11" r="7" />
                 <path d="m21 21-4.3-4.3" />
@@ -1156,10 +1156,10 @@ export function DocumentationPage() {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Rechercher une fonction… (ex. businessDays, callConnector, setError)"
               aria-label="Rechercher dans la documentation"
-              className="w-full rounded-xl border border-ink-200 bg-white py-3 pl-10 pr-4 text-sm text-navy-900 shadow-card placeholder:text-ink-400 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
+              className="w-full rounded-xl border border-ink-200 bg-white py-3 pl-10 pr-4 text-sm text-navy-900 shadow-card placeholder:text-ink-500 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
             />
             {q !== '' && (
-              <p className="mt-2 text-xs text-ink-400">
+              <p className="mt-2 text-xs text-ink-500">
                 {visible.length} {visible.length > 1 ? 'sections correspondent' : 'section correspond'} à « {query.trim()} »
               </p>
             )}

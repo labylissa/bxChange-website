@@ -45,7 +45,7 @@ export function ProcessCard({ process }: { process: Process }) {
           leurs étapes à des hauteurs différentes, et l'ensemble paraîtrait
           bancal sans qu'on sache pourquoi. */}
       <div className="mt-auto pt-5">
-        <p className="flex items-baseline justify-between gap-2 text-[11px] font-semibold uppercase tracking-wide text-ink-400">
+        <p className="flex items-baseline justify-between gap-2 text-[11px] font-semibold uppercase tracking-wide text-ink-500">
           <span>{t('catalog.stepsLabel')}</span>
           <span className="normal-case tracking-normal">
             {t('catalog.stepCount', { n: process.stepCount })}
@@ -66,7 +66,7 @@ export function ProcessCard({ process }: { process: Process }) {
           ))}
         </ol>
         {autres > 0 && (
-          <p className="mt-1.5 pl-6 text-xs text-ink-400">{t('catalog.moreSteps', { n: autres })}</p>
+          <p className="mt-1.5 pl-6 text-xs text-ink-500">{t('catalog.moreSteps', { n: autres })}</p>
         )}
       </div>
     </div>

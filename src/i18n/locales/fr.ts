@@ -33,6 +33,11 @@ export const fr = {
       description:
         'Architecture logicielle, modélisation de processus, développement et conduite de projet : les personnes qui construisent bxFlow, et leurs parcours.',
     },
+    suite: {
+      title: 'La gamme bxGroup — bxFlow | bxReports et les autres produits',
+      description:
+        'bxFlow fait partie de la gamme bxGroup. Découvrez bxReports : des tableaux de bord construits à partir de vos fichiers Excel et de vos outils métier.',
+    },
     security: {
       title: 'Sécurité — bxFlow | Chiffrement, isolation, conformité',
       description:
@@ -86,10 +91,12 @@ export const fr = {
     teamDesc: 'Qui construit bxFlow, et avec quel parcours.',
     securityDesc: 'Chiffrement, isolation entre clients, traçabilité des accès.',
     deploymentDesc: 'Sur vos serveurs ou hébergé chez nous — la procédure de bout en bout.',
+    suite: 'La gamme bxGroup',
+    suiteDesc: 'Les autres produits de bxGroup, à commencer par bxReports.',
     contact: 'Contact',
     demo: 'Planifier une démo',
     documentation: 'Documentation',
-    cta: 'Planifier une démo',
+    cta: 'Demander une démo',
     openMenu: 'Ouvrir le menu',
     closeMenu: 'Fermer le menu',
     language: 'Langue',
@@ -106,6 +113,15 @@ export const fr = {
   },
 
   home: {
+    // Section « La gamme bxGroup » : les produits eux-mêmes viennent de
+    // `suite.produits`, pour que l'accueil et la page de la gamme disent la
+    // même chose.
+    suite: {
+      eyebrow: 'La gamme bxGroup',
+      title: 'Au-delà des processus : vos indicateurs',
+      subtitle: 'bxFlow fait partie de la gamme bxGroup. D’autres produits la rejoignent, à commencer par bxReports.',
+      cta: 'Voir la gamme bxGroup',
+    },
     hero: {
       eyebrow: 'Moteur de processus métier',
       title: 'Vos processus métier, sous contrôle de bout en bout.',
@@ -501,6 +517,41 @@ export const fr = {
       title: 'Une petite équipe, et ce que cela implique',
       text: 'Nous sommes une petite équipe, et nous le disons. C’est pourquoi votre installation ne dépend pas de nous : sur vos serveurs, bxFlow fonctionne sans aucune connexion vers l’éditeur, vos clés de chiffrement restent chez vous, et aucun compte éditeur n’existe sur votre instance. Vos processus s’exportent dans un fichier et se réimportent ailleurs — y compris sans nous.',
       cta: 'Voir la procédure de déploiement',
+    },
+  },
+
+  // Page « La gamme bxGroup » (menu Confiance). Les produits sont listés
+  // dans `src/data/gamme.ts` ; ici, seulement leurs textes. Les promesses
+  // de bxReports reprennent mot pour mot celles de son propre site.
+  suite: {
+    hero: {
+      eyebrow: 'La gamme bxGroup',
+      title: 'bxFlow n’est pas seul',
+      subtitle:
+        'bxGroup édite des logiciels de gestion, hébergés chez nous ou installés sur vos serveurs. bxFlow fait avancer vos dossiers ; les autres produits de la gamme sont présentés ici.',
+    },
+    produits: {
+      bxreports: {
+        categorie: 'Tableaux de bord et reporting',
+        accroche: 'Vos tableaux de bord, sans développeur.',
+        texte: 'Vos fichiers Excel et vos outils métier deviennent des indicateurs clairs, qui vous préviennent quand ça dérape.',
+        points: [
+          'Partez de vos fichiers : un export Excel ou CSV suffit, rien à migrer.',
+          'Fixez vos objectifs : une cible, trois seuils, chacun sait où il en est.',
+          'Soyez prévenu : alertes et rapports par e-mail, sans aller vérifier.',
+          'Chacun voit ce qui le concerne : par profil, par équipe, par onglet.',
+        ],
+        statut: 'Nous cherchons nos premières entreprises pilotes.',
+        cta: 'Découvrir bxReports',
+        alt: 'Tableau de bord bxReports : quatre indicateurs avec cible et variation, chiffre d’affaires et marge mois par mois, répartition par famille et par région.',
+        legende: 'Capture réelle du produit. Données fictives.',
+      },
+    },
+    // Annoncé au lecteur d'un lecteur d'écran avant qu'il ne quitte le site.
+    externe: '(site externe)',
+    avenir: {
+      title: 'D’autres produits à venir',
+      text: 'La gamme s’agrandira. Chaque nouveau produit bxGroup sera présenté sur cette page.',
     },
   },
 
@@ -996,6 +1047,8 @@ export const fr = {
     tagline: 'Vos processus métier, sous contrôle de bout en bout.',
     product: 'Produit',
     company: 'Ressources',
+    suite: 'La gamme bxGroup',
+    suiteLink: 'Toute la gamme',
     legal: 'Légal',
     legalNotice: 'Mentions légales',
     privacy: 'Confidentialité',

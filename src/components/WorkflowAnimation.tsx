@@ -222,7 +222,7 @@ export function WorkflowMini() {
                 />
                 <span
                   className={`text-[10px] font-semibold uppercase tracking-wide transition-colors duration-500 ${
-                    !surRejet && etapeActive === i ? 'text-gold-600' : 'text-ink-400'
+                    !surRejet && etapeActive === i ? 'text-gold-600' : 'text-ink-500'
                   }`}
                 >
                   {flux.transitions[i - 1]}
@@ -256,7 +256,7 @@ export function WorkflowMini() {
         />
         <span
           className={`text-[10px] font-semibold uppercase tracking-wide transition-colors duration-500 ${
-            surRejet ? 'text-gold-600' : 'text-ink-400'
+            surRejet ? 'text-gold-600' : 'text-ink-500'
           }`}
         >
           {flux.reject}
@@ -312,7 +312,7 @@ export function SuiviDossier({ className = '' }: { className?: string }) {
             <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
           </span>
           <span className="truncate text-xs font-semibold text-navy-900">{suivi.label}</span>
-          <span className="hidden font-mono text-[11px] text-ink-400 sm:inline">{suivi.reference}</span>
+          <span className="hidden font-mono text-[11px] text-ink-500 sm:inline">{suivi.reference}</span>
         </div>
         {/* La clé relance l'apparition à chaque pas : le libellé change ET se voit changer. */}
         <span
@@ -355,7 +355,7 @@ export function SuiviDossier({ className = '' }: { className?: string }) {
               </span>
               <span
                 className={`mt-1.5 px-1 text-center text-[10px] font-semibold leading-tight transition-colors duration-500 sm:text-[11px] ${
-                  allumee ? 'text-navy-900' : franchie ? 'text-ink-500' : 'text-ink-400'
+                  allumee ? 'text-navy-900' : franchie ? 'text-ink-600' : 'text-ink-500'
                 }`}
               >
                 {label}

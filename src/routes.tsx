@@ -9,6 +9,7 @@ import { CatalogPage } from './pages/CatalogPage';
 import { SecurityPage } from './pages/SecurityPage';
 import { DeploymentPage } from './pages/DeploymentPage';
 import { TeamPage } from './pages/TeamPage';
+import { SuitePage } from './pages/SuitePage';
 import { PricingPage } from './pages/PricingPage';
 import { ContactPage } from './pages/ContactPage';
 import { DemoPage } from './pages/DemoPage';
@@ -25,6 +26,7 @@ const PAGE_ELEMENTS: Record<Exclude<PageKey, 'home'>, JSX.Element> = {
   security: <SecurityPage />,
   deployment: <DeploymentPage />,
   team: <TeamPage />,
+  suite: <SuitePage />,
   pricing: <PricingPage />,
   contact: <ContactPage />,
   demo: <DemoPage />,

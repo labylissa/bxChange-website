@@ -31,6 +31,11 @@ export const en: Translation = {
       description:
         'Software architecture, business process modelling, development and project management: the people who build bxFlow, and their backgrounds.',
     },
+    suite: {
+      title: 'The bxGroup suite — bxFlow | bxReports and other products',
+      description:
+        'bxFlow is part of the bxGroup suite. Discover bxReports: dashboards built from your Excel files and business tools.',
+    },
     security: {
       title: 'Security — bxFlow | Encryption, isolation, compliance',
       description:
@@ -84,10 +89,12 @@ export const en: Translation = {
     teamDesc: 'Who builds bxFlow, and with what background.',
     securityDesc: 'Encryption, separation between clients, access audit trail.',
     deploymentDesc: 'On your servers or hosted by us — the end-to-end procedure.',
+    suite: 'The bxGroup suite',
+    suiteDesc: 'Other bxGroup products, starting with bxReports.',
     contact: 'Contact',
     demo: 'Book a demo',
     documentation: 'Documentation',
-    cta: 'Book a demo',
+    cta: 'Request a demo',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
     language: 'Language',
@@ -104,6 +111,12 @@ export const en: Translation = {
   },
 
   home: {
+    suite: {
+      eyebrow: 'The bxGroup suite',
+      title: 'Beyond processes: your indicators',
+      subtitle: 'bxFlow is part of the bxGroup suite. Other products are joining it, starting with bxReports.',
+      cta: 'See the bxGroup suite',
+    },
     hero: {
       eyebrow: 'Business process engine',
       title: 'Your business processes, under control end to end.',
@@ -485,6 +498,37 @@ export const en: Translation = {
       title: 'A small team, and what that means for you',
       text: 'We are a small team, and we say so. That is exactly why your installation does not depend on us: on your servers, bxFlow runs with no connection back to the vendor, your encryption keys stay with you, and no vendor account exists on your instance. Your processes export to a file and import elsewhere — including without us.',
       cta: 'See the deployment procedure',
+    },
+  },
+
+  suite: {
+    hero: {
+      eyebrow: 'The bxGroup suite',
+      title: 'bxFlow has company',
+      subtitle:
+        'bxGroup publishes business software, hosted by us or installed on your own servers. bxFlow moves your cases forward; the other products in the suite are presented here.',
+    },
+    produits: {
+      bxreports: {
+        categorie: 'Dashboards and reporting',
+        accroche: 'Your dashboards, no developer needed.',
+        texte: 'Your Excel files and business tools become clear indicators that warn you when things slip.',
+        points: [
+          'Start from your files: an Excel or CSV export is enough, nothing to migrate.',
+          'Set your targets: one target, three thresholds, everyone knows where they stand.',
+          'Get warned: alerts and reports by email, no need to go and check.',
+          'Everyone sees what concerns them: by role, by team, by tab.',
+        ],
+        statut: 'We are looking for our first pilot companies.',
+        cta: 'Discover bxReports',
+        alt: 'bxReports dashboard: four indicators with target and variance, revenue and margin month by month, breakdown by product family and by region.',
+        legende: 'Real product screenshot. Fictitious data.',
+      },
+    },
+    externe: '(external site, in French)',
+    avenir: {
+      title: 'More products to come',
+      text: 'The suite will grow. Each new bxGroup product will be presented on this page.',
     },
   },
 
@@ -977,6 +1021,8 @@ export const en: Translation = {
     tagline: 'Your business processes, under control end to end.',
     product: 'Product',
     company: 'Resources',
+    suite: 'The bxGroup suite',
+    suiteLink: 'The whole suite',
     legal: 'Legal',
     legalNotice: 'Legal notice',
     privacy: 'Privacy',

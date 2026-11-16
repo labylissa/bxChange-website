@@ -10,6 +10,8 @@ import { useContent } from '@/hooks/useContent';
 import { useLang } from '@/hooks/useLang';
 import { processPath } from '@/lib/routes';
 import { getFeaturedProcesses, processes, type ProcessIconName } from '@/data/processes';
+import { GAMME } from '@/data/gamme';
+import { CarteProduitGamme } from '@/components/CarteProduitGamme';
 
 // Une icône par étape, dans l'ordre du texte : on dessine le déroulé, une
 // demande ouvre un dossier, les étapes avancent, les logiciels existants
@@ -58,10 +60,11 @@ export function HomePage() {
       <Seo page="home" title={c.meta.home.title} description={c.meta.home.description} />
 
       {/* HERO */}
-      {/* Le décor de fond a été retiré : cercles concentriques et grille de
-          points remplissaient la moitié droite du hero sans rien dire, et la
-          carte du processus s'en trouvait repoussée dans un coin. */}
-      <section className="relative border-b border-ink-100 bg-white">
+      {/* Les cercles concentriques et la grille de points qui remplissaient la
+          moitié droite ont été retirés : ils repoussaient la carte dans un coin.
+          Le fond doré (`fond-dore`) est d'une autre nature — une lueur et une
+          grille centrées, estompées, qui ne prennent aucune place au contenu. */}
+      <section className="fond-dore border-b border-ink-100 bg-white">
         <div className="container-page relative grid items-center gap-10 py-16 lg:grid-cols-[1fr_1.15fr] lg:py-20">
           <div className="animate-fade-up">
             <span className="eyebrow">{c.home.hero.eyebrow}</span>
@@ -291,7 +294,7 @@ export function HomePage() {
             {c.home.catalog.cardCta}
             <Icons.arrowRight className="h-4 w-4" />
           </Link>
-          <p className="mt-4 text-sm text-ink-400">
+          <p className="mt-4 text-sm text-ink-500">
             {processes.length}+ {c.home.catalog.available}
           </p>
         </div>
@@ -339,6 +342,37 @@ export function HomePage() {
           <Link to={path('useCases')} className="btn-secondary">
             {c.home.sectors.cta}
             <Icons.arrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </Section>
+
+      {/* LA GAMME bxGROUP
+
+          Une section à part, juste avant l'appel final : d'autres produits
+          rejoindront la gamme, et elle doit pouvoir les accueillir sans
+          remanier l'accueil — la liste vient de `src/data/gamme.ts`. Placée
+          après les secteurs, elle ne coupe pas le chemin vers la démo bxFlow. */}
+      <Section className="bg-ink-50/60">
+        <Reveal>
+          <SectionHeading
+            eyebrow={c.home.suite.eyebrow}
+            title={c.home.suite.title}
+            subtitle={c.home.suite.subtitle}
+          />
+        </Reveal>
+        <div className="mt-12 grid gap-10">
+          {GAMME.map((produit) => (
+            <Reveal key={produit.id} from="up">
+              <CarteProduitGamme produit={produit} />
+            </Reveal>
+          ))}
+        </div>
+        <div className="mt-8 text-center">
+          <Link
+            to={path('suite')}
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-gold-600 hover:underline"
+          >
+            {c.home.suite.cta} <span aria-hidden>→</span>
           </Link>
         </div>
       </Section>

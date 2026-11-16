@@ -38,7 +38,7 @@ export function ContactPage() {
 
   const f = c.contact.form;
   const inputClass =
-    'mt-1.5 w-full rounded-lg border border-ink-200 bg-white px-4 py-2.5 text-sm text-navy-900 placeholder:text-ink-300 focus:border-teal focus:outline-none focus:ring-2 focus:ring-teal/30';
+    'mt-1.5 w-full rounded-lg border border-ink-200 bg-white px-4 py-2.5 text-sm text-navy-900 placeholder:text-ink-500 focus:border-teal focus:outline-none focus:ring-2 focus:ring-teal/30';
 
   return (
     <>
@@ -127,7 +127,7 @@ export function ContactPage() {
               ))}
             </ol>
             <div className="mt-8 border-t border-ink-200 pt-6">
-              <p className="text-xs font-semibold uppercase tracking-wider text-ink-400">
+              <p className="text-xs font-semibold uppercase tracking-wider text-ink-500">
                 {c.contact.aside.emailLabel}
               </p>
               <a

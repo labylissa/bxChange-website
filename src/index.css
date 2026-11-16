@@ -1,3 +1,14 @@
+/* Polices auto-hébergées (Fontsource 5.3.0, licence OFL-1.1 : public/polices/LICENCE-*.txt).
+   Mêmes graisses que l'ancien appel Google Fonts ; Space Grotesk 400 y manquait déjà
+   (le navigateur prend 500, comme avant). */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('/polices/inter-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url('/polices/inter-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('/polices/inter-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap; src: url('/polices/inter-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 500; font-display: swap; src: url('/polices/space-grotesk-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 600; font-display: swap; src: url('/polices/space-grotesk-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap; src: url('/polices/space-grotesk-latin-700-normal.woff2') format('woff2'); }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,6 +16,16 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* L'en-tête est collant (h-20, 5rem) : sans cette marge, un élément
+       atteint au clavier ou par une ancre (#catalogue) passe dessous. */
+    scroll-padding-top: 6rem;
+  }
+
+  /* Le défilement doux est un mouvement comme un autre. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
@@ -25,6 +46,49 @@
 }
 
 @layer components {
+  /* Fond des en-têtes : lueur dorée qui respire et grille estompée, repris du
+     site bxReports pour que les deux produits de la gamme se reconnaissent.
+     Les deux couches passent SOUS le contenu (z-index -1 dans un contexte
+     isolé) : aucun enfant n'a besoin d'être repositionné. Purement décoratif,
+     donc arrêté quand le visiteur demande moins de mouvement. */
+  .fond-dore {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .fond-dore::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -14rem;
+    z-index: -1;
+    width: 64rem;
+    height: 40rem;
+    translate: -50% 0;
+    background: radial-gradient(closest-side, theme('colors.gold.DEFAULT / 28%'), transparent 70%);
+    animation: respire 9s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+  .fond-dore::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(to right, theme('colors.navy.900 / 4.5%') 1px, transparent 1px),
+      linear-gradient(to bottom, theme('colors.navy.900 / 4.5%') 1px, transparent 1px);
+    background-size: 88px 88px;
+    mask-image: radial-gradient(ellipse at 50% 20%, #000 20%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 20%, #000 20%, transparent 70%);
+    pointer-events: none;
+  }
+  @keyframes respire {
+    from { opacity: 0.7; scale: 1; }
+    to { opacity: 1; scale: 1.12; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fond-dore::before { animation: none; }
+  }
   .container-page {
     @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
   }
