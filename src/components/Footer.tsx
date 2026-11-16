@@ -3,11 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { Logo } from './Logo';
 import { Icons } from './Icon';
 import { useLang } from '@/hooks/useLang';
+import { useContent } from '@/hooks/useContent';
 import { NAV_PAGES, PAGE_LABEL_KEY } from '@/lib/routes';
-import { BXREPORTS_URL, CONTACT_EMAIL, LINKEDIN_URL } from '@/lib/site';
+import { GAMME } from '@/data/gamme';
+import { CONTACT_EMAIL, LINKEDIN_URL } from '@/lib/site';
 export function Footer() {
   const { t } = useTranslation();
   const { path } = useLang();
+  const c = useContent();
   const year = new Date().getFullYear();
 
   return (
@@ -37,7 +40,9 @@ export function Footer() {
             {t('footer.product')}
           </h3>
           <ul className="mt-4 space-y-3 text-sm">
-            {NAV_PAGES.map((page) => (
+            {/* La page de la gamme a son propre bloc ci-contre : la lister aussi
+                sous « Produit » la rangerait parmi les pages de bxFlow. */}
+            {NAV_PAGES.filter((page) => page !== 'suite').map((page) => (
               <li key={page}>
                 <Link to={path(page)} className="text-white/70 transition-colors hover:text-teal">
                   {t(PAGE_LABEL_KEY[page])}
@@ -48,7 +53,31 @@ export function Footer() {
         </div>
 
         <div>
+          {/* La gamme bxGroup, en tête de colonne : d'autres produits la
+              rejoindront, elle ne doit pas se lire comme une note sous les
+              ressources. Une liste et non un lien unique, pour les accueillir.
+              Toujours pas de cinquième colonne, qui faisait passer le bouton de
+              démo sur deux lignes. */}
           <h3 className="text-sm font-semibold uppercase tracking-wider text-white/50">
+            {t('footer.suite')}
+          </h3>
+          <ul className="mt-4 space-y-3 text-sm">
+            {GAMME.map((produit) => (
+              <li key={produit.id}>
+                <a href={produit.url} className="group block text-white/70 transition-colors hover:text-teal">
+                  <span className="font-medium text-white group-hover:text-teal">{produit.nom}</span>
+                  <span className="mt-0.5 block text-white/60">{c.suite.produits[produit.id].categorie}</span>
+                </a>
+              </li>
+            ))}
+            <li>
+              <Link to={path('suite')} className="text-white/70 transition-colors hover:text-teal">
+                {t('footer.suiteLink')} <span aria-hidden>→</span>
+              </Link>
+            </li>
+          </ul>
+
+          <h3 className="mt-8 text-sm font-semibold uppercase tracking-wider text-white/50">
             {t('footer.company')}
           </h3>
           <ul className="mt-4 space-y-3 text-sm">
@@ -80,21 +109,6 @@ export function Footer() {
               <Link to={path('privacy')} className="text-white/70 transition-colors hover:text-teal">
                 {t('footer.privacy')}
               </Link>
-            </li>
-          </ul>
-
-          {/* L'autre produit de la gamme, en pied de page seulement : bxFlow
-              reste le sujet de ce site. Sous « Ressources » plutôt qu'en
-              cinquième colonne, qui faisait passer le bouton de démo sur deux lignes. */}
-          <h3 className="mt-8 text-sm font-semibold uppercase tracking-wider text-white/50">
-            {t('footer.suite')}
-          </h3>
-          <ul className="mt-4 space-y-3 text-sm">
-            <li>
-              <a href={BXREPORTS_URL} className="group block text-white/70 transition-colors hover:text-teal">
-                <span className="font-medium text-white group-hover:text-teal">bxReports</span>
-                <span className="mt-0.5 block text-white/60">{t('footer.bxreportsDesc')}</span>
-              </a>
             </li>
           </ul>
         </div>

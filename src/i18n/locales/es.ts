@@ -931,7 +931,6 @@ export const es: Translation = {
     product: 'Producto',
     company: 'Recursos',
     suite: 'La gama bxGroup',
-    bxreportsDesc: 'Paneles e informes (en francés)',
     legal: 'Legal',
     legalNotice: 'Aviso legal',
     privacy: 'Privacidad',

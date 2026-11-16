@@ -114,6 +114,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://bxgroup.io/fr/gamme-bxgroup/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/gamme-bxgroup/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/bxgroup-suite/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bxgroup.io/fr/gamme-bxgroup/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bxgroup.io/en/bxgroup-suite/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/gamme-bxgroup/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/bxgroup-suite/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bxgroup.io/fr/gamme-bxgroup/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://bxgroup.io/fr/tarifs/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://bxgroup.io/fr/tarifs/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://bxgroup.io/en/pricing/"/>

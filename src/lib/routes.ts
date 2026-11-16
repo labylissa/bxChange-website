@@ -8,6 +8,7 @@ export type PageKey =
   | 'security'
   | 'deployment'
   | 'team'
+  | 'suite'
   | 'pricing'
   | 'contact'
   | 'demo'
@@ -36,6 +37,7 @@ export const PAGE_SLUGS: Record<Lang, Record<PageKey, string>> = {
     security: 'securite',
     deployment: 'deploiement',
     team: 'equipe',
+    suite: 'gamme-bxgroup',
     pricing: 'tarifs',
     contact: 'contact',
     demo: 'demo',
@@ -51,6 +53,7 @@ export const PAGE_SLUGS: Record<Lang, Record<PageKey, string>> = {
     security: 'security',
     deployment: 'deployment',
     team: 'team',
+    suite: 'bxgroup-suite',
     pricing: 'pricing',
     contact: 'contact',
     demo: 'demo',
@@ -106,6 +109,7 @@ export const ALL_PAGES: PageKey[] = [
   'security',
   'deployment',
   'team',
+  'suite',
   'pricing',
   'documentation',
   'demo',
@@ -142,6 +146,7 @@ export const NAV_ENTRIES: NavEntry[] = [
       { page: 'security', descKey: 'nav.securityDesc' },
       { page: 'deployment', descKey: 'nav.deploymentDesc' },
       { page: 'team', descKey: 'nav.teamDesc' },
+      { page: 'suite', descKey: 'nav.suiteDesc' },
     ],
   },
   { kind: 'page', page: 'pricing' },
@@ -173,6 +178,7 @@ export const PAGE_LABEL_KEY: Record<PageKey, string> = {
   security: 'nav.security',
   deployment: 'nav.deployment',
   team: 'nav.team',
+  suite: 'nav.suite',
   pricing: 'nav.pricing',
   contact: 'nav.contact',
   demo: 'nav.demo',

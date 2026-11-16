@@ -10,6 +10,8 @@ import { useContent } from '@/hooks/useContent';
 import { useLang } from '@/hooks/useLang';
 import { processPath } from '@/lib/routes';
 import { getFeaturedProcesses, processes, type ProcessIconName } from '@/data/processes';
+import { GAMME } from '@/data/gamme';
+import { CarteProduitGamme } from '@/components/CarteProduitGamme';
 
 // Une icône par étape, dans l'ordre du texte : on dessine le déroulé, une
 // demande ouvre un dossier, les étapes avancent, les logiciels existants
@@ -339,6 +341,37 @@ export function HomePage() {
           <Link to={path('useCases')} className="btn-secondary">
             {c.home.sectors.cta}
             <Icons.arrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </Section>
+
+      {/* LA GAMME bxGROUP
+
+          Une section à part, juste avant l'appel final : d'autres produits
+          rejoindront la gamme, et elle doit pouvoir les accueillir sans
+          remanier l'accueil — la liste vient de `src/data/gamme.ts`. Placée
+          après les secteurs, elle ne coupe pas le chemin vers la démo bxFlow. */}
+      <Section className="bg-ink-50/60">
+        <Reveal>
+          <SectionHeading
+            eyebrow={c.home.suite.eyebrow}
+            title={c.home.suite.title}
+            subtitle={c.home.suite.subtitle}
+          />
+        </Reveal>
+        <div className="mt-12 grid gap-10">
+          {GAMME.map((produit) => (
+            <Reveal key={produit.id} from="up">
+              <CarteProduitGamme produit={produit} />
+            </Reveal>
+          ))}
+        </div>
+        <div className="mt-8 text-center">
+          <Link
+            to={path('suite')}
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-gold-600 hover:underline"
+          >
+            {c.home.suite.cta} <span aria-hidden>→</span>
           </Link>
         </div>
       </Section>
