@@ -47,7 +47,7 @@ export function Illustration({
   );
 }
 
-/** En-tête de page clair et stylé (dégradé doux + grille + halos teal/mint). */
+/** En-tête de page clair : fond doré et grille estompée (`fond-dore`). */
 export function PageHero({
   eyebrow,
   title,
@@ -63,11 +63,10 @@ export function PageHero({
   flow?: boolean;
 }) {
   return (
-    <section className="relative border-b border-ink-100 bg-white">
-      {/* Le décor de fond a été retiré : cercles concentriques et grille de
-          points occupaient toute la hauteur du hero pour ne rien dire, et
-          laissaient une grande zone vide au-dessus du contenu. Le schéma
-          ci-dessous remplit ce rôle en montrant le produit. */}
+    <section className="fond-dore border-b border-ink-100 bg-white">
+      {/* Fond doré et grille estompée, communs à tous les en-têtes et repris
+          du site bxReports (voir `.fond-dore`, index.css). Il remplace un
+          ancien décor de cercles et de points qui occupait toute la hauteur. */}
       <div className="container-page py-14 lg:py-16">
         {/* Le TEXTE reste borné à une largeur de lecture confortable ; le
             schéma, lui, prend toute la largeur du conteneur — il lui en faut

@@ -60,10 +60,11 @@ export function HomePage() {
       <Seo page="home" title={c.meta.home.title} description={c.meta.home.description} />
 
       {/* HERO */}
-      {/* Le décor de fond a été retiré : cercles concentriques et grille de
-          points remplissaient la moitié droite du hero sans rien dire, et la
-          carte du processus s'en trouvait repoussée dans un coin. */}
-      <section className="relative border-b border-ink-100 bg-white">
+      {/* Les cercles concentriques et la grille de points qui remplissaient la
+          moitié droite ont été retirés : ils repoussaient la carte dans un coin.
+          Le fond doré (`fond-dore`) est d'une autre nature — une lueur et une
+          grille centrées, estompées, qui ne prennent aucune place au contenu. */}
+      <section className="fond-dore border-b border-ink-100 bg-white">
         <div className="container-page relative grid items-center gap-10 py-16 lg:grid-cols-[1fr_1.15fr] lg:py-20">
           <div className="animate-fade-up">
             <span className="eyebrow">{c.home.hero.eyebrow}</span>
