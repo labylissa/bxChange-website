@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Logo } from './Logo';
@@ -29,6 +29,8 @@ function GroupeNav({ groupe }: { groupe: Groupe }) {
   // refermait aussitôt le menu : le visiteur qui cliquait sur « Confiance » le
   // voyait apparaître puis disparaître.
   const ouvertParSurvol = useRef(false);
+  const bouton = useRef<HTMLButtonElement>(null);
+  const idPanneau = useId();
 
   const actif = groupe.items.some((i) => location.pathname === path(i.page));
 
@@ -40,7 +42,12 @@ function GroupeNav({ groupe }: { groupe: Groupe }) {
       if (!conteneur.current?.contains(e.target as Node)) setOuvert(false);
     }
     function auClavier(e: KeyboardEvent) {
-      if (e.key === 'Escape') setOuvert(false);
+      if (e.key !== 'Escape') return;
+      // Le focus revient au bouton quand il était dans le panneau : sans cela,
+      // le lien focalisé disparaît avec le panneau et le clavier repart du
+      // haut de la page.
+      if (conteneur.current?.contains(document.activeElement)) bouton.current?.focus();
+      setOuvert(false);
     }
     document.addEventListener('mousedown', auClic);
     document.addEventListener('keydown', auClavier);
@@ -55,6 +62,11 @@ function GroupeNav({ groupe }: { groupe: Groupe }) {
   return (
     <div
       ref={conteneur}
+      // Fermé quand le focus quitte le groupe (Tab après le dernier lien) :
+      // sinon le panneau resterait ouvert par-dessus la page.
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setOuvert(false);
+      }}
       className="relative"
       // Événements de POINTEUR et non de souris : un écran tactile émule
       // `mouseenter` avant le clic, ce qui reproduisait le même défaut au doigt.
@@ -72,6 +84,7 @@ function GroupeNav({ groupe }: { groupe: Groupe }) {
       }}
     >
       <button
+        ref={bouton}
         type="button"
         onClick={() => {
           // Premier clic après un survol : le panneau est déjà ouvert, il le
@@ -83,7 +96,7 @@ function GroupeNav({ groupe }: { groupe: Groupe }) {
           }
           setOuvert((v) => !v);
         }}
-        aria-haspopup="menu"
+        aria-controls={idPanneau}
         aria-expanded={ouvert}
         className={`inline-flex items-center gap-1 text-sm font-medium transition-colors ${
           actif ? 'text-teal-500' : 'text-ink-600 hover:text-navy-900'
@@ -98,14 +111,13 @@ function GroupeNav({ groupe }: { groupe: Groupe }) {
       {ouvert && (
         <div className="absolute left-1/2 top-full z-50 w-80 -translate-x-1/2 pt-3">
           <div
-            role="menu"
+            id={idPanneau}
             className="overflow-hidden rounded-xl border border-ink-100 bg-white p-1.5 shadow-card-hover"
           >
             {groupe.items.map((item) => (
               <NavLink
                 key={item.page}
                 to={path(item.page)}
-                role="menuitem"
                 className={({ isActive }) =>
                   `block rounded-lg px-3 py-2.5 transition-colors ${
                     isActive ? 'bg-teal/10' : 'hover:bg-ink-50'

@@ -18,8 +18,12 @@ export interface ProduitGamme {
   /** Nom de marque, identique dans toutes les langues. */
   nom: string;
   url: string;
-  /** Capture réelle du produit, dimensions natives (réserve la place, pas de décalage au chargement). */
-  capture: { src: string; largeur: number; hauteur: number };
+  /**
+   * Capture réelle du produit, en WebP à deux largeurs : le navigateur prend
+   * la plus petite qui suffit à l'écran. Largeur et hauteur de la plus grande
+   * réservent la place (aucun décalage au chargement).
+   */
+  capture: { versions: { src: string; largeur: number }[]; largeur: number; hauteur: number };
 }
 
 export const GAMME: readonly ProduitGamme[] = [
@@ -27,8 +31,16 @@ export const GAMME: readonly ProduitGamme[] = [
     id: 'bxreports',
     nom: 'bxReports',
     url: BXREPORTS_URL,
-    // Reprise du site bxReports (site/images/tb-vue.png), qui la publie déjà
-    // avec la mention « Données fictives ».
-    capture: { src: '/gamme/bxreports-tableau-de-bord.png', largeur: 2400, hauteur: 1650 },
+    // Reprise du site bxReports (site/images/tb-vue.png, PNG 2400 px, 209 Ko),
+    // qui la publie déjà avec la mention « Données fictives ». Réencodée en
+    // WebP : 21 Ko pour un téléphone, 57 Ko pour un écran large.
+    capture: {
+      versions: [
+        { src: '/gamme/bxreports-tableau-de-bord-800.webp', largeur: 800 },
+        { src: '/gamme/bxreports-tableau-de-bord-1600.webp', largeur: 1600 },
+      ],
+      largeur: 1600,
+      hauteur: 1100,
+    },
   },
 ];

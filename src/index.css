@@ -16,6 +16,16 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* L'en-tête est collant (h-20, 5rem) : sans cette marge, un élément
+       atteint au clavier ou par une ancre (#catalogue) passe dessous. */
+    scroll-padding-top: 6rem;
+  }
+
+  /* Le défilement doux est un mouvement comme un autre. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {

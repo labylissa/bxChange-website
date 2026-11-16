@@ -49,7 +49,11 @@ export function CarteProduitGamme({ produit, detail = false }: { produit: Produi
 
         <figure className="flex flex-col justify-center bg-ink-50 p-6 sm:p-8">
           <img
-            src={produit.capture.src}
+            src={produit.capture.versions[produit.capture.versions.length - 1].src}
+            srcSet={produit.capture.versions.map((v) => `${v.src} ${v.largeur}w`).join(', ')}
+            // Colonne de droite de la carte à partir de lg (~560 px), pleine
+            // largeur en dessous.
+            sizes="(min-width: 1024px) 560px, 100vw"
             width={produit.capture.largeur}
             height={produit.capture.hauteur}
             alt={t.alt}
