@@ -1,5 +1,7 @@
 import { Icons } from './Icon';
 import { useContent } from '@/hooks/useContent';
+import { Link } from 'react-router-dom';
+import { useLang } from '@/hooks/useLang';
 import type { ProduitGamme } from '@/data/gamme';
 
 /**
@@ -12,6 +14,7 @@ import type { ProduitGamme } from '@/data/gamme';
  */
 export function CarteProduitGamme({ produit, detail = false }: { produit: ProduitGamme; detail?: boolean }) {
   const c = useContent();
+  const { path } = useLang();
   const t = c.suite.produits[produit.id];
   // Sous le titre de section de l'accueil (h2), le produit est un h3 ; sur sa
   // page, il suit directement le h1.
@@ -39,11 +42,18 @@ export function CarteProduitGamme({ produit, detail = false }: { produit: Produi
           {detail && <p className="mt-6 text-sm font-medium text-navy-900">{t.statut}</p>}
 
           <div className="mt-8 lg:mt-auto lg:pt-8">
-            <a href={produit.url} className={detail ? 'btn-primary' : 'btn-secondary'}>
-              {t.cta}
-              <span className="sr-only"> {c.suite.externe}</span>
-              <Icons.arrowRight className="h-4 w-4" />
-            </a>
+            {produit.pageInterne ? (
+              <Link to={path(produit.pageInterne)} className={detail ? 'btn-primary' : 'btn-secondary'}>
+                {t.cta}
+                <Icons.arrowRight className="h-4 w-4" />
+              </Link>
+            ) : (
+              <a href={produit.url} className={detail ? 'btn-primary' : 'btn-secondary'}>
+                {t.cta}
+                <span className="sr-only"> {c.suite.externe}</span>
+                <Icons.arrowRight className="h-4 w-4" />
+              </a>
+            )}
           </div>
         </div>
 

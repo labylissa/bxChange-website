@@ -34,9 +34,9 @@ export const fr = {
         'Architecture logicielle, modélisation de processus, développement et conduite de projet : les personnes qui construisent bxFlow, et leurs parcours.',
     },
     suite: {
-      title: 'La gamme bxGroup — bxFlow | bxReports et les autres produits',
+      title: 'La gamme bxGroup — bxFlow | bxReports, bxCourses et les autres produits',
       description:
-        'bxFlow fait partie de la gamme bxGroup. Découvrez bxReports : des tableaux de bord construits à partir de vos fichiers Excel et de vos outils métier.',
+        'bxFlow fait partie de la gamme bxGroup. Découvrez bxReports, des tableaux de bord construits à partir de vos fichiers Excel et de vos outils métier, et bxCourses, la formation avec la conformité en ligne de mire.',
     },
     security: {
       title: 'Sécurité — bxFlow | Chiffrement, isolation, conformité',
@@ -92,7 +92,7 @@ export const fr = {
     securityDesc: 'Chiffrement, isolation entre clients, traçabilité des accès.',
     deploymentDesc: 'Sur vos serveurs ou hébergé chez nous — la procédure de bout en bout.',
     suite: 'La gamme bxGroup',
-    suiteDesc: 'Les autres produits de bxGroup, à commencer par bxReports.',
+    suiteDesc: 'Les autres produits de bxGroup : bxReports et bxCourses.',
     contact: 'Contact',
     demo: 'Planifier une démo',
     documentation: 'Documentation',
@@ -119,7 +119,7 @@ export const fr = {
     suite: {
       eyebrow: 'La gamme bxGroup',
       title: 'Au-delà des processus : vos indicateurs',
-      subtitle: 'bxFlow fait partie de la gamme bxGroup. D’autres produits la rejoignent, à commencer par bxReports.',
+      subtitle: 'bxFlow fait partie de la gamme bxGroup. D’autres produits la rejoignent : bxReports et bxCourses.',
       cta: 'Voir la gamme bxGroup',
     },
     hero: {
@@ -528,7 +528,7 @@ export const fr = {
       eyebrow: 'La gamme bxGroup',
       title: 'bxFlow n’est pas seul',
       subtitle:
-        'bxGroup édite des logiciels de gestion, hébergés chez nous ou installés sur vos serveurs. bxFlow fait avancer vos dossiers ; les autres produits de la gamme sont présentés ici.',
+        'bxGroup édite des logiciels de gestion, hébergés chez nous ou installés sur vos serveurs. bxFlow fait avancer vos dossiers ; bxReports et bxCourses, les autres produits de la gamme, sont présentés ici.',
     },
     produits: {
       bxreports: {
@@ -546,12 +546,27 @@ export const fr = {
         alt: 'Tableau de bord bxReports : quatre indicateurs avec cible et variation, chiffre d’affaires et marge mois par mois, répartition par famille et par région.',
         legende: 'Capture réelle du produit. Données fictives.',
       },
+      bxcourses: {
+        categorie: 'Formation et conformité',
+        accroche: 'La formation, avec la conformité en ligne de mire.',
+        texte: 'Former vos équipes, et prouver que c’est fait.',
+        points: [
+          'Créez dans Articulate 360 : vos contenus sont importés en SCORM.',
+          'Affectez à qui vous voulez : par formation, par parcours ou par session.',
+          'Relancez et suivez : la complétion de chacun, sans courir après personne.',
+          'Prouvez-le : certificats PDF, rapports d’équipe et de conformité avec export CSV, connexion par SSO.',
+        ],
+        statut: 'Une démonstration vous montrera le produit en situation.',
+        cta: 'Demander une démo de bxCourses',
+        alt: 'Bibliothèque bxCourses : quatre compteurs (formations publiées, brouillons, parcours, inscrits) et les cartes de deux formations SCORM publiées, avec leurs inscrits et leur progression.',
+        legende: 'Capture réelle du produit.',
+      },
     },
     // Annoncé au lecteur d'un lecteur d'écran avant qu'il ne quitte le site.
     externe: '(site externe)',
     avenir: {
       title: 'D’autres produits à venir',
-      text: 'La gamme s’agrandira. Chaque nouveau produit bxGroup sera présenté sur cette page.',
+      text: 'Après bxReports et bxCourses, la gamme s’agrandira. Chaque nouveau produit bxGroup sera présenté sur cette page.',
     },
   },
 

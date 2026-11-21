@@ -1,5 +1,6 @@
 import type { Translation } from '@/i18n/locales/fr';
 import { BXREPORTS_URL } from '@/lib/site';
+import type { PageKey } from '@/lib/routes';
 
 /**
  * Les AUTRES produits de la gamme bxGroup, présentés sur l'accueil et sur la
@@ -18,6 +19,12 @@ export interface ProduitGamme {
   /** Nom de marque, identique dans toutes les langues. */
   nom: string;
   url: string;
+  /**
+   * Page du site bxFlow vers laquelle mène le bouton, pour un produit qui n'a
+   * pas encore de site propre. Prend le pas sur `url` (lien interne, sans la
+   * mention « site externe »).
+   */
+  pageInterne?: PageKey;
   /**
    * Capture réelle du produit, en WebP à deux largeurs : le navigateur prend
    * la plus petite qui suffit à l'écran. Largeur et hauteur de la plus grande
@@ -41,6 +48,24 @@ export const GAMME: readonly ProduitGamme[] = [
       ],
       largeur: 1600,
       hauteur: 1100,
+    },
+  },
+  {
+    id: 'bxcourses',
+    nom: 'bxCourses',
+    // URL à remplacer par le site bxCourses quand il existera
+    url: '',
+    pageInterne: 'demo',
+    // Écran Bibliothèque du produit, recadré sur le contenu (sans menu latéral
+    // ni barre du haut, donc sans nom de personne). 1120 px de large : la
+    // grande version n'est pas agrandie.
+    capture: {
+      versions: [
+        { src: '/gamme/bxcourses-bibliotheque-800.webp', largeur: 800 },
+        { src: '/gamme/bxcourses-bibliotheque-1600.webp', largeur: 1120 },
+      ],
+      largeur: 1120,
+      hauteur: 735,
     },
   },
 ];
