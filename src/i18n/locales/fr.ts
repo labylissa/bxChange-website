@@ -1075,6 +1075,8 @@ export const fr = {
     editeur: 'Un produit bxGroup',
     rights: 'Tous droits réservés.',
     madeWith: 'Fait pour les organisations d’Afrique francophone et d’ailleurs.',
+    designedBy: 'Conçu par',
+    founderOf: ', fondateur de bxGroup',
   },
 
   // Contenu commun à toutes les pages processus (/fr/catalogue/:slug). Ce qui

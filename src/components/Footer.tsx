@@ -146,6 +146,13 @@ export function Footer() {
             {t('footer.rights')}
           </p>
           <p>{t('footer.madeWith')}</p>
+          <p>
+            {t('footer.designedBy')}{' '}
+            <Link to={path('team')} rel="author" className="font-semibold text-white/80 underline underline-offset-2 transition-colors hover:text-teal">
+              Boly SENE
+            </Link>
+            {t('footer.founderOf')}
+          </p>
         </div>
       </div>
     </footer>

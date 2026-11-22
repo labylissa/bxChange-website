@@ -1049,6 +1049,8 @@ export const en: Translation = {
     editeur: 'A bxGroup product',
     rights: 'All rights reserved.',
     madeWith: 'Built for organisations across French-speaking Africa and beyond.',
+    designedBy: 'Designed by',
+    founderOf: ', founder of bxGroup',
   },
 
   processPage: {
