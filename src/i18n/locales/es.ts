@@ -942,6 +942,8 @@ export const es: Translation = {
     editeur: 'Un producto de bxGroup',
     rights: 'Todos los derechos reservados.',
     madeWith: 'Hecho para las organizaciones del África francófona y de más allá.',
+    designedBy: 'Diseñado por',
+    founderOf: ', fundador de bxGroup',
   },
 
   notFound: {

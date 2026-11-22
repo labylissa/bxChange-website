@@ -32,9 +32,9 @@ export const en: Translation = {
         'Software architecture, business process modelling, development and project management: the people who build bxFlow, and their backgrounds.',
     },
     suite: {
-      title: 'The bxGroup suite — bxFlow | bxReports and other products',
+      title: 'The bxGroup suite — bxFlow | bxReports, bxCourses and other products',
       description:
-        'bxFlow is part of the bxGroup suite. Discover bxReports: dashboards built from your Excel files and business tools.',
+        'bxFlow is part of the bxGroup suite. Discover bxReports, dashboards built from your Excel files and business tools, and bxCourses, training with compliance in sight.',
     },
     security: {
       title: 'Security — bxFlow | Encryption, isolation, compliance',
@@ -90,7 +90,7 @@ export const en: Translation = {
     securityDesc: 'Encryption, separation between clients, access audit trail.',
     deploymentDesc: 'On your servers or hosted by us — the end-to-end procedure.',
     suite: 'The bxGroup suite',
-    suiteDesc: 'Other bxGroup products, starting with bxReports.',
+    suiteDesc: 'Other bxGroup products: bxReports and bxCourses.',
     contact: 'Contact',
     demo: 'Book a demo',
     documentation: 'Documentation',
@@ -114,7 +114,7 @@ export const en: Translation = {
     suite: {
       eyebrow: 'The bxGroup suite',
       title: 'Beyond processes: your indicators',
-      subtitle: 'bxFlow is part of the bxGroup suite. Other products are joining it, starting with bxReports.',
+      subtitle: 'bxFlow is part of the bxGroup suite. Other products are joining it: bxReports and bxCourses.',
       cta: 'See the bxGroup suite',
     },
     hero: {
@@ -506,7 +506,7 @@ export const en: Translation = {
       eyebrow: 'The bxGroup suite',
       title: 'bxFlow has company',
       subtitle:
-        'bxGroup publishes business software, hosted by us or installed on your own servers. bxFlow moves your cases forward; the other products in the suite are presented here.',
+        'bxGroup publishes business software, hosted by us or installed on your own servers. bxFlow moves your cases forward; bxReports and bxCourses, the other products in the suite, are presented here.',
     },
     produits: {
       bxreports: {
@@ -524,11 +524,26 @@ export const en: Translation = {
         alt: 'bxReports dashboard: four indicators with target and variance, revenue and margin month by month, breakdown by product family and by region.',
         legende: 'Real product screenshot. Fictitious data.',
       },
+      bxcourses: {
+        categorie: 'Training and compliance',
+        accroche: 'Training, with compliance in sight.',
+        texte: 'Train your teams, and prove it was done.',
+        points: [
+          'Build in Articulate 360: your content is imported as SCORM.',
+          'Assign as you wish: by course, by learning path or by session.',
+          'Send reminders and track completion: everyone’s progress, without chasing anyone.',
+          'Prove it: PDF certificates, team and compliance reports with CSV export, SSO sign-in.',
+        ],
+        statut: 'A demo will show you the product at work.',
+        cta: 'Request a bxCourses demo',
+        alt: 'bxCourses library: four counters (published courses, drafts, learning paths, enrolled learners) and the cards of two published SCORM courses, with their enrolments and progress.',
+        legende: 'Real product screenshot.',
+      },
     },
     externe: '(external site, in French)',
     avenir: {
       title: 'More products to come',
-      text: 'The suite will grow. Each new bxGroup product will be presented on this page.',
+      text: 'After bxReports and bxCourses, the suite will grow. Each new bxGroup product will be presented on this page.',
     },
   },
 
@@ -1034,6 +1049,8 @@ export const en: Translation = {
     editeur: 'A bxGroup product',
     rights: 'All rights reserved.',
     madeWith: 'Built for organisations across French-speaking Africa and beyond.',
+    designedBy: 'Designed by',
+    founderOf: ', founder of bxGroup',
   },
 
   processPage: {

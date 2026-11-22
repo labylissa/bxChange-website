@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { useLang } from '@/hooks/useLang';
 import { useContent } from '@/hooks/useContent';
 import { SUPPORTED_LANGS, DEFAULT_LANG, type Lang } from '@/i18n';
-import { SITE_URL } from '@/lib/site';
+import { LINKEDIN_URL, SITE_URL } from '@/lib/site';
 import { localizedPath, type PageKey } from '@/lib/routes';
 
 /**
@@ -11,6 +11,15 @@ import { localizedPath, type PageKey } from '@/lib/routes';
  * redécrire l'entité à chaque fois.
  */
 export const BXFLOW_ID = `${SITE_URL}/#bxflow`;
+
+/**
+ * Identifiants stables du fondateur et de l'éditeur en JSON-LD. L'`@id` de la
+ * personne est l'identifiant de référence commun aux trois sites bxGroup
+ * (bxFlow, bxReports, bxCourses) : il pointe vers la page équipe française.
+ */
+export const PERSONNE_URL = `${SITE_URL}/fr/equipe/`;
+export const BOLY_ID = `${PERSONNE_URL}#boly-sene`;
+export const ORGANISATION_ID = `${SITE_URL}/#organisation`;
 
 /**
  * La locale Open Graph de chaque langue. Typée sur `Lang` : une langue ajoutée
@@ -64,12 +73,38 @@ export function Seo({ title, description, page, paths, jsonLd }: SeoProps) {
     operatingSystem: 'Web',
     url: SITE_URL,
     inLanguage: lang,
-    publisher: {
-      '@type': 'Organization',
-      name: 'bxGroup',
-      url: SITE_URL,
-      logo: `${SITE_URL}/icone-bxflow-512.png`,
-    },
+    author: { '@id': BOLY_ID },
+    creator: { '@id': BOLY_ID },
+    publisher: { '@id': ORGANISATION_ID },
+  };
+
+  // Le fondateur et l'éditeur, une seule fois par page : la personne renvoie
+  // vers l'organisation (`worksFor`), l'organisation vers la personne (`founder`).
+  const fondateur = c.team.membres.boly;
+  const identites = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Person',
+        '@id': BOLY_ID,
+        name: 'Boly SENE',
+        jobTitle: fondateur.role,
+        description: fondateur.bio,
+        image: `${SITE_URL}/equipe/boly.webp`,
+        sameAs: ['https://www.linkedin.com/in/boly-sene-369025164/'],
+        url: PERSONNE_URL,
+        worksFor: { '@id': ORGANISATION_ID },
+      },
+      {
+        '@type': 'Organization',
+        '@id': ORGANISATION_ID,
+        name: 'bxGroup',
+        url: SITE_URL,
+        logo: `${SITE_URL}/icone-bxflow-512.png`,
+        founder: { '@id': BOLY_ID },
+        sameAs: [LINKEDIN_URL],
+      },
+    ],
   };
 
   return (
@@ -77,6 +112,7 @@ export function Seo({ title, description, page, paths, jsonLd }: SeoProps) {
       <html lang={lang} />
       <title>{title}</title>
       <meta name="description" content={description} />
+      <meta name="author" content="Boly SENE" />
       <link rel="canonical" href={canonical} />
       {/* Une ligne par langue, ENGENDRÉE : la liste était écrite à la main, et
           une langue ajoutée sans sa ligne n'est jamais annoncée à Google — la
@@ -103,6 +139,7 @@ export function Seo({ title, description, page, paths, jsonLd }: SeoProps) {
       <meta name="twitter:image" content={`${SITE_URL}/apercu-social.png`} />
 
       <script type="application/ld+json">{JSON.stringify(bxflow)}</script>
+      <script type="application/ld+json">{JSON.stringify(identites)}</script>
       {jsonLd?.map((bloc, i) => (
         // eslint-disable-next-line react/no-array-index-key -- l'ordre des blocs ne change jamais pour une page donnée.
         <script key={i} type="application/ld+json">

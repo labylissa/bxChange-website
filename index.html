@@ -61,6 +61,8 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://bxgroup.io/apercu-social.png" />
 
+    <meta name="author" content="Boly SENE" />
+
     <!-- Données structurées : ce qu'un moteur retient de l'entité bxFlow
          elle-même. DANS le repère de tête, donc REMPLACÉ page par page comme
          le reste — chaque page l'engendre dans sa propre langue via
@@ -78,12 +80,35 @@
         "url": "https://bxgroup.io",
         "description": "Moteur de processus métier : modélisation des étapes, rôles et validations, exécution automatique des dossiers.",
         "inLanguage": "fr",
-        "publisher": {
-          "@type": "Organization",
-          "name": "bxGroup",
-          "url": "https://bxgroup.io",
-          "logo": "https://bxgroup.io/icone-bxflow-512.png"
-        }
+        "author": { "@id": "https://bxgroup.io/fr/equipe/#boly-sene" },
+        "creator": { "@id": "https://bxgroup.io/fr/equipe/#boly-sene" },
+        "publisher": { "@id": "https://bxgroup.io/#organisation" }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://bxgroup.io/fr/equipe/#boly-sene",
+            "name": "Boly SENE",
+            "jobTitle": "Fondateur, architecte logiciel",
+            "description": "Développeur full stack de formation, architecte aujourd'hui : plus de 8 ans de développement logiciel et 5 ans de conception de workflows. Il porte la vision produit et les choix technologiques de bxFlow.",
+            "image": "https://bxgroup.io/equipe/boly.webp",
+            "url": "https://bxgroup.io/fr/equipe/",
+            "worksFor": { "@id": "https://bxgroup.io/#organisation" }
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://bxgroup.io/#organisation",
+            "name": "bxGroup",
+            "url": "https://bxgroup.io",
+            "logo": "https://bxgroup.io/icone-bxflow-512.png",
+            "founder": { "@id": "https://bxgroup.io/fr/equipe/#boly-sene" },
+            "sameAs": ["https://www.linkedin.com/company/bxgroup-horizon"]
+          }
+        ]
       }
     </script>
     <!--/tete-par-page-->
