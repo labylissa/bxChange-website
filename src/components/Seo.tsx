@@ -91,6 +91,7 @@ export function Seo({ title, description, page, paths, jsonLd }: SeoProps) {
         jobTitle: fondateur.role,
         description: fondateur.bio,
         image: `${SITE_URL}/equipe/boly.webp`,
+        sameAs: ['https://www.linkedin.com/in/boly-sene-369025164/'],
         url: PERSONNE_URL,
         worksFor: { '@id': ORGANISATION_ID },
       },
