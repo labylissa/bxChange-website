@@ -127,11 +127,6 @@ export function Footer() {
                 {CONTACT_EMAIL}
               </a>
             </li>
-            <li>
-              <Link to={path('demo')} className="btn-inverse mt-2">
-                {t('common.requestDemo')}
-              </Link>
-            </li>
           </ul>
         </div>
       </div>

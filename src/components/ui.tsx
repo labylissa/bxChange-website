@@ -67,15 +67,15 @@ export function PageHero({
       {/* Fond doré et grille estompée, communs à tous les en-têtes et repris
           du site bxReports (voir `.fond-dore`, index.css). Il remplace un
           ancien décor de cercles et de points qui occupait toute la hauteur. */}
-      <div className="container-page py-14 lg:py-16">
+      <div className={`container-page py-14 lg:py-16 ${flow !== false ? 'flex flex-col gap-4 py-6 sm:block sm:py-14' : ''}`}>
         {/* Le TEXTE reste borné à une largeur de lecture confortable ; le
             schéma, lui, prend toute la largeur du conteneur — il lui en faut
             720 pixels pour que les intitulés de transitions tiennent. */}
-        <div className="max-w-3xl">
-          <span className="eyebrow">{eyebrow}</span>
-          <h1 className="mt-5 text-4xl font-bold leading-tight text-navy-900 sm:text-5xl">{title}</h1>
-          {subtitle && <p className="mt-6 text-lg text-ink-500">{subtitle}</p>}
-          {children}
+        <div className={`max-w-3xl ${flow !== false ? 'contents sm:block' : ''}`}>
+          <span className={`eyebrow ${flow !== false ? 'hidden sm:inline-flex' : ''}`}>{eyebrow}</span>
+          <h1 className="order-1 mt-0 text-3xl sm:mt-5 font-bold leading-tight text-navy-900 sm:text-5xl">{title}</h1>
+          {subtitle && <p className="order-3 mt-0 text-base text-ink-500 sm:mt-6 sm:text-lg">{subtitle}</p>}
+          {children && <div className="order-4">{children}</div>}
         </div>
         {/* Le schéma animé n'est plus sur tous les heros : il l'a été, et le
             commentaire l'affirmait encore alors que six pages sur neuf le
@@ -84,7 +84,7 @@ export function PageHero({
             repousse vers le bas ce qu'on est venu chercher — le calendrier de
             la page démo, le tarif, les fiches de l'équipe. */}
         {flow !== false && (
-          <div className="mt-10 rounded-2xl border border-ink-100 bg-ink-50/60 p-6 lg:p-8">
+          <div className="order-2 mt-0 rounded-2xl border border-ink-100 bg-ink-50/60 p-4 sm:mt-10 sm:p-6 lg:p-8">
             <WorkflowAnimation />
           </div>
         )}

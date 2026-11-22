@@ -65,19 +65,22 @@ export function HomePage() {
           Le fond doré (`fond-dore`) est d'une autre nature — une lueur et une
           grille centrées, estompées, qui ne prennent aucune place au contenu. */}
       <section className="fond-dore border-b border-ink-100 bg-white">
-        <div className="container-page relative grid items-center gap-10 py-16 lg:grid-cols-[1fr_1.15fr] lg:py-20">
-          <div className="animate-fade-up">
-            <span className="eyebrow">{c.home.hero.eyebrow}</span>
-            <h1 className="mt-5 text-4xl font-bold leading-[1.1] text-navy-900 sm:text-5xl lg:text-6xl">
+        <div className="container-page relative grid items-center gap-4 py-6 sm:gap-10 sm:py-16 lg:grid-cols-[1fr_1.15fr] lg:py-20">
+          {/* Sur mobile le bloc de texte est « aplati » (`contents`) pour que ses
+              enfants se rangent dans la grille : titre, visuel, phrase, bouton.
+              Dès `lg`, il redevient un bloc et le bureau est inchangé. */}
+          <div className="contents animate-fade-up lg:block">
+            <span className="eyebrow hidden sm:inline-flex">{c.home.hero.eyebrow}</span>
+            <h1 className="order-1 mt-0 text-3xl font-bold leading-[1.1] text-navy-900 sm:mt-5 sm:text-5xl lg:text-6xl">
               {c.home.hero.title}
             </h1>
-            <p className="mt-6 max-w-xl text-lg text-ink-500">{c.home.hero.subtitle}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link to={path('demo')} className="btn-primary hover:-translate-y-0.5">
+            <p className="order-3 max-w-xl text-base text-ink-500 sm:mt-6 sm:text-lg">{c.home.hero.subtitle}</p>
+            <div className="order-4 flex flex-wrap gap-3 sm:mt-8">
+              <Link to={path('demo')} className="btn-primary min-h-11 w-full hover:-translate-y-0.5 sm:w-auto">
                 {c.home.hero.ctaPrimary}
                 <Icons.arrowRight className="h-4 w-4" />
               </Link>
-              <Link to={path('catalog')} className="btn-secondary">
+              <Link to={path('catalog')} className="btn-secondary hidden sm:inline-flex">
                 {c.home.hero.ctaSecondary}
               </Link>
             </div>
@@ -85,13 +88,13 @@ export function HomePage() {
                 après que le visiteur a décidé de s'y rendre. C'est pourtant ce
                 qui lève l'objection « personne ne l'utilise encore » : il se dit
                 à côté du bouton, pas deux pages plus loin. */}
-            <p className="mt-5 text-sm text-ink-500">
+            <p className="mt-5 hidden text-sm text-ink-500 sm:block">
               {c.home.hero.pilot}{' '}
               <Link to={path('pricing')} className="font-semibold text-teal-500 hover:underline">
                 {c.home.hero.pilotLink}
               </Link>
             </p>
-            <ul className="mt-7 space-y-2.5">
+            <ul className="mt-7 hidden space-y-2.5 sm:block">
               {c.home.hero.proofs.map((preuve) => (
                 <li key={preuve} className="flex items-start gap-2.5 text-sm text-ink-600">
                   <Icons.check className="mt-0.5 h-4 w-4 shrink-0 text-gold-600" strokeWidth={2.5} />
@@ -108,7 +111,7 @@ export function HomePage() {
               la carte donnait l'impression de deux blocs accolés plutôt que
               de deux colonnes. Le retrait ne s'applique qu'en disposition à
               deux colonnes — empilée, il ne ferait que rogner la carte. */}
-          <div className="mx-auto w-full max-w-lg lg:max-w-none lg:pl-12">
+          <div className="order-2 mx-auto w-full max-w-lg lg:order-none lg:max-w-none lg:pl-12">
             <HeroVisual />
           </div>
         </div>
